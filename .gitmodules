@@ -1,0 +1,3 @@
+[submodule "themes/kavi-hugo-theme"]
+	path = themes/kavi-hugo-theme
+	url = https://github.com/jkotra/kavi-hugo-theme.git
