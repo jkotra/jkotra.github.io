@@ -1,61 +1,318 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><base href=/posts/react-myip/><meta name=description content="Making a 'Know Your IP' page with React.js."><meta name=language content="en"><link rel=sitemap type=application/xml title=Sitemap href=/sitemap.xml><title>'Know Your IP Address' with React :: &lt;stdin></title><link rel=icon type=image/png href=/static/chip.png><meta property="og:title" content="'Know Your IP Address' with React"><meta property="og:description" content="Making a 'Know Your IP' page with React.js."><meta property="og:type" content="article"><meta property="og:url" content="/posts/react-myip/"><meta property="og:image" content="https://i.imgur.com/2AUyhE5.png"><meta property="article:published_time" content="2020-03-21T20:13:16+05:30"><meta property="article:modified_time" content="2020-03-21T20:13:16+05:30"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://i.imgur.com/2AUyhE5.png"><meta name=twitter:title content="'Know Your IP Address' with React"><meta name=twitter:description content="Making a 'Know Your IP' page with React.js."><meta name=theme-color content="#2e2847"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet><script src=/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1+KmwzJg=="></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous><link rel=stylesheet type=text/css media=screen href=/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog=="><link rel=stylesheet type=text/css media=screen href=/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT+D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS+PZcayDeOHKFb99Z9ZO6g=="><link rel=stylesheet type=text/css href=/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css media="(prefers-color-scheme: dark)"><link rel=stylesheet type=text/css media=screen href=/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css integrity="sha512-ESwE0m+hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg=="><script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config',"G-YW8V9DTR0N");</script><script data-ad-client=ca-pub-8658473214995139 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></head><body><div class="container wrapper"><div class=header><base href=/><h1 class=site-title><a href=/>&lt;stdin></a>
-<span class=blinking-cursor>|</span></h1><div class=site-description><h2 class=cursive>My Thoughts, Trials and Adventures</h2><nav class="nav social"><ul class=flat><a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a><a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a><a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a><a href=index.xml title=RSS><i class="fas fa-rss"></i></a></ul></div><nav class=nav><ul class=flat><li><a href=/about/>About</a></li><li><a href=/tags/>Tags</a></li><li><a href=/portfolio/>Portfolio</a></li><li><a href=http://lab.stdin.top>Lab</a></li><li><a href=/pgp/>PGP</a></li></ul></nav></div><div class=post><div class=post-header><h1 class=title>'Know Your IP Address' with React</h1><div class=meta>Posted at &mdash; Mar 21, 2020</div></div><div class=markdown><p><a href=https://lab.stdin.top/#/myip/>Demo</a> | <a href=https://gitlab.com/synk.0x1/lab.stdin.top/-/blob/master/src/components/pages/MyIp.js>Code</a></p><p>This is a quick primer on how to make a &lsquo;Know Your IP&rsquo; page with React.</p><div class="notices info"><p>To follow through this, you will need to install <code>node</code>, and create a new project using <code>create-react-app</code>.This tutorial only deals with creating <em>Know Your IP Address</em> Component.</p></div><hr><h1 id=prerequisites>Prerequisites</h1><ol><li><a href=https://www.npmjs.com/package/public-ip>public-ip</a> module</li><li>Working knowledge with <a href=https://reactjs.org/>React</a> and ES6 Javascript.</li></ol><hr><p>Start by making a default skeleton component.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>
-<span style=color:#069;font-weight:700>import</span> React from <span style=color:#c30>&#39;react&#39;</span>;
-<span style=color:#069;font-weight:700>const</span> publicIp <span style=color:#555>=</span> require(<span style=color:#c30>&#39;public-ip&#39;</span>);
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/posts/react-myip/">
+    
+    
+
+    
+    <meta name="description" content="Making a &#39;Know Your IP&#39; page with React.js." />
+    
+    
+    <meta name="language" content="en">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" /> 
+
+    
+    
+    
+    <title>&#39;Know Your IP Address&#39; with React :: &lt;stdin&gt;</title>
+    
+
+    <link rel="icon" type="image/png" href=/static/chip.png />
+
+    <meta property="og:title" content="&#39;Know Your IP Address&#39; with React" />
+<meta property="og:description" content="Making a &#39;Know Your IP&#39; page with React.js." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/react-myip/" />
+<meta property="og:image" content="https://i.imgur.com/2AUyhE5.png" />
+<meta property="article:published_time" content="2020-03-21T20:13:16+05:30" />
+<meta property="article:modified_time" content="2020-03-21T20:13:16+05:30" />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://i.imgur.com/2AUyhE5.png"/>
+
+<meta name="twitter:title" content="&#39;Know Your IP Address&#39; with React"/>
+<meta name="twitter:description" content="Making a &#39;Know Your IP&#39; page with React.js."/>
+
+
+    <meta name="theme-color" content=#2e2847 />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
+
+    
+    
+    <script src="/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
+    
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
+
+
+    
+    
+
+    
+
+    
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "G-YW8V9DTR0N" );
+</script>
+
+
+
+    
+    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+</head>
+
+<body>
+    <div class="container wrapper">
+    <div class="header">
+	<base href="/">
+	<h1 class="site-title">
+		
+		<a href="/">&lt;stdin&gt;</a>
+		
+		<span class="blinking-cursor">|</span>
+		
+	</h1>
+
+	<div class="site-description">
+		
+		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
+		
+
+		<nav class="nav social">
+			<ul class="flat">
+				
+				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
+				
+				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
+				
+				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
+				
+				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
+				
+			</ul>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/about/">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags/">Tags</a>
+			</li>
+			
+			<li>
+				<a href="/portfolio/">Portfolio</a>
+			</li>
+			
+			<li>
+				<a href="/pgp/">PGP</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+    
+<div class= "post">
+<div class="post-header">
+	<h1 class="title">&#39;Know Your IP Address&#39; with React</h1>
+	
+	<div class="meta">Posted at &mdash; Mar 21, 2020</div>
+	
+</div>
+
+<div class="markdown">
+	<p><a href="https://lab.stdin.top/#/myip/">Demo</a> | <a href="https://gitlab.com/synk.0x1/lab.stdin.top/-/blob/master/src/components/pages/MyIp.js">Code</a></p>
+<p>This is a quick primer on how to make a &lsquo;Know Your IP&rsquo; page with React.</p>
+<div class="notices info" ><p>To follow through this, you will need to install <code>node</code>, and create a new project using <code>create-react-app</code>.This tutorial only deals with creating <em>Know Your IP Address</em> Component.</p></div>
+<hr>
+<h1 id="prerequisites">Prerequisites</h1>
+<ol>
+<li><a href="https://www.npmjs.com/package/public-ip">public-ip</a> module</li>
+<li>Working knowledge with <a href="https://reactjs.org/">React</a> and ES6 Javascript.</li>
+</ol>
+<hr>
+<p>Start by making a default skeleton component.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#069;font-weight:bold">import</span> React from <span style="color:#c30">&#39;react&#39;</span>;
+<span style="color:#069;font-weight:bold">const</span> publicIp <span style="color:#555">=</span> require(<span style="color:#c30">&#39;public-ip&#39;</span>);
 
 
     render(){
 
-        <span style=color:#069;font-weight:700>return</span> <span style=color:#555>&lt;</span>div<span style=color:#555>&gt;</span>
+        <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">&lt;</span>div<span style="color:#555">&gt;</span>
             
-            <span style=color:#555>&lt;</span>h1<span style=color:#555>&gt;</span>Hello World<span style=color:#555>!&lt;</span><span style=color:#a00;background-color:#faa>/h1&gt;</span>
-        <span style=color:#555>&lt;</span><span style=color:#a00;background-color:#faa>/div&gt;</span>
+            <span style="color:#555">&lt;</span>h1<span style="color:#555">&gt;</span>Hello World<span style="color:#555">!&lt;</span><span style="color:#a00;background-color:#faa">/h1&gt;</span>
+        <span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/div&gt;</span>
 
     }
 
 }
 
-<span style=color:#069;font-weight:700>export</span> <span style=color:#069;font-weight:700>default</span> MyIp;
+<span style="color:#069;font-weight:bold">export</span> <span style="color:#069;font-weight:bold">default</span> MyIp;
 
-</code></pre></div><p>Make sure this is working, when you visit the component, it should display &ldquo;Hello World!&rdquo;</p><hr><p>Create a <code>constructor</code> for our class.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>constructor(props){
-        <span style=color:#069;font-weight:700>super</span>(props)
-        <span style=color:#069;font-weight:700>this</span>.state <span style=color:#555>=</span> {<span style=color:#c30>&#39;ipv4&#39;</span><span style=color:#555>:</span> <span style=color:#c30>&#39;0.0.0.0&#39;</span>, <span style=color:#c30>&#39;ok&#39;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>false</span>}
+</code></pre></div><p>Make sure this is working, when you visit the component, it should display &ldquo;Hello World!&rdquo;</p>
+<hr>
+<p>Create a <code>constructor</code> for our class.</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">constructor(props){
+        <span style="color:#069;font-weight:bold">super</span>(props)
+        <span style="color:#069;font-weight:bold">this</span>.state <span style="color:#555">=</span> {<span style="color:#c30">&#39;ipv4&#39;</span><span style="color:#555">:</span> <span style="color:#c30">&#39;0.0.0.0&#39;</span>, <span style="color:#c30">&#39;ok&#39;</span><span style="color:#555">:</span> <span style="color:#069;font-weight:bold">false</span>}
     }
-</code></pre></div><p>Here, I initiate a React <code>state</code> with 2 value pairs.</p><ul><li><code>'ipv4': '0.0.0.0'</code> - Placeholder that we update after retriving user&rsquo;s ip.</li><li><code>'ok': false</code> - This will be set to <code>True</code> if user&rsquo;s ip is sucessfully retrived.</li></ul><hr><p>These are some helper functions the retrieve and update IP in the state:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>   <span style=color:#069;font-weight:700>async</span> get_ip_user_ipv4(){
-        <span style=color:#069;font-weight:700>let</span> ip <span style=color:#555>=</span> <span style=color:#069;font-weight:700>await</span> publicIp.v4();
-        <span style=color:#069;font-weight:700>return</span> ip
+</code></pre></div><p>Here, I initiate a React <code>state</code> with 2 value pairs.</p>
+<ul>
+<li><code>'ipv4': '0.0.0.0'</code> - Placeholder that we update after retriving user&rsquo;s ip.</li>
+<li><code>'ok': false</code> - This will be set to <code>True</code> if user&rsquo;s ip is sucessfully retrived.</li>
+</ul>
+<hr>
+<p>These are some helper functions the retrieve and update IP in the state:</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">   <span style="color:#069;font-weight:bold">async</span> get_ip_user_ipv4(){
+        <span style="color:#069;font-weight:bold">let</span> ip <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">await</span> publicIp.v4();
+        <span style="color:#069;font-weight:bold">return</span> ip
 }
 
 
-    <span style=color:#069;font-weight:700>async</span> set_ip(){
+    <span style="color:#069;font-weight:bold">async</span> set_ip(){
         
-        <span style=color:#069;font-weight:700>var</span> curr_ip_ipv4;
+        <span style="color:#069;font-weight:bold">var</span> curr_ip_ipv4;
 
-        <span style=color:#069;font-weight:700>try</span>{
+        <span style="color:#069;font-weight:bold">try</span>{
 
-            curr_ip_ipv4 <span style=color:#555>=</span> <span style=color:#069;font-weight:700>await</span> <span style=color:#069;font-weight:700>this</span>.get_ip_user_ipv4();
+            curr_ip_ipv4 <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">await</span> <span style="color:#069;font-weight:bold">this</span>.get_ip_user_ipv4();
             
-           }<span style=color:#069;font-weight:700>catch</span>(err){ console.log(err); curr_ip_ipv4<span style=color:#555>=</span><span style=color:#069;font-weight:700>undefined</span>; }
+           }<span style="color:#069;font-weight:bold">catch</span>(err){ console.log(err); curr_ip_ipv4<span style="color:#555">=</span><span style="color:#069;font-weight:bold">undefined</span>; }
 
-        <span style=color:#069;font-weight:700>if</span> (<span style=color:#555>!</span>(curr_ip_ipv4 <span style=color:#555>===</span> <span style=color:#069;font-weight:700>undefined</span>)){
-        <span style=color:#069;font-weight:700>this</span>.setState({<span style=color:#c30>&#39;ipv4&#39;</span><span style=color:#555>:</span> curr_ip_ipv4})
-        <span style=color:#069;font-weight:700>this</span>.setState({<span style=color:#c30>&#39;ok&#39;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>true</span>})
+        <span style="color:#069;font-weight:bold">if</span> (<span style="color:#555">!</span>(curr_ip_ipv4 <span style="color:#555">===</span> <span style="color:#069;font-weight:bold">undefined</span>)){
+        <span style="color:#069;font-weight:bold">this</span>.setState({<span style="color:#c30">&#39;ipv4&#39;</span><span style="color:#555">:</span> curr_ip_ipv4})
+        <span style="color:#069;font-weight:bold">this</span>.setState({<span style="color:#c30">&#39;ok&#39;</span><span style="color:#555">:</span> <span style="color:#069;font-weight:bold">true</span>})
      }
 
-        console.log(<span style=color:#069;font-weight:700>this</span>.state.ipv4);
+        console.log(<span style="color:#069;font-weight:bold">this</span>.state.ipv4);
  }
-</code></pre></div><p><code>set_ip()</code> is the entry point. It will further call <code>get_ip_user_ipv4()</code> to get IP address of the user.It will then update <code>ipv4</code> state with retrieved IP and set <code>ok</code> state to <code>True</code></p><hr><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>render(){
+</code></pre></div><p><code>set_ip()</code> is the entry point. It will further call <code>get_ip_user_ipv4()</code> to get IP address of the user.It will then update <code>ipv4</code> state with retrieved IP and set <code>ok</code> state to <code>True</code></p>
+<hr>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">render(){
 
-        <span style=color:#069;font-weight:700>return</span> <span style=color:#555>&lt;</span>div<span style=color:#555>&gt;</span>
+        <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">&lt;</span>div<span style="color:#555">&gt;</span>
             
-            {<span style=color:#069;font-weight:700>this</span>.state.ok <span style=color:#555>?</span> 
-            <span style=color:#555>&lt;</span>div className<span style=color:#555>=</span><span style=color:#c30>&#34;alert alert-primary&#34;</span> role<span style=color:#555>=</span><span style=color:#c30>&#34;alert&#34;</span><span style=color:#555>&gt;</span>
-                <span style=color:#555>&lt;</span>h3<span style=color:#555>&gt;</span>Your IP<span style=color:#555>:</span> {<span style=color:#069;font-weight:700>this</span>.state.ipv4}<span style=color:#555>&lt;</span><span style=color:#a00;background-color:#faa>/h3&gt;</span>
-                <span style=color:#555>&lt;</span><span style=color:#a00;background-color:#faa>/div&gt;: null}</span>
-            <span style=color:#555>&lt;</span>button className<span style=color:#555>=</span><span style=color:#c30>&#34;btn btn-success&#34;</span> onClick<span style=color:#555>=</span>{() =&gt; <span style=color:#069;font-weight:700>this</span>.set_ip()}<span style=color:#555>&gt;</span>Get IP<span style=color:#555>!&lt;</span><span style=color:#a00;background-color:#faa>/button&gt;</span>
-        <span style=color:#555>&lt;</span><span style=color:#a00;background-color:#faa>/div&gt;</span>
+            {<span style="color:#069;font-weight:bold">this</span>.state.ok <span style="color:#555">?</span> 
+            <span style="color:#555">&lt;</span>div className<span style="color:#555">=</span><span style="color:#c30">&#34;alert alert-primary&#34;</span> role<span style="color:#555">=</span><span style="color:#c30">&#34;alert&#34;</span><span style="color:#555">&gt;</span>
+                <span style="color:#555">&lt;</span>h3<span style="color:#555">&gt;</span>Your IP<span style="color:#555">:</span> {<span style="color:#069;font-weight:bold">this</span>.state.ipv4}<span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/h3&gt;</span>
+                <span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/div&gt;: null}</span>
+            <span style="color:#555">&lt;</span>button className<span style="color:#555">=</span><span style="color:#c30">&#34;btn btn-success&#34;</span> onClick<span style="color:#555">=</span>{() =&gt; <span style="color:#069;font-weight:bold">this</span>.set_ip()}<span style="color:#555">&gt;</span>Get IP<span style="color:#555">!&lt;</span><span style="color:#a00;background-color:#faa">/button&gt;</span>
+        <span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/div&gt;</span>
 
 }
-</code></pre></div><p>first, we check whether <code>state.ok</code> is set to True, This means we only want it to render if it is set to true or else return <code>null</code>. I used <a href=https://getbootstrap.com/docs/4.0/components/alerts/>Bootstrap alert</a> to make it look good, this is is <em>optional</em>.</p><p>in <code>Button</code> we use <code>onClick</code> prop to invoke our function that retrieves and displays user IP on screen.</p><div class="notices tip"><p><a href=https://gitlab.com/synk.0x1/lab.stdin.top/-/blob/master/src/components/pages/MyIp.js>Full code - MyIp.js</a></p></div></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/react>React</a></li><li><a href=/tags/web-development>Web Development</a></li></ul></nav></div><div id=commento></div><script id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the
-<a href=https://commento.io/>comments powered by Commento.</a></noscript></div><link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body);></script></div></div><div class="footer wrapper"><script async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script><ins class=adsbygoogle style=display:block data-ad-client=ca-pub-8658473214995139 data-ad-slot=2398602558 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><br><nav class=nav><div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div><div><a href=https://gitlab.com/synk.0x1/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div></body></html>
+</code></pre></div><p>first, we check whether <code>state.ok</code> is set to True, This means we only want it to render if it is set to true or else return <code>null</code>. I used <a href="https://getbootstrap.com/docs/4.0/components/alerts/">Bootstrap alert</a> to make it look good, this is is <em>optional</em>.</p>
+<p>in <code>Button</code> we use <code>onClick</code> prop to invoke our function that retrieves and displays user IP on screen.</p>
+<div class="notices tip" ><p><a href="https://gitlab.com/synk.0x1/lab.stdin.top/-/blob/master/src/components/pages/MyIp.js">Full code - MyIp.js</a></p></div>
+
+</div>
+
+<div class="post-tags">
+	
+	
+	<nav class="nav tags">
+		<ul class="flat">
+			
+			<li><a href="/tags/react">React</a></li>
+			
+			<li><a href="/tags/web-development">Web Development</a></li>
+			
+		</ul>
+	</nav>
+	
+	
+</div>
+
+<div id="commento"></div>
+
+<script id="comments" src="https://utteranc.es/client.js" repo="jkotra/stdin.top-comments" issue-term="pathname"
+	label="💬" theme="github-light" crossorigin="anonymous" async>
+	</script>
+
+<noscript>Please enable JavaScript to view the
+	<a href="https://commento.io/">comments powered by Commento.</a>
+</noscript>
+
+</div>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+
+
+</div>
+
+
+    </div>
+
+    <div class="footer wrapper">
+
+			
+			
+			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8658473214995139"
+     data-ad-slot="2398602558"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<br>
+			
+
+	<nav class="nav">
+		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
+		<div> <a href="https://gitlab.com/synk.0x1/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+</body>
+
+</html>

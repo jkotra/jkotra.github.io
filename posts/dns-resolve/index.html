@@ -1,45 +1,230 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><base href=/posts/dns-resolve/><meta name=description content="Domain to IP resolution using getnameinfo()🌐"><meta name=language content="en"><link rel=sitemap type=application/xml title=Sitemap href=/sitemap.xml><title>DNS resolution in C :: &lt;stdin></title><link rel=icon type=image/png href=/static/chip.png><meta property="og:title" content="DNS resolution in C"><meta property="og:description" content="Domain to IP resolution using getnameinfo()🌐"><meta property="og:type" content="article"><meta property="og:url" content="/posts/dns-resolve/"><meta property="og:image" content="https://i.imgur.com/8g8yX84.jpg"><meta property="article:published_time" content="2020-09-08T01:20:42+05:30"><meta property="article:modified_time" content="2020-09-08T01:20:42+05:30"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://i.imgur.com/8g8yX84.jpg"><meta name=twitter:title content="DNS resolution in C"><meta name=twitter:description content="Domain to IP resolution using getnameinfo()🌐"><meta name=theme-color content="#2e2847"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet><script src=/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1+KmwzJg=="></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous><link rel=stylesheet type=text/css media=screen href=/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog=="><link rel=stylesheet type=text/css media=screen href=/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT+D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS+PZcayDeOHKFb99Z9ZO6g=="><link rel=stylesheet type=text/css href=/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css media="(prefers-color-scheme: dark)"><link rel=stylesheet type=text/css media=screen href=/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css integrity="sha512-ESwE0m+hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg=="><script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config',"G-YW8V9DTR0N");</script><script data-ad-client=ca-pub-8658473214995139 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></head><body><div class="container wrapper"><div class=header><base href=/><h1 class=site-title><a href=/>&lt;stdin></a>
-<span class=blinking-cursor>|</span></h1><div class=site-description><h2 class=cursive>My Thoughts, Trials and Adventures</h2><nav class="nav social"><ul class=flat><a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a><a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a><a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a><a href=index.xml title=RSS><i class="fas fa-rss"></i></a></ul></div><nav class=nav><ul class=flat><li><a href=/about/>About</a></li><li><a href=/tags/>Tags</a></li><li><a href=/portfolio/>Portfolio</a></li><li><a href=http://lab.stdin.top>Lab</a></li><li><a href=/pgp/>PGP</a></li></ul></nav></div><div class=post><div class=post-header><h1 class=title>DNS resolution in C</h1><div class=meta>Posted at &mdash; Sep 8, 2020</div></div><div class=markdown><h1 id=introduction>Introduction</h1><p>DNS resolution is the process of converting Domain name (example.com) into an IP address, Reverse DNS is the opposite of it, IP -> Domain</p><p>this article is a code walkthrough of a simple C program to resolve domain names into their respective IP address(s).</p><h1 id=code>Code</h1><div class="notices note"><p>the code explained here can be found in my <a href=https://github.com/jkotra/NetworkProgramming/blob/master/dns/lookup.c>NetworkProgramming GitHub repository</a>.</p></div><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=color:#099>#include</span> <span style=color:#099>&lt;stdio.h&gt;</span><span style=color:#099>
-</span><span style=color:#099>#include</span> <span style=color:#099>&lt;string.h&gt;</span><span style=color:#099>
-</span><span style=color:#099>#include</span><span style=color:#099>&lt;netdb.h&gt;</span><span style=color:#099>
-</span><span style=color:#099></span>
-<span style=color:#078;font-weight:700>int</span> <span style=color:#c0f>main</span>(<span style=color:#078;font-weight:700>int</span> argc, <span style=color:#078;font-weight:700>char</span> <span style=color:#555>*</span>argv[]){
+<!DOCTYPE html>
+<html>
 
-    printf(<span style=color:#c30>&#34;resolving host: %s</span><span style=color:#c30;font-weight:700>\n</span><span style=color:#c30>&#34;</span>, argv[<span style=color:#f60>1</span>]);
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/posts/dns-resolve/">
+    
+    
 
-    <span style=color:#069;font-weight:700>struct</span> addrinfo hints;
-    memset(<span style=color:#555>&amp;</span>hints, <span style=color:#f60>0</span>, <span style=color:#069;font-weight:700>sizeof</span>(hints));
+    
+    <meta name="description" content="Domain to IP resolution using getnameinfo()🌐" />
+    
+    
+    <meta name="language" content="en">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" /> 
 
-    hints.ai_flags <span style=color:#555>=</span> AI_ALL;
+    
+    
+    
+    <title>DNS resolution in C :: &lt;stdin&gt;</title>
+    
 
-    <span style=color:#069;font-weight:700>struct</span> addrinfo <span style=color:#555>*</span>peer;
+    <link rel="icon" type="image/png" href=/static/chip.png />
 
-    <span style=color:#069;font-weight:700>if</span> ( getaddrinfo(argv[<span style=color:#f60>1</span>], <span style=color:#f60>0</span>, <span style=color:#555>&amp;</span>hints, <span style=color:#555>&amp;</span>peer) <span style=color:#555>!=</span> <span style=color:#f60>0</span> ){
-        printf(<span style=color:#c30>&#34;getaddrinfo error!</span><span style=color:#c30;font-weight:700>\n</span><span style=color:#c30>&#34;</span>);
-        <span style=color:#069;font-weight:700>return</span> <span style=color:#f60>1</span>;
+    <meta property="og:title" content="DNS resolution in C" />
+<meta property="og:description" content="Domain to IP resolution using getnameinfo()🌐" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/dns-resolve/" />
+<meta property="og:image" content="https://i.imgur.com/8g8yX84.jpg" />
+<meta property="article:published_time" content="2020-09-08T01:20:42+05:30" />
+<meta property="article:modified_time" content="2020-09-08T01:20:42+05:30" />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://i.imgur.com/8g8yX84.jpg"/>
+
+<meta name="twitter:title" content="DNS resolution in C"/>
+<meta name="twitter:description" content="Domain to IP resolution using getnameinfo()🌐"/>
+
+
+    <meta name="theme-color" content=#2e2847 />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
+
+    
+    
+    <script src="/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
+    
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
+
+
+    
+    
+
+    
+
+    
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "G-YW8V9DTR0N" );
+</script>
+
+
+
+    
+    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+</head>
+
+<body>
+    <div class="container wrapper">
+    <div class="header">
+	<base href="/">
+	<h1 class="site-title">
+		
+		<a href="/">&lt;stdin&gt;</a>
+		
+		<span class="blinking-cursor">|</span>
+		
+	</h1>
+
+	<div class="site-description">
+		
+		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
+		
+
+		<nav class="nav social">
+			<ul class="flat">
+				
+				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
+				
+				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
+				
+				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
+				
+				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
+				
+			</ul>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/about/">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags/">Tags</a>
+			</li>
+			
+			<li>
+				<a href="/portfolio/">Portfolio</a>
+			</li>
+			
+			<li>
+				<a href="/pgp/">PGP</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+    
+<div class= "post">
+<div class="post-header">
+	<h1 class="title">DNS resolution in C</h1>
+	
+	<div class="meta">Posted at &mdash; Sep 8, 2020</div>
+	
+</div>
+
+<div class="markdown">
+	<h1 id="introduction">Introduction</h1>
+<p>DNS resolution is the process of converting Domain name (example.com) into an IP address, Reverse DNS is the opposite of it, IP -&gt; Domain</p>
+<p>this article is a code walkthrough of a simple C program to resolve domain names into their respective IP address(s).</p>
+<h1 id="code">Code</h1>
+<div class="notices note" ><p>the code explained here can be found in my <a href="https://github.com/jkotra/NetworkProgramming/blob/master/dns/lookup.c">NetworkProgramming GitHub repository</a>.</p></div>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
+</span><span style="color:#099">#include</span> <span style="color:#099">&lt;string.h&gt;</span><span style="color:#099">
+</span><span style="color:#099">#include</span><span style="color:#099">&lt;netdb.h&gt;</span><span style="color:#099">
+</span><span style="color:#099"></span>
+<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(<span style="color:#078;font-weight:bold">int</span> argc, <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>argv[]){
+
+    printf(<span style="color:#c30">&#34;resolving host: %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, argv[<span style="color:#f60">1</span>]);
+
+    <span style="color:#069;font-weight:bold">struct</span> addrinfo hints;
+    memset(<span style="color:#555">&amp;</span>hints, <span style="color:#f60">0</span>, <span style="color:#069;font-weight:bold">sizeof</span>(hints));
+
+    hints.ai_flags <span style="color:#555">=</span> AI_ALL;
+
+    <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>peer;
+
+    <span style="color:#069;font-weight:bold">if</span> ( getaddrinfo(argv[<span style="color:#f60">1</span>], <span style="color:#f60">0</span>, <span style="color:#555">&amp;</span>hints, <span style="color:#555">&amp;</span>peer) <span style="color:#555">!=</span> <span style="color:#f60">0</span> ){
+        printf(<span style="color:#c30">&#34;getaddrinfo error!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
+        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
     }
 
-    <span style=color:#069;font-weight:700>struct</span> addrinfo <span style=color:#555>*</span>address <span style=color:#555>=</span> peer;
+    <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>address <span style="color:#555">=</span> peer;
 
-    <span style=color:#069;font-weight:700>do</span>
+    <span style="color:#069;font-weight:bold">do</span>
     {
-        <span style=color:#078;font-weight:700>char</span> addr_buf[<span style=color:#f60>100</span>];
+        <span style="color:#078;font-weight:bold">char</span> addr_buf[<span style="color:#f60">100</span>];
 
-        getnameinfo(address<span style=color:#555>-&gt;</span>ai_addr, address<span style=color:#555>-&gt;</span>ai_addrlen, addr_buf, <span style=color:#069;font-weight:700>sizeof</span>(addr_buf),
-                                    <span style=color:#f60>0</span>, <span style=color:#f60>0</span>, NI_NUMERICHOST);
+        getnameinfo(address<span style="color:#555">-&gt;</span>ai_addr, address<span style="color:#555">-&gt;</span>ai_addrlen, addr_buf, <span style="color:#069;font-weight:bold">sizeof</span>(addr_buf),
+                                    <span style="color:#f60">0</span>, <span style="color:#f60">0</span>, NI_NUMERICHOST);
 
-        printf(<span style=color:#c30>&#34;%s</span><span style=color:#c30;font-weight:700>\n</span><span style=color:#c30>&#34;</span>, addr_buf);
-    } <span style=color:#069;font-weight:700>while</span> ((address <span style=color:#555>=</span> address<span style=color:#555>-&gt;</span>ai_next));
+        printf(<span style="color:#c30">&#34;%s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, addr_buf);
+    } <span style="color:#069;font-weight:bold">while</span> ((address <span style="color:#555">=</span> address<span style="color:#555">-&gt;</span>ai_next));
     
-    <span style=color:#069;font-weight:700>return</span> <span style=color:#f60>0</span>;
+    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
 }
-</code></pre></div><h2 id=explanation>explanation</h2><ol><li><p>we start by first printing arguments to screen, the program expects two arguments, a domain name and a port/protocol.</p></li><li><p>a struct of <code>addrinfo</code> is declared <code>hints</code>. this struct fields need to be set as per our requirement. in the next line, we set <code>hints.ai_flags = AI_ALL;</code>. this means that we want bot IPV4 and IPV6 addresses. the result will be in the form of a linked list that can be iterated.</p></li><li><p>we then declare another <code>addrinfo</code> struct called <code>peer</code>. this holds the results of <code>getnameinfo()</code></p></li></ol><h3 id=getnameinfo><code>getnameinfo()</code></h3><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c>
-       <span style=color:#078;font-weight:700>int</span> <span style=color:#c0f>getnameinfo</span>(<span style=color:#069;font-weight:700>const</span> <span style=color:#069;font-weight:700>struct</span> sockaddr <span style=color:#555>*</span>addr, socklen_t addrlen,
-                       <span style=color:#078;font-weight:700>char</span> <span style=color:#555>*</span>host, socklen_t hostlen,
-                       <span style=color:#078;font-weight:700>char</span> <span style=color:#555>*</span>serv, socklen_t servlen, <span style=color:#078;font-weight:700>int</span> flags);
+</code></pre></div><h2 id="explanation">explanation</h2>
+<ol>
+<li>
+<p>we start by first printing arguments to screen, the program expects two arguments, a domain name and a port/protocol.</p>
+</li>
+<li>
+<p>a struct of <code>addrinfo</code> is declared <code>hints</code>. this struct fields need to be set as per our requirement. in the next line, we set <code>hints.ai_flags = AI_ALL;</code>. this means that we want bot IPV4 and IPV6 addresses. the result will be in the form of a linked list that can be iterated.</p>
+</li>
+<li>
+<p>we then declare another <code>addrinfo</code> struct called <code>peer</code>. this holds the results of <code>getnameinfo()</code></p>
+</li>
+</ol>
+<h3 id="getnameinfo"><code>getnameinfo()</code></h3>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
+       <span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">getnameinfo</span>(<span style="color:#069;font-weight:bold">const</span> <span style="color:#069;font-weight:bold">struct</span> sockaddr <span style="color:#555">*</span>addr, socklen_t addrlen,
+                       <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>host, socklen_t hostlen,
+                       <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>serv, socklen_t servlen, <span style="color:#078;font-weight:bold">int</span> flags);
 
-</code></pre></div><hr><ol start=4><li>the address(s) will be stored in a linked, there can be iterated using <code>do while</code> loop as shown above in code.</li></ol><h1 id=output>Output</h1><p>compile the program using <code>gcc</code></p><p><code>gcc lookup.c -o lookup</code></p><p>run the program:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>~/Documents/Projects/network_programming/dns(master*) » ./lookup example.com http                              jojo@synk
+</code></pre></div><hr>
+<ol start="4">
+<li>the address(s) will be stored in a linked, there can be iterated using <code>do while</code> loop as shown above in code.</li>
+</ol>
+<h1 id="output">Output</h1>
+<p>compile the program using <code>gcc</code></p>
+<p><code>gcc lookup.c -o lookup</code></p>
+<p>run the program:</p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">~/Documents/Projects/network_programming/dns(master*) » ./lookup example.com http                              jojo@synk
 resolving host: example.com
 93.184.216.34
 93.184.216.34
@@ -47,6 +232,86 @@ resolving host: example.com
 2606:2800:220:1:248:1893:25c8:1946
 2606:2800:220:1:248:1893:25c8:1946
 2606:2800:220:1:248:1893:25c8:1946
-</code></pre></div><div class="notices tip"><p><p>the above output contains multiple duplicates, this can be fixed by adding another field to <code>hints</code></p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c>hints.ai_socktype <span style=color:#555>=</span> SOCK_STREAM;
-</code></pre></div></p></div><hr><h1 id=conclusion>Conclusion</h1><ul><li>resolving domain names to IP address.</li><li>usage of <code>getnameinfo()</code></li></ul></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/network-programming>network programming</a></li><li><a href=/tags/c>c</a></li></ul></nav></div><div id=commento></div><script id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the
-<a href=https://commento.io/>comments powered by Commento.</a></noscript></div><link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body);></script></div></div><div class="footer wrapper"><script async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script><ins class=adsbygoogle style=display:block data-ad-client=ca-pub-8658473214995139 data-ad-slot=2398602558 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script><br><nav class=nav><div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div><div><a href=https://gitlab.com/synk.0x1/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div></body></html>
+</code></pre></div><div class="notices tip" ><p><p>the above output contains multiple duplicates, this can be fixed by adding another field to <code>hints</code></p>
+<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">hints.ai_socktype <span style="color:#555">=</span> SOCK_STREAM;
+</code></pre></div></p></div>
+<hr>
+<h1 id="conclusion">Conclusion</h1>
+<ul>
+<li>resolving domain names to IP address.</li>
+<li>usage of <code>getnameinfo()</code></li>
+</ul>
+
+</div>
+
+<div class="post-tags">
+	
+	
+	<nav class="nav tags">
+		<ul class="flat">
+			
+			<li><a href="/tags/network-programming">network programming</a></li>
+			
+			<li><a href="/tags/c">c</a></li>
+			
+		</ul>
+	</nav>
+	
+	
+</div>
+
+<div id="commento"></div>
+
+<script id="comments" src="https://utteranc.es/client.js" repo="jkotra/stdin.top-comments" issue-term="pathname"
+	label="💬" theme="github-light" crossorigin="anonymous" async>
+	</script>
+
+<noscript>Please enable JavaScript to view the
+	<a href="https://commento.io/">comments powered by Commento.</a>
+</noscript>
+
+</div>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+
+
+</div>
+
+
+    </div>
+
+    <div class="footer wrapper">
+
+			
+			
+			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8658473214995139"
+     data-ad-slot="2398602558"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<br>
+			
+
+	<nav class="nav">
+		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
+		<div> <a href="https://gitlab.com/synk.0x1/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+</body>
+
+</html>

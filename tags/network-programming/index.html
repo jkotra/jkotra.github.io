@@ -1,3 +1,217 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><base href=/tags/network-programming/><meta name=description content><meta name=language content="en"><link rel=sitemap type=application/xml title=Sitemap href=/sitemap.xml><title>network programming :: &lt;stdin></title><link rel=icon type=image/png href=/static/chip.png><meta property="og:title" content="network programming"><meta property="og:description" content="My writings about technology and other things. Herein I document my experiences on various topics."><meta property="og:type" content="website"><meta property="og:url" content="/tags/network-programming/"><meta property="og:updated_time" content="2020-09-20T20:07:40+05:30"><meta name=twitter:card content="summary"><meta name=twitter:title content="network programming"><meta name=twitter:description content="My writings about technology and other things. Herein I document my experiences on various topics."><meta name=theme-color content="#2e2847"><link rel=alternate type=application/rss+xml href=/tags/network-programming/index.xml title="<stdin>"><link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet><script src=/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1+KmwzJg=="></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous><link rel=stylesheet type=text/css media=screen href=/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog=="><link rel=stylesheet type=text/css media=screen href=/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT+D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS+PZcayDeOHKFb99Z9ZO6g=="><link rel=stylesheet type=text/css href=/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css media="(prefers-color-scheme: dark)"><link rel=stylesheet type=text/css media=screen href=/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css integrity="sha512-ESwE0m+hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg=="><script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config',"G-YW8V9DTR0N");</script><script data-ad-client=ca-pub-8658473214995139 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></head><body><div class="container wrapper"><div class=header><base href=/><h1 class=site-title><a href=/>&lt;stdin></a>
-<span class=blinking-cursor>|</span></h1><div class=site-description><h2 class=cursive>My Thoughts, Trials and Adventures</h2><nav class="nav social"><ul class=flat><a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a><a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a><a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a><a href=index.xml title=RSS><i class="fas fa-rss"></i></a></ul></div><nav class=nav><ul class=flat><li><a href=/about/>About</a></li><li><a href=/tags/>Tags</a></li><li><a href=/portfolio/>Portfolio</a></li><li><a href=http://lab.stdin.top>Lab</a></li><li><a href=/pgp/>PGP</a></li></ul></nav></div><div class=list><h1>Entries tagged - "network programming"</h1><ul class=posts><li class=post><a href=/posts/https_parse_openssl/>Parse HTTPS website(s) in C with OpenSSL</a> <span class=meta>Sep 20, 2020</span></li><li class=post><a href=/posts/smtp-sendmail/>Sending mail using SMTP protocol</a> <span class=meta>Sep 17, 2020</span></li><li class=post><a href=/posts/dns-resolve/>DNS resolution in C</a> <span class=meta>Sep 8, 2020</span></li><li class=post><a href=/posts/udp-server-client/>Communicating between server and client using UDP</a> <span class=meta>Sep 6, 2020</span></li><li class=post><a href=/posts/network-programming-pt2/>Network Programming Pt 2 - TCP client</a> <span class=meta>Aug 31, 2020</span></li><li class=post><a href=/posts/network-programming-pt1/>Network programming Pt. 1 - TCP and Hello World!</a> <span class=meta>Aug 27, 2020</span></li></ul></div></div><div class="footer wrapper"><nav class=nav><div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div><div><a href=https://gitlab.com/synk.0x1/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div></body></html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/tags/network-programming/">
+    
+    
+
+    
+    <meta name="description" content="" />
+    
+    
+    <meta name="language" content="en">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" /> 
+
+    
+    
+    
+    <title>network programming :: &lt;stdin&gt;</title>
+    
+
+    <link rel="icon" type="image/png" href=/static/chip.png />
+
+    <meta property="og:title" content="network programming" />
+<meta property="og:description" content="My writings about technology and other things. Herein I document my experiences on various topics." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/tags/network-programming/" />
+<meta property="og:updated_time" content="2020-09-20T20:07:40+05:30" />
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="network programming"/>
+<meta name="twitter:description" content="My writings about technology and other things. Herein I document my experiences on various topics."/>
+
+
+    <meta name="theme-color" content=#2e2847 />
+
+    <link rel="alternate" type="application/rss+xml" href="/tags/network-programming/index.xml" title="<stdin>" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
+
+    
+    
+    <script src="/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
+    
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
+
+
+    
+    
+
+    
+
+    
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "G-YW8V9DTR0N" );
+</script>
+
+
+
+    
+    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+
+</head>
+
+<body>
+    <div class="container wrapper">
+    <div class="header">
+	<base href="/">
+	<h1 class="site-title">
+		
+		<a href="/">&lt;stdin&gt;</a>
+		
+		<span class="blinking-cursor">|</span>
+		
+	</h1>
+
+	<div class="site-description">
+		
+		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
+		
+
+		<nav class="nav social">
+			<ul class="flat">
+				
+				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
+				
+				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
+				
+				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
+				
+				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
+				
+			</ul>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/about/">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags/">Tags</a>
+			</li>
+			
+			<li>
+				<a href="/portfolio/">Portfolio</a>
+			</li>
+			
+			<li>
+				<a href="/pgp/">PGP</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+    
+
+	<div class="list">
+		
+		
+			<h1>Entries tagged - "network programming"</h1>
+		
+
+		
+
+		<ul class="posts">
+			
+			
+			<li class="post">
+				<a href="/posts/https_parse_openssl/">Parse HTTPS website(s) in C with OpenSSL</a> <span class="meta">Sep 20, 2020</span>
+			</li>
+			
+			
+			
+			<li class="post">
+				<a href="/posts/smtp-sendmail/">Sending mail using SMTP protocol</a> <span class="meta">Sep 17, 2020</span>
+			</li>
+			
+			
+			
+			<li class="post">
+				<a href="/posts/dns-resolve/">DNS resolution in C</a> <span class="meta">Sep 8, 2020</span>
+			</li>
+			
+			
+			
+			<li class="post">
+				<a href="/posts/udp-server-client/">Communicating between server and client using UDP</a> <span class="meta">Sep 6, 2020</span>
+			</li>
+			
+			
+			
+			<li class="post">
+				<a href="/posts/network-programming-pt2/">Network Programming Pt 2 - TCP client</a> <span class="meta">Aug 31, 2020</span>
+			</li>
+			
+			
+			
+			<li class="post">
+				<a href="/posts/network-programming-pt1/">Network programming Pt. 1 - TCP and Hello World!</a> <span class="meta">Aug 27, 2020</span>
+			</li>
+			
+			
+		</ul>
+	</div>
+
+
+
+    </div>
+
+    <div class="footer wrapper">
+
+			
+			
+
+	<nav class="nav">
+		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
+		<div> <a href="https://gitlab.com/synk.0x1/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+</body>
+
+</html>

@@ -1,6 +1,259 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>&lt;stdin></title><link>/</link><description>Recent content on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 Feb 2021 19:50:28 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Porting (coinflip-gtk) to GTK4</title><link>/posts/experience_porting_gtk4/</link><pubDate>Fri, 19 Feb 2021 19:50:28 +0530</pubDate><guid>/posts/experience_porting_gtk4/</guid><description>Introduction Recently, I decided to fix some lingering bugs in my toy project coinflip-gtk which I made a few months back to get a taste of GTK.</description></item><item><title>What changed in WPC 1.0? a lot.</title><link>/posts/what-changed-in-wpc-1.0-a-lot/</link><pubDate>Thu, 14 Jan 2021 02:07:19 +0530</pubDate><guid>/posts/what-changed-in-wpc-1.0-a-lot/</guid><description>Introduction WPC 1.0 has been released and with a whole set of new features and most importantly readable, refactored and saner code which should make things easy for any hackers/tinkerers out there.</description></item><item><title>Hello CUDA!</title><link>/posts/cuda-hello-world/</link><pubDate>Fri, 04 Dec 2020 18:47:53 +0530</pubDate><guid>/posts/cuda-hello-world/</guid><description>Introduction CUDA is a parallel computing platform and application programming interface model created by Nvidia.</description></item><item><title>MusicGenreClassification - Combining multiple features to make a better model</title><link>/posts/musicgenreclassification-ensemble/</link><pubDate>Sat, 31 Oct 2020 23:13:27 +0530</pubDate><guid>/posts/musicgenreclassification-ensemble/</guid><description>Introduction This post is about the extension of my work in one of my projects MusicGenreClassification - a collection of methods to classify given audio clips into any of the 10 categories of GTZAN dataset that it was trained on.</description></item><item><title>Python Decorators demystified</title><link>/posts/python-decorators/</link><pubDate>Sun, 27 Sep 2020 22:32:50 +0530</pubDate><guid>/posts/python-decorators/</guid><description>Introduction This is a short primer on python decorators. I will show 2 examples and walk you through it.</description></item><item><title>Parse HTTPS website(s) in C with OpenSSL</title><link>/posts/https_parse_openssl/</link><pubDate>Sun, 20 Sep 2020 20:07:40 +0530</pubDate><guid>/posts/https_parse_openssl/</guid><description>Introduction In this article, I will explain how to parse a website that uses HTTPS.</description></item><item><title>Sending mail using SMTP protocol</title><link>/posts/smtp-sendmail/</link><pubDate>Thu, 17 Sep 2020 00:47:17 +0530</pubDate><guid>/posts/smtp-sendmail/</guid><description>Introduction This article introduces the SMTP protocol and associated code and jargon.</description></item><item><title>DNS resolution in C</title><link>/posts/dns-resolve/</link><pubDate>Tue, 08 Sep 2020 01:20:42 +0530</pubDate><guid>/posts/dns-resolve/</guid><description>Introduction DNS resolution is the process of converting Domain name (example.</description></item><item><title>Communicating between server and client using UDP</title><link>/posts/udp-server-client/</link><pubDate>Sun, 06 Sep 2020 00:34:58 +0530</pubDate><guid>/posts/udp-server-client/</guid><description>Introduction This article provides a brief introduction to the UDP protocol, what makes it different from TCP.</description></item><item><title>Network Programming Pt 2 - TCP client</title><link>/posts/network-programming-pt2/</link><pubDate>Mon, 31 Aug 2020 01:49:14 +0530</pubDate><guid>/posts/network-programming-pt2/</guid><description>Introduction HTTP is powered by TCP, websites can be retrieved by communicating through TCP socket.</description></item><item><title>Network programming Pt. 1 - TCP and Hello World!</title><link>/posts/network-programming-pt1/</link><pubDate>Thu, 27 Aug 2020 16:40:15 +0530</pubDate><guid>/posts/network-programming-pt1/</guid><description>Introduction a short introduction to TCP and code walkthrough of a simple TCP web server.</description></item><item><title>Xcard library</title><link>/posts/xcard/</link><pubDate>Thu, 20 Aug 2020 22:36:03 +0530</pubDate><guid>/posts/xcard/</guid><description>Introduction xcard is a library to generate and validate credit/debit cards.</description></item><item><title>They are Billions - Automatic game saving utility</title><link>/posts/trbsg/</link><pubDate>Sun, 09 Aug 2020 15:52:50 +0530</pubDate><guid>/posts/trbsg/</guid><description>Github repository
-Introduction technical overview of TRBSG. the purpose of the tool is to automatically backup(zip) save files of They are Billions and easily restore them afterward.</description></item><item><title>C11 Threads</title><link>/posts/c11-threads/</link><pubDate>Mon, 03 Aug 2020 11:23:52 +0530</pubDate><guid>/posts/c11-threads/</guid><description>Introduction this is a simple introduction to threading in C. I will be using inbuild C threading library threads.</description></item><item><title>Function Pointers in C</title><link>/posts/function-pointers-c/</link><pubDate>Fri, 24 Jul 2020 19:00:12 +0530</pubDate><guid>/posts/function-pointers-c/</guid><description>introduction this is a short excerpt on function pointers in C.</description></item><item><title>Writing an Algorithm for Algoticks</title><link>/posts/write-algo-for-algoticks/</link><pubDate>Sat, 11 Jul 2020 01:21:15 +0530</pubDate><guid>/posts/write-algo-for-algoticks/</guid><description>Introduction This is a short tutorial on how to write an algorithm to use with algoticks.</description></item><item><title>Getting Started With Algoticks</title><link>/posts/getting-started-with-algoticks/</link><pubDate>Thu, 02 Jul 2020 03:06:47 +0000</pubDate><guid>/posts/getting-started-with-algoticks/</guid><description>Introduction This is a quick &amp;ldquo;Getting Started&amp;rdquo; Guide to algoticks trading simulator program.</description></item><item><title>Reading CSV files in C</title><link>/posts/csv-in-c/</link><pubDate>Sun, 14 Jun 2020 23:32:29 +0530</pubDate><guid>/posts/csv-in-c/</guid><description>This program is to be compiled using GCC for accurately reproducing results.</description></item><item><title>'Know Your IP Address' with React</title><link>/posts/react-myip/</link><pubDate>Sat, 21 Mar 2020 20:13:16 +0530</pubDate><guid>/posts/react-myip/</guid><description>Demo | Code
-This is a quick primer on how to make a &amp;lsquo;Know Your IP&amp;rsquo; page with React.</description></item><item><title>Overview of WPC: Writing a wallpaper changer in Rust</title><link>/posts/wpc-overview/</link><pubDate>Fri, 13 Mar 2020 10:30:06 +0530</pubDate><guid>/posts/wpc-overview/</guid><description>WPC stands for Wall Paper Changer
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>&lt;stdin&gt;</title>
+    <link>/</link>
+    <description>Recent content on &lt;stdin&gt;</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 Feb 2021 19:50:28 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Porting (coinflip-gtk) to GTK4</title>
+      <link>/posts/experience_porting_gtk4/</link>
+      <pubDate>Fri, 19 Feb 2021 19:50:28 +0530</pubDate>
+      
+      <guid>/posts/experience_porting_gtk4/</guid>
+      <description>Introduction Recently, I decided to fix some lingering bugs in my toy project coinflip-gtk which I made a few months back to get a taste of GTK.</description>
+    </item>
+    
+    <item>
+      <title>What changed in WPC 1.0? a lot.</title>
+      <link>/posts/what-changed-in-wpc-1.0-a-lot/</link>
+      <pubDate>Thu, 14 Jan 2021 02:07:19 +0530</pubDate>
+      
+      <guid>/posts/what-changed-in-wpc-1.0-a-lot/</guid>
+      <description>Introduction WPC 1.0 has been released and with a whole set of new features and most importantly readable, refactored and saner code which should make things easy for any hackers/tinkerers out there.</description>
+    </item>
+    
+    <item>
+      <title>Hello CUDA!</title>
+      <link>/posts/cuda-hello-world/</link>
+      <pubDate>Fri, 04 Dec 2020 18:47:53 +0530</pubDate>
+      
+      <guid>/posts/cuda-hello-world/</guid>
+      <description>Introduction CUDA is a parallel computing platform and application programming interface model created by Nvidia.</description>
+    </item>
+    
+    <item>
+      <title>MusicGenreClassification - Combining multiple features to make a better model</title>
+      <link>/posts/musicgenreclassification-ensemble/</link>
+      <pubDate>Sat, 31 Oct 2020 23:13:27 +0530</pubDate>
+      
+      <guid>/posts/musicgenreclassification-ensemble/</guid>
+      <description>Introduction This post is about the extension of my work in one of my projects MusicGenreClassification - a collection of methods to classify given audio clips into any of the 10 categories of GTZAN dataset that it was trained on.</description>
+    </item>
+    
+    <item>
+      <title>Python Decorators demystified</title>
+      <link>/posts/python-decorators/</link>
+      <pubDate>Sun, 27 Sep 2020 22:32:50 +0530</pubDate>
+      
+      <guid>/posts/python-decorators/</guid>
+      <description>Introduction This is a short primer on python decorators. I will show 2 examples and walk you through it.</description>
+    </item>
+    
+    <item>
+      <title>Parse HTTPS website(s) in C with OpenSSL</title>
+      <link>/posts/https_parse_openssl/</link>
+      <pubDate>Sun, 20 Sep 2020 20:07:40 +0530</pubDate>
+      
+      <guid>/posts/https_parse_openssl/</guid>
+      <description>Introduction In this article, I will explain how to parse a website that uses HTTPS.</description>
+    </item>
+    
+    <item>
+      <title>Sending mail using SMTP protocol</title>
+      <link>/posts/smtp-sendmail/</link>
+      <pubDate>Thu, 17 Sep 2020 00:47:17 +0530</pubDate>
+      
+      <guid>/posts/smtp-sendmail/</guid>
+      <description>Introduction This article introduces the SMTP protocol and associated code and jargon.</description>
+    </item>
+    
+    <item>
+      <title>DNS resolution in C</title>
+      <link>/posts/dns-resolve/</link>
+      <pubDate>Tue, 08 Sep 2020 01:20:42 +0530</pubDate>
+      
+      <guid>/posts/dns-resolve/</guid>
+      <description>Introduction DNS resolution is the process of converting Domain name (example.</description>
+    </item>
+    
+    <item>
+      <title>Communicating between server and client using UDP</title>
+      <link>/posts/udp-server-client/</link>
+      <pubDate>Sun, 06 Sep 2020 00:34:58 +0530</pubDate>
+      
+      <guid>/posts/udp-server-client/</guid>
+      <description>Introduction This article provides a brief introduction to the UDP protocol, what makes it different from TCP.</description>
+    </item>
+    
+    <item>
+      <title>Network Programming Pt 2 - TCP client</title>
+      <link>/posts/network-programming-pt2/</link>
+      <pubDate>Mon, 31 Aug 2020 01:49:14 +0530</pubDate>
+      
+      <guid>/posts/network-programming-pt2/</guid>
+      <description>Introduction HTTP is powered by TCP, websites can be retrieved by communicating through TCP socket.</description>
+    </item>
+    
+    <item>
+      <title>Network programming Pt. 1 - TCP and Hello World!</title>
+      <link>/posts/network-programming-pt1/</link>
+      <pubDate>Thu, 27 Aug 2020 16:40:15 +0530</pubDate>
+      
+      <guid>/posts/network-programming-pt1/</guid>
+      <description>Introduction a short introduction to TCP and code walkthrough of a simple TCP web server.</description>
+    </item>
+    
+    <item>
+      <title>Xcard library</title>
+      <link>/posts/xcard/</link>
+      <pubDate>Thu, 20 Aug 2020 22:36:03 +0530</pubDate>
+      
+      <guid>/posts/xcard/</guid>
+      <description>Introduction xcard is a library to generate and validate credit/debit cards.</description>
+    </item>
+    
+    <item>
+      <title>They are Billions - Automatic game saving utility</title>
+      <link>/posts/trbsg/</link>
+      <pubDate>Sun, 09 Aug 2020 15:52:50 +0530</pubDate>
+      
+      <guid>/posts/trbsg/</guid>
+      <description>Github repository
+ Introduction technical overview of TRBSG. the purpose of the tool is to automatically backup(zip) save files of They are Billions and easily restore them afterward.</description>
+    </item>
+    
+    <item>
+      <title>C11 Threads</title>
+      <link>/posts/c11-threads/</link>
+      <pubDate>Mon, 03 Aug 2020 11:23:52 +0530</pubDate>
+      
+      <guid>/posts/c11-threads/</guid>
+      <description>Introduction this is a simple introduction to threading in C. I will be using inbuild C threading library threads.</description>
+    </item>
+    
+    <item>
+      <title>Function Pointers in C</title>
+      <link>/posts/function-pointers-c/</link>
+      <pubDate>Fri, 24 Jul 2020 19:00:12 +0530</pubDate>
+      
+      <guid>/posts/function-pointers-c/</guid>
+      <description>introduction this is a short excerpt on function pointers in C.</description>
+    </item>
+    
+    <item>
+      <title>Writing an Algorithm for Algoticks</title>
+      <link>/posts/write-algo-for-algoticks/</link>
+      <pubDate>Sat, 11 Jul 2020 01:21:15 +0530</pubDate>
+      
+      <guid>/posts/write-algo-for-algoticks/</guid>
+      <description>Introduction This is a short tutorial on how to write an algorithm to use with algoticks.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started With Algoticks</title>
+      <link>/posts/getting-started-with-algoticks/</link>
+      <pubDate>Thu, 02 Jul 2020 03:06:47 +0000</pubDate>
+      
+      <guid>/posts/getting-started-with-algoticks/</guid>
+      <description>Introduction This is a quick &amp;ldquo;Getting Started&amp;rdquo; Guide to algoticks trading simulator program.</description>
+    </item>
+    
+    <item>
+      <title>Reading CSV files in C</title>
+      <link>/posts/csv-in-c/</link>
+      <pubDate>Sun, 14 Jun 2020 23:32:29 +0530</pubDate>
+      
+      <guid>/posts/csv-in-c/</guid>
+      <description>This program is to be compiled using GCC for accurately reproducing results.</description>
+    </item>
+    
+    <item>
+      <title>&#39;Know Your IP Address&#39; with React</title>
+      <link>/posts/react-myip/</link>
+      <pubDate>Sat, 21 Mar 2020 20:13:16 +0530</pubDate>
+      
+      <guid>/posts/react-myip/</guid>
+      <description>Demo | Code
+This is a quick primer on how to make a &amp;lsquo;Know Your IP&amp;rsquo; page with React.</description>
+    </item>
+    
+    <item>
+      <title>Overview of WPC: Writing a wallpaper changer in Rust</title>
+      <link>/posts/wpc-overview/</link>
+      <pubDate>Fri, 13 Mar 2020 10:30:06 +0530</pubDate>
+      
+      <guid>/posts/wpc-overview/</guid>
+      <description>WPC stands for Wall Paper Changer
 Github
-Changelog (09-07-2020) WPC v0.</description></item><item><title>Vapoursynth - Merge clips using MaskedMerge</title><link>/posts/vapoursynth-maskedmerge/</link><pubDate>Tue, 03 Mar 2020 22:03:21 +0530</pubDate><guid>/posts/vapoursynth-maskedmerge/</guid><description>std.MaskedMerge(clip clipa, clip clipb, clip mask[, int[] planes, bint first_plane=0, bint premultiplied=0])</description></item><item><title>PGP</title><link>/pgp/</link><pubDate>Wed, 26 Feb 2020 11:54:58 +0530</pubDate><guid>/pgp/</guid><description>-----BEGIN PGP PUBLIC KEY BLOCK----- mQENBF5WOBEBCADTALgMWenLc9VpXDm0gVgVnonfcHeTOUJCnLrllsrl5TIinE0s NUeIXhaN+aVWXnEaMiVUxwJjqN20vEHEWad3Gycw6ZryCfK5Grb4wz5iz542SLPq fAL2skFIArPZkFSyaygTEUQG/KWoJMuNDyBNQO48UgEqwDMMZqvlTmnRccOHKUpE n48cPR/jfEbdDXYnDKa7MRBzPm9L5VTwcMlLvjiZda/zvFZL2tLnplLXlrbBuMv4 8qQZQXNSOWNOem4Kuql5aWDAmFNx5DXB2YpjazYZvb6i33HGCxSUl+CHoUJlabo4 62AB7WyxqyxPBgh8SZOVB8o4C/PvTRixhYmLABEBAAG0JUphZ2FkZWVzaCBLb3Ry YSA8amFnYWRlZXNoQHN0ZGluLnRvcD6JAVQEEwEIAD4WIQQnQillrhjy75IleL8J zS1dBmNMPwUCXlY4EQIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAK CRAJzS1dBmNMP7kMB/9K/vkoRz/RRpVE/9puFOZZNLCnx+BWTM9hbWbuu2480Q8J 2BB1Don45U54UwUUbJpSdGZHQcipN7vz1W6AD49NT5iBQsHQT3V8H61gbnT5F3Ph 9IHBRbL8vhD3jq8AKZrFinnPc2dpLBN6hB4n7ISZb7I98hYKfwsCAXUAFGqrj3+2 k4JE/ZF46yPCPNPZLOpatUOt6Jzp9M0LtbIi2fq+dyCSdvZqY1Eta5UsfX9v0jB8 ZCiy6W+V8yaNLH1bFMyiQVtHO1Cb9R36xMG3amGRUh6tYXwhPbYBSe0Z/xlFFar8 073glZFfZN/gHOYDBOiNHut/Mxa1kU9eOyXm3JNzuQENBF5WOBEBCADF/rNCc0Wb JM7PumOQGdIgMfXnAfVhlCPl3TGp2zQ5x/RRrdA+75nbegXDE/WW3G/FNCgBPSaT 0e6IHxBV874fGT85fxR+JfXwyAUv7EY226ACEASZYFFSkWjI7wpoN/HfOyzFtulb ImKB9HFNI/DIO6cuo4WixFsOWS9iVfPcQNgVwgndloFaaMEt4aiWho/5W80Ae+d9 7ZK5wb146XH42zWUTXE0oa6JE0XHHFlNS8D7E5op613l5yviDOJ9EjTAoKvu25JC rpI9+O3LAzfc4nud0eDYX27JKI7PgL4zOIudDFFjbPRx0w3377RLP1HP25DHM7cF xRPfnDW+qTyjABEBAAGJATwEGAEIACYWIQQnQillrhjy75IleL8JzS1dBmNMPwUC XlY4EQIbDAUJA8JnAAAKCRAJzS1dBmNMPyhiB/9py2LmosTLgXnRwFo+UyEFVSZh ALOE2P6SaEF65/2YU/2C5TjrhBnpL3titFyrqftkyluxSYoLvWEUDX8x/uZ3TQJr 7zyFIyB5F3kqE3UQsPxSSwIl/e1eVVzOXoyblYyszZBbYUuVU5e/jWwSUYwvl415 EWQLELlgC5gTepN8ldODFw/YHuXIoL+7eT4OLQLZ72th31DkNV5O97zpw0kW7UrP 7Ek+JzcgWe7wGrLf7VxQQLZC7XGJhMQcovhrbjUSCIf9RV8bU+DHdKEZcl6QmrkT nrs6Ie7GrpZqKAeBMN0+jQH39PDsc6xd9JmI8FCrowK7yV6GAUkRe0/lPTsW =zYrS -----END PGP PUBLIC KEY BLOCK-----</description></item><item><title>Pollution forecasting using Time series and LSTM with MXnet</title><link>/posts/lstm-mxnet/</link><pubDate>Mon, 21 Oct 2019 23:41:53 +0530</pubDate><guid>/posts/lstm-mxnet/</guid><description>Time series Time series analysis is a statistical technique that deals with time series data, or trend analysis.</description></item><item><title>About Me</title><link>/about/</link><pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate><guid>/about/</guid><description>Hi, I&amp;rsquo;m Jagadeesh Kotra.
-I am a self-taught programmer and an avid open-source contributor.</description></item><item><title>Playground</title><link>/playground/</link><pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate><guid>/playground/</guid><description/></item><item><title>Portfolio</title><link>/portfolio/</link><pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate><guid>/portfolio/</guid><description>eOVPN eOVPN is a application to connect, manage and update(from remote .</description></item><item><title>Privacy Policy</title><link>/privacy-policy/</link><pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate><guid>/privacy-policy/</guid><description>Privacy Policy for stdin.top At stdin, accessible from https://stdin.top, one of our main priorities is the privacy of our visitors.</description></item></channel></rss>
+ Changelog (09-07-2020)  WPC v0.</description>
+    </item>
+    
+    <item>
+      <title>Vapoursynth - Merge clips using MaskedMerge</title>
+      <link>/posts/vapoursynth-maskedmerge/</link>
+      <pubDate>Tue, 03 Mar 2020 22:03:21 +0530</pubDate>
+      
+      <guid>/posts/vapoursynth-maskedmerge/</guid>
+      <description>std.MaskedMerge(clip clipa, clip clipb, clip mask[, int[] planes, bint first_plane=0, bint premultiplied=0])</description>
+    </item>
+    
+    <item>
+      <title>PGP</title>
+      <link>/pgp/</link>
+      <pubDate>Wed, 26 Feb 2020 11:54:58 +0530</pubDate>
+      
+      <guid>/pgp/</guid>
+      <description>-----BEGIN PGP PUBLIC KEY BLOCK----- mQENBF5WOBEBCADTALgMWenLc9VpXDm0gVgVnonfcHeTOUJCnLrllsrl5TIinE0s NUeIXhaN+aVWXnEaMiVUxwJjqN20vEHEWad3Gycw6ZryCfK5Grb4wz5iz542SLPq fAL2skFIArPZkFSyaygTEUQG/KWoJMuNDyBNQO48UgEqwDMMZqvlTmnRccOHKUpE n48cPR/jfEbdDXYnDKa7MRBzPm9L5VTwcMlLvjiZda/zvFZL2tLnplLXlrbBuMv4 8qQZQXNSOWNOem4Kuql5aWDAmFNx5DXB2YpjazYZvb6i33HGCxSUl+CHoUJlabo4 62AB7WyxqyxPBgh8SZOVB8o4C/PvTRixhYmLABEBAAG0JUphZ2FkZWVzaCBLb3Ry YSA8amFnYWRlZXNoQHN0ZGluLnRvcD6JAVQEEwEIAD4WIQQnQillrhjy75IleL8J zS1dBmNMPwUCXlY4EQIbAwUJA8JnAAULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAK CRAJzS1dBmNMP7kMB/9K/vkoRz/RRpVE/9puFOZZNLCnx+BWTM9hbWbuu2480Q8J 2BB1Don45U54UwUUbJpSdGZHQcipN7vz1W6AD49NT5iBQsHQT3V8H61gbnT5F3Ph 9IHBRbL8vhD3jq8AKZrFinnPc2dpLBN6hB4n7ISZb7I98hYKfwsCAXUAFGqrj3+2 k4JE/ZF46yPCPNPZLOpatUOt6Jzp9M0LtbIi2fq+dyCSdvZqY1Eta5UsfX9v0jB8 ZCiy6W+V8yaNLH1bFMyiQVtHO1Cb9R36xMG3amGRUh6tYXwhPbYBSe0Z/xlFFar8 073glZFfZN/gHOYDBOiNHut/Mxa1kU9eOyXm3JNzuQENBF5WOBEBCADF/rNCc0Wb JM7PumOQGdIgMfXnAfVhlCPl3TGp2zQ5x/RRrdA+75nbegXDE/WW3G/FNCgBPSaT 0e6IHxBV874fGT85fxR+JfXwyAUv7EY226ACEASZYFFSkWjI7wpoN/HfOyzFtulb ImKB9HFNI/DIO6cuo4WixFsOWS9iVfPcQNgVwgndloFaaMEt4aiWho/5W80Ae+d9 7ZK5wb146XH42zWUTXE0oa6JE0XHHFlNS8D7E5op613l5yviDOJ9EjTAoKvu25JC rpI9+O3LAzfc4nud0eDYX27JKI7PgL4zOIudDFFjbPRx0w3377RLP1HP25DHM7cF xRPfnDW+qTyjABEBAAGJATwEGAEIACYWIQQnQillrhjy75IleL8JzS1dBmNMPwUC XlY4EQIbDAUJA8JnAAAKCRAJzS1dBmNMPyhiB/9py2LmosTLgXnRwFo+UyEFVSZh ALOE2P6SaEF65/2YU/2C5TjrhBnpL3titFyrqftkyluxSYoLvWEUDX8x/uZ3TQJr 7zyFIyB5F3kqE3UQsPxSSwIl/e1eVVzOXoyblYyszZBbYUuVU5e/jWwSUYwvl415 EWQLELlgC5gTepN8ldODFw/YHuXIoL+7eT4OLQLZ72th31DkNV5O97zpw0kW7UrP 7Ek+JzcgWe7wGrLf7VxQQLZC7XGJhMQcovhrbjUSCIf9RV8bU+DHdKEZcl6QmrkT nrs6Ie7GrpZqKAeBMN0+jQH39PDsc6xd9JmI8FCrowK7yV6GAUkRe0/lPTsW =zYrS -----END PGP PUBLIC KEY BLOCK----- </description>
+    </item>
+    
+    <item>
+      <title>Pollution forecasting using Time series and LSTM with MXnet</title>
+      <link>/posts/lstm-mxnet/</link>
+      <pubDate>Mon, 21 Oct 2019 23:41:53 +0530</pubDate>
+      
+      <guid>/posts/lstm-mxnet/</guid>
+      <description>Time series Time series analysis is a statistical technique that deals with time series data, or trend analysis.</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>/about/</link>
+      <pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Hi, I&amp;rsquo;m Jagadeesh Kotra.
+I am a self-taught programmer and an avid open-source contributor.</description>
+    </item>
+    
+    <item>
+      <title>Playground</title>
+      <link>/playground/</link>
+      <pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate>
+      
+      <guid>/playground/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Portfolio</title>
+      <link>/portfolio/</link>
+      <pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate>
+      
+      <guid>/portfolio/</guid>
+      <description>eOVPN eOVPN is a application to connect, manage and update(from remote .</description>
+    </item>
+    
+    <item>
+      <title>Privacy Policy</title>
+      <link>/privacy-policy/</link>
+      <pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate>
+      
+      <guid>/privacy-policy/</guid>
+      <description>Privacy Policy for stdin.top At stdin, accessible from https://stdin.top, one of our main priorities is the privacy of our visitors.</description>
+    </item>
+    
+  </channel>
+</rss>
