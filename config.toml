@@ -79,12 +79,6 @@ url = "index.xml"
 	weight = 3
 
 [[menu.main]]
-	name = "Lab"
-	identifier = "playground"
-	url = "http://lab.stdin.top"
-	weight = 4
-
-[[menu.main]]
 	name = "PGP"
 	identifier = "pgp"
 	url = "/pgp/"
