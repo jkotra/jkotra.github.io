@@ -26,4 +26,4 @@ jobs:
         with:
           personal_token: ${{ secrets.TOKEN }}
           publish_branch: gh-pages
-          #cname: example.com
+          cname: stdin.top
