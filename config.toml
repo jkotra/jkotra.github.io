@@ -9,8 +9,8 @@ paginate = 6 # Set the number of posts to show before overflowing to the next pa
 summaryLength = 10 # Configure how long the post summary should be on the homepage.
 
 
-pygmentsstyle = "manni"
 pygmentscodefences = true
+pygmentsUseClasses=true
 pygmentscodefencesguesssyntax = true
 
 

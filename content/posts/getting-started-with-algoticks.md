@@ -9,6 +9,11 @@ draft: false
 
 ---
 
+{{% notice note %}}
+**Updated**: 10-Mar-2021
+- *Updated things that are changed in algoticks v2.0*
+{{% /notice %}}
+
 # Introduction
 
 This is a quick "Getting Started" Guide to algoticks trading simulator program. Algorticks is an algorithmic trading simulator written in C with Speed and modularity as design objectives. It's easy to write your own algorithms, all you need to know is how to write a for loop in C. ([learn here](https://www.tutorialspoint.com/cprogramming/c_for_loop.htm))
@@ -123,7 +128,7 @@ Data: [NIFTY50 1min Interval OHLC](https://drive.google.com/file/d/19sH22KV4X_re
     "quantity": 100,
     "target": 50,
     "stoploss": 75,
-    "is_training_sl": true,
+    "is_trailing_sl": true,
     "trailing_sl_val": 25,
     
     "sliding": false,
@@ -173,7 +178,7 @@ benchmark mode can be enabled using command line arg `-B`
     "quantity": [10],
     "target": [1.5,2,2.5],
     "stoploss": [2,2.5,3,3.5],
-    "is_training_sl": [true,false],
+    "is_trailing_sl": [true,false],
     "trailing_sl_val": [1,2,3],
     
     "sliding": [true, false],
@@ -197,7 +202,7 @@ this feature can be enabled using `-L` command line arg.
 
 example:
 
-`./algoticks -L`
+`./algoticks -l`
 
 What this essentially does is that, on hitting EOF, the program will repeatedly check for file modification in datasource, if it detects any modification, it reloads the file and continues execution.
 
