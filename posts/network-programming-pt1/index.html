@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -169,20 +169,20 @@
 <div class="notices note" ><p>the code explained here can be found in my <a href="https://github.com/jkotra/NetworkProgramming/blob/master/hello.c">NetworkProgramming GitHub repository</a>.</p></div>
 <h1 id="walkthrough">Walkthrough</h1>
 <p>we need a bunch of header files that contain different functions and structures that we need.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span> <span style="color:#099">&lt;sys/types.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;sys/socket.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#include</span> <span style="color:#099">&lt;netinet/in.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#include</span> <span style="color:#099">&lt;netdb.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;string.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;unistd.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdbool.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#define MAX_BACKLOG 10
-</span><span style="color:#099">#define PORT &#34;8080&#34;
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;netinet/in.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;netdb.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#define MAX_BACKLOG 10
+</span><span class="cp">#define PORT &#34;8080&#34;
 </span></code></pre></div><h2 id="header-breakdown">Header Breakdown</h2>
 <table>
 <thead>
@@ -219,39 +219,39 @@
 </p>
 <p>we start by calling <code>init_server()</code> function. this function will create a socket and bind it to a port.</p>
 <p><code>init_server</code> return&rsquo;s a socket descriptor (<code>&gt; 0</code>) if the socket is created and the address is successfully binded.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-    <span style="color:#078;font-weight:bold">int</span> socketfd <span style="color:#555">=</span> init_server();
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+    <span class="kt">int</span> <span class="n">socketfd</span> <span class="o">=</span> <span class="n">init_server</span><span class="p">();</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (socketfd <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
-        printf(<span style="color:#c30">&#34;cannot init_server()&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">socketfd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;cannot init_server()&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 </code></pre></div><p>this is our <code>init_server()</code> function.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">init_server</span>()
-{
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">init_server</span><span class="p">()</span>
+<span class="p">{</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo hints;
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>bind_addr;
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">bind_addr</span><span class="p">;</span>
 
-    memset(<span style="color:#555">&amp;</span>hints, <span style="color:#f60">0</span>, <span style="color:#069;font-weight:bold">sizeof</span>(hints)); <span style="color:#09f;font-style:italic">//zero out!
-</span><span style="color:#09f;font-style:italic"></span>
-    hints.ai_family <span style="color:#555">=</span> AF_INET;       <span style="color:#09f;font-style:italic">// we need ipv4
-</span><span style="color:#09f;font-style:italic"></span>    hints.ai_socktype <span style="color:#555">=</span> SOCK_STREAM; <span style="color:#09f;font-style:italic">// TCP
-</span><span style="color:#09f;font-style:italic"></span>    hints.ai_flags <span style="color:#555">=</span> AI_PASSIVE;     <span style="color:#09f;font-style:italic">// PASSIVE mode
-</span><span style="color:#09f;font-style:italic"></span>
-    getaddrinfo(<span style="color:#f60">0</span>, PORT, <span style="color:#555">&amp;</span>hints, <span style="color:#555">&amp;</span>bind_addr); <span style="color:#09f;font-style:italic">//get local address from system.
-</span><span style="color:#09f;font-style:italic"></span>
-    <span style="color:#09f;font-style:italic">//init socket
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">int</span> socketfd <span style="color:#555">=</span> socket(bind_addr<span style="color:#555">-&gt;</span>ai_family, bind_addr<span style="color:#555">-&gt;</span>ai_socktype, bind_addr<span style="color:#555">-&gt;</span>ai_protocol);
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span> <span class="c1">//zero out!
+</span><span class="c1"></span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>       <span class="c1">// we need ipv4
+</span><span class="c1"></span>    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_STREAM</span><span class="p">;</span> <span class="c1">// TCP
+</span><span class="c1"></span>    <span class="n">hints</span><span class="p">.</span><span class="n">ai_flags</span> <span class="o">=</span> <span class="n">AI_PASSIVE</span><span class="p">;</span>     <span class="c1">// PASSIVE mode
+</span><span class="c1"></span>
+    <span class="n">getaddrinfo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">PORT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bind_addr</span><span class="p">);</span> <span class="c1">//get local address from system.
+</span><span class="c1"></span>
+    <span class="c1">//init socket
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socketfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (bind(socketfd, bind_addr<span style="color:#555">-&gt;</span>ai_addr, bind_addr<span style="color:#555">-&gt;</span>ai_addrlen) <span style="color:#555">==</span> <span style="color:#555">-</span><span style="color:#f60">1</span>)
-    {
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">-</span><span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">socketfd</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">return</span> socketfd;
-}
+    <span class="k">return</span> <span class="n">socketfd</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><ol>
 <li>we first start by declaring two structs of <code>addrinfo</code> - <code>hints</code> and <code>bind_addr</code></li>
 <li>we must zero out the struct struct <code>memset()</code>. this will remove any garbage data from it and set all friends to <code>0</code>.</li>
@@ -261,9 +261,9 @@
 <ol start="4">
 <li>we then call <code>getaddrinfo()</code>. it&rsquo;s defined as:</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">getaddrinfo</span>(<span style="color:#069;font-weight:bold">const</span> <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>node, <span style="color:#069;font-weight:bold">const</span> <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>service,
-                <span style="color:#069;font-weight:bold">const</span> <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>hints,
-                <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">**</span>res);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">getaddrinfo</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">service</span><span class="p">,</span>
+                <span class="k">const</span> <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">hints</span><span class="p">,</span>
+                <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">**</span><span class="n">res</span><span class="p">);</span>
 </code></pre></div><p>set <code>NULL</code> as the first argument(<em>node</em>) indicating we need an address from system, 2nd arg. is our desired port, 3rd arg is <code>hints</code> struct passed as a ref, the result of this is stored in <code>bind_addr</code> struct that we defined above and passed as a ref as 4th arg.</p>
 <ol start="5">
 <li>
@@ -278,59 +278,59 @@
 </ol>
 <p>Back to <code>main()</code>
 we then call <code>listen()</code> with two arguments, 1st arg is <code>socket_fd</code> and second one is <code>MAX_BACKLOG</code> - this is the maximum number of simultanious connection that our socket will accept before refusing.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#09f;font-style:italic">//start listining
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#069;font-weight:bold">if</span> (listen(socketfd, MAX_BACKLOG) <span style="color:#555">&gt;=</span> <span style="color:#f60">0</span>)
-    {
-        printf(<span style="color:#c30">&#34;✅ server listining on 127.0.0.1:%s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, PORT);
-    }
-    <span style="color:#069;font-weight:bold">else</span>
-    {
-        printf(<span style="color:#c30">&#34;❌ cannot listen()! %d </span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, listen(socketfd, MAX_BACKLOG));
-    }
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="c1">//start listining
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">listen</span><span class="p">(</span><span class="n">socketfd</span><span class="p">,</span> <span class="n">MAX_BACKLOG</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;✅ server listining on 127.0.0.1:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">PORT</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;❌ cannot listen()! %d </span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">listen</span><span class="p">(</span><span class="n">socketfd</span><span class="p">,</span> <span class="n">MAX_BACKLOG</span><span class="p">));</span>
+    <span class="p">}</span>
 
 </code></pre></div><p>we then call to <code>accept_and_send()</code> function with <code>socket_fd</code> as arg. this function will accept incoming connections (forwarded by <code>listen()</code>)</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#069;font-weight:bold">while</span> (<span style="color:#366">true</span>)
-    {
-        accept_and_send(socketfd);
-    }
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">accept_and_send</span><span class="p">(</span><span class="n">socketfd</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div><p><code>accept_and_send()</code> function:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">accept_and_send</span>(<span style="color:#078;font-weight:bold">int</span> socketfd)
-{
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">accept_and_send</span><span class="p">(</span><span class="kt">int</span> <span class="n">socketfd</span><span class="p">)</span>
+<span class="p">{</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> sockaddr_storage client_addr; <span style="color:#09f;font-style:italic">//to store client addr
-</span><span style="color:#09f;font-style:italic"></span>    socklen_t client_addr_len;           <span style="color:#09f;font-style:italic">//length of client addr;
-</span><span style="color:#09f;font-style:italic"></span>
-    <span style="color:#078;font-weight:bold">int</span> client <span style="color:#555">=</span> accept(socketfd, (<span style="color:#069;font-weight:bold">struct</span> sockaddr <span style="color:#555">*</span>)<span style="color:#555">&amp;</span>client_addr, <span style="color:#555">&amp;</span>client_addr_len);
+    <span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="n">client_addr</span><span class="p">;</span> <span class="c1">//to store client addr
+</span><span class="c1"></span>    <span class="n">socklen_t</span> <span class="n">client_addr_len</span><span class="p">;</span>           <span class="c1">//length of client addr;
+</span><span class="c1"></span>
+    <span class="kt">int</span> <span class="n">client</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">socketfd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_addr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_addr_len</span><span class="p">);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (client <span style="color:#555">==</span> <span style="color:#555">-</span><span style="color:#f60">1</span>)
-    {
-        printf(<span style="color:#c30">&#34;cannot accept connection from client!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">-</span><span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">client</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;cannot accept connection from client!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#078;font-weight:bold">char</span> addr_buffer[<span style="color:#f60">100</span>]; <span style="color:#09f;font-style:italic">//empty buf. to store ip.
-</span><span style="color:#09f;font-style:italic"></span>
-    getnameinfo((<span style="color:#069;font-weight:bold">struct</span> sockaddr <span style="color:#555">*</span>)<span style="color:#555">&amp;</span>client_addr, client_addr_len, addr_buffer, <span style="color:#069;font-weight:bold">sizeof</span>(addr_buffer), <span style="color:#f60">0</span>, <span style="color:#f60">0</span>, NI_NUMERICHOST);
+    <span class="kt">char</span> <span class="n">addr_buffer</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span> <span class="c1">//empty buf. to store ip.
+</span><span class="c1"></span>
+    <span class="n">getnameinfo</span><span class="p">((</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_addr</span><span class="p">,</span> <span class="n">client_addr_len</span><span class="p">,</span> <span class="n">addr_buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">addr_buffer</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">NI_NUMERICHOST</span><span class="p">);</span>
 
-    printf(<span style="color:#c30">&#34;client IP: %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, addr_buffer);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;client IP: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">addr_buffer</span><span class="p">);</span>
 
-    <span style="color:#09f;font-style:italic">// HANDLE / READ REQ
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">char</span> request[<span style="color:#f60">1024</span>];
+    <span class="c1">// HANDLE / READ REQ
+</span><span class="c1"></span>    <span class="kt">char</span> <span class="n">request</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
 
-    <span style="color:#078;font-weight:bold">int</span> bytes_received <span style="color:#555">=</span> recv(client, request, <span style="color:#f60">1024</span>, <span style="color:#f60">0</span>);
+    <span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-    <span style="color:#09f;font-style:italic">//send response
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#069;font-weight:bold">const</span> <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>response <span style="color:#555">=</span> <span style="color:#c30">&#34;HTTP/1.1 200 OK</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">&#34;</span>
-                           <span style="color:#c30">&#34;Connection: close</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">&#34;</span>
-                           <span style="color:#c30">&#34;Content-Type: text/plain</span><span style="color:#c30;font-weight:bold">\r\n\r\n</span><span style="color:#c30">&#34;</span>
-                           <span style="color:#c30">&#34;Hello World from hello.c&#34;</span>;
+    <span class="c1">//send response
+</span><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">response</span> <span class="o">=</span> <span class="s">&#34;HTTP/1.1 200 OK</span><span class="se">\r\n</span><span class="s">&#34;</span>
+                           <span class="s">&#34;Connection: close</span><span class="se">\r\n</span><span class="s">&#34;</span>
+                           <span class="s">&#34;Content-Type: text/plain</span><span class="se">\r\n\r\n</span><span class="s">&#34;</span>
+                           <span class="s">&#34;Hello World from hello.c&#34;</span><span class="p">;</span>
 
-    <span style="color:#078;font-weight:bold">int</span> bytes_sent <span style="color:#555">=</span> send(client, response, strlen(response), <span style="color:#f60">0</span>);
+    <span class="kt">int</span> <span class="n">bytes_sent</span> <span class="o">=</span> <span class="n">send</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
 
-    close(client);
-}
+    <span class="n">close</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div><ol>
 <li>
 <p>we start the function by declaring two structs - <code>client_addr</code> and <code>client_addr_len</code>
@@ -359,7 +359,7 @@ we then call <code>listen()</code> with two arguments, 1st arg is <code>socket_f
 <p>compile the program using <code>gcc</code></p>
 <p><code>gcc hello.c -o hello</code></p>
 <p>Run the program</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">~/Documents/Projects/network_programming » ./hello 
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">~/Documents/Projects/network_programming » ./hello 
 socketfd = 3
 ✅ server listining on 127.0.0.1:8080
 </code></pre></div><p>open a browser and navigate to <code>http://127.0.0.1:8080/</code></p>

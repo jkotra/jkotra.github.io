@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -164,7 +164,7 @@
 <p>In this, I will show you how to read CSV files in C.</p>
 <h1 id="examplecsv">Example.csv</h1>
 <p>Let&rsquo;s take a look at <code>example.csv</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">date,open,high,low,close,volume
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">date,open,high,low,close,volume
 2020-03-11 09:15:00,26272.75,26453.65,26241.5,26443.85,0
 2020-03-11 09:16:00,26447.1,26542.2,26423.6,26520.45,0
 2020-03-11 09:17:00,26526.75,26543.15,26465.55,26522.15,0
@@ -197,33 +197,33 @@ The process of reading CSV can be broken down into two steps:</p>
 <h1 id="reading-a-line">Reading a line</h1>
 <p>we use <code>fgets()</code> from <code>string.h</code>.</p>
 <h3 id="lets-demonstrate-this">let&rsquo;s demonstrate this.</h3>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span><span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span><span style="color:#099">&lt;string.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span><span style="color:#099">&lt;stdbool.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#define MAXCHAR 1000
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(){
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#define MAXCHAR 1000
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
-    FILE <span style="color:#555">*</span>fp;
-    <span style="color:#078;font-weight:bold">char</span> row[MAXCHAR];
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">row</span><span class="p">[</span><span class="n">MAXCHAR</span><span class="p">];</span>
 
-    fp <span style="color:#555">=</span> fopen(<span style="color:#c30">&#34;example.csv&#34;</span>,<span style="color:#c30">&#34;r&#34;</span>);
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;example.csv&#34;</span><span class="p">,</span><span class="s">&#34;r&#34;</span><span class="p">);</span>
 
-    ;
+    <span class="p">;</span>
 
-    <span style="color:#069;font-weight:bold">while</span> (feof(fp) <span style="color:#555">!=</span> <span style="color:#366">true</span>)
-    {
-        fgets(row, MAXCHAR, fp);
-        printf(<span style="color:#c30">&#34;Row: %s&#34;</span>, row);
-    }
+    <span class="k">while</span> <span class="p">(</span><span class="n">feof</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fgets</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">MAXCHAR</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Row: %s&#34;</span><span class="p">,</span> <span class="n">row</span><span class="p">);</span>
+    <span class="p">}</span>
     
 
-    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
 </code></pre></div><h3 id="output">Output</h3>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Row: date,open,high,low,close,volume
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Row: date,open,high,low,close,volume
 Row: 2020-03-11 09:15:00,26272.75,26453.65,26241.5,26443.85,0
 Row: 2020-03-11 09:16:00,26447.1,26542.2,26423.6,26520.45,0
 Row: 2020-03-11 09:17:00,26526.75,26543.15,26465.55,26522.15,0
@@ -243,42 +243,42 @@ Row: 2020-03-11 09:29:00,26755.65,26779.7,26755.65,26760.65,0%
 <p>Tokenizing is the processing of splitting a string by any given character, in our case we want to split it by <code>,</code>.</p>
 <p>we use <code>strtok()</code> from <code>string.h</code></p>
 <h3 id="code">code</h3>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span><span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span><span style="color:#099">&lt;string.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span><span style="color:#099">&lt;stdbool.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#define MAXCHAR 1000
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(){
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#define MAXCHAR 1000
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
-    FILE <span style="color:#555">*</span>fp;
-    <span style="color:#078;font-weight:bold">char</span> row[MAXCHAR];
-    <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>token;
+    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">row</span><span class="p">[</span><span class="n">MAXCHAR</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">token</span><span class="p">;</span>
 
-    fp <span style="color:#555">=</span> fopen(<span style="color:#c30">&#34;example.csv&#34;</span>,<span style="color:#c30">&#34;r&#34;</span>);
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;example.csv&#34;</span><span class="p">,</span><span class="s">&#34;r&#34;</span><span class="p">);</span>
 
 
-    <span style="color:#069;font-weight:bold">while</span> (feof(fp) <span style="color:#555">!=</span> <span style="color:#366">true</span>)
-    {
-        fgets(row, MAXCHAR, fp);
-        printf(<span style="color:#c30">&#34;Row: %s&#34;</span>, row);
+    <span class="k">while</span> <span class="p">(</span><span class="n">feof</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fgets</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">MAXCHAR</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Row: %s&#34;</span><span class="p">,</span> <span class="n">row</span><span class="p">);</span>
 
-        token <span style="color:#555">=</span> strtok(row, <span style="color:#c30">&#34;,&#34;</span>);
+        <span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="s">&#34;,&#34;</span><span class="p">);</span>
 
-        <span style="color:#069;font-weight:bold">while</span>(token <span style="color:#555">!=</span> <span style="color:#366">NULL</span>)
-        {
-            printf(<span style="color:#c30">&#34;Token: %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, token);
-            token <span style="color:#555">=</span> strtok(<span style="color:#366">NULL</span>, <span style="color:#c30">&#34;,&#34;</span>);
-        }
+        <span class="k">while</span><span class="p">(</span><span class="n">token</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Token: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">strtok</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="s">&#34;,&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
 
-    }
+    <span class="p">}</span>
     
 
-    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 
-}
+<span class="p">}</span>
 </code></pre></div><h3 id="output-1">Output</h3>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Row: date,open,high,low,close,volume
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Row: date,open,high,low,close,volume
 Token: date
 Token: open
 Token: high

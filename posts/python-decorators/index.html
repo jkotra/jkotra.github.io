@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -165,41 +165,41 @@
 <p>As the name suggests, a decorator is a special type of function that decorates another function. Here, Decoration may mean extending functionality (or) preprocessing before passing it to the subject function. Using decorates is a nice abstraction that can be reused as needed.</p>
 <hr>
 <h2 id="example-1">Example 1</h2>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">upperalpha</span>(func):
-    <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">inner</span>(s):
-        s <span style="color:#555">=</span> s<span style="color:#555">.</span>upper()
-        <span style="color:#069;font-weight:bold">return</span> func(s)
-    <span style="color:#069;font-weight:bold">return</span> inner
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">def</span> <span class="nf">upperalpha</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inner</span>
 
 
-<span style="color:#99f">@upperalpha</span>
-<span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">proc</span>(s):
-    <span style="color:#069;font-weight:bold">return</span> s
+<span class="nd">@upperalpha</span>
+<span class="k">def</span> <span class="nf">proc</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">s</span>
 
 
-<span style="color:#069;font-weight:bold">print</span>(proc(<span style="color:#c30">&#34;Hello World!&#34;</span>))
+<span class="k">print</span><span class="p">(</span><span class="n">proc</span><span class="p">(</span><span class="s2">&#34;Hello World!&#34;</span><span class="p">))</span>
 </code></pre></div><p>The above code contains two functions, <code>upperalpha</code> and <code>proc</code>. Our aim is to decorate <code>proc</code> with <code>upperalpha</code>.</p>
 <p>we start by defining <code>upperalpha</code> which takes a function(<code>func</code>). we then define an inner function (<code>inner</code>). Note that <code>inner</code> takes the same argument as <code>proc</code>. <code>inner</code> contains the statements to <em>decorate</em> the function. <code>.upper()</code> is called on the string and passed on to <code>func</code>(which simply returns whatever it received). Finally, <code>inner</code> function is returned.</p>
 <p>in python, function(s) can be decorated using <code>@DEC</code> syntax where <code>DEC</code> is the name of the decorator.</p>
 <p>we finally run the <code>proc</code> with <code>Hello World</code>. the output will in capital letter because our decorator calls <code>.upper()</code> on our input.</p>
 <h1 id="example-2">Example 2</h1>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">init_mul</span>(func):
-    <span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">inner</span>(n):
-        n <span style="color:#555">=</span> n <span style="color:#555">*</span> <span style="color:#f60">100</span>
-        <span style="color:#069;font-weight:bold">return</span> func(n)
+<div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="k">def</span> <span class="nf">init_mul</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     
-    <span style="color:#069;font-weight:bold">return</span> inner
+    <span class="k">return</span> <span class="n">inner</span>
 
-<span style="color:#99f">@init_mul</span>
-<span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">proc</span>(n):
-    <span style="color:#069;font-weight:bold">print</span>(<span style="color:#c30">&#34;I received&#34;</span>, n)
-    <span style="color:#069;font-weight:bold">return</span> n<span style="color:#555">+</span><span style="color:#f60">1</span>
+<span class="nd">@init_mul</span>
+<span class="k">def</span> <span class="nf">proc</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I received&#34;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
 
 
-<span style="color:#069;font-weight:bold">print</span>(proc(<span style="color:#f60">1</span>))
+<span class="k">print</span><span class="p">(</span><span class="n">proc</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div><p>Let&rsquo;s assume we want to multiply the input by a number before passing on to the function, while you can do this directly on a single function it&rsquo;s not ideal to keep repeating <code>n += n*100</code> everywhere. This is where <code>init_mul</code> decorator comes in handy, just decorate the required function with <code>@init_mul</code> and it will take care of the multiplication requirement.</p>
 <p>Output:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">I received 100
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">I received 100
 101
 </code></pre></div><p><code>1</code> get&rsquo;s multiplied by <code>100</code> in the decorator and the original function is called on modified <code>n</code> value.</p>
 

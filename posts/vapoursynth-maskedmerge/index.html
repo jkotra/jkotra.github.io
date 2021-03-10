@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -190,7 +190,7 @@ Video Files:
 <ol>
 <li>We use <code>lsmas.LWLibavSource</code> to load the clip and save a frame as <code>.png</code></li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">clip_a <span style="color:#555">=</span> core<span style="color:#555">.</span>lsmas<span style="color:#555">.</span>LWLibavSource(script_path <span style="color:#555">+</span> <span style="color:#c30">&#34;/GM_clip_1.mkv&#34;</span>,threads<span style="color:#555">=</span><span style="color:#f60">6</span>)
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">clip_a</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">lsmas</span><span class="o">.</span><span class="n">LWLibavSource</span><span class="p">(</span><span class="n">script_path</span> <span class="o">+</span> <span class="s2">&#34;/GM_clip_1.mkv&#34;</span><span class="p">,</span><span class="n">threads</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 </code></pre></div><div class="notices info" ><p>you can use any other application/video player such as <a href="https://www.videolan.org/vlc/index.html">VLC player</a> to save a screenshot.</p></div>
 <p>
   <img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/frame214.png" alt="Frame 214 from GM_clip_1.mkv">
@@ -209,9 +209,9 @@ Video Files:
 <ol start="4">
 <li>You can view the mask in <a href="https://bitbucket.org/mystery_keeper/vapoursynth-editor/src/master/">vapoursynth editor</a> by using the snippet below.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask <span style="color:#555">=</span> core<span style="color:#555">.</span>imwri<span style="color:#555">.</span>Read(script_path <span style="color:#555">+</span> <span style="color:#c30">&#34;/mask.png&#34;</span>,alpha<span style="color:#555">=</span>True)[<span style="color:#f60">1</span>]
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">mask</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">imwri</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">script_path</span> <span class="o">+</span> <span class="s2">&#34;/mask.png&#34;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
-mask<span style="color:#555">.</span>set_output()
+<span class="n">mask</span><span class="o">.</span><span class="n">set_output</span><span class="p">()</span>
 </code></pre></div><p>
   <img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/2.png" alt="">
 </p>
@@ -219,20 +219,20 @@ mask<span style="color:#555">.</span>set_output()
 <ol start="5">
 <li>Putting it all together..</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">vapoursynth</span> <span style="color:#069;font-weight:bold">as</span> <span style="color:#0cf;font-weight:bold">vs</span>
-<span style="color:#069;font-weight:bold">import</span> <span style="color:#0cf;font-weight:bold">os</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">vapoursynth</span> <span class="kn">as</span> <span class="nn">vs</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-script_path <span style="color:#555">=</span> os<span style="color:#555">.</span>path<span style="color:#555">.</span>dirname(os<span style="color:#555">.</span>path<span style="color:#555">.</span>abspath(__file__))
+<span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 
-core <span style="color:#555">=</span> vs<span style="color:#555">.</span>get_core()
+<span class="n">core</span> <span class="o">=</span> <span class="n">vs</span><span class="o">.</span><span class="n">get_core</span><span class="p">()</span>
 
-clip_a <span style="color:#555">=</span> core<span style="color:#555">.</span>lsmas<span style="color:#555">.</span>LWLibavSource(script_path <span style="color:#555">+</span> <span style="color:#c30">&#34;/GM_clip_1.mkv&#34;</span>,threads<span style="color:#555">=</span><span style="color:#f60">6</span>)
-clip_b <span style="color:#555">=</span> core<span style="color:#555">.</span>lsmas<span style="color:#555">.</span>LWLibavSource(script_path <span style="color:#555">+</span> <span style="color:#c30">&#34;/GM_clip_2.mkv&#34;</span>,threads<span style="color:#555">=</span><span style="color:#f60">6</span>)
+<span class="n">clip_a</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">lsmas</span><span class="o">.</span><span class="n">LWLibavSource</span><span class="p">(</span><span class="n">script_path</span> <span class="o">+</span> <span class="s2">&#34;/GM_clip_1.mkv&#34;</span><span class="p">,</span><span class="n">threads</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">clip_b</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">lsmas</span><span class="o">.</span><span class="n">LWLibavSource</span><span class="p">(</span><span class="n">script_path</span> <span class="o">+</span> <span class="s2">&#34;/GM_clip_2.mkv&#34;</span><span class="p">,</span><span class="n">threads</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 
-mask <span style="color:#555">=</span> core<span style="color:#555">.</span>imwri<span style="color:#555">.</span>Read(script_path <span style="color:#555">+</span> <span style="color:#c30">&#34;/mask.png&#34;</span>,alpha<span style="color:#555">=</span>True)[<span style="color:#f60">1</span>]
+<span class="n">mask</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">imwri</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">script_path</span> <span class="o">+</span> <span class="s2">&#34;/mask.png&#34;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="bp">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
-merged_clip <span style="color:#555">=</span> core<span style="color:#555">.</span>std<span style="color:#555">.</span>MaskedMerge(clip_a,clip_b,mask)
-merged_clip<span style="color:#555">.</span>set_output()
+<span class="n">merged_clip</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">std</span><span class="o">.</span><span class="n">MaskedMerge</span><span class="p">(</span><span class="n">clip_a</span><span class="p">,</span><span class="n">clip_b</span><span class="p">,</span><span class="n">mask</span><span class="p">)</span>
+<span class="n">merged_clip</span><span class="o">.</span><span class="n">set_output</span><span class="p">()</span>
 </code></pre></div><p>
   <img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/merged.png" alt="Merged">
 </p>

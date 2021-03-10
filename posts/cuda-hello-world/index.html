@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -172,24 +172,24 @@
 <div class="notices note" ><p><a href="https://github.com/jkotra/cuda_samples/tree/main/hello_world">Code on Github</a></p></div>
 <p>Demonstration and code walkthrough of a simple <code>Hello World</code> program.</p>
 <p>To run this, clone the repository and run <code>make</code> command.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span><span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span><span style="color:#099">&lt;stdlib.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-__global__ <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">from_gpu</span>(<span style="color:#078;font-weight:bold">void</span>){
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="n">__global__</span> <span class="kt">void</span> <span class="nf">from_gpu</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
 
-    printf(<span style="color:#c30">&#34;%d, %d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, blockIdx.x, threadIdx.x);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d, %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">);</span>
 
-}
+<span class="p">}</span>
 
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(){
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
-    from_gpu<span style="color:#555">&lt;&lt;&lt;</span><span style="color:#f60">10</span>, <span style="color:#f60">10</span><span style="color:#555">&gt;&gt;&gt;</span>();
-    cudaDeviceSynchronize();
+    <span class="n">from_gpu</span><span class="o">&lt;&lt;&lt;</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;&gt;&gt;</span><span class="p">();</span>
+    <span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
 
-    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><p>Output:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">0, 0
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">0, 0
 0, 1
 0, 2
 0, 3
@@ -213,116 +213,125 @@ __global__ <span style="color:#078;font-weight:bold">void</span> <span style="co
 <li><a href="https://github.com/jkotra/cuda_samples/blob/main/vec_add/vec_add.cpp">vec_add.cpp</a></li>
 <li><a href="https://github.com/jkotra/cuda_samples/blob/main/vec_add/vec_add_k.cu">vec_add_k.cu</a></li>
 </ul>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#099">#include</span> <span style="color:#099">&lt;iostream&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;random&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;vector&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;algorithm&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#include</span> <span style="color:#099">&#34;vec_add_k.cuh&#34;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(){
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;random&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&#34;vec_add_k.cuh&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
-    std<span style="color:#555">::</span>vector<span style="color:#555">&lt;</span><span style="color:#078;font-weight:bold">int</span><span style="color:#555">&gt;</span> a(<span style="color:#f60">100</span>), b(<span style="color:#f60">100</span>);
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 
-    std<span style="color:#555">::</span>generate(a.begin(), a.end(), [<span style="color:#555">&amp;</span>](){ <span style="color:#069;font-weight:bold">return</span> std<span style="color:#555">::</span>rand() <span style="color:#555">%</span> <span style="color:#f60">10</span>; });
-    std<span style="color:#555">::</span>generate(b.begin(), b.end(), [<span style="color:#555">&amp;</span>](){ <span style="color:#069;font-weight:bold">return</span> std<span style="color:#555">::</span>rand() <span style="color:#555">%</span> <span style="color:#f60">10</span>; });
+    <span class="n">std</span><span class="o">::</span><span class="n">generate</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](){</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span> <span class="p">});</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">generate</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](){</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span> <span class="p">});</span>
 
-    <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>result <span style="color:#555">=</span> add_vec(a.data(), b.data());
+    <span class="kt">int</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="n">add_vec</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
 
-    <span style="color:#069;font-weight:bold">for</span> (<span style="color:#078;font-weight:bold">int</span> i <span style="color:#555">=</span> <span style="color:#f60">0</span>; i <span style="color:#555">&lt;</span> <span style="color:#f60">100</span>; i<span style="color:#555">++</span>)
-    {
-        std<span style="color:#555">::</span>cout <span style="color:#555">&lt;&lt;</span> a.at(i) <span style="color:#555">&lt;&lt;</span> <span style="color:#c30">&#34;+&#34;</span> <span style="color:#555">&lt;&lt;</span> b.at(i) <span style="color:#555">&lt;&lt;</span> <span style="color:#c30">&#34;=&#34;</span> <span style="color:#555">&lt;&lt;</span> result[i] <span style="color:#555">&lt;&lt;</span> std<span style="color:#555">::</span>endl;
-    }
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;+&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;=&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><p>In <code>vec_add.cpp</code>, 2 vectors are defined and are filled with random numbers. These two vectors are then passed to CUDA kernel for computation.</p>
 <h3 id="cuda-kernel">CUDA Kernel</h3>
 <p>we start by importing standard library</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#099">#include</span> <span style="color:#099">&lt;iostream&gt;</span><span style="color:#099">
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span></code></pre></div><p>create a function called <code>add_vec</code> this takes in the vector from our program <code>vec_add.cpp</code></p>
 <p>declare variables for device storage. (<code>d_a</code>, <code>d_b</code>, <code>d_c</code>)
 to store the result, declare a variable <code>c</code> and allocate memory.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#078;font-weight:bold">int</span><span style="color:#555">*</span> <span style="color:#c0f">add_vec</span>(<span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>a, <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>b){
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span><span class="o">*</span> <span class="nf">add_vec</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
 
-    <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>d_a, <span style="color:#555">*</span>d_b, <span style="color:#555">*</span>d_c;
-    <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>c;
-    c <span style="color:#555">=</span> (<span style="color:#078;font-weight:bold">int</span><span style="color:#555">*</span>) malloc(<span style="color:#069;font-weight:bold">sizeof</span>(<span style="color:#078;font-weight:bold">int</span>) <span style="color:#555">*</span> <span style="color:#f60">100</span>);
+    <span class="kt">int</span> <span class="o">*</span><span class="n">d_a</span><span class="p">,</span> <span class="o">*</span><span class="n">d_b</span><span class="p">,</span> <span class="o">*</span><span class="n">d_c</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>
 </code></pre></div><p>compute the size of storage required, Note that we generated 100 randoms numbers each in both vectors.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#078;font-weight:bold">int</span> size <span style="color:#555">=</span> <span style="color:#f60">100</span> <span style="color:#555">*</span> <span style="color:#069;font-weight:bold">sizeof</span>(<span style="color:#078;font-weight:bold">int</span>);
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
 </code></pre></div><p>allocate memory to device variable&rsquo;s using <code>cudaMalloc()</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    cudaMalloc(<span style="color:#555">&amp;</span>d_a, size);
-    cudaMalloc(<span style="color:#555">&amp;</span>d_b, size);
-    cudaMalloc(<span style="color:#555">&amp;</span>d_c, size);
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp">    <span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_a</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_b</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_c</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
 </code></pre></div><p>Copy host variables into device variables:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_c, c, size, cudaMemcpyHostToDevice);
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp">    <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+    <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_b</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+    <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_c</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
 </code></pre></div><p>Finally Launch the kernel:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">add_vec_cuda<span style="color:#555">&lt;&lt;&lt;</span><span style="color:#f60">1</span>, <span style="color:#f60">100</span><span style="color:#555">&gt;&gt;&gt;</span>(d_a, d_b, d_c);
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">add_vec_cuda</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_a</span><span class="p">,</span> <span class="n">d_b</span><span class="p">,</span> <span class="n">d_c</span><span class="p">);</span>
 </code></pre></div><p>the numbers inside the triple arrow i.e <code>&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;</code> define the size of the kernel, the above line will launch 1 block with 100 threads.</p>
 <p><a href="https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/">More on it</a></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">__global__ <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">add_vec_cuda</span>(<span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>a, <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>b, <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>c){
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">__global__</span> <span class="kt">void</span> <span class="nf">add_vec_cuda</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">c</span><span class="p">){</span>
 
-    <span style="color:#078;font-weight:bold">int</span> index <span style="color:#555">=</span> blockDim.x <span style="color:#555">*</span> blockIdx.x <span style="color:#555">+</span> threadIdx.x;
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">blockDim</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
     
-    <span style="color:#069;font-weight:bold">if</span> (index <span style="color:#555">&lt;</span> <span style="color:#f60">100</span>){
-        c[index] <span style="color:#555">=</span> a[index] <span style="color:#555">+</span> b[index]; 
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">){</span>
+        <span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">index</span><span class="p">];</span> 
+    <span class="p">}</span>
 
-}
+<span class="p">}</span>
 </code></pre></div><p>This is where the magic happens, the result of the addition of vector(s) can be calculated independent of other elements in the array. Taking advantage of massive no of Cuda cores and threads, operations like these can be accelerated many times compared to a typical CPU.</p>
 <p>index can be calculated like below:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#078;font-weight:bold">int</span> index <span style="color:#555">=</span> blockDim.x <span style="color:#555">*</span> blockIdx.x <span style="color:#555">+</span> threadIdx.x;
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">blockDim</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
 </code></pre></div><p>This is one of the main limitations of CUDA, things work a lit bit differently inside CUDA kernel.</p>
 <p>
   <img src="https://i.imgur.com/zVDXn7E.png" alt="">
-(Credits: <a href="http://study.marearts.com/2015/03/meaning-of-threadidx-blockidx-blockdim.html">http://study.marearts.com/2015/03/meaning-of-threadidx-blockidx-blockdim.html</a>)</p>
+
+(Source<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>)</p>
 <p><code>if</code> condition is used to prevent memory overflow, this can be useful in the case of variable input size.</p>
 <p>Complete code:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#09f;font-style:italic">// vec_add_k.cu
-</span><span style="color:#09f;font-style:italic"></span>
-<span style="color:#099">#include</span> <span style="color:#099">&lt;iostream&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-__global__ <span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">add_vec_cuda</span>(<span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>a, <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>b, <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>c){
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// vec_add_k.cu
+</span><span class="c1"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="n">__global__</span> <span class="kt">void</span> <span class="nf">add_vec_cuda</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">c</span><span class="p">){</span>
 
-    <span style="color:#078;font-weight:bold">int</span> index <span style="color:#555">=</span> blockDim.x <span style="color:#555">*</span> blockIdx.x <span style="color:#555">+</span> threadIdx.x;
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">blockDim</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
     
-    <span style="color:#069;font-weight:bold">if</span> (index <span style="color:#555">&lt;</span> <span style="color:#f60">100</span>){
-        c[index] <span style="color:#555">=</span> a[index] <span style="color:#555">+</span> b[index]; 
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">){</span>
+        <span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">index</span><span class="p">];</span> 
+    <span class="p">}</span>
 
-}
+<span class="p">}</span>
 
-<span style="color:#078;font-weight:bold">int</span><span style="color:#555">*</span> <span style="color:#c0f">add_vec</span>(<span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>a, <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>b){
+<span class="kt">int</span><span class="o">*</span> <span class="nf">add_vec</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
 
-    <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>d_a, <span style="color:#555">*</span>d_b, <span style="color:#555">*</span>d_c;
-    <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>c;
+    <span class="kt">int</span> <span class="o">*</span><span class="n">d_a</span><span class="p">,</span> <span class="o">*</span><span class="n">d_b</span><span class="p">,</span> <span class="o">*</span><span class="n">d_c</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
 
-    c <span style="color:#555">=</span> (<span style="color:#078;font-weight:bold">int</span><span style="color:#555">*</span>) malloc(<span style="color:#069;font-weight:bold">sizeof</span>(<span style="color:#078;font-weight:bold">int</span>) <span style="color:#555">*</span> <span style="color:#f60">100</span>);
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>
 
-    <span style="color:#078;font-weight:bold">int</span> size <span style="color:#555">=</span> <span style="color:#f60">100</span> <span style="color:#555">*</span> <span style="color:#069;font-weight:bold">sizeof</span>(<span style="color:#078;font-weight:bold">int</span>);
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
 
-    cudaMalloc(<span style="color:#555">&amp;</span>d_a, size);
-    cudaMalloc(<span style="color:#555">&amp;</span>d_b, size);
-    cudaMalloc(<span style="color:#555">&amp;</span>d_c, size);
+    <span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_a</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_b</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_c</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
 
-    cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_c, c, size, cudaMemcpyHostToDevice);
+    <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+    <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_b</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+    <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_c</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
 
-    add_vec_cuda<span style="color:#555">&lt;&lt;&lt;</span><span style="color:#f60">1</span>, <span style="color:#f60">100</span><span style="color:#555">&gt;&gt;&gt;</span>(d_a, d_b, d_c);
+    <span class="n">add_vec_cuda</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_a</span><span class="p">,</span> <span class="n">d_b</span><span class="p">,</span> <span class="n">d_c</span><span class="p">);</span>
 
-    cudaMemcpy(c, d_c, size, cudaMemcpyDeviceToHost);
+    <span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d_c</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
 
-    cudaFree(d_a);
-    cudaFree(d_b);
-    cudaFree(d_c);
+    <span class="n">cudaFree</span><span class="p">(</span><span class="n">d_a</span><span class="p">);</span>
+    <span class="n">cudaFree</span><span class="p">(</span><span class="n">d_b</span><span class="p">);</span>
+    <span class="n">cudaFree</span><span class="p">(</span><span class="n">d_c</span><span class="p">);</span>
 
-    <span style="color:#069;font-weight:bold">return</span> c;
-}
+    <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><h2 id="whats-next">What&rsquo;s Next?</h2>
 <p>This post serves as an example-first intro to CUDA, I skipped a lot of jargon about CUDA and NVIDIA architecture. I intend to cover some important topics like Matrix Multiplication and Image processing in future articles :bowtie:</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="http://study.marearts.com/2015/03/meaning-of-threadidx-blockidx-blockdim.html">http://study.marearts.com/2015/03/meaning-of-threadidx-blockidx-blockdim.html</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
 
 </div>
 

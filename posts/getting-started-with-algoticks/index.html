@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -159,7 +159,12 @@
 </div>
 
 <div class="markdown">
-	<h1 id="introduction">Introduction</h1>
+	<div class="notices note" ><p><p><strong>Updated</strong>: 10-Mar-2021</p>
+<ul>
+<li><em>Updated things that are changed in algoticks v2.0</em></li>
+</ul>
+</p></div>
+<h1 id="introduction">Introduction</h1>
 <p>This is a quick &ldquo;Getting Started&rdquo; Guide to algoticks trading simulator program. Algorticks is an algorithmic trading simulator written in C with Speed and modularity as design objectives. It&rsquo;s easy to write your own algorithms, all you need to know is how to write a for loop in C. (<a href="https://www.tutorialspoint.com/cprogramming/c_for_loop.htm">learn here</a>)</p>
 <p>Algoticks is built to handle many types of OHLC data, most of the data found online can be directly fed into the program without any additional filtering.</p>
 <h2 id="getting-started">Getting Started</h2>
@@ -168,31 +173,31 @@
 <h2 id="preprocessing">Preprocessing</h2>
 <p>Additional preprocessing is necessary to remove any oddities in your data like Missing data, ununiform formatting, etc.</p>
 <p>Algoticks accepts upto 3 technical indicator columns namely as <code>ti1</code>, <code>ti2</code>, <code>ti3</code>. these values must be of type <code>int</code> or <code>float</code>. any additional technical indicators can be included using <code>ti_others</code> column name. these values are exposed as:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">Row <span style="color:#555">-&gt;</span> technical_indicators <span style="color:#555">-&gt;</span> ti1 (<span style="color:#078;font-weight:bold">float</span>)
-Row <span style="color:#555">-&gt;</span> technical_indicators <span style="color:#555">-&gt;</span> ti2 (<span style="color:#078;font-weight:bold">float</span>)
-Row <span style="color:#555">-&gt;</span> technical_indicators <span style="color:#555">-&gt;</span> ti3 (<span style="color:#078;font-weight:bold">float</span>)
-Row <span style="color:#555">-&gt;</span> technical_indicators <span style="color:#555">-&gt;</span> ti_others (<span style="color:#078;font-weight:bold">char</span> [<span style="color:#f60">2084</span>])
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Row</span> <span class="o">-&gt;</span> <span class="n">technical_indicators</span> <span class="o">-&gt;</span> <span class="n">ti1</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span>
+<span class="n">Row</span> <span class="o">-&gt;</span> <span class="n">technical_indicators</span> <span class="o">-&gt;</span> <span class="n">ti2</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span>
+<span class="n">Row</span> <span class="o">-&gt;</span> <span class="n">technical_indicators</span> <span class="o">-&gt;</span> <span class="n">ti3</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span>
+<span class="n">Row</span> <span class="o">-&gt;</span> <span class="n">technical_indicators</span> <span class="o">-&gt;</span> <span class="n">ti_others</span> <span class="p">(</span><span class="kt">char</span> <span class="p">[</span><span class="mi">2084</span><span class="p">])</span>
 </code></pre></div><h2 id="simulation">Simulation</h2>
 <p>Example config file(s) can be found in the <code>assets</code> folder of the project. these are copied into <code>bin</code> folder on the invocation of <code>make</code></p>
 <p>example <code>config.json</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#309;font-weight:bold">&#34;algo&#34;</span>: <span style="color:#c30">&#34;algorithms/3Reds.so&#34;</span>,
-    <span style="color:#309;font-weight:bold">&#34;datasource&#34;</span>: <span style="color:#c30">&#34;example.csv&#34;</span>,
-    <span style="color:#309;font-weight:bold">&#34;symbol&#34;</span>: <span style="color:#c30">&#34;SUNPHARMA&#34;</span>,
-    <span style="color:#309;font-weight:bold">&#34;candles&#34;</span>: <span style="color:#f60">3</span>,
-    <span style="color:#309;font-weight:bold">&#34;interval&#34;</span>: <span style="color:#f60">0</span>,
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;algo&#34;</span><span class="p">:</span> <span class="s2">&#34;algorithms/3Reds.so&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;datasource&#34;</span><span class="p">:</span> <span class="s2">&#34;example.csv&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;symbol&#34;</span><span class="p">:</span> <span class="s2">&#34;SUNPHARMA&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;candles&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nt">&#34;interval&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
 
-    <span style="color:#309;font-weight:bold">&#34;quantity&#34;</span>: <span style="color:#f60">100</span>,
-    <span style="color:#309;font-weight:bold">&#34;target&#34;</span>: <span style="color:#f60">5</span>,
-    <span style="color:#309;font-weight:bold">&#34;stoploss&#34;</span>: <span style="color:#f60">7</span>,
-    <span style="color:#309;font-weight:bold">&#34;is_training_sl&#34;</span>: <span style="color:#069;font-weight:bold">false</span>,
-    <span style="color:#309;font-weight:bold">&#34;trailing_sl_val&#34;</span>: <span style="color:#f60">1</span>,
+    <span class="nt">&#34;quantity&#34;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nt">&#34;target&#34;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="nt">&#34;stoploss&#34;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="nt">&#34;is_training_sl&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&#34;trailing_sl_val&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     
-    <span style="color:#309;font-weight:bold">&#34;sliding&#34;</span>: <span style="color:#069;font-weight:bold">false</span>,
-    <span style="color:#309;font-weight:bold">&#34;intraday&#34;</span>: <span style="color:#069;font-weight:bold">true</span>,
-    <span style="color:#309;font-weight:bold">&#34;skip_header&#34;</span>: <span style="color:#069;font-weight:bold">true</span>
+    <span class="nt">&#34;sliding&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&#34;intraday&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;skip_header&#34;</span><span class="p">:</span> <span class="kc">true</span>
 
-}
+<span class="p">}</span>
 </code></pre></div><p><code>algo</code> - This is the name of the algorithm.</p>
 <p><code>datasource</code> - This is the datasource which is expected to contain OHLC data.</p>
 <p><code>symbol</code> - Symbol corresponding to datasource.</p>
@@ -217,55 +222,55 @@ $$\ r1, r2, r3,[r4,r5,r6] $$</p>
 <h3 id="example">Example</h3>
 <p>Data: <a href="https://drive.google.com/file/d/19sH22KV4X_reuf7wg2AWLXqVLSfqVs0K/view?usp=sharing">NIFTY50 1min Interval OHLC</a></p>
 <p><code>config.json</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">
-{
-    <span style="color:#309;font-weight:bold">&#34;algo&#34;</span>: <span style="color:#c30">&#34;algorithms/3Reds.so&#34;</span>,
-    <span style="color:#309;font-weight:bold">&#34;datasource&#34;</span>: <span style="color:#c30">&#34;NIFTY50_1min.csv&#34;</span>,
-    <span style="color:#309;font-weight:bold">&#34;symbol&#34;</span>: <span style="color:#c30">&#34;NIFTY50&#34;</span>,
-    <span style="color:#309;font-weight:bold">&#34;candles&#34;</span>: <span style="color:#f60">3</span>,
-    <span style="color:#309;font-weight:bold">&#34;interval&#34;</span>: <span style="color:#f60">0</span>,
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">
+<span class="p">{</span>
+    <span class="nt">&#34;algo&#34;</span><span class="p">:</span> <span class="s2">&#34;algorithms/3Reds.so&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;datasource&#34;</span><span class="p">:</span> <span class="s2">&#34;NIFTY50_1min.csv&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;symbol&#34;</span><span class="p">:</span> <span class="s2">&#34;NIFTY50&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;candles&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nt">&#34;interval&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
 
-    <span style="color:#309;font-weight:bold">&#34;quantity&#34;</span>: <span style="color:#f60">100</span>,
-    <span style="color:#309;font-weight:bold">&#34;target&#34;</span>: <span style="color:#f60">50</span>,
-    <span style="color:#309;font-weight:bold">&#34;stoploss&#34;</span>: <span style="color:#f60">75</span>,
-    <span style="color:#309;font-weight:bold">&#34;is_training_sl&#34;</span>: <span style="color:#069;font-weight:bold">true</span>,
-    <span style="color:#309;font-weight:bold">&#34;trailing_sl_val&#34;</span>: <span style="color:#f60">25</span>,
+    <span class="nt">&#34;quantity&#34;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nt">&#34;target&#34;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="nt">&#34;stoploss&#34;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+    <span class="nt">&#34;is_trailing_sl&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;trailing_sl_val&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
     
-    <span style="color:#309;font-weight:bold">&#34;sliding&#34;</span>: <span style="color:#069;font-weight:bold">false</span>,
-    <span style="color:#309;font-weight:bold">&#34;intraday&#34;</span>: <span style="color:#069;font-weight:bold">false</span>,
-    <span style="color:#309;font-weight:bold">&#34;skip_header&#34;</span>: <span style="color:#069;font-weight:bold">true</span>
+    <span class="nt">&#34;sliding&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&#34;intraday&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&#34;skip_header&#34;</span><span class="p">:</span> <span class="kc">true</span>
 
-}
+<span class="p">}</span>
 
 </code></pre></div><p>run algoticks from the command line:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./algoticks
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">./algoticks
 </code></pre></div><p>to enable debug (this shows Target Hits, SL hits, TSL Adjustments, etc..)</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">./algoticks -D
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">./algoticks -D
 </code></pre></div><p>On completion of the simulation, a <code>result.csv</code> is generated with results pertaining to completed simulation.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">algo,pnl,datasource,symbol,candles,interval,target,stoploss,is_trailing_sl,trailing_sl_val,quantity,sliding,intraday,buy_signals,sell_signals,neutral_signals,trgt_hits,sl_hits,b_trgt_hits,s_trgt_hits,b_sl_hits,s_sl_hits,peak,bottom
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">algo,pnl,datasource,symbol,candles,interval,target,stoploss,is_trailing_sl,trailing_sl_val,quantity,sliding,intraday,buy_signals,sell_signals,neutral_signals,trgt_hits,sl_hits,b_trgt_hits,s_trgt_hits,b_sl_hits,s_sl_hits,peak,bottom
 algorithms/3Reds.so,-319344.750000,NIFTY50_1min.csv,NIFTY50,3,0,50.000000,75.000000,1,25.000000,100,0,0,0,380,1119,89,253,0,89,0,253,127930.085938,-346939.656250
 </code></pre></div><h2 id="benchmark">Benchmark</h2>
 <p>Algoticks has the ability to perform hundreds of simulation to choose the best one.</p>
 <p>benchmark mode can be enabled using command line arg <code>-B</code></p>
 <p><code>benchmark.json</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">
-{
-    <span style="color:#309;font-weight:bold">&#34;algo&#34;</span>: [<span style="color:#c30">&#34;algorithms/3Greens.so&#34;</span>, <span style="color:#c30">&#34;algorithms/3Reds.so&#34;</span>],
-    <span style="color:#309;font-weight:bold">&#34;datasource&#34;</span>: [<span style="color:#c30">&#34;example.csv&#34;</span>],
-    <span style="color:#309;font-weight:bold">&#34;symbol&#34;</span>: <span style="color:#c30">&#34;SUNPHARMA&#34;</span>,
-    <span style="color:#309;font-weight:bold">&#34;candles&#34;</span>: [<span style="color:#f60">4</span>,<span style="color:#f60">6</span>,<span style="color:#f60">8</span>],
-    <span style="color:#309;font-weight:bold">&#34;interval&#34;</span>: [<span style="color:#f60">5</span>,<span style="color:#f60">10</span>,<span style="color:#f60">15</span>],
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">
+<span class="p">{</span>
+    <span class="nt">&#34;algo&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;algorithms/3Greens.so&#34;</span><span class="p">,</span> <span class="s2">&#34;algorithms/3Reds.so&#34;</span><span class="p">],</span>
+    <span class="nt">&#34;datasource&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;example.csv&#34;</span><span class="p">],</span>
+    <span class="nt">&#34;symbol&#34;</span><span class="p">:</span> <span class="s2">&#34;SUNPHARMA&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;candles&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="nt">&#34;interval&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">],</span>
 
-    <span style="color:#309;font-weight:bold">&#34;quantity&#34;</span>: [<span style="color:#f60">10</span>],
-    <span style="color:#309;font-weight:bold">&#34;target&#34;</span>: [<span style="color:#f60">1.5</span>,<span style="color:#f60">2</span>,<span style="color:#f60">2.5</span>],
-    <span style="color:#309;font-weight:bold">&#34;stoploss&#34;</span>: [<span style="color:#f60">2</span>,<span style="color:#f60">2.5</span>,<span style="color:#f60">3</span>,<span style="color:#f60">3.5</span>],
-    <span style="color:#309;font-weight:bold">&#34;is_training_sl&#34;</span>: [<span style="color:#069;font-weight:bold">true</span>,<span style="color:#069;font-weight:bold">false</span>],
-    <span style="color:#309;font-weight:bold">&#34;trailing_sl_val&#34;</span>: [<span style="color:#f60">1</span>,<span style="color:#f60">2</span>,<span style="color:#f60">3</span>],
+    <span class="nt">&#34;quantity&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+    <span class="nt">&#34;target&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.5</span><span class="p">],</span>
+    <span class="nt">&#34;stoploss&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">3.5</span><span class="p">],</span>
+    <span class="nt">&#34;is_trailing_sl&#34;</span><span class="p">:</span> <span class="p">[</span><span class="kc">true</span><span class="p">,</span><span class="kc">false</span><span class="p">],</span>
+    <span class="nt">&#34;trailing_sl_val&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
     
-    <span style="color:#309;font-weight:bold">&#34;sliding&#34;</span>: [<span style="color:#069;font-weight:bold">true</span>, <span style="color:#069;font-weight:bold">false</span>],
-    <span style="color:#309;font-weight:bold">&#34;intraday&#34;</span>: [<span style="color:#069;font-weight:bold">true</span>,<span style="color:#069;font-weight:bold">false</span>],
-    <span style="color:#309;font-weight:bold">&#34;skip_header&#34;</span>: <span style="color:#069;font-weight:bold">true</span>
-}
+    <span class="nt">&#34;sliding&#34;</span><span class="p">:</span> <span class="p">[</span><span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">],</span>
+    <span class="nt">&#34;intraday&#34;</span><span class="p">:</span> <span class="p">[</span><span class="kc">true</span><span class="p">,</span><span class="kc">false</span><span class="p">],</span>
+    <span class="nt">&#34;skip_header&#34;</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
 
 </code></pre></div><p>A <code>results.csv</code> is generated with all the simulation results.</p>
 <h2 id="livemode">LiveMode</h2>
@@ -273,7 +278,7 @@ algorithms/3Reds.so,-319344.750000,NIFTY50_1min.csv,NIFTY50,3,0,50.000000,75.000
 <p>This gives the ability to monitor and test real-time market data.</p>
 <p>this feature can be enabled using <code>-L</code> command line arg.</p>
 <p>example:</p>
-<p><code>./algoticks -L</code></p>
+<p><code>./algoticks -l</code></p>
 <p>What this essentially does is that, on hitting EOF, the program will repeatedly check for file modification in datasource, if it detects any modification, it reloads the file and continues execution.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>Algoticks is a result of almost a month of programming, tweaking and debugging. The idea was first implemented in python but the speed is not great, thus it will never see the light of the public. This is made with a vision to be very fast, compact, and robust compared to the initial python mock project.</p>

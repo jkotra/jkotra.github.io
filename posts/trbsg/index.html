@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -172,42 +172,42 @@
 <div class="notices note" ><p>save directory is by default set to <code>C:\\Users\{user}\Documents\My Games\They Are Billions\</code>.
 non-default value can be passed using <code>--path</code> arg.</p></div>
 <p>This is a small script(<em>&lt; 80 ln</em>) written in python (&gt;= <em>3.0</em>). this script repeatedly checks for a change in modified date of files ending with <code>*zx*</code> file extension as an indication that savefiles are modified.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">watch</span>(path):
-    <span style="color:#069;font-weight:bold">print</span>(<span style="color:#c30">&#34;Watching: &#34;</span>, path)
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">watch</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Watching: &#34;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
-    modified_times <span style="color:#555">=</span> []
-    <span style="color:#069;font-weight:bold">for</span> root, _, files <span style="color:#000;font-weight:bold">in</span> os<span style="color:#555">.</span>walk(path):
-        <span style="color:#069;font-weight:bold">for</span> <span style="color:#366">file</span> <span style="color:#000;font-weight:bold">in</span> files:
-            <span style="color:#069;font-weight:bold">if</span> <span style="color:#c30">&#34;.zx&#34;</span> <span style="color:#000;font-weight:bold">in</span> <span style="color:#366">file</span>:
-                modified_times<span style="color:#555">.</span>append(os<span style="color:#555">.</span>path<span style="color:#555">.</span>getmtime(os<span style="color:#555">.</span>path<span style="color:#555">.</span>join(root, <span style="color:#366">file</span>)))
+    <span class="n">modified_times</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&#34;.zx&#34;</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+                <span class="n">modified_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">file</span><span class="p">)))</span>
 
 
     
-    <span style="color:#069;font-weight:bold">while</span> True:
-        current_modified_times <span style="color:#555">=</span> []
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">current_modified_times</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span style="color:#069;font-weight:bold">for</span> root, _, files <span style="color:#000;font-weight:bold">in</span> os<span style="color:#555">.</span>walk(path):
-            <span style="color:#069;font-weight:bold">for</span> <span style="color:#366">file</span> <span style="color:#000;font-weight:bold">in</span> files:
-                <span style="color:#069;font-weight:bold">if</span> <span style="color:#c30">&#34;.zx&#34;</span> <span style="color:#000;font-weight:bold">in</span> <span style="color:#366">file</span>:
-                    <span style="color:#069;font-weight:bold">try</span>:
-                        current_modified_times<span style="color:#555">.</span>append(os<span style="color:#555">.</span>path<span style="color:#555">.</span>getmtime(os<span style="color:#555">.</span>path<span style="color:#555">.</span>join(root, <span style="color:#366">file</span>)))
-                    <span style="color:#069;font-weight:bold">except</span> FileNotFoundError:
-                        <span style="color:#069;font-weight:bold">continue</span>    
+        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&#34;.zx&#34;</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">current_modified_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="nb">file</span><span class="p">)))</span>
+                    <span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
+                        <span class="k">continue</span>    
   
 
-        <span style="color:#069;font-weight:bold">if</span> current_modified_times <span style="color:#555">!=</span> modified_times:
-            <span style="color:#069;font-weight:bold">print</span>(modified_times, current_modified_times)
-            modified_times <span style="color:#555">=</span> current_modified_times
+        <span class="k">if</span> <span class="n">current_modified_times</span> <span class="o">!=</span> <span class="n">modified_times</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">modified_times</span><span class="p">,</span> <span class="n">current_modified_times</span><span class="p">)</span>
+            <span class="n">modified_times</span> <span class="o">=</span> <span class="n">current_modified_times</span>
 
-            zipSave(path)
-        <span style="color:#069;font-weight:bold">else</span>:
-            <span style="color:#069;font-weight:bold">continue</span>
+            <span class="n">zipSave</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
 </code></pre></div><p>1st loop stores the initial <code>modified time</code> of files in a list. this is later compared every time in an infinite loop to check for a change in the modified timestamp. if any change is detected, it calls <code>zipSave(path)</code> and sets <code>modified_times = current_modified_times</code></p>
 <p><code>zipSave()</code> uses <code>shutil.make_archive()</code> to make zip file and store it under <code>saves/</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#069;font-weight:bold">def</span> <span style="color:#c0f">zipSave</span>(path):
-    zipfname <span style="color:#555">=</span> <span style="color:#c30">&#34;saves</span><span style="color:#c30;font-weight:bold">\\</span><span style="color:#c30">{n}&#34;</span><span style="color:#555">.</span>format(n<span style="color:#555">=</span><span style="color:#366">len</span>(os<span style="color:#555">.</span>listdir(<span style="color:#c30">&#34;saves&#34;</span>))<span style="color:#555">+</span><span style="color:#f60">1</span>)
-    shutil<span style="color:#555">.</span>make_archive(zipfname, <span style="color:#c30">&#39;zip&#39;</span>, path)
-    <span style="color:#069;font-weight:bold">print</span>(<span style="color:#c30">&#34;Backup completed &#34;</span>, zipfname)
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">zipSave</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="n">zipfname</span> <span class="o">=</span> <span class="s2">&#34;saves</span><span class="se">\\</span><span class="s2">{n}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&#34;saves&#34;</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">make_archive</span><span class="p">(</span><span class="n">zipfname</span><span class="p">,</span> <span class="s1">&#39;zip&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Backup completed &#34;</span><span class="p">,</span> <span class="n">zipfname</span><span class="p">)</span>
 </code></pre></div><p>the user has 2 option to restore the backup(s),</p>
 <ol>
 <li>extract zip file directly to save directory, relacing files.

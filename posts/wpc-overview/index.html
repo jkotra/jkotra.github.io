@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -186,7 +186,7 @@
 <h3 id="how">How?</h3>
 <p>WPC is written in rust with a modular design in mind.</p>
 <p>APIs are divided into modules and used in main.rs as required based on the platform.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">.
 ├── Cargo.lock
 ├── Cargo.toml
 ├── LICENSE.md
@@ -211,26 +211,26 @@
 </code></pre></div><hr>
 <h3 id="dependencies">Dependencies</h3>
 <p><code>config.toml</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[package]
-name = <span style="color:#c30">&#34;wpc&#34;</span>
-version = <span style="color:#c30">&#34;0.1.1&#34;</span>
-authors = [<span style="color:#c30">&#34;Jagadeesh Kotra &lt;jagadeesh@stdin.top&gt;&#34;</span>]
-edition = <span style="color:#c30">&#34;2018&#34;</span>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">package</span><span class="p">]</span>
+<span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;wpc&#34;</span>
+<span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.1.1&#34;</span>
+<span class="nx">authors</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;Jagadeesh Kotra &lt;jagadeesh@stdin.top&gt;&#34;</span><span class="p">]</span>
+<span class="nx">edition</span> <span class="p">=</span> <span class="s2">&#34;2018&#34;</span>
 
-<span style="color:#09f;font-style:italic"># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
+<span class="c"># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
 
-[dependencies]
-serde = <span style="color:#c30">&#34;1.0.104&#34;</span>
-serde_json = <span style="color:#c30">&#34;1.0.48&#34;</span>
-reqwest = { version = <span style="color:#c30">&#34;0.10&#34;</span>, features = [<span style="color:#c30">&#34;blocking&#34;</span>, <span style="color:#c30">&#34;json&#34;</span>] }
-clap = {version = <span style="color:#c30">&#34;2.33&#34;</span>, features = [<span style="color:#c30">&#34;yaml&#34;</span>]}
-rand = <span style="color:#c30">&#34;0.7&#34;</span>
-chrono = <span style="color:#c30">&#34;0.4.10&#34;</span>
-enquote = <span style="color:#c30">&#34;1.0.3&#34;</span>
-dirs = <span style="color:#c30">&#34;2.0.2&#34;</span>
+<span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
+<span class="nx">serde</span> <span class="p">=</span> <span class="s2">&#34;1.0.104&#34;</span>
+<span class="nx">serde_json</span> <span class="p">=</span> <span class="s2">&#34;1.0.48&#34;</span>
+<span class="nx">reqwest</span> <span class="p">=</span> <span class="p">{</span> <span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.10&#34;</span><span class="p">,</span> <span class="nx">features</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;blocking&#34;</span><span class="p">,</span> <span class="s2">&#34;json&#34;</span><span class="p">]</span> <span class="p">}</span>
+<span class="nx">clap</span> <span class="p">=</span> <span class="p">{</span><span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;2.33&#34;</span><span class="p">,</span> <span class="nx">features</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;yaml&#34;</span><span class="p">]}</span>
+<span class="nx">rand</span> <span class="p">=</span> <span class="s2">&#34;0.7&#34;</span>
+<span class="nx">chrono</span> <span class="p">=</span> <span class="s2">&#34;0.4.10&#34;</span>
+<span class="nx">enquote</span> <span class="p">=</span> <span class="s2">&#34;1.0.3&#34;</span>
+<span class="nx">dirs</span> <span class="p">=</span> <span class="s2">&#34;2.0.2&#34;</span>
 
-[target.<span style="color:#c30">&#39;cfg(windows)&#39;</span>.dependencies]
-winapi = { version = <span style="color:#c30">&#34;0.3&#34;</span>, features = [<span style="color:#c30">&#34;winuser&#34;</span>] }
+<span class="p">[</span><span class="nx">target</span><span class="p">.</span><span class="s1">&#39;cfg(windows)&#39;</span><span class="p">.</span><span class="nx">dependencies</span><span class="p">]</span>
+<span class="nx">winapi</span> <span class="p">=</span> <span class="p">{</span> <span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;0.3&#34;</span><span class="p">,</span> <span class="nx">features</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;winuser&#34;</span><span class="p">]</span> <span class="p">}</span>
 </code></pre></div><p>Some notes,</p>
 <p><code>serde</code> and <code>serde_json</code> is used to deal with JSON data.</p>
 <p><code>reqwest</code> is the used to parse information from web sources.</p>
@@ -240,28 +240,28 @@ winapi = { version = <span style="color:#c30">&#34;0.3&#34;</span>, features = [
 <p>One of the main features of WPC is its ability to parse wallpapers from the web. Namely, <a href="https://wallhaven.cc/">Wallheaven</a> and Bing WPOD are implemented.</p>
 <p><a href="https://wallhaven.cc/help/api">wallheaven API</a> is implemented in Rust
 It uses <code>reqwest::blocking</code> to make GET requests and convert them to JSON.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#069;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">wallheaven_wallpaperinfo</span>(apikey: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">str</span>,<span style="color:#bbb"> </span>id: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">str</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#366">Result</span><span style="color:#555">&lt;</span>serde_json::value::Value,<span style="color:#bbb"> </span><span style="color:#366">Box</span><span style="color:#555">&lt;</span>dyn<span style="color:#bbb"> </span>std::error::Error<span style="color:#555">&gt;&gt;</span><span style="color:#bbb"> 
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">wallheaven_search</span>(apikey: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">str</span>,<span style="color:#bbb"> </span>query: <span style="color:#0a8;font-weight:bold">HashMap</span><span style="color:#555">&lt;&amp;</span><span style="color:#078;font-weight:bold">str</span>,<span style="color:#bbb"> </span><span style="color:#555">&amp;</span><span style="color:#078;font-weight:bold">str</span><span style="color:#555">&gt;</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#366">Result</span><span style="color:#555">&lt;</span>Value,<span style="color:#bbb"> </span><span style="color:#366">Box</span><span style="color:#555">&lt;</span>dyn<span style="color:#bbb"> </span>std::error::Error<span style="color:#555">&gt;&gt;</span><span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">wallheaven_taginfo</span>(id: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">str</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#366">Result</span><span style="color:#555">&lt;</span>Value,<span style="color:#bbb"> </span><span style="color:#366">Box</span><span style="color:#555">&lt;</span>dyn<span style="color:#bbb"> </span>std::error::Error<span style="color:#555">&gt;&gt;</span><span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">wallheaven_usersettings</span>(apikey: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">str</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#366">Result</span><span style="color:#555">&lt;</span>Value,<span style="color:#bbb"> </span><span style="color:#366">Box</span><span style="color:#555">&lt;</span>dyn<span style="color:#bbb"> </span>std::error::Error<span style="color:#555">&gt;&gt;</span><span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">wallheaven_getid</span>(apikey: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">str</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#366">Result</span><span style="color:#555">&lt;</span>serde_json::value::Value,<span style="color:#bbb"> </span><span style="color:#366">Box</span><span style="color:#555">&lt;</span>dyn<span style="color:#bbb"> </span>std::error::Error<span style="color:#555">&gt;&gt;</span><span style="color:#bbb">
-</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">wallheaven_getcoll</span>(username: <span style="color:#069">&amp;</span><span style="color:#078;font-weight:bold">str</span>,<span style="color:#bbb"> </span>collid: <span style="color:#078;font-weight:bold">i64</span>)<span style="color:#bbb"> </span>-&gt; <span style="color:#366">Result</span><span style="color:#555">&lt;</span>serde_json::value::Value,<span style="color:#bbb"> </span><span style="color:#366">Box</span><span style="color:#555">&lt;</span>dyn<span style="color:#bbb"> </span>std::error::Error<span style="color:#555">&gt;&gt;</span><span style="color:#bbb">
-</span><span style="color:#bbb">
+<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">wallheaven_wallpaperinfo</span><span class="p">(</span><span class="n">apikey</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">id</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">serde_json</span>::<span class="n">value</span>::<span class="n">Value</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> 
+</span><span class="w">
+</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">wallheaven_search</span><span class="p">(</span><span class="n">apikey</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">query</span>: <span class="nc">HashMap</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">Value</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">wallheaven_taginfo</span><span class="p">(</span><span class="n">id</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">Value</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">wallheaven_usersettings</span><span class="p">(</span><span class="n">apikey</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">Value</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">wallheaven_getid</span><span class="p">(</span><span class="n">apikey</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">serde_json</span>::<span class="n">value</span>::<span class="n">Value</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">wallheaven_getcoll</span><span class="p">(</span><span class="n">username</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">collid</span>: <span class="kt">i64</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">serde_json</span>::<span class="n">value</span>::<span class="n">Value</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w">
+</span><span class="w">
 </span></code></pre></div><p><a href="https://github.com/jkotra/wpc/blob/master/src/web/wallheaven_api.rs">wallhaven.rs</a></p>
 <hr>
 <h3 id="bing-api">Bing API</h3>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#069;font-weight:bold">pub</span><span style="color:#bbb"> </span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">get_wallpaper_of_the_day</span>()<span style="color:#bbb"> </span>-&gt; <span style="color:#366">Result</span><span style="color:#555">&lt;</span>serde_json::value::Value,<span style="color:#bbb"> </span><span style="color:#366">Box</span><span style="color:#555">&lt;</span>dyn<span style="color:#bbb"> </span>std::error::Error<span style="color:#555">&gt;&gt;</span><span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">let</span><span style="color:#bbb"> </span>resp<span style="color:#bbb"> </span><span style="color:#555">=</span><span style="color:#bbb"> </span>reqwest::blocking::get(<span style="color:#c30">&#34;https://www.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;mkt=en-US&#34;</span>).expect(<span style="color:#c30">&#34;Unable to make GET request!&#34;</span>)<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>.text()<span style="color:#555">?</span>;<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#069;font-weight:bold">let</span><span style="color:#bbb"> </span>v: <span style="color:#0a8;font-weight:bold">Value</span><span style="color:#bbb"> </span><span style="color:#555">=</span><span style="color:#bbb"> </span>serde_json::from_str(<span style="color:#555">&amp;</span>resp)<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>.expect(<span style="color:#c30">&#34;Cannot Decode JSON Data!&#34;</span>);<span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#366">Ok</span>(v)<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
+<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_wallpaper_of_the_day</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="n">serde_json</span>::<span class="n">value</span>::<span class="n">Value</span><span class="p">,</span><span class="w"> </span><span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span><span class="w"> </span><span class="n">std</span>::<span class="n">error</span>::<span class="n">Error</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">resp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reqwest</span>::<span class="n">blocking</span>::<span class="n">get</span><span class="p">(</span><span class="s">&#34;https://www.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;mkt=en-US&#34;</span><span class="p">).</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Unable to make GET request!&#34;</span><span class="p">)</span><span class="w">
+</span><span class="w">        </span><span class="p">.</span><span class="n">text</span><span class="p">()</span><span class="o">?</span><span class="p">;</span><span class="w">
+</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">v</span>: <span class="nc">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serde_json</span>::<span class="n">from_str</span><span class="p">(</span><span class="o">&amp;</span><span class="n">resp</span><span class="p">)</span><span class="w">
+</span><span class="w">        </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;Cannot Decode JSON Data!&#34;</span><span class="p">);</span><span class="w">
+</span><span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
 </span></code></pre></div><p>Output: <code>JSON</code></p>
 <hr>
 <h3 id="tests">Tests</h3>
@@ -273,14 +273,14 @@ It uses <code>reqwest::blocking</code> to make GET requests and convert them to 
 <br>
 <code>fn wallheaven_get_wallpapers()</code>
 <br></p></div>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">it_works</span>()<span style="color:#bbb"> </span>{<span style="color:#bbb">
-</span><span style="color:#bbb">        </span>assert_eq<span style="color:#555">!</span>(<span style="color:#f60">2</span><span style="color:#bbb"> </span><span style="color:#555">+</span><span style="color:#bbb"> </span><span style="color:#f60">2</span>,<span style="color:#bbb"> </span><span style="color:#f60">4</span>);<span style="color:#bbb">
-</span><span style="color:#bbb"></span>}<span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">bing_test_is_jpg</span>()<span style="color:#bbb"> 
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">bing_test_is_downloadable</span>()<span style="color:#bbb"> 
-</span><span style="color:#bbb"></span><span style="color:#069;font-weight:bold">fn</span> <span style="color:#c0f">wallheaven_get_wallpapers</span>()<span style="color:#bbb">
-</span><span style="color:#bbb">
+<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="w">
+</span><span class="w"></span><span class="k">fn</span> <span class="nf">it_works</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="w">        </span><span class="n">assert_eq</span><span class="o">!</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="w"></span><span class="k">fn</span> <span class="nf">bing_test_is_jpg</span><span class="p">()</span><span class="w"> 
+</span><span class="w"></span><span class="k">fn</span> <span class="nf">bing_test_is_downloadable</span><span class="p">()</span><span class="w"> 
+</span><span class="w"></span><span class="k">fn</span> <span class="nf">wallheaven_get_wallpapers</span><span class="p">()</span><span class="w">
+</span><span class="w">
 </span></code></pre></div><hr>
 <h2 id="conclusion">Conclusion</h2>
 <p>Creating this application has been a great journey. PR/Issues are welcome.</p>

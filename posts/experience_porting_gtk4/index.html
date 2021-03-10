@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -165,7 +165,7 @@
 <p>The topic of whether to use RAD tool (Glade) or not is a hot debate in the Gnome community<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I went with the suggestion that is given to all the beginners i.e use glade. It took a few days to get hold of it esp. the spacing mechanism, it&rsquo;s not as user-friendly as Qt Creator AFAIR.</p>
 <p>It Turned out glade files are for the most part incompatible with GTK4 as-it-is. a renowned developer even made a blog post<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> about why glade is BAD and you should write XML by hand instead.</p>
 <p>Gtk developers provide a tool <code>gtk4-builder-tool</code> that is intended to fix issues in <code>.ui</code>/<code>.glade</code> files.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Usage:
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Usage:
   gtk-builder-tool [COMMAND] [OPTION…] FILE
 
 Commands:
@@ -188,8 +188,8 @@ Perform various tasks on GtkBuilder .ui files.
 <p>The first obvious thing one would notice is that there is no <code>gtk_builder_connect_signals()</code>. All signals are connected by default.</p>
 <p>another important thing to note is the introduction of <code>GdkTexture</code> which replaces <code>GdkPixbuf.</code> <a href="https://blog.gtk.org/2018/03/16/textures-and-paintables/">this change is explained by devs on the Gtk blog.</a></p>
 <p>this creates a problem with the current implementation of about dialog in my app . in GTK4, <code>gtk_about_dialog_set_logo</code> takes <code>GdkPaintable</code> as input. The correct way to set logo is as follows:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    GdkTexture <span style="color:#555">*</span>about_logo <span style="color:#555">=</span> gdk_texture_new_from_resource(<span style="color:#c30">&#34;/com/github/jkotra/coinflip/images/com.github.jkotra.coinflip.svg&#34;</span>);
-    gtk_about_dialog_set_logo(about, GDK_PAINTABLE(about_logo));
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="n">GdkTexture</span> <span class="o">*</span><span class="n">about_logo</span> <span class="o">=</span> <span class="n">gdk_texture_new_from_resource</span><span class="p">(</span><span class="s">&#34;/com/github/jkotra/coinflip/images/com.github.jkotra.coinflip.svg&#34;</span><span class="p">);</span>
+    <span class="n">gtk_about_dialog_set_logo</span><span class="p">(</span><span class="n">about</span><span class="p">,</span> <span class="n">GDK_PAINTABLE</span><span class="p">(</span><span class="n">about_logo</span><span class="p">));</span>
 </code></pre></div><h2 id="result">Result</h2>
 <p>The porting explained here is <a href="https://github.com/jkotra/coinflip-gtk">available on Github</a>. (<code>gtk4-port</code> branch)</p>
 <p>

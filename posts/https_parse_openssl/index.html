@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -174,150 +174,150 @@
 </blockquote>
 <p><a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">Source</a></p>
 <h3 id="walkthrough">Walkthrough</h3>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span> <span style="color:#099">&lt;openssl/x509.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;openssl/crypto.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;openssl/pem.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;openssl/ssl.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;openssl/err.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;openssl/evp.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#include</span> <span style="color:#099">&lt;sys/types.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;sys/socket.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;sys/select.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;netinet/in.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;netdb.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;string.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;unistd.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdbool.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;errno.h&gt;</span><span style="color:#099">
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;openssl/x509.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;openssl/crypto.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;openssl/pem.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;openssl/ssl.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;openssl/err.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;openssl/evp.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;sys/select.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;netinet/in.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;netdb.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
 </span></code></pre></div><p>We start by importing the required headers. Notice the OpenSSL headers, these contain essential functions to communicate securely with the website.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(<span style="color:#078;font-weight:bold">int</span> argc, <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>argv[])
-{
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
 
-    <span style="color:#09f;font-style:italic">// ssl initialization.
-</span><span style="color:#09f;font-style:italic"></span>    SSL_library_init();
-    OpenSSL_add_all_algorithms();
+    <span class="c1">// ssl initialization.
+</span><span class="c1"></span>    <span class="n">SSL_library_init</span><span class="p">();</span>
+    <span class="n">OpenSSL_add_all_algorithms</span><span class="p">();</span>
 </code></pre></div><p><code>main()</code> function takes two arguments, a domain name/ IP and a port/protocol. SSL port is <code>443</code>. we can also use <code>https</code>(which defaults to <code>443</code>) as the port. <code>getaddrinfo()</code> will understand it either way.</p>
 <p>we need to initialize two functions, <code>SSL_library_init()</code> will set up the environment to use other functions of OpenSSL. <code>OpenSSL_add_all_algorithms()</code> will load required algorithms to encrypt, decrypt data and negotiate cipher with server.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#09f;font-style:italic">//init context
-</span><span style="color:#09f;font-style:italic"></span>    SSL_CTX <span style="color:#555">*</span>ctx <span style="color:#555">=</span> SSL_CTX_new(TLS_client_method());
-    <span style="color:#069;font-weight:bold">if</span> (<span style="color:#555">!</span>ctx)
-    {
-        printf(<span style="color:#c30">&#34;cannot create SSL context!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">//init context
+</span><span class="c1"></span>    <span class="n">SSL_CTX</span> <span class="o">*</span><span class="n">ctx</span> <span class="o">=</span> <span class="n">SSL_CTX_new</span><span class="p">(</span><span class="n">TLS_client_method</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;cannot create SSL context!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 </code></pre></div><p>we then need to initialize a context using <code>SSL_CTX_new()</code>. we pass a inbuilt constructor, <code>TLS_client_method()</code> indicating that we expect a client functionality.</p>
 <div class="notices info" ><p><p><code>TLS_method(), TLS_server_method(), TLS_client_method()</code></p>
 <p>These are the general-purpose version-flexible SSL/TLS methods. The actual protocol version used will be negotiated to the highest version mutually supported by the client and the server. The supported protocols are SSLv3, TLSv1, TLSv1.1 and TLSv1.2. Applications should use these methods, and avoid the version-specific methods described below.</p>
 <p><a href="https://www.openssl.org/docs/man1.1.0/man3/TLS_client_method.html">Source</a></p>
 </p></div>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#09f;font-style:italic">/* code taken from tcp_client_classic.c */</span>
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo hints;
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="cm">/* code taken from tcp_client_classic.c */</span>
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
 
-    memset(<span style="color:#555">&amp;</span>hints, <span style="color:#f60">0</span>, <span style="color:#069;font-weight:bold">sizeof</span>(hints));
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>peer;
-    hints.ai_socktype <span style="color:#555">=</span> SOCK_STREAM;
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">peer</span><span class="p">;</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_STREAM</span><span class="p">;</span>
 
-    printf(<span style="color:#c30">&#34;args: %s %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, argv[<span style="color:#f60">1</span>], argv[<span style="color:#f60">2</span>]);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;args: %s %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (getaddrinfo(argv[<span style="color:#f60">1</span>], argv[<span style="color:#f60">2</span>], <span style="color:#555">&amp;</span>hints, <span style="color:#555">&amp;</span>peer) <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
+    <span class="k">if</span> <span class="p">(</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">peer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
 
-        printf(<span style="color:#c30">&#34;addrinfo() error!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;addrinfo() error!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#078;font-weight:bold">char</span> peer_addr[<span style="color:#f60">100</span>];
-    <span style="color:#078;font-weight:bold">char</span> peer_protocol[<span style="color:#f60">100</span>];
-    getnameinfo(peer<span style="color:#555">-&gt;</span>ai_addr, peer<span style="color:#555">-&gt;</span>ai_addrlen, peer_addr, <span style="color:#069;font-weight:bold">sizeof</span>(peer_addr), peer_protocol, <span style="color:#069;font-weight:bold">sizeof</span>(peer_protocol), NI_NUMERICHOST);
+    <span class="kt">char</span> <span class="n">peer_addr</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">peer_protocol</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+    <span class="n">getnameinfo</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">,</span> <span class="n">peer_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">peer_addr</span><span class="p">),</span> <span class="n">peer_protocol</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">peer_protocol</span><span class="p">),</span> <span class="n">NI_NUMERICHOST</span><span class="p">);</span>
 
-    printf(<span style="color:#c30">&#34;ip: %s | protocol: %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, peer_addr, peer_protocol);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;ip: %s | protocol: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">peer_addr</span><span class="p">,</span> <span class="n">peer_protocol</span><span class="p">);</span>
 
-    <span style="color:#09f;font-style:italic">//family socket_type protocol
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">int</span> socket_fd <span style="color:#555">=</span> socket(peer<span style="color:#555">-&gt;</span>ai_family, peer<span style="color:#555">-&gt;</span>ai_socktype, peer<span style="color:#555">-&gt;</span>ai_protocol);
+    <span class="c1">//family socket_type protocol
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socket_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (socket_fd <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
-        printf(<span style="color:#c30">&#34;socket error.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">socket_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;socket error.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (connect(socket_fd, peer<span style="color:#555">-&gt;</span>ai_addr, peer<span style="color:#555">-&gt;</span>ai_addrlen) <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
-        printf(<span style="color:#c30">&#34;connect error.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;connect error.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    printf(<span style="color:#c30">&#34;connected!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;connected!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 
-    <span style="color:#09f;font-style:italic">/* END */</span>
+    <span class="cm">/* END */</span>
 </code></pre></div><p>The above code is directly taken from <code>tcp_client_classic.c</code> which is explained in <a href="/posts/network-programming-pt2/">this article</a>.</p>
 <p>this essentially initiates a connection with the server, involving address resolution, socket creation, and <code>connect()</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    SSL <span style="color:#555">*</span>ssl <span style="color:#555">=</span> SSL_new(ctx);
-    <span style="color:#069;font-weight:bold">if</span> (<span style="color:#555">!</span>ctx)
-    {
-        fprintf(stderr, <span style="color:#c30">&#34;SSL_new() failed.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="n">SSL</span> <span class="o">*</span><span class="n">ssl</span> <span class="o">=</span> <span class="n">SSL_new</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;SSL_new() failed.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 </code></pre></div><p>next, we create an <code>SSL</code> pointer for peer(server). this will be used to communicate with the server replacing a <code>socket_fd</code>.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#069;font-weight:bold">if</span> (<span style="color:#555">!</span>SSL_set_tlsext_host_name(ssl, argv[<span style="color:#f60">1</span>]))
-    {
-        fprintf(stderr, <span style="color:#c30">&#34;SSL_set_tlsext_host_name() failed.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">SSL_set_tlsext_host_name</span><span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;SSL_set_tlsext_host_name() failed.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 </code></pre></div><p>The above code will ask the server to send details only related to the required website/Hostname. This is a necessary step if multiple sites are hosted under 1(single) IP. The server will then send a certificate pertaining to the hostname provided. it&rsquo;s up to us(client) to validate the details.</p>
 <p>Usually, a self-signed certificate cannot be trusted, every OS comes with a set of trusted CA(certificate authorities) that are to be trusted. the client also must verify that the certificate is valid and not expired or yet-to-be issued.</p>
 <p>(certificate validation is not covered in this article)</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    SSL_set_fd(ssl, socket_fd);
-    <span style="color:#069;font-weight:bold">if</span> (SSL_connect(ssl) <span style="color:#555">==</span> <span style="color:#555">-</span><span style="color:#f60">1</span>)
-    {
-        fprintf(stderr, <span style="color:#c30">&#34;SSL_connect() failed.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="n">SSL_set_fd</span><span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">socket_fd</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">SSL_connect</span><span class="p">(</span><span class="n">ssl</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;SSL_connect() failed.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 </code></pre></div><p>In the above step, we connect our TCP socket to <code>SSL</code> using <code>SSL_set_fd</code>. from this point onwards (after <code>SSL_connect()</code>) we can communicate securely.</p>
 <p><code>ssl_connect()</code> negotiates the best possible and mutually accepted cipher to decrypt and encrypt.it returns <code>-1</code> on error.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">printf(<span style="color:#c30">&#34;SSL/TLS using %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, SSL_get_cipher(ssl));
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">printf</span><span class="p">(</span><span class="s">&#34;SSL/TLS using %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">SSL_get_cipher</span><span class="p">(</span><span class="n">ssl</span><span class="p">));</span>
 </code></pre></div><p>(Optional) print the cipher being used using <code>SSL_get_cipher()</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">char</span> buffer[<span style="color:#f60">2048</span>];
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">2048</span><span class="p">];</span>
 
-    sprintf(buffer, <span style="color:#c30">&#34;GET / HTTP/1.1</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">&#34;</span>);
-    sprintf(buffer <span style="color:#555">+</span> strlen(buffer), <span style="color:#c30">&#34;Host: %s:%s</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">&#34;</span>, argv[<span style="color:#f60">1</span>], argv[<span style="color:#f60">2</span>]);
-    sprintf(buffer <span style="color:#555">+</span> strlen(buffer), <span style="color:#c30">&#34;Connection: close</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">&#34;</span>);
-    sprintf(buffer <span style="color:#555">+</span> strlen(buffer), <span style="color:#c30">&#34;User-Agent: https_simple</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">&#34;</span>);
-    sprintf(buffer <span style="color:#555">+</span> strlen(buffer), <span style="color:#c30">&#34;</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">&#34;</span>);
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="s">&#34;GET / HTTP/1.1</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="s">&#34;Host: %s:%s</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="s">&#34;Connection: close</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="s">&#34;User-Agent: https_simple</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buffer</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="s">&#34;</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
 
-    SSL_write(ssl, buffer, strlen(buffer));
-    printf(<span style="color:#c30">&#34;Sent Headers:</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">%s&#34;</span>, buffer);
+    <span class="n">SSL_write</span><span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buffer</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Sent Headers:</span><span class="se">\n</span><span class="s">%s&#34;</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
 
-    <span style="color:#078;font-weight:bold">int</span> bytes_received <span style="color:#555">=</span> SSL_read(ssl, buffer, <span style="color:#069;font-weight:bold">sizeof</span>(buffer));
-    <span style="color:#069;font-weight:bold">if</span> (bytes_received <span style="color:#555">&lt;</span> <span style="color:#f60">1</span>)
-    {
-        printf(<span style="color:#c30">&#34;</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">Connection closed by peer.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-    }
+    <span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">SSL_read</span><span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bytes_received</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Connection closed by peer.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    printf(<span style="color:#c30">&#34;Received (%d bytes): &#39;%.*s&#39;</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, bytes_received, bytes_received, buffer);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Received (%d bytes): &#39;%.*s&#39;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">bytes_received</span><span class="p">,</span> <span class="n">bytes_received</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
 </code></pre></div><p>The above code<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> declares a buffer. the buffer is filled with requred HTTP headers to make a request. <code>send()</code> is replaced by <code>SSL_write()</code> and <code>recv()</code> is replaced by <code>SSL_read()</code>.</p>
 <p>the response is then stored into the <code>buffer</code>. the response is printed onto the screen.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#09f;font-style:italic">// shutdown ssl connection and free() ctx. 
-</span><span style="color:#09f;font-style:italic"></span>    SSL_shutdown(ssl);
-    SSL_free(ssl);
-    SSL_CTX_free(ctx);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">// shutdown ssl connection and free() ctx. 
+</span><span class="c1"></span>    <span class="n">SSL_shutdown</span><span class="p">(</span><span class="n">ssl</span><span class="p">);</span>
+    <span class="n">SSL_free</span><span class="p">(</span><span class="n">ssl</span><span class="p">);</span>
+    <span class="n">SSL_CTX_free</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
     
-    <span style="color:#09f;font-style:italic">// close socket
-</span><span style="color:#09f;font-style:italic"></span>    close(socket_fd);
+    <span class="c1">// close socket
+</span><span class="c1"></span>    <span class="n">close</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">);</span>
 
-    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><p>Finally, we must clean up pointers n stuff, starting with OpenSSL. shutdown the current SSL connection using <code>SSL_shutdown()</code>, then free it from memory i.e <code>SSL_free(ssl)</code>. SSL context that is used to create SSL should be free&rsquo;d (since we are exiting the application, keep it around if you don&rsquo;t). Finally, as always, close the socket using <code>close()</code></p>
 <h3 id="output">Output</h3>
 <p>compile the program with GCC (remember to link with openSSL library)</p>
 <p><code>gcc get_https_webpage.c -lcrypto -lssl</code></p>
 <p>Run the program:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">~/Documents/Projects/network_programming/tls(master) » ./a.out example.org 443                                            jojo@synk
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">~/Documents/Projects/network_programming/tls(master) » ./a.out example.org 443                                            jojo@synk
 args: example.org 443
 ip: 93.184.216.34 | protocol: https
 connected!

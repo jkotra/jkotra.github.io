@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -176,16 +176,16 @@
 </ul>
 <h1 id="udp-server">UDP Server</h1>
 <div class="notices note" ><p>the code explained here can be found in my <a href="https://github.com/jkotra/NetworkProgramming/blob/master/udp/udp_server_select.c">NetworkProgramming GitHub repository</a>.</p></div>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#069;font-weight:bold">struct</span> addrinfo hints;
-    memset(<span style="color:#555">&amp;</span>hints, <span style="color:#f60">0</span> , <span style="color:#069;font-weight:bold">sizeof</span>(hints));
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>bind_addr;
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">bind_addr</span><span class="p">;</span>
 
-    hints.ai_family <span style="color:#555">=</span> AF_INET; <span style="color:#09f;font-style:italic">//ipv4
-</span><span style="color:#09f;font-style:italic"></span>    hints.ai_socktype <span style="color:#555">=</span> SOCK_DGRAM; <span style="color:#09f;font-style:italic">// UDP
-</span><span style="color:#09f;font-style:italic"></span>    hints.ai_flags <span style="color:#555">=</span> AI_PASSIVE;
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span> <span class="c1">//ipv4
+</span><span class="c1"></span>    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_DGRAM</span><span class="p">;</span> <span class="c1">// UDP
+</span><span class="c1"></span>    <span class="n">hints</span><span class="p">.</span><span class="n">ai_flags</span> <span class="o">=</span> <span class="n">AI_PASSIVE</span><span class="p">;</span>
 
-    getaddrinfo(<span style="color:#f60">0</span>, <span style="color:#c30">&#34;8080&#34;</span>, <span style="color:#555">&amp;</span>hints, <span style="color:#555">&amp;</span>bind_addr);
+    <span class="n">getaddrinfo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#34;8080&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bind_addr</span><span class="p">);</span>
 
 </code></pre></div><ol>
 <li>we start by declaring <code>addrinfo</code> struct. we set the contents of <code>hints</code> to <code>0</code> using <code>memset()</code></li>
@@ -195,40 +195,40 @@
 <ol start="3">
 <li>we then call <code>getaddrinfo()</code> with the required parameters. the result will be stored in <code>bind_addr</code> struct.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#09f;font-style:italic">//bind it
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">int</span> socket_fd <span style="color:#555">=</span> socket(bind_addr<span style="color:#555">-&gt;</span>ai_family, bind_addr<span style="color:#555">-&gt;</span>ai_socktype, bind_addr<span style="color:#555">-&gt;</span>ai_protocol);
-    printf(<span style="color:#c30">&#34;socket_fd: %d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, socket_fd);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">//bind it
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socket_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;socket_fd: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">socket_fd</span><span class="p">);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (socket_fd <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>){
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">socket_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">if</span> ( bind(socket_fd, bind_addr<span style="color:#555">-&gt;</span>ai_addr, bind_addr<span style="color:#555">-&gt;</span>ai_addrlen) <span style="color:#555">&lt;</span> <span style="color:#f60">0</span> ){
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
-    <span style="color:#069;font-weight:bold">else</span>{
-        printf(<span style="color:#c30">&#34;UDP server listing on 127.0.0.1:8080</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-    }
+    <span class="k">if</span> <span class="p">(</span> <span class="n">bind</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;UDP server listing on 127.0.0.1:8080</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
 </code></pre></div><ol>
 <li>create a socket. it returns a negative number on failure.</li>
 <li>we can then bind the address to the port, we do it by calling <code>bind()</code> with socket descriptor, address, and address length.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#069;font-weight:bold">struct</span> sockaddr_storage client_address;
-    socklen_t client_len <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">sizeof</span>(client_address);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="n">client_address</span><span class="p">;</span>
+    <span class="n">socklen_t</span> <span class="n">client_len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">client_address</span><span class="p">);</span>
 
-    <span style="color:#078;font-weight:bold">char</span> read[<span style="color:#f60">1024</span>];
-    <span style="color:#078;font-weight:bold">int</span> bytes_received <span style="color:#555">=</span> recvfrom(socket_fd, read, <span style="color:#f60">1024</span>, <span style="color:#f60">0</span>, (<span style="color:#069;font-weight:bold">struct</span> sockaddr<span style="color:#555">*</span>)<span style="color:#555">&amp;</span>client_address, <span style="color:#555">&amp;</span>client_len);
+    <span class="kt">char</span> <span class="n">read</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">recvfrom</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_address</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_len</span><span class="p">);</span>
 
-    printf(<span style="color:#c30">&#34;%s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, read);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">read</span><span class="p">);</span>
 
-    close(socket_fd);
+    <span class="n">close</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">);</span>
 </code></pre></div><ol>
 <li>declare <code>sockaddr_storage</code> struct. this is used to store the address of the client.</li>
 <li>declare <code>client_len</code> of type <code>socklen_t</code>. this stores the length of the client address.</li>
 <li>declare a char array of length <code>1024</code>.</li>
 <li>we then call <code>recvfrom()</code>. this is where UDP defers from TCP in a major way. in UDP we do not need to call <code>accept()</code> or any other handshake procedure, the data can be directly sent to the client.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">int</span> bytes_received <span style="color:#555">=</span> recvfrom(socket_fd, read, <span style="color:#f60">1024</span>, <span style="color:#f60">0</span>, (<span style="color:#069;font-weight:bold">struct</span> sockaddr<span style="color:#555">*</span>)<span style="color:#555">&amp;</span>client_address, <span style="color:#555">&amp;</span>client_len);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">recvfrom</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_address</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_len</span><span class="p">);</span>
 </code></pre></div><p><code>socket_fd</code> - socket descriptor.</p>
 <p><code>read</code> - message buffer. the response will be stored here.</p>
 <p><code>1024</code> - length of <code>read</code>.</p>
@@ -240,44 +240,44 @@
 <hr>
 <h1 id="udp-client">UDP Client</h1>
 <div class="notices note" ><p>the code explained here can be found in my <a href="https://github.com/jkotra/NetworkProgramming/blob/master/udp/udp_client.c">NetworkProgramming GitHub repository</a>.</p></div>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(<span style="color:#078;font-weight:bold">int</span> argc, <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>argv[])
-{
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (argc <span style="color:#555">&lt;</span> <span style="color:#f60">3</span>){
-        printf(<span style="color:#c30">&#34;invalid no of args.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;invalid no of args.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo hints;
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
 
-    memset(<span style="color:#555">&amp;</span>hints, <span style="color:#f60">0</span>, <span style="color:#069;font-weight:bold">sizeof</span>(hints));
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>peer;
-    hints.ai_socktype <span style="color:#555">=</span> SOCK_DGRAM;
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">peer</span><span class="p">;</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_DGRAM</span><span class="p">;</span>
 
-    printf(<span style="color:#c30">&#34;args: %s %s %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, argv[<span style="color:#f60">1</span>], argv[<span style="color:#f60">2</span>], argv[<span style="color:#f60">3</span>]);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;args: %s %s %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (getaddrinfo(argv[<span style="color:#f60">1</span>], argv[<span style="color:#f60">2</span>], <span style="color:#555">&amp;</span>hints, <span style="color:#555">&amp;</span>peer) <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
+    <span class="k">if</span> <span class="p">(</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">peer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
 
-        printf(<span style="color:#c30">&#34;addrinfo() error!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;addrinfo() error!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
 </code></pre></div><ol>
 <li>as always, we start by declaring <code>hints</code> and set required fields, in this case, we only need to set the required socket type i.e UDP <code>hints.ai_socktype = SOCK_DGRAM;</code></li>
 <li>we call <code>getaddrinfo()</code> with user arguments, example (<em>argv[1]</em> = <code>example.com</code> and <em>argv[2]</em> = <code>80</code> or <code>http</code>). result is stored in <code>peer</code> struct.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#09f;font-style:italic">//create socket
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">int</span> socket_fd <span style="color:#555">=</span> socket(peer<span style="color:#555">-&gt;</span>ai_family, peer<span style="color:#555">-&gt;</span>ai_socktype, peer<span style="color:#555">-&gt;</span>ai_protocol);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">//create socket
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socket_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
     
-    <span style="color:#078;font-weight:bold">char</span> msg[<span style="color:#f60">1024</span>];
-    strncpy(msg, argv[<span style="color:#f60">3</span>], <span style="color:#f60">1024</span>);
-    <span style="color:#078;font-weight:bold">int</span> bytes_sent <span style="color:#555">=</span> sendto(socket_fd, msg, strlen(msg), <span style="color:#f60">0</span>, peer<span style="color:#555">-&gt;</span>ai_addr, peer<span style="color:#555">-&gt;</span>ai_addrlen);
+    <span class="kt">char</span> <span class="n">msg</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+    <span class="n">strncpy</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1024</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">bytes_sent</span> <span class="o">=</span> <span class="n">sendto</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">);</span>
 
-    printf(<span style="color:#c30">&#34;Sent %s (%d bytes)</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, msg, bytes_sent);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Sent %s (%d bytes)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">bytes_sent</span><span class="p">);</span>
 
-    close(socket_fd);
+    <span class="n">close</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">);</span>
 </code></pre></div><ol>
 <li>create a socket.</li>
 <li>declare a char array of length <code>1024</code> <code>msg</code>.</li>
@@ -293,13 +293,13 @@
 <ol>
 <li>First, run the <code>server</code></li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/Documents/Projects/network_programming/udp<span style="color:#555">(</span>master*<span style="color:#555">)</span> » ./server                                              jojo@synk
-socket_fd: <span style="color:#f60">3</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">~/Documents/Projects/network_programming/udp<span class="o">(</span>master*<span class="o">)</span> » ./server                                              jojo@synk
+socket_fd: <span class="m">3</span>
 UDP server listing on 127.0.0.1:8080
 </code></pre></div><ol start="2">
 <li>once the server is up and running, we can test it out by sending messages from our <code>client</code></li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./client 127.0.0.1 <span style="color:#f60">8080</span> hello
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./client 127.0.0.1 <span class="m">8080</span> hello
 </code></pre></div><p>you should see <code>hello</code> printed to in server window.</p>
 <p>
   <figure>

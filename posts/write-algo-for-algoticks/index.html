@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -163,85 +163,85 @@
 <p>This is a short tutorial on how to write an algorithm to use with algoticks. This article also provides a general layout of how algoticks asks and receives signals from user-written algorithms.</p>
 <p>an algorithm, in the context of algoticks, is simply a function. The function must return a <code>signal</code></p>
 <p><code>Signal</code> is defined as:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#069;font-weight:bold">typedef</span> <span style="color:#069;font-weight:bold">struct</span> Signal {
-    <span style="color:#078;font-weight:bold">int</span> buy;
-    <span style="color:#078;font-weight:bold">int</span> neutral;
-    <span style="color:#078;font-weight:bold">int</span> sell;
-}algoticks_signal;
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Signal</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">buy</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">neutral</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">sell</span><span class="p">;</span>
+<span class="p">}</span><span class="n">algoticks_signal</span><span class="p">;</span>
 </code></pre></div><p>only any one of the above fields shall be set to <code>true</code> and the remaining two must be set to <code>false</code>.  A <code>signal</code> response consisting of more than 1 field set as <code>true</code> will result in either an error or a guaranteed (undefined/undesired) behavior.</p>
 <h1 id="layout">Layout</h1>
 <p>Example layout of an algorithm is as follows:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-<span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;string.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdbool.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&#34;../../include/dtypes.h&#34;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#ifdef _WIN32
-</span><span style="color:#099"></span><span style="color:#069;font-weight:bold">__declspec</span>(dllexport)                     <span style="color:#09f;font-style:italic">// This is required for windows compatibility.
-</span><span style="color:#09f;font-style:italic"></span><span style="color:#099">#endif
-</span><span style="color:#099"></span>
-algoticks_signal analyze(algoticks_row <span style="color:#555">*</span>series, <span style="color:#078;font-weight:bold">int</span> n_candles){
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;../../include/dtypes.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#ifdef _WIN32
+</span><span class="cp"></span><span class="kr">__declspec</span><span class="p">(</span><span class="n">dllexport</span><span class="p">)</span>                     <span class="c1">// This is required for windows compatibility.
+</span><span class="c1"></span><span class="cp">#endif
+</span><span class="cp"></span>
+<span class="n">algoticks_signal</span> <span class="n">analyze</span><span class="p">(</span><span class="n">algoticks_row</span> <span class="o">*</span><span class="n">series</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n_candles</span><span class="p">){</span>
 
-    <span style="color:#09f;font-style:italic">/* Blah Blah Blah */</span>      <span style="color:#09f;font-style:italic">// a short desc. of algorithm
-</span><span style="color:#09f;font-style:italic"></span>
-    <span style="color:#069;font-weight:bold">struct</span> Signal signal;
-    memset(<span style="color:#555">&amp;</span>signal, <span style="color:#f60">0</span>, <span style="color:#069;font-weight:bold">sizeof</span>(signal));
+    <span class="cm">/* Blah Blah Blah */</span>      <span class="c1">// a short desc. of algorithm
+</span><span class="c1"></span>
+    <span class="k">struct</span> <span class="n">Signal</span> <span class="n">signal</span><span class="p">;</span>
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">signal</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">signal</span><span class="p">));</span>
     
     
-    <span style="color:#09f;font-style:italic">/*
-</span><span style="color:#09f;font-style:italic">    
-</span><span style="color:#09f;font-style:italic">    
-</span><span style="color:#09f;font-style:italic">    DO SOMETHING HERE!
-</span><span style="color:#09f;font-style:italic">    
-</span><span style="color:#09f;font-style:italic">    
-</span><span style="color:#09f;font-style:italic">    */</span>
+    <span class="cm">/*
+</span><span class="cm">    
+</span><span class="cm">    
+</span><span class="cm">    DO SOMETHING HERE!
+</span><span class="cm">    
+</span><span class="cm">    
+</span><span class="cm">    */</span>
 
 
-    <span style="color:#069;font-weight:bold">return</span> signal; <span style="color:#09f;font-style:italic">// finally return the signal.
-</span><span style="color:#09f;font-style:italic"></span>
-}
+    <span class="k">return</span> <span class="n">signal</span><span class="p">;</span> <span class="c1">// finally return the signal.
+</span><span class="c1"></span>
+<span class="p">}</span>
 
 
 </code></pre></div><h1 id="whats-inside-series">what&rsquo;s inside <code>series</code>?</h1>
 <p>a series is a collection of <code>n</code> rows (<code>n</code> defined by user <code>candles</code> in <code>config.json</code>)</p>
 <p>a <code>Row</code> struct is defined as:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-<span style="color:#069;font-weight:bold">typedef</span> <span style="color:#069;font-weight:bold">struct</span> Row
-{
-    <span style="color:#09f;font-style:italic">/* dataformat to store CSV data */</span>
-    <span style="color:#078;font-weight:bold">char</span> date[<span style="color:#f60">32</span>];
-    <span style="color:#078;font-weight:bold">float</span> open;
-    <span style="color:#078;font-weight:bold">float</span> high;
-    <span style="color:#078;font-weight:bold">float</span> low;
-    <span style="color:#078;font-weight:bold">float</span> close;
-    <span style="color:#078;font-weight:bold">int</span> volume;
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Row</span>
+<span class="p">{</span>
+    <span class="cm">/* dataformat to store CSV data */</span>
+    <span class="kt">char</span> <span class="n">date</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+    <span class="kt">float</span> <span class="n">open</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">high</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">low</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">close</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">volume</span><span class="p">;</span>
 
-    algoticks_tow_ti technical_indicators;
+    <span class="n">algoticks_tow_ti</span> <span class="n">technical_indicators</span><span class="p">;</span>
 
-    <span style="color:#078;font-weight:bold">int</span> curr;
-    <span style="color:#078;font-weight:bold">int</span> n_rows; <span style="color:#09f;font-style:italic">//this is to be set in case of Row array of non-predetermined size.
-</span><span style="color:#09f;font-style:italic"></span>}algoticks_row;
+    <span class="kt">int</span> <span class="n">curr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">n_rows</span><span class="p">;</span> <span class="c1">//this is to be set in case of Row array of non-predetermined size.
+</span><span class="c1"></span><span class="p">}</span><span class="n">algoticks_row</span><span class="p">;</span>
 
 </code></pre></div><p>Notice <code>technical_indicators</code> of type <code>algoticks_tow_ti</code></p>
 <p><code>algoticks_tow_ti</code> is another struct that holds user given technical indicator data.</p>
 <p><code>algoticks_tow_ti</code> is defined as:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-<span style="color:#069;font-weight:bold">typedef</span> <span style="color:#069;font-weight:bold">struct</span> row_ti{
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">row_ti</span><span class="p">{</span>
 
-    <span style="color:#078;font-weight:bold">int</span> is_ti1_p;
-    <span style="color:#078;font-weight:bold">float</span> ti1;
+    <span class="kt">int</span> <span class="n">is_ti1_p</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">ti1</span><span class="p">;</span>
 
-    <span style="color:#078;font-weight:bold">int</span> is_ti2_p;
-    <span style="color:#078;font-weight:bold">float</span> ti2;
+    <span class="kt">int</span> <span class="n">is_ti2_p</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">ti2</span><span class="p">;</span>
 
-    <span style="color:#078;font-weight:bold">int</span> is_ti3_p;
-    <span style="color:#078;font-weight:bold">float</span> ti3;
+    <span class="kt">int</span> <span class="n">is_ti3_p</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">ti3</span><span class="p">;</span>
 
-    <span style="color:#078;font-weight:bold">int</span> is_ti_others_p;
-    <span style="color:#078;font-weight:bold">char</span> ti_others[<span style="color:#f60">2048</span>];
+    <span class="kt">int</span> <span class="n">is_ti_others_p</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">ti_others</span><span class="p">[</span><span class="mi">2048</span><span class="p">];</span>
 
-}algoticks_tow_ti;
+<span class="p">}</span><span class="n">algoticks_tow_ti</span><span class="p">;</span>
 
 </code></pre></div><p>algoticks allow up to 3 technical indicators i.e <code>ti1</code> <code>ti2</code> <code>ti3</code> these fields need to explicitly set by the user in CSV data source to be parsed by algoticks.</p>
 <p>if more then 3 technical indicators are required, the user can use <code>ti_others</code> and split it inside the algorithm as he needs.</p>
@@ -249,39 +249,39 @@ algoticks_signal analyze(algoticks_row <span style="color:#555">*</span>series, 
 <h1 id="dissecting-a-simple-algorithm">Dissecting a simple algorithm</h1>
 <p>Here, we take a simple algorithm <code>Greens</code></p>
 <p><a href="https://github.com/jkotra/algoticks/blob/master/src/algorithms/Greens.c"><code>Greens.c</code></a> is included with algoticks and can be found at <code>algorithms/Greens.c</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-<span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;string.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdbool.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&#34;../../include/dtypes.h&#34;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#099">#ifdef _WIN32
-</span><span style="color:#099"></span><span style="color:#069;font-weight:bold">__declspec</span>(dllexport)
-<span style="color:#099">#endif
-</span><span style="color:#099"></span>algoticks_signal analyze(algoticks_row <span style="color:#555">*</span>series, <span style="color:#078;font-weight:bold">int</span> n_candles){
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;../../include/dtypes.h&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="cp">#ifdef _WIN32
+</span><span class="cp"></span><span class="kr">__declspec</span><span class="p">(</span><span class="n">dllexport</span><span class="p">)</span>
+<span class="cp">#endif
+</span><span class="cp"></span><span class="n">algoticks_signal</span> <span class="n">analyze</span><span class="p">(</span><span class="n">algoticks_row</span> <span class="o">*</span><span class="n">series</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n_candles</span><span class="p">){</span>
 
-    <span style="color:#09f;font-style:italic">/* This is a buy only algo indicator */</span>
+    <span class="cm">/* This is a buy only algo indicator */</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> Signal signal;                           <span style="color:#09f;font-style:italic">// Step 1
-</span><span style="color:#09f;font-style:italic"></span>    memset(<span style="color:#555">&amp;</span>signal, <span style="color:#f60">0</span>, <span style="color:#069;font-weight:bold">sizeof</span>(signal));
+    <span class="k">struct</span> <span class="n">Signal</span> <span class="n">signal</span><span class="p">;</span>                           <span class="c1">// Step 1
+</span><span class="c1"></span>    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">signal</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">signal</span><span class="p">));</span>
 
-    <span style="color:#069;font-weight:bold">for</span> (<span style="color:#078;font-weight:bold">int</span> i <span style="color:#555">=</span> <span style="color:#f60">1</span>; i <span style="color:#555">&lt;</span> n_candles; i<span style="color:#555">++</span>)            <span style="color:#09f;font-style:italic">// Step 2
-</span><span style="color:#09f;font-style:italic"></span>    {
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n_candles</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>            <span class="c1">// Step 2
+</span><span class="c1"></span>    <span class="p">{</span>
 
-        <span style="color:#069;font-weight:bold">if</span>(series[i].close <span style="color:#555">&gt;</span> series[i<span style="color:#555">-</span><span style="color:#f60">1</span>].close){   <span style="color:#09f;font-style:italic">// Step 3
-</span><span style="color:#09f;font-style:italic"></span>            signal.buy <span style="color:#555">=</span> <span style="color:#366">true</span>;
-        }
-        <span style="color:#069;font-weight:bold">else</span> {
-            signal.neutral <span style="color:#555">=</span> <span style="color:#366">true</span>;
-            signal.sell <span style="color:#555">=</span> <span style="color:#366">false</span>;
-            signal.buy <span style="color:#555">=</span> <span style="color:#366">false</span>;
-            <span style="color:#069;font-weight:bold">break</span>;
-        }
-    }
+        <span class="k">if</span><span class="p">(</span><span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">close</span> <span class="o">&gt;</span> <span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">close</span><span class="p">){</span>   <span class="c1">// Step 3
+</span><span class="c1"></span>            <span class="n">signal</span><span class="p">.</span><span class="n">buy</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">signal</span><span class="p">.</span><span class="n">neutral</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="n">signal</span><span class="p">.</span><span class="n">sell</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="n">signal</span><span class="p">.</span><span class="n">buy</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">return</span> signal;                                <span style="color:#09f;font-style:italic">// Step 4
-</span><span style="color:#09f;font-style:italic"></span>
-}
+    <span class="k">return</span> <span class="n">signal</span><span class="p">;</span>                                <span class="c1">// Step 4
+</span><span class="c1"></span>
+<span class="p">}</span>
 
 </code></pre></div><p>There are only 4 simple steps in writing an algorithm.</p>
 <ol>

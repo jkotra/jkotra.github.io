@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -169,65 +169,65 @@
     <figcaption>TCP client flowchart</figcaption>
   </figure>
 </p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#069;font-weight:bold">struct</span> addrinfo hints;
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
 
-    memset(<span style="color:#555">&amp;</span>hints, <span style="color:#f60">0</span>, <span style="color:#069;font-weight:bold">sizeof</span>(hints));
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span>
 
-    <span style="color:#069;font-weight:bold">struct</span> addrinfo <span style="color:#555">*</span>peer;
-    hints.ai_socktype <span style="color:#555">=</span> SOCK_STREAM;
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">peer</span><span class="p">;</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_STREAM</span><span class="p">;</span>
 
-    printf(<span style="color:#c30">&#34;args: %s %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, argv[<span style="color:#f60">1</span>], argv[<span style="color:#f60">2</span>]);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;args: %s %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (getaddrinfo(argv[<span style="color:#f60">1</span>], argv[<span style="color:#f60">2</span>], <span style="color:#555">&amp;</span>hints, <span style="color:#555">&amp;</span>peer) <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
+    <span class="k">if</span> <span class="p">(</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">peer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
 
-        printf(<span style="color:#c30">&#34;addrinfo() error!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;addrinfo() error!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
 </code></pre></div><ol>
 <li>we start by declaring a <code>addrinfo</code> struct <code>hints</code>. we then call <code>getaddrinfo()</code>. <code>getaddrinfo()</code> resolves domain name into IP address.</li>
 <li>note that unlike in server, we only need to set <code>hints.ai_socktype = SOCK_STREAM;</code> other fields are filled automatically by <code>getaddrinfo()</code> based on IP we are connecting to.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#078;font-weight:bold">char</span> peer_addr[<span style="color:#f60">100</span>];
-    <span style="color:#078;font-weight:bold">char</span> peer_protocol[<span style="color:#f60">100</span>];
-    getnameinfo(peer<span style="color:#555">-&gt;</span>ai_addr, peer<span style="color:#555">-&gt;</span>ai_addrlen, peer_addr, <span style="color:#069;font-weight:bold">sizeof</span>(peer_addr), peer_protocol, <span style="color:#069;font-weight:bold">sizeof</span>(peer_protocol), NI_NUMERICHOST);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="kt">char</span> <span class="n">peer_addr</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">peer_protocol</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+    <span class="n">getnameinfo</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">,</span> <span class="n">peer_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">peer_addr</span><span class="p">),</span> <span class="n">peer_protocol</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">peer_protocol</span><span class="p">),</span> <span class="n">NI_NUMERICHOST</span><span class="p">);</span>
 
-    printf(<span style="color:#c30">&#34;ip: %s | protocol: %s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, peer_addr, peer_protocol);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;ip: %s | protocol: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">peer_addr</span><span class="p">,</span> <span class="n">peer_protocol</span><span class="p">);</span>
 
 </code></pre></div><ol start="0">
 <li>we can print the domain and protocol using the code above (Optional)</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#09f;font-style:italic">//family socket_type protocol
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">int</span> socket_fd <span style="color:#555">=</span> socket(peer<span style="color:#555">-&gt;</span>ai_family, peer<span style="color:#555">-&gt;</span>ai_socktype, peer<span style="color:#555">-&gt;</span>ai_protocol);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">//family socket_type protocol
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socket_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (socket_fd <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
-        printf(<span style="color:#c30">&#34;socket error.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">socket_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;socket error.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">if</span> (connect(socket_fd, peer<span style="color:#555">-&gt;</span>ai_addr, peer<span style="color:#555">-&gt;</span>ai_addrlen) <span style="color:#555">&lt;</span> <span style="color:#f60">0</span>)
-    {
-        printf(<span style="color:#c30">&#34;connect error.</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">1</span>;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;connect error.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    printf(<span style="color:#c30">&#34;connected!</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;connected!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </code></pre></div><ol>
 <li>we start by creating a socket using <code>peer</code> fields are arguments.</li>
 <li>we then need to call <code>connect()</code> to connect to a remote address.<code>connect()</code> returns a negative number on error.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">    <span style="color:#078;font-weight:bold">char</span> <span style="color:#555">*</span>header <span style="color:#555">=</span> <span style="color:#c30">&#34;GET /index.html HTTP/1.1</span><span style="color:#c30;font-weight:bold">\r\n</span><span style="color:#c30">Host: www.example.com</span><span style="color:#c30;font-weight:bold">\r\n\r\n</span><span style="color:#c30">&#34;</span>;
-    send(socket_fd, header, strlen(header), <span style="color:#f60">0</span>);
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="kt">char</span> <span class="o">*</span><span class="n">header</span> <span class="o">=</span> <span class="s">&#34;GET /index.html HTTP/1.1</span><span class="se">\r\n</span><span class="s">Host: www.example.com</span><span class="se">\r\n\r\n</span><span class="s">&#34;</span><span class="p">;</span>
+    <span class="n">send</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">header</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
 
-    <span style="color:#078;font-weight:bold">char</span> res[<span style="color:#f60">4096</span>];
-    <span style="color:#078;font-weight:bold">int</span> bytes_received <span style="color:#555">=</span> recv(socket_fd, res, <span style="color:#f60">4096</span>, <span style="color:#f60">0</span>);
-    printf(<span style="color:#c30">&#34;bytes_received: %d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, bytes_received);
+    <span class="kt">char</span> <span class="n">res</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;bytes_received: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">bytes_received</span><span class="p">);</span>
 
-    printf(<span style="color:#c30">&#34;%s</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, res);
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
 
-    close(socket_fd);
+    <span class="n">close</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">);</span>
 </code></pre></div><ol>
 <li>declare a string <strong>header</strong>, this needs to be sent to the server to get a response.</li>
 <li>we can then call <code>recv()</code>, this stores response from the web server into <code>res</code></li>
@@ -239,7 +239,7 @@
 <p>run the program with required args: <code>domain</code> and <code>protocol</code></p>
 <p><code>./tcp_client example.com http</code></p>
 <p>Output:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">
 args: example.com http
 ip: 93.184.216.34 | protocol: http
 connected!
@@ -258,52 +258,52 @@ Vary: Accept-Encoding
 X-Cache: HIT
 Content-Length: 1256
 
-<span style="color:#099">&lt;!doctype html&gt;</span>
-&lt;<span style="color:#309;font-weight:bold">html</span>&gt;
-&lt;<span style="color:#309;font-weight:bold">head</span>&gt;
-    &lt;<span style="color:#309;font-weight:bold">title</span>&gt;Example Domain&lt;/<span style="color:#309;font-weight:bold">title</span>&gt;
+<span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example Domain<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 
-    &lt;<span style="color:#309;font-weight:bold">meta</span> <span style="color:#309">charset</span><span style="color:#555">=</span><span style="color:#c30">&#34;utf-8&#34;</span> /&gt;
-    &lt;<span style="color:#309;font-weight:bold">meta</span> <span style="color:#309">http-equiv</span><span style="color:#555">=</span><span style="color:#c30">&#34;Content-type&#34;</span> <span style="color:#309">content</span><span style="color:#555">=</span><span style="color:#c30">&#34;text/html; charset=utf-8&#34;</span> /&gt;
-    &lt;<span style="color:#309;font-weight:bold">meta</span> <span style="color:#309">name</span><span style="color:#555">=</span><span style="color:#c30">&#34;viewport&#34;</span> <span style="color:#309">content</span><span style="color:#555">=</span><span style="color:#c30">&#34;width=device-width, initial-scale=1&#34;</span> /&gt;
-    &lt;<span style="color:#309;font-weight:bold">style</span> <span style="color:#309">type</span><span style="color:#555">=</span><span style="color:#c30">&#34;text/css&#34;</span>&gt;
-    <span style="color:#309;font-weight:bold">body</span> {
-        <span style="color:#069;font-weight:bold">background-color</span>: <span style="color:#f60">#f0f0f2</span>;
-        <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">0</span>;
-        <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">0</span>;
-        <span style="color:#069;font-weight:bold">font-family</span>: <span style="color:#555">-</span>apple-system, system-ui, BlinkMacSystemFont, <span style="color:#c30">&#34;Segoe UI&#34;</span>, <span style="color:#c30">&#34;Open Sans&#34;</span>, <span style="color:#c30">&#34;Helvetica Neue&#34;</span>, Helvetica, Arial, <span style="color:#069;font-weight:bold">sans-serif</span>;
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;Content-type&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;text/html; charset=utf-8&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1&#34;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span><span class="p">&gt;</span>
+    <span class="nt">body</span> <span class="p">{</span>
+        <span class="k">background-color</span><span class="p">:</span> <span class="mh">#f0f0f2</span><span class="p">;</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">font-family</span><span class="p">:</span> <span class="o">-</span><span class="n">apple-system</span><span class="p">,</span> <span class="n">system-ui</span><span class="p">,</span> <span class="n">BlinkMacSystemFont</span><span class="p">,</span> <span class="s2">&#34;Segoe UI&#34;</span><span class="p">,</span> <span class="s2">&#34;Open Sans&#34;</span><span class="p">,</span> <span class="s2">&#34;Helvetica Neue&#34;</span><span class="p">,</span> <span class="n">Helvetica</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span> <span class="kc">sans-serif</span><span class="p">;</span>
         
-    }
-    <span style="color:#309;font-weight:bold">div</span> {
-        <span style="color:#069;font-weight:bold">width</span>: <span style="color:#f60">600</span><span style="color:#078;font-weight:bold">px</span>;
-        <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">5</span><span style="color:#078;font-weight:bold">em</span> <span style="color:#069;font-weight:bold">auto</span>;
-        <span style="color:#069;font-weight:bold">padding</span>: <span style="color:#f60">2</span><span style="color:#078;font-weight:bold">em</span>;
-        <span style="color:#069;font-weight:bold">background-color</span>: <span style="color:#f60">#fdfdff</span>;
-        <span style="color:#069;font-weight:bold">border-radius</span>: <span style="color:#f60">0.5</span><span style="color:#078;font-weight:bold">em</span>;
-        <span style="color:#069;font-weight:bold">box-shadow</span>: <span style="color:#f60">2</span><span style="color:#078;font-weight:bold">px</span> <span style="color:#f60">3</span><span style="color:#078;font-weight:bold">px</span> <span style="color:#f60">7</span><span style="color:#078;font-weight:bold">px</span> <span style="color:#f60">2</span><span style="color:#078;font-weight:bold">px</span> <span style="color:#366">rgba</span>(<span style="color:#f60">0</span>,<span style="color:#f60">0</span>,<span style="color:#f60">0</span>,<span style="color:#f60">0.02</span>);
-    }
-    <span style="color:#309;font-weight:bold">a</span>:<span style="color:#99f">link</span><span style="color:#555">,</span> <span style="color:#309;font-weight:bold">a</span>:<span style="color:#99f">visited</span> {
-        <span style="color:#069;font-weight:bold">color</span>: <span style="color:#f60">#38488f</span>;
-        <span style="color:#069;font-weight:bold">text-decoration</span>: <span style="color:#069;font-weight:bold">none</span>;
-    }
-    @<span style="color:#069;font-weight:bold">media</span> <span style="color:#555">(</span><span style="color:#309;font-weight:bold">max-width</span><span style="color:#555">:</span> <span style="color:#309;font-weight:bold">700px</span><span style="color:#555">)</span> {
-        <span style="color:#309;font-weight:bold">div</span> {
-            <span style="color:#069;font-weight:bold">margin</span>: <span style="color:#f60">0</span> <span style="color:#069;font-weight:bold">auto</span>;
-            <span style="color:#069;font-weight:bold">width</span>: <span style="color:#069;font-weight:bold">auto</span>;
-        }
-    }
-    &lt;/<span style="color:#309;font-weight:bold">style</span>&gt;    
-&lt;/<span style="color:#309;font-weight:bold">head</span>&gt;
+    <span class="p">}</span>
+    <span class="nt">div</span> <span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">5</span><span class="kt">em</span> <span class="kc">auto</span><span class="p">;</span>
+        <span class="k">padding</span><span class="p">:</span> <span class="mi">2</span><span class="kt">em</span><span class="p">;</span>
+        <span class="k">background-color</span><span class="p">:</span> <span class="mh">#fdfdff</span><span class="p">;</span>
+        <span class="k">border-radius</span><span class="p">:</span> <span class="mf">0.5</span><span class="kt">em</span><span class="p">;</span>
+        <span class="k">box-shadow</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="mi">3</span><span class="kt">px</span> <span class="mi">7</span><span class="kt">px</span> <span class="mi">2</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.02</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nt">a</span><span class="p">:</span><span class="nd">link</span><span class="o">,</span> <span class="nt">a</span><span class="p">:</span><span class="nd">visited</span> <span class="p">{</span>
+        <span class="k">color</span><span class="p">:</span> <span class="mh">#38488f</span><span class="p">;</span>
+        <span class="k">text-decoration</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">700px</span><span class="o">)</span> <span class="p">{</span>
+        <span class="nt">div</span> <span class="p">{</span>
+            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="kc">auto</span><span class="p">;</span>
+            <span class="k">width</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>    
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 
-&lt;<span style="color:#309;font-weight:bold">body</span>&gt;
-&lt;<span style="color:#309;font-weight:bold">div</span>&gt;
-    &lt;<span style="color:#309;font-weight:bold">h1</span>&gt;Example Domain&lt;/<span style="color:#309;font-weight:bold">h1</span>&gt;
-    &lt;<span style="color:#309;font-weight:bold">p</span>&gt;This domain is for use in illustrative examples in documents. You may use this
-    domain in literature without prior coordination or asking for permission.&lt;/<span style="color:#309;font-weight:bold">p</span>&gt;
-    &lt;<span style="color:#309;font-weight:bold">p</span>&gt;&lt;<span style="color:#309;font-weight:bold">a</span> <span style="color:#309">href</span><span style="color:#555">=</span><span style="color:#c30">&#34;https://www.iana.org/domains/example&#34;</span>&gt;More information...&lt;/<span style="color:#309;font-weight:bold">a</span>&gt;&lt;/<span style="color:#309;font-weight:bold">p</span>&gt;
-&lt;/<span style="color:#309;font-weight:bold">div</span>&gt;
-&lt;/<span style="color:#309;font-weight:bold">body</span>&gt;
-&lt;/<span style="color:#309;font-weight:bold">html</span>&gt;
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Example Domain<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://www.iana.org/domains/example&#34;</span><span class="p">&gt;</span>More information...<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 
 </code></pre></div><h1 id="conclusion">Conclusion</h1>
 <p>This article covered a code walkthrough on how to retrieve a web page using sockets.</p>

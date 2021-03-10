@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -165,47 +165,47 @@
 <h2 id="counting-to-a-billion">Counting to a Billion</h2>
 <h3 id="single-threaded">Single-threaded</h3>
 <p>For the demonstration, we take a simple program the counts to 1 billion (<em>1 billion x 5 times</em>)</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-<span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdlib.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">void</span> <span style="color:#c0f">count_to_billion</span>()
-{
-    <span style="color:#078;font-weight:bold">int</span> at <span style="color:#555">=</span> <span style="color:#f60">0</span>;
-    <span style="color:#069;font-weight:bold">for</span> (<span style="color:#078;font-weight:bold">int</span> i <span style="color:#555">=</span> <span style="color:#f60">0</span>; i <span style="color:#555">&lt;</span> <span style="color:#f60">1000000000</span>; i<span style="color:#555">++</span>)
-    {
-        at<span style="color:#555">++</span>;
-    }
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">void</span> <span class="nf">count_to_billion</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">at</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000000000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">at</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    printf(<span style="color:#c30">&#34;counted to 1 billion! at=%d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, at);
-}
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;counted to 1 billion! at=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">at</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>()
-{
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 
-    <span style="color:#09f;font-style:italic">// count to 5 billion 5 times
-</span><span style="color:#09f;font-style:italic"></span>    count_to_billion();
-    count_to_billion();
-    count_to_billion();
-    count_to_billion();
-    count_to_billion();
+    <span class="c1">// count to 5 billion 5 times
+</span><span class="c1"></span>    <span class="n">count_to_billion</span><span class="p">();</span>
+    <span class="n">count_to_billion</span><span class="p">();</span>
+    <span class="n">count_to_billion</span><span class="p">();</span>
+    <span class="n">count_to_billion</span><span class="p">();</span>
+    <span class="n">count_to_billion</span><span class="p">();</span>
 
-    <span style="color:#069;font-weight:bold">return</span> EXIT_SUCCESS;
-}
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 
 </code></pre></div><p>let&rsquo;s compile the program</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gcc main.c
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">gcc main.c
 </code></pre></div><p>we use a Unix utility <code>time</code> to measure the execution time of the program.</p>
 <p>run the compiled program with <code>time</code> as the prefix</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">time ./a.out
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">time ./a.out
 </code></pre></div><p>Output:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-~/Documents/Projects/CWS » <span style="color:#366">time</span> ./a.out
-counted to <span style="color:#f60">1</span> billion! <span style="color:#033">at</span><span style="color:#555">=</span><span style="color:#f60">1000000000</span>
-counted to <span style="color:#f60">1</span> billion! <span style="color:#033">at</span><span style="color:#555">=</span><span style="color:#f60">1000000000</span>
-counted to <span style="color:#f60">1</span> billion! <span style="color:#033">at</span><span style="color:#555">=</span><span style="color:#f60">1000000000</span>
-counted to <span style="color:#f60">1</span> billion! <span style="color:#033">at</span><span style="color:#555">=</span><span style="color:#f60">1000000000</span>
-counted to <span style="color:#f60">1</span> billion! <span style="color:#033">at</span><span style="color:#555">=</span><span style="color:#f60">1000000000</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">
+~/Documents/Projects/CWS » <span class="nb">time</span> ./a.out
+counted to <span class="m">1</span> billion! <span class="nv">at</span><span class="o">=</span><span class="m">1000000000</span>
+counted to <span class="m">1</span> billion! <span class="nv">at</span><span class="o">=</span><span class="m">1000000000</span>
+counted to <span class="m">1</span> billion! <span class="nv">at</span><span class="o">=</span><span class="m">1000000000</span>
+counted to <span class="m">1</span> billion! <span class="nv">at</span><span class="o">=</span><span class="m">1000000000</span>
+counted to <span class="m">1</span> billion! <span class="nv">at</span><span class="o">=</span><span class="m">1000000000</span>
 ./a.out  8.68s user 0.00s system 99% cpu 8.686 total
 
 </code></pre></div><p>as we can see from the output it took <code>8.686</code> secs to complete</p>
@@ -214,45 +214,45 @@ counted to <span style="color:#f60">1</span> billion! <span style="color:#033">a
 <div class="notices note" ><p><p>from <a href="https://en.cppreference.com/w/c/thread/thrd_create">cppreference.com</a>:</p>
 <p>The type <code>thrd_start_t</code> is a typedef of <code>int(*)(void*)</code>, which differs from the POSIX equivalent <code>void*(*)(void*)</code></p>
 </p></div>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-<span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;threads.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdlib.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">count_to_billion</span>(<span style="color:#078;font-weight:bold">void</span><span style="color:#555">*</span> arg)
-{
-    <span style="color:#078;font-weight:bold">int</span> at <span style="color:#555">=</span> <span style="color:#f60">0</span>;
-    <span style="color:#069;font-weight:bold">for</span> (<span style="color:#078;font-weight:bold">int</span> i <span style="color:#555">=</span> <span style="color:#f60">0</span>; i <span style="color:#555">&lt;</span> <span style="color:#f60">1000000000</span>; i<span style="color:#555">++</span>)
-    {
-        at<span style="color:#555">++</span>;
-    }
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;threads.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">count_to_billion</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">at</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000000000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">at</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    printf(<span style="color:#c30">&#34;counted to 1 billion! at=%d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, at);
-}
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;counted to 1 billion! at=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">at</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>()
-{
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 
-    <span style="color:#078;font-weight:bold">int</span> n_threads <span style="color:#555">=</span> <span style="color:#f60">5</span>;
+    <span class="kt">int</span> <span class="n">n_threads</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 
-    thrd_t <span style="color:#069;font-weight:bold">thread</span>[n_threads];
+    <span class="n">thrd_t</span> <span class="kr">thread</span><span class="p">[</span><span class="n">n_threads</span><span class="p">];</span>
 
-    <span style="color:#069;font-weight:bold">for</span> (<span style="color:#078;font-weight:bold">int</span> i <span style="color:#555">=</span> <span style="color:#f60">0</span>; i <span style="color:#555">&lt;</span> n_threads; i<span style="color:#555">++</span>)
-    {
-        thrd_create(<span style="color:#555">&amp;</span><span style="color:#069;font-weight:bold">thread</span>[i], count_to_billion, <span style="color:#366">NULL</span>);
-    }
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n_threads</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">thrd_create</span><span class="p">(</span><span class="o">&amp;</span><span class="kr">thread</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">count_to_billion</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">for</span> (<span style="color:#078;font-weight:bold">int</span> i <span style="color:#555">=</span> <span style="color:#f60">0</span>; i <span style="color:#555">&lt;</span> n_threads; i<span style="color:#555">++</span>)
-    {
-        thrd_join(<span style="color:#069;font-weight:bold">thread</span>[i], <span style="color:#366">NULL</span>);
-    }
-    <span style="color:#069;font-weight:bold">return</span> EXIT_SUCCESS;
-}
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n_threads</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">thrd_join</span><span class="p">(</span><span class="kr">thread</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 
 </code></pre></div><p>let&rsquo;s compile our program and run it.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gcc main.c -lpthread
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">gcc main.c -lpthread
 </code></pre></div><p>don&rsquo;t forget to link it with thread library of your OS, in my case, it&rsquo;s <code>pthreads</code></p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">~/Documents/Projects/CWS » time ./a.out
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">~/Documents/Projects/CWS » time ./a.out
 counted to 1 billion! at=1000000000
 counted to 1 billion! at=1000000000
 counted to 1 billion! at=1000000000

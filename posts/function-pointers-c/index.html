@@ -55,12 +55,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -160,74 +160,74 @@
 <p>this is a short excerpt on function pointers in C.</p>
 <h2 id="what-is-a-pointer">What is a pointer?</h2>
 <p>a <code>pointer</code> is a variable that holds a physical memory address of another variable.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdlib.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>()
-{
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 
-    <span style="color:#078;font-weight:bold">int</span> a <span style="color:#555">=</span> <span style="color:#f60">1337</span>; <span style="color:#09f;font-style:italic">//value
-</span><span style="color:#09f;font-style:italic"></span>    <span style="color:#078;font-weight:bold">int</span> <span style="color:#555">*</span>b;       <span style="color:#09f;font-style:italic">//declare a pointer
-</span><span style="color:#09f;font-style:italic"></span>
-    b <span style="color:#555">=</span> <span style="color:#555">&amp;</span>a; <span style="color:#09f;font-style:italic">//b holds the addr to a;
-</span><span style="color:#09f;font-style:italic"></span>
-    printf(<span style="color:#c30">&#34;addr: %d, val: %d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, b, <span style="color:#555">*</span>b); <span style="color:#09f;font-style:italic">//print addr and &#34;a&#34; value.
-</span><span style="color:#09f;font-style:italic"></span>
-    <span style="color:#069;font-weight:bold">return</span> EXIT_SUCCESS;
-}
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1337</span><span class="p">;</span> <span class="c1">//value
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>       <span class="c1">//declare a pointer
+</span><span class="c1"></span>
+    <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> <span class="c1">//b holds the addr to a;
+</span><span class="c1"></span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;addr: %d, val: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span> <span class="c1">//print addr and &#34;a&#34; value.
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><p><strong>Output</strong>:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">addr: 1293474476, val: 1337
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">addr: 1293474476, val: 1337
 </code></pre></div><h2 id="what-is-a-function-pointer">What is a function pointer?</h2>
 <p>a <code>function pointer</code> points to a function. it can be called like any other function.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdlib.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
 
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">add</span>(<span style="color:#078;font-weight:bold">int</span> a, <span style="color:#078;font-weight:bold">int</span> b){
-    <span style="color:#069;font-weight:bold">return</span> a<span style="color:#555">+</span>b;
-}
+<span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(){
-
-
-    <span style="color:#078;font-weight:bold">int</span>    (<span style="color:#555">*</span>funcPointerAdd)    (<span style="color:#078;font-weight:bold">int</span>, <span style="color:#078;font-weight:bold">int</span>) <span style="color:#555">=</span>       <span style="color:#555">&amp;</span>add;
-<span style="color:#09f;font-style:italic">/*   ↓           ↓               ↓                  ↓
-</span><span style="color:#09f;font-style:italic">(return_type) (Function Name) (arg1) (arg2)  (assign to actual function addr.) 
-</span><span style="color:#09f;font-style:italic">*/</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
 
-    <span style="color:#078;font-weight:bold">int</span> res <span style="color:#555">=</span> funcPointerAdd(<span style="color:#f60">5</span>,<span style="color:#f60">8</span>);
+    <span class="kt">int</span>    <span class="p">(</span><span class="o">*</span><span class="n">funcPointerAdd</span><span class="p">)</span>    <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span>       <span class="o">&amp;</span><span class="n">add</span><span class="p">;</span>
+<span class="cm">/*   ↓           ↓               ↓                  ↓
+</span><span class="cm">(return_type) (Function Name) (arg1) (arg2)  (assign to actual function addr.) 
+</span><span class="cm">*/</span>
 
-    printf(<span style="color:#c30">&#34;%d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, res);
 
-    <span style="color:#069;font-weight:bold">return</span> EXIT_SUCCESS;
-}
+    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">funcPointerAdd</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><hr>
 <h2 id="function-pointer-as-a-type">Function Pointer as a <em>type</em></h2>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">
-<span style="color:#099">#include</span> <span style="color:#099">&lt;stdio.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;stdlib.h&gt;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">add</span>(<span style="color:#078;font-weight:bold">int</span> a, <span style="color:#078;font-weight:bold">int</span> b){
-    <span style="color:#069;font-weight:bold">return</span> a<span style="color:#555">+</span>b;
-}
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">typedef</span> <span style="color:#c0f">int</span> (<span style="color:#555">*</span>funcPointer_t)   (<span style="color:#078;font-weight:bold">int</span>, <span style="color:#078;font-weight:bold">int</span>);
-<span style="color:#09f;font-style:italic">/*   ↓       ↓            ↓            ↓      ↓
-</span><span style="color:#09f;font-style:italic">(typedef) (return_type) (type_name) (arg1) (arg2)  */</span>
-
-
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>(){
+    <span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">funcPointer_t</span><span class="p">)</span>   <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="cm">/*   ↓       ↓            ↓            ↓      ↓
+</span><span class="cm">(typedef) (return_type) (type_name) (arg1) (arg2)  */</span>
 
 
-    funcPointer_t x <span style="color:#555">=</span> <span style="color:#555">&amp;</span>add;
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
 
-    <span style="color:#078;font-weight:bold">int</span> res <span style="color:#555">=</span> x(<span style="color:#f60">15</span>,<span style="color:#f60">51</span>);
 
-    printf(<span style="color:#c30">&#34;%d</span><span style="color:#c30;font-weight:bold">\n</span><span style="color:#c30">&#34;</span>, res);
+    <span class="n">funcPointer_t</span> <span class="n">x</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">add</span><span class="p">;</span>
 
-    <span style="color:#069;font-weight:bold">return</span> EXIT_SUCCESS;
-}
+    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">51</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 
 </code></pre></div>
 </div>

@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -170,31 +170,31 @@
 </ol>
 <hr>
 <p>Start by making a default skeleton component.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
-<span style="color:#069;font-weight:bold">import</span> React from <span style="color:#c30">&#39;react&#39;</span>;
-<span style="color:#069;font-weight:bold">const</span> publicIp <span style="color:#555">=</span> require(<span style="color:#c30">&#39;public-ip&#39;</span>);
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js">
+<span class="kr">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">publicIp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;public-ip&#39;</span><span class="p">);</span>
 
 
-    render(){
+    <span class="nx">render</span><span class="p">(){</span>
 
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">&lt;</span>div<span style="color:#555">&gt;</span>
+        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
             
-            <span style="color:#555">&lt;</span>h1<span style="color:#555">&gt;</span>Hello World<span style="color:#555">!&lt;</span><span style="color:#a00;background-color:#faa">/h1&gt;</span>
-        <span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/div&gt;</span>
+            <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!&lt;</span><span class="err">/h1&gt;</span>
+        <span class="o">&lt;</span><span class="err">/div&gt;</span>
 
-    }
+    <span class="p">}</span>
 
-}
+<span class="p">}</span>
 
-<span style="color:#069;font-weight:bold">export</span> <span style="color:#069;font-weight:bold">default</span> MyIp;
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">MyIp</span><span class="p">;</span>
 
 </code></pre></div><p>Make sure this is working, when you visit the component, it should display &ldquo;Hello World!&rdquo;</p>
 <hr>
 <p>Create a <code>constructor</code> for our class.</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">constructor(props){
-        <span style="color:#069;font-weight:bold">super</span>(props)
-        <span style="color:#069;font-weight:bold">this</span>.state <span style="color:#555">=</span> {<span style="color:#c30">&#39;ipv4&#39;</span><span style="color:#555">:</span> <span style="color:#c30">&#39;0.0.0.0&#39;</span>, <span style="color:#c30">&#39;ok&#39;</span><span style="color:#555">:</span> <span style="color:#069;font-weight:bold">false</span>}
-    }
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ipv4&#39;</span><span class="o">:</span> <span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">}</span>
+    <span class="p">}</span>
 </code></pre></div><p>Here, I initiate a React <code>state</code> with 2 value pairs.</p>
 <ul>
 <li><code>'ipv4': '0.0.0.0'</code> - Placeholder that we update after retriving user&rsquo;s ip.</li>
@@ -202,43 +202,43 @@
 </ul>
 <hr>
 <p>These are some helper functions the retrieve and update IP in the state:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">   <span style="color:#069;font-weight:bold">async</span> get_ip_user_ipv4(){
-        <span style="color:#069;font-weight:bold">let</span> ip <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">await</span> publicIp.v4();
-        <span style="color:#069;font-weight:bold">return</span> ip
-}
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js">   <span class="kr">async</span> <span class="nx">get_ip_user_ipv4</span><span class="p">(){</span>
+        <span class="kd">let</span> <span class="nx">ip</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">publicIp</span><span class="p">.</span><span class="nx">v4</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nx">ip</span>
+<span class="p">}</span>
 
 
-    <span style="color:#069;font-weight:bold">async</span> set_ip(){
+    <span class="kr">async</span> <span class="nx">set_ip</span><span class="p">(){</span>
         
-        <span style="color:#069;font-weight:bold">var</span> curr_ip_ipv4;
+        <span class="kd">var</span> <span class="nx">curr_ip_ipv4</span><span class="p">;</span>
 
-        <span style="color:#069;font-weight:bold">try</span>{
+        <span class="k">try</span><span class="p">{</span>
 
-            curr_ip_ipv4 <span style="color:#555">=</span> <span style="color:#069;font-weight:bold">await</span> <span style="color:#069;font-weight:bold">this</span>.get_ip_user_ipv4();
+            <span class="nx">curr_ip_ipv4</span> <span class="o">=</span> <span class="kr">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">get_ip_user_ipv4</span><span class="p">();</span>
             
-           }<span style="color:#069;font-weight:bold">catch</span>(err){ console.log(err); curr_ip_ipv4<span style="color:#555">=</span><span style="color:#069;font-weight:bold">undefined</span>; }
+           <span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="nx">curr_ip_ipv4</span><span class="o">=</span><span class="kc">undefined</span><span class="p">;</span> <span class="p">}</span>
 
-        <span style="color:#069;font-weight:bold">if</span> (<span style="color:#555">!</span>(curr_ip_ipv4 <span style="color:#555">===</span> <span style="color:#069;font-weight:bold">undefined</span>)){
-        <span style="color:#069;font-weight:bold">this</span>.setState({<span style="color:#c30">&#39;ipv4&#39;</span><span style="color:#555">:</span> curr_ip_ipv4})
-        <span style="color:#069;font-weight:bold">this</span>.setState({<span style="color:#c30">&#39;ok&#39;</span><span style="color:#555">:</span> <span style="color:#069;font-weight:bold">true</span>})
-     }
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">curr_ip_ipv4</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="s1">&#39;ipv4&#39;</span><span class="o">:</span> <span class="nx">curr_ip_ipv4</span><span class="p">})</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="s1">&#39;ok&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+     <span class="p">}</span>
 
-        console.log(<span style="color:#069;font-weight:bold">this</span>.state.ipv4);
- }
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">ipv4</span><span class="p">);</span>
+ <span class="p">}</span>
 </code></pre></div><p><code>set_ip()</code> is the entry point. It will further call <code>get_ip_user_ipv4()</code> to get IP address of the user.It will then update <code>ipv4</code> state with retrieved IP and set <code>ok</code> state to <code>True</code></p>
 <hr>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">render(){
+<div class="highlight"><pre class="chroma"><code class="language-js" data-lang="js"><span class="nx">render</span><span class="p">(){</span>
 
-        <span style="color:#069;font-weight:bold">return</span> <span style="color:#555">&lt;</span>div<span style="color:#555">&gt;</span>
+        <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
             
-            {<span style="color:#069;font-weight:bold">this</span>.state.ok <span style="color:#555">?</span> 
-            <span style="color:#555">&lt;</span>div className<span style="color:#555">=</span><span style="color:#c30">&#34;alert alert-primary&#34;</span> role<span style="color:#555">=</span><span style="color:#c30">&#34;alert&#34;</span><span style="color:#555">&gt;</span>
-                <span style="color:#555">&lt;</span>h3<span style="color:#555">&gt;</span>Your IP<span style="color:#555">:</span> {<span style="color:#069;font-weight:bold">this</span>.state.ipv4}<span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/h3&gt;</span>
-                <span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/div&gt;: null}</span>
-            <span style="color:#555">&lt;</span>button className<span style="color:#555">=</span><span style="color:#c30">&#34;btn btn-success&#34;</span> onClick<span style="color:#555">=</span>{() =&gt; <span style="color:#069;font-weight:bold">this</span>.set_ip()}<span style="color:#555">&gt;</span>Get IP<span style="color:#555">!&lt;</span><span style="color:#a00;background-color:#faa">/button&gt;</span>
-        <span style="color:#555">&lt;</span><span style="color:#a00;background-color:#faa">/div&gt;</span>
+            <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">ok</span> <span class="o">?</span> 
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&#34;alert alert-primary&#34;</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&#34;alert&#34;</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="nx">Your</span> <span class="nx">IP</span><span class="o">:</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">ipv4</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h3&gt;</span>
+                <span class="o">&lt;</span><span class="err">/div&gt;: null}</span>
+            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&#34;btn btn-success&#34;</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">set_ip</span><span class="p">()}</span><span class="o">&gt;</span><span class="nx">Get</span> <span class="nx">IP</span><span class="o">!&lt;</span><span class="err">/button&gt;</span>
+        <span class="o">&lt;</span><span class="err">/div&gt;</span>
 
-}
+<span class="p">}</span>
 </code></pre></div><p>first, we check whether <code>state.ok</code> is set to True, This means we only want it to render if it is set to true or else return <code>null</code>. I used <a href="https://getbootstrap.com/docs/4.0/components/alerts/">Bootstrap alert</a> to make it look good, this is is <em>optional</em>.</p>
 <p>in <code>Button</code> we use <code>onClick</code> prop to invoke our function that retrieves and displays user IP on screen.</p>
 <div class="notices tip" ><p><a href="https://gitlab.com/synk.0x1/lab.stdin.top/-/blob/master/src/components/pages/MyIp.js">Full code - MyIp.js</a></p></div>

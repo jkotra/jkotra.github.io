@@ -58,12 +58,12 @@
     
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.11e4fae581d29b4f1d9ee81e1c11e70ef64db60ae869076aa75b9212ffe3098417b4019c294384255339a37a864d37e4dd7a55ee05fd953536c1ddc11bf952a2.css" integrity="sha512-EeT65YHSm08dnugeHBHnDvZNtgroaQdqp1uSEv/jCYQXtAGcKUOEJVM5o3qGTTfk3XpV7gX9lTU2wd3BG/lSog==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
     
     <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
     
     
-    <link rel="stylesheet" type="text/css" href="/css/dark.min.a6e1132ca354fccc5b438d5409cb8472d273c4d4df9bfc966733b6834ac01013a955ce583e386b9ed5bc2a5217255129b6389867b03bfa3b19ed78677816669a.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.dbe5d4073fad7a2fd8321a5ef20edc7cf45743a51192c9897193547cd4d851943841f3e0816e3b0a5458f9d74bb19d359f1239e6202c90d631d77bb8c66743ea.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -174,35 +174,35 @@
 <hr>
 <h2 id="using-xcard-library">using <code>xcard</code> library</h2>
 <p><a href="https://github.com/jkotra/xcard/blob/master/src/demo.cpp">demo.cpp</a> contains simple code to generate a random credit card with prefix <code>4</code>(VISA)</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#099">#include</span> <span style="color:#099">&lt;iostream&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;vector&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&lt;threads.h&gt;</span><span style="color:#099">
-</span><span style="color:#099">#include</span> <span style="color:#099">&#34;../include/xcard.hpp&#34;</span><span style="color:#099">
-</span><span style="color:#099"></span>
-<span style="color:#078;font-weight:bold">int</span> <span style="color:#c0f">main</span>()
-{
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;threads.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&#34;../include/xcard.hpp&#34;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
 
-    <span style="color:#09f;font-style:italic">//initialize
-</span><span style="color:#09f;font-style:italic"></span>    xcard xc(<span style="color:#c30">&#34;4&#34;</span>, <span style="color:#366">false</span>);
+    <span class="c1">//initialize
+</span><span class="c1"></span>    <span class="n">xcard</span> <span class="n">xc</span><span class="p">(</span><span class="s">&#34;4&#34;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
 
-    std<span style="color:#555">::</span>cout <span style="color:#555">&lt;&lt;</span> <span style="color:#c30">&#34;xcard version: &#34;</span> <span style="color:#555">&lt;&lt;</span> xc.VERSION <span style="color:#555">&lt;&lt;</span> std<span style="color:#555">::</span>endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;xcard version: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">xc</span><span class="p">.</span><span class="n">VERSION</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-    std<span style="color:#555">::</span>cout <span style="color:#555">&lt;&lt;</span> <span style="color:#c30">&#34;Generate 10 random valid cards with prefix 4&#34;</span> <span style="color:#555">&lt;&lt;</span> std<span style="color:#555">::</span>endl;
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Generate 10 random valid cards with prefix 4&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-    <span style="color:#069;font-weight:bold">for</span> (<span style="color:#078;font-weight:bold">int</span> i <span style="color:#555">=</span> <span style="color:#f60">0</span>; i <span style="color:#555">&lt;</span> <span style="color:#f60">10</span>; i<span style="color:#555">++</span>)
-    {
-        std<span style="color:#555">::</span>cout <span style="color:#555">&lt;&lt;</span> xc.generateCard() <span style="color:#555">&lt;&lt;</span> std<span style="color:#555">::</span>endl;
-    }
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">xc</span><span class="p">.</span><span class="n">generateCard</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span style="color:#069;font-weight:bold">return</span> <span style="color:#f60">0</span>;
-}
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
 </code></pre></div><h3 id="multithreaded-functions-for-validation-and-search">Multithreaded functions for validation and search</h3>
 <p><code>xcardMT</code> consists of a <code>constructor</code> which takes 3 arguments (prefix, no of threads and debug switch) and two multi-threaded functions:</p>
-<div class="highlight"><pre style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#069;font-weight:bold">public</span><span style="color:#555">:</span>
-    xcardMT(std<span style="color:#555">::</span>string prefix, <span style="color:#078;font-weight:bold">int</span> threads, <span style="color:#078;font-weight:bold">int</span> debug);
-    std<span style="color:#555">::</span>vector<span style="color:#555">&lt;</span><span style="color:#078;font-weight:bold">bool</span><span style="color:#555">&gt;</span> validateFromFile(std<span style="color:#555">::</span>ifstream <span style="color:#555">&amp;</span>fp);
-    std<span style="color:#555">::</span>vector<span style="color:#555">&lt;</span>std<span style="color:#555">::</span>string<span style="color:#555">&gt;</span> LinearSearch();
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">public</span><span class="o">:</span>
+    <span class="n">xcardMT</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">prefix</span><span class="p">,</span> <span class="kt">int</span> <span class="n">threads</span><span class="p">,</span> <span class="kt">int</span> <span class="n">debug</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">validateFromFile</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="o">&amp;</span><span class="n">fp</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">LinearSearch</span><span class="p">();</span>
 </code></pre></div><hr>
 <h1 id="conclusion">Conclusion</h1>
 <p><code>xcard</code> is a very simple C++ library to validate and generate credit cards, multi-threaded functions are useful to speed up processing on supported CPU(s).</p>
