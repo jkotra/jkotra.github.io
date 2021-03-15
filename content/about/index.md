@@ -50,6 +50,6 @@ If you require, download [my resume 📄](resume.pdf).
 
 ---
 
-## 📚 Books Recommendations
+## 📚 Book Recommendations
 
 * [Hands-On Network Programming with C](https://www.packtpub.com/product/hands-on-network-programming-with-c/9781789349863)
