@@ -4,12 +4,32 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-02-19T19:50:28+05:30</lastmod>
+    <lastmod>2021-03-17T01:24:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/algoticks/</loc>
+    <lastmod>2021-03-17T01:24:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/algoticks_2.0/</loc>
+    <lastmod>2021-03-17T01:24:18+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/c/</loc>
-    <lastmod>2021-02-19T19:50:28+05:30</lastmod>
+    <lastmod>2021-03-17T01:24:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-03-17T01:24:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-03-17T01:24:18+00:00</lastmod>
   </url>
   
   <url>
@@ -19,16 +39,6 @@
   
   <url>
     <loc>/posts/experience_porting_gtk4/</loc>
-    <lastmod>2021-02-19T19:50:28+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2021-02-19T19:50:28+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-02-19T19:50:28+05:30</lastmod>
   </url>
   
@@ -120,11 +130,6 @@
   <url>
     <loc>/posts/function-pointers-c/</loc>
     <lastmod>2020-07-24T19:00:12+05:30</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/algoticks/</loc>
-    <lastmod>2020-07-11T01:21:15+05:30</lastmod>
   </url>
   
   <url>

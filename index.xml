@@ -6,7 +6,17 @@
     <description>Recent content on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Feb 2021 19:50:28 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Mar 2021 01:24:18 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algoticks v2.0 - improving memory efficiency</title>
+      <link>/posts/algoticks_2.0/</link>
+      <pubDate>Wed, 17 Mar 2021 01:24:18 +0000</pubDate>
+      
+      <guid>/posts/algoticks_2.0/</guid>
+      <description>Github
+ it&amp;rsquo;s been in my mind for a few months, but I always said &amp;ldquo;it&amp;rsquo;s just a few megabytes pff.</description>
+    </item>
+    
     <item>
       <title>Porting (coinflip-gtk) to GTK4</title>
       <link>/posts/experience_porting_gtk4/</link>
