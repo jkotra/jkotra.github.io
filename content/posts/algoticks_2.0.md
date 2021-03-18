@@ -1,6 +1,6 @@
 ---
-title: "Algoticks v2.0 - improving memory efficiency."
-date: 2021-03-17T23:06:47Z
+title: "Algoticks v2.0 - improving memory efficiency"
+date: 2021-03-18T01:24:18Z
 description: Changelog of algoticks v2.0
 tags: ["C", "algoticks"]
 images:
