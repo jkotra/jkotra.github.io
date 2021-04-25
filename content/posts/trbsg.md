@@ -86,6 +86,6 @@ the user has 2 option to restore the backup(s),
 
 ## Conclusion
 
-this is a very simple script to backup your progress in the game and restart conveniently. this makes playing TRB a bit easier. ;)
+this is a very simple script to backup your progress in the game and restart conveniently. this makes playing 'They are Billions' a bit easier.  :blush:
 
 
