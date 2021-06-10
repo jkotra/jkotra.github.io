@@ -8,11 +8,6 @@ images:
   - https://i.imgur.com/fFWGUZa.png
 ---
 
-{{% notice info %}}
-
-This program is to be compiled using `GCC` for accurately reproducing results.
-
-{{% /notice %}}
 
 # Introduction
 
