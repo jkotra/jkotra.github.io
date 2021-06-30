@@ -41,9 +41,6 @@ date,open,high,low,close,volume
 
 This is an example of OHLC data - **O**pen **H**igh **L**ow **C**lose Data. This type of data is widely used to represent movement in a financial instruments. we will use this example data to demonstrate how to read CSV files in C.
 
-{{% adsense Bottom %}}
-{{% /adsense %}}
-
 # Setup
 
 * gcc version 10.1.0 (GCC)
