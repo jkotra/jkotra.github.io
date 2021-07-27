@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/posts/pdfunlockr-technical-essay/">
+    
+    
+
+    
+    <meta name="description" content="A technical 👨‍🔧 eassy about my app - PDFUnlockR." />
+    
+    
+    <meta name="language" content="en">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" /> 
+
+    
+    
+    
+    <title>Making the best PDF Unlocker / Decryptor App :: &lt;stdin&gt;</title>
+    
+
+    <link rel="icon" type="image/png" href=/static/chip.png />
+
+    <meta property="og:title" content="Making the best PDF Unlocker / Decryptor App" />
+<meta property="og:description" content="A technical 👨‍🔧 eassy about my app - PDFUnlockR." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/pdfunlockr-technical-essay/" />
+<meta property="og:image" content="https://i.imgur.com/pkz1D9P.png" />
+<meta property="article:published_time" content="2021-07-23T00:08:43+05:30" />
+<meta property="article:modified_time" content="2021-07-23T00:08:43+05:30" />
+
+    <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://i.imgur.com/pkz1D9P.png"/>
+
+<meta name="twitter:title" content="Making the best PDF Unlocker / Decryptor App"/>
+<meta name="twitter:description" content="A technical 👨‍🔧 eassy about my app - PDFUnlockR."/>
+
+
+    <meta name="theme-color" content=#2e2847 />
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
+
+    
+    
+    <script src="/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
+    
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.min.8d344b1d86251b837c1ec6542a9864c20ffeb7aa9a9c5b5a36f2916f1246a41e5792cc41e421cd67585b427acf7714f66d731d90e840be55351879c4e82cb7e4.css" integrity="sha512-jTRLHYYlG4N8HsZUKphkwg/&#43;t6qanFtaNvKRbxJGpB5XksxB5CHNZ1hbQnrPdxT2bXMdkOhAvlU1GHnE6Cy35A==" />
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/custom.min.3e90b71df5994759c01a2c012d044795212a2436d2b36597893f83e31af62525d4571cc4135b3c4c2c634e0101d0c8e04be3d971ac8378e1ca15bf7d67d64eea.css" integrity="sha512-PpC3HfWZR1nAGiwBLQRHlSEqJDbSs2WXiT&#43;D4xr2JSXUVxzEE1s8TCxjTgEB0MjgS&#43;PZcayDeOHKFb99Z9ZO6g==" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/dark.min.ff9609228f03a669ee26f873b4d7e0ec88932f4251825d1eb834279960505a5386d476acfce505572a49a2da551454c21273c81ca5e082bae56bbb2e55b9b3dd.css" media="(prefers-color-scheme: dark)">
+
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
+
+
+    
+    
+
+    
+
+    
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "G-YW8V9DTR0N" );
+</script>
+
+
+
+    
+    
+    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    
+
+</head>
+
+<body>
+    <div class="container wrapper">
+    <div class="header">
+	<base href="/">
+	<h1 class="site-title">
+		
+		<a href="/">&lt;stdin&gt;</a>
+		
+		<span class="blinking-cursor">|</span>
+		
+	</h1>
+
+	<div class="site-description">
+		
+		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
+		
+
+		<nav class="nav social">
+			<ul class="flat">
+				
+				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
+				
+				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
+				
+				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
+				
+				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
+				
+			</ul>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/about/">About</a>
+			</li>
+			
+			<li>
+				<a href="/tags/">Tags</a>
+			</li>
+			
+			<li>
+				<a href="/portfolio/">Portfolio</a>
+			</li>
+			
+			<li>
+				<a href="/pgp/">PGP</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+    
+<div class= "post">
+<div class="post-header">
+	<h1 class="title">Making the best PDF Unlocker / Decryptor App</h1>
+	
+	<div class="meta">Posted at &mdash; Jul 23, 2021</div>
+	
+</div>
+
+<div class="markdown">
+	<p><a href='https://play.google.com/store/apps/details?id=com.pdfunlockr&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img height="192px" width="192px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a></p>
+<h2 id="preface">Preface</h2>
+<p>My foray into React native happened approximately a month before of publishing date of this article, I know of very little javascript (non ES6) and almost a <em>newb</em> with React ecosystem. It almost felt like an adventure, after many months developing and improving my libraries and application written in a language(s) I&rsquo;m comfortable with.</p>
+<p>As of writing this, I feel like a pro of javascript. No wonder JS rules across the tech industry, the ease of learning makes it easy for a beginner like me. Even though I&rsquo;m no stranger to the programming paradigm, it must be said that JS(ES6 variant) is the easiest to write, debug and extend.</p>
+<p>With a mixture of learning <a href="https://www.newline.co/fullstack-react-native/">from a book</a>, <a href="https://www.udemy.com/course/react-native-the-practical-guide/">Udemy course</a>, and tinkering around with examples, I made a simple app to view semester results of my university. It&rsquo;s now <a href="https://play.google.com/store/apps/details?id=com.ouresults">available on the Google play store</a>.</p>
+<h2 id="problem">Problem</h2>
+<p>You have a pdf file, and it has a password. The aim is to generate a new file from input with password / any other encryption removed.</p>
+<h3 id="but-why">But why?</h3>
+<p>In general, it&rsquo;s a hassle to enter the password every time you need to view it. The default PDF viewer on android does not have a feature to remember passwords.</p>
+<p>Often, Financial institutions request bank statements other KYC documents which are often encrypted with a password(for example, eAadhar in India). There are several tools available online with varying downsides. I discussed these issues in the section below.</p>
+<h2 id="competition-research">Competition Research</h2>
+<p>A <a href="https://play.google.com/store/search?q=pdf%20unlocker">search</a> for &ldquo;<em>pdf unlocker</em>&rdquo; on google play store returns at least 6 that claim to do the job. But after I tested each one of them(excluding corporate type, discussed in next paragraph) I find their functionality ranging from unusable to badly designed UI to just crash. I don&rsquo;t want to take the name of the developers here, I have immense respect for my colleagues in the trades irrespective of skill. The problem is quite possibly API and old age(depreciation). Many years after writing this article, my app might as well join them becoming unusable, the trick here is to use a newer SDK for future-proofing. I have a good feeling this is good for at least the next 4-5 Android versions. For this reason, <code>PDFUnlockR</code> requires a minimum SDK of 24 (API) (Android 7)</p>
+<p>Those which work and look nice are the corporate variety. An example is <a href="https://play.google.com/store/apps/details?id=com.smallpdf.app.android&amp;hl=en_IN&amp;gl=US">Smallpdf</a> and <a href="https://play.google.com/store/apps/details?id=com.ilovepdf.www&amp;hl=en_IN&amp;gl=US">iLovePDF</a>. Both of these are in a way more than a tool, they have a business model, charging users money if they exceed a certain limit of files. I feel this is a very dubious practice because of two reasons, they offer no value and little convenience, just jump on a computer and there are many programs to decrypt unlimited no. of files with no catch. 2nd reason is even though a guess, they are probably using some open-source library under the hood. The license of said Open source library may even explicitly prohibit profiting from their code.</p>
+<h2 id="uiux-design">UI/UX Design</h2>
+<p>The basic structure of <code>PDFUnlockR</code> consists of mainly 3 screens.</p>
+<ul>
+<li><code>Home / Queue</code></li>
+<li><code>Processing </code></li>
+<li><code>Decrypt(Final Results) </code></li>
+</ul>
+<p>
+  <img src="https://i.imgur.com/CzMuWhP.png" alt="">
+</p>
+<p>Components used are a combination of vanilla react native and <a href="https://callstack.github.io/react-native-paper/">react-native-paper</a></p>
+<h2 id="the-best-pdf-library---qpdf-theres-a-problem-though">the best PDF library - QPDF. There&rsquo;s a problem though&hellip;</h2>
+<p>I&rsquo;m quite confident QPDF is the best <em>opensource</em>  PDF library out there. The emphasis on open-source is important here, during my research I&rsquo;ve encountered many closed source libraries with java bindings(that would have made my life easier, not having to deal with JNI). The problem is that QPDF is a c++ library and the way to connect it with java is through JNI(Java Native Interface)</p>
+<h3 id="cross-compiling-qpdf-to-multiple--cpu-architectures">Cross Compiling QPDF to multiple  CPU architectures.</h3>
+<p>We first need to compile the library into a shared object(<code>.so</code>) file to include in our project.</p>
+<p>From <code>android/app/gradle.build</code> we can specify the architectures we can target:</p>
+<div class="highlight"><pre class="chroma"><code class="language-gradle" data-lang="gradle">        <span class="n">externalNativeBuild</span> <span class="o">{</span>
+            <span class="n">cmake</span> <span class="o">{</span>
+                <span class="n">cppFlags</span> <span class="s2">&#34;-O2 -frtti -fexceptions -Wall -fstack-protector-all&#34;</span>
+                <span class="n">abiFilters</span> <span class="s1">&#39;x86&#39;</span><span class="o">,</span> <span class="s1">&#39;x86_64&#39;</span><span class="o">,</span> <span class="s1">&#39;armeabi-v7a&#39;</span><span class="o">,</span> <span class="s1">&#39;arm64-v8a&#39;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+</code></pre></div><p>Here, I&rsquo;ve chosen to use the library for all 4 (<code>'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'</code>) architecture, cross-compiling is pretty straightforward once you figure out ins and outs of NDK compilers.</p>
+<p><a href="https://sourceforge.net/projects/qpdf/files/qpdf/">QPDF</a> depends on one other library:</p>
+<ul>
+<li><a href="http://www.ijg.org/files/jpegsrc.v9d.tar.gz">libjpeg</a></li>
+</ul>
+<p>I&rsquo;ve included links to gists of bash scripts to cross-compile these dependencies and also <code>qpdf</code> itself.</p>
+<p><a href="https://gist.github.com/jkotra/e5cfa6f2b06c97dafe11384594000a4a">Github Gist</a></p>
+<div class="notices note" ><p><p>compilation of QPDF will fail during cross-compilation due to its inability to confirm the existence of <code>/dev/urandom</code>. This check must be disabled in <code>configure</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1">#ln 16476 - version - 10.3.2</span>
+<span class="nb">test</span> <span class="s2">&#34;</span><span class="nv">$cross_compiling</span><span class="s2">&#34;</span> <span class="o">=</span> no <span class="o">&amp;&amp;</span>
+</code></pre></div></p></div>
+<p>Running the above bash scripts should produce binary <code>.so</code> for each architecture.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── arm64-v8a
+│   ├── libjpeg.so
+│   └── libqpdf.so
+├── armeabi-v7a
+│   ├── libjpeg.so
+│   └── libqpdf.so
+├── x86
+│   ├── libjpeg.so
+│   └── libqpdf.so
+└── x86_64
+    ├── libjpeg.so
+    └── libqpdf.so
+</code></pre></div><h3 id="jni--ndk">JNI + NDK</h3>
+<p><a href="https://en.wikipedia.org/wiki/Java_Native_Interface">JNI</a> stands for <strong>J</strong>ava <strong>N</strong>ative <strong>I</strong>nterface. <a href="https://developer.android.com/ndk">NDK</a> (<strong>N</strong>ative <strong>D</strong>evelopment <strong>K</strong>it) is what allows us to run C++ natively on the android platform.</p>
+<p>JNI acts as a bridge between java and NDK/C++.</p>
+<h2 id="stitching-it-all-together">Stitching it all together</h2>
+<p>The process of putting all these together starts with the bottom, our pure C++ library which uses <code>qpdf</code> to decrypt the file.</p>
+<p>An excerpt is given below:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">decryptPDF_wFD</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">filename</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">out</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">password</span><span class="p">)</span>
+<span class="p">{</span>
+    
+    <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span>
+     <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span>
+      <span class="s">&#34;%s%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="s">&#34;decryptPDF_wFD Received FD:&#34;</span><span class="p">,</span> <span class="n">fd</span><span class="p">);</span>
+
+    <span class="c1">//read from FD
+</span><span class="c1"></span>    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="k">throw</span><span class="p">(</span><span class="s">&#34;Cannot open file descriptor.&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//malloc
+</span><span class="c1"></span>    <span class="kt">char</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
+    <span class="n">fread</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+    
+    <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span> <span class="s">&#34;FD loaded!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+
+    <span class="n">QPDF</span> <span class="n">qpdf</span><span class="p">;</span>
+
+    <span class="k">try</span>
+    <span class="p">{</span>
+        <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span> <span class="s">&#34;received inputs: %s %s %d %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">filename</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">out</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">size</span><span class="p">,</span> <span class="n">password</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+        <span class="n">qpdf</span><span class="p">.</span><span class="n">processMemoryFile</span><span class="p">(</span><span class="n">filename</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">password</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+        <span class="n">QPDFWriter</span> <span class="n">w</span><span class="p">(</span><span class="n">qpdf</span><span class="p">,</span> <span class="n">out</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+        <span class="n">w</span><span class="p">.</span><span class="n">setPreserveEncryption</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+        <span class="n">w</span><span class="p">.</span><span class="n">write</span><span class="p">();</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span> <span class="s">&#34;Decrypt Error: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+        <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="k">throw</span><span class="p">(</span><span class="o">&amp;</span><span class="n">err</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div><p>Next comes the JNI C++, which acts as a glue between java and our code mentioned above:</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
+<span class="n">JNIEXPORT</span> <span class="n">jboolean</span> <span class="n">JNICALL</span>
+<span class="n">Java_com_pdfunlockr_QPDFModule_decryptPDF</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">type</span><span class="p">,</span> <span class="n">jint</span> <span class="n">fd</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">filename</span><span class="p">,</span> <span class="n">jlong</span> <span class="n">pdf_size</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">password</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_fname</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">passwd</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">pdf_size</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">result</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="k">try</span><span class="p">{</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">decryptPDF_wFD</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">input_fname</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">output</span><span class="p">),</span> <span class="n">size</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">passwd</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="o">*</span><span class="n">e</span><span class="p">){</span>
+        <span class="n">jclass</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;java/lang/Exception&#34;</span><span class="p">);</span>
+        <span class="n">env</span><span class="o">-&gt;</span><span class="n">ThrowNew</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">what</span><span class="p">());</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="nf">jboolean</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>Finally, these native functions can be used in java, and using React native modules, these wrapped methods can be invoked from javascript.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">   <span class="nd">@ReactMethod</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">QPDFdecryptPDF</span><span class="o">(</span><span class="n">String</span> <span class="n">file_uri</span><span class="o">,</span> <span class="n">String</span> <span class="n">filename</span><span class="o">,</span> <span class="n">String</span> <span class="n">pdf_size</span><span class="o">,</span> <span class="n">String</span> <span class="n">password</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Promise</span> <span class="n">promise</span><span class="o">){</span>
+
+      <span class="n">Uri</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">Uri</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">file_uri</span><span class="o">);</span>
+      <span class="n">ContentResolver</span> <span class="n">resolver</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">getContentResolver</span><span class="o">();</span>
+       <span class="n">String</span> <span class="n">output_file</span><span class="o">;</span>
+
+      <span class="n">output_file</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">getCacheDir</span><span class="o">().</span><span class="na">getAbsolutePath</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;/&#34;</span> <span class="o">+</span> <span class="n">filename</span><span class="o">;</span>
+      
+      <span class="k">try</span> <span class="o">{</span>
+          <span class="n">ParcelFileDescriptor</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="na">openFileDescriptor</span><span class="o">(</span><span class="n">uri</span><span class="o">,</span> <span class="s">&#34;r&#34;</span><span class="o">);</span>
+          <span class="kt">int</span> <span class="n">pdf_fd</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="na">getFd</span><span class="o">();</span>
+          <span class="kt">long</span> <span class="n">lsize</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">pdf_size</span><span class="o">);</span>
+          <span class="kt">boolean</span> <span class="n">out</span> <span class="o">=</span> <span class="n">decryptPDF</span><span class="o">(</span><span class="n">pdf_fd</span><span class="o">,</span> <span class="n">filename</span><span class="o">,</span> <span class="n">lsize</span><span class="o">,</span> <span class="n">password</span><span class="o">,</span> <span class="n">output_file</span><span class="o">);</span>
+          <span class="n">fd</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+          <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">output_file</span><span class="o">);</span>
+      <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
+        <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&#34;PDFUnlockr&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="n">promise</span><span class="o">.</span><span class="na">reject</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+       <span class="o">}</span>
+
+   <span class="o">}</span>
+   
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">decryptPDF</span><span class="o">(</span><span class="kt">int</span> <span class="n">in_fd</span><span class="o">,</span> <span class="n">String</span> <span class="n">filename</span><span class="o">,</span> <span class="kt">long</span> <span class="n">pdf_size</span><span class="o">,</span> <span class="n">String</span> <span class="n">password</span><span class="o">,</span> <span class="n">String</span> <span class="n">output</span><span class="o">);</span>
+</code></pre></div><div class="notices tip" ><p>Refer to <a href="https://reactnative.dev/docs/native-modules-android">RN Documentation</a> on how to bridge <code>Java &lt;-&gt; Javascript</code>.</p></div>
+<div class="notices info" ><p>My code is highly inspired at initial setup stage by <a href="https://github.com/reime005/react-native-cpp-code">reime005&rsquo;s react-native-cpp-code</a></p></div>
+<div class="notices note" ><p><p>Exception handling is a <strong>MUST</strong> if you want to remain sane during the development. Without exception handling, if an error occurs, the app abruptly crashes.</p>
+<p>The only way to debug what caused the crash is to look for hints in <code>adb logcat</code>.this ordeal is comparable to finding a needle in a haystack.</p>
+</p></div>
+<h2 id="monetization">Monetization</h2>
+<p>I placed just 2 ads.</p>
+<ul>
+<li><a href="https://developers.google.com/admob/android/banner">Banner Ad</a> in Processing Screen</li>
+<li><a href="https://developers.google.com/admob/android/interstitial">Interstitial Ad</a> on final/decrypt stage</li>
+</ul>
+<p>There&rsquo;s a lot of ad placement potential in here, At this point, I don&rsquo;t feel like adding more ads that might make the app less functional and annoying.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Over and all, I&rsquo;m still surprised how fast this whole journey has been thanks to JS. Considering how little if anything about making apps before jumping in just a week ago. I still do not know a lot of vanilla java / Kotlin principles and practices. This is not a deficiency of me or a supposedly steep learning curve of Vanilla Android Development, rather the point here is that <strong>React Native just WORKS!</strong></p>
+
+</div>
+
+<div class="post-tags">
+	
+	
+	<nav class="nav tags">
+		<ul class="flat">
+			
+			<li><a href="/tags/react-native">React Native</a></li>
+			
+			<li><a href="/tags/cpp">cpp</a></li>
+			
+			<li><a href="/tags/java">Java</a></li>
+			
+		</ul>
+	</nav>
+	
+	
+</div>
+
+<div id="commento"></div>
+
+<script id="comments" src="https://utteranc.es/client.js" repo="jkotra/stdin.top-comments" issue-term="pathname"
+	label="💬" theme="github-light" crossorigin="anonymous" async>
+	</script>
+
+<noscript>Please enable JavaScript to view the
+	<a href="https://commento.io/">comments powered by Commento.</a>
+</noscript>
+
+</div>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+
+
+</div>
+
+
+    </div>
+
+    <div class="footer wrapper">
+
+			
+			
+			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8658473214995139"
+     data-ad-slot="2398602558"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<br>
+			
+
+	<nav class="nav">
+		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
+		<div> <a href="https://github.com/jkotra/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+</body>
+
+</html>

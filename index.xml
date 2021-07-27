@@ -6,7 +6,16 @@
     <description>Recent content on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Mar 2021 01:24:18 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jul 2021 00:08:43 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making the best PDF Unlocker / Decryptor App</title>
+      <link>/posts/pdfunlockr-technical-essay/</link>
+      <pubDate>Fri, 23 Jul 2021 00:08:43 +0530</pubDate>
+      
+      <guid>/posts/pdfunlockr-technical-essay/</guid>
+      <description>Preface My foray into React native happened approximately a month before of publishing date of this article, I know of very little javascript (non ES6) and almost a newb with React ecosystem.</description>
+    </item>
+    
     <item>
       <title>Algoticks v2.0 - improving memory efficiency</title>
       <link>/posts/algoticks_2.0/</link>
@@ -254,7 +263,7 @@ I am a self-taught programmer and an avid open-source contributor.</description>
       <pubDate>Fri, 01 Jan 1971 11:54:58 +0530</pubDate>
       
       <guid>/portfolio/</guid>
-      <description>eOVPN eOVPN is a application to connect, manage and update(from remote .</description>
+      <description>PDFUnlockR  PDFUnlockR is a powerful app to remove passwords and encryption from PDF files.</description>
     </item>
     
     <item>

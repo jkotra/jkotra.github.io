@@ -6,7 +6,34 @@
     <description>Recent content in Tags on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Mar 2021 01:24:18 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jul 2021 00:08:43 +0530</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cpp</title>
+      <link>/tags/cpp/</link>
+      <pubDate>Fri, 23 Jul 2021 00:08:43 +0530</pubDate>
+      
+      <guid>/tags/cpp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>/tags/java/</link>
+      <pubDate>Fri, 23 Jul 2021 00:08:43 +0530</pubDate>
+      
+      <guid>/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>React Native</title>
+      <link>/tags/react-native/</link>
+      <pubDate>Fri, 23 Jul 2021 00:08:43 +0530</pubDate>
+      
+      <guid>/tags/react-native/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>algoticks</title>
       <link>/tags/algoticks/</link>
@@ -49,15 +76,6 @@
       <pubDate>Sun, 20 Sep 2020 20:07:40 +0530</pubDate>
       
       <guid>/tags/network-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cpp</title>
-      <link>/tags/cpp/</link>
-      <pubDate>Thu, 20 Aug 2020 22:36:03 +0530</pubDate>
-      
-      <guid>/tags/cpp/</guid>
       <description></description>
     </item>
     
