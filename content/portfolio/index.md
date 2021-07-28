@@ -74,7 +74,7 @@ It is made with [GTK toolkit](https://www.gtk.org/) and written in python.
 
 _WPC_ stands for **W**all **P**aper **C**hanger
 
-_WPC_ is a wallpaper changer for **Windows**/**Linux**. It can optionally retrieve wallpapers from wallhaven and Bing.
+_WPC_ is a wallpaper changer for **Windows**/**Linux**. It can optionally retrieve wallpapers from wallhaven, Bing and Reddit.
 
 ---
 
@@ -130,6 +130,8 @@ Classifying MNIST dataset using different approaches with Tensorflow, Pytorch, a
 
 ## [LogoNet](https://github.com/jkotra/LogoNet)
 
+<img src="https://raw.githubusercontent.com/jagadeesh-kotra/LogoNet/master/misc/logonet.png" height="256" width="256">
+
 _convolutional neural network model to detect brand logo._
 
 Logonet is a convolutional neural network(CNN) model to detect brand logos in the given input image.
@@ -137,6 +139,8 @@ Logonet is a convolutional neural network(CNN) model to detect brand logos in th
 ---
 
 ## [Xcard](https://github.com/jkotra/xcard)
+
+<img src="https://raw.githubusercontent.com/jkotra/xcard/master/assets/credit-card.png" height="128" width="128">
 
 _xcard is a c++ library to generate and validate credit/debit cards._
 
