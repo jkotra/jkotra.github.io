@@ -9,9 +9,7 @@ Hi, I'm Jagadeesh Kotra.
 
 I am a self-taught programmer and an avid open-source contributor. I'm currently pursuing my bachelor's majoring in Mathematics, Physics, and Computer Science.
 
-I like to learn and experiment on subjects related to CS - Programming, Software development, Machine Learning/DL, and other fields. I like dipping my feet into uncharted waters now and then such as Web development occasionally.
-
-I enjoy learning and discovering new things - I became interested in programming due to necessity. at a moment, None of the available solutions are suitable for my use case or not well written, so, I programmed it myself. 
+I like to learn and experiment on subjects related to CS - Programming, Software development, Machine Learning/DL, and other fields. I like dipping my feet into uncharted waters now and then such as Web development occasionally. I enjoy learning and discovering new things.
 
 I utilize my spare time either by spending time on my hobbies such as video programming, reading a book, or just binge on a Netflix series. 
 
