@@ -5,11 +5,11 @@ date: 2019-10-21T23:41:53+05:30
 tags: ["Deep Learning", "MXNet"]
 draft: false
 images:
-  - https://i.imgur.com/F0EP55n.jpg
+  - https://i.imgur.com/RFE2udJ.jpg
 ---
 
 
-![Photo by [Jake Hills](https://unsplash.com/@jakehills?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://i.imgur.com/F0EP55n.jpg)
+![Photo by [Jake Hills](https://unsplash.com/@jakehills?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://i.imgur.com/RFE2udJ.jpg)
 
 ## Time series
 

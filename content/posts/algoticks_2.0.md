@@ -4,7 +4,7 @@ date: 2021-03-17T01:24:18Z
 description: Changelog of algoticks v2.0
 tags: ["C", "algoticks"]
 images:
-  - https://i.imgur.com/2EVP0SE.gif
+  - /images/algoticks_demo.gif
 draft: false
 ---
 

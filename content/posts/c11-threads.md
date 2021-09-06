@@ -4,7 +4,7 @@ date: 2020-08-03T11:23:52+05:30
 description: "counting to a billion 7x faster with threads.h🚀"
 tags: ["c"]
 images:
- - https://i.imgur.com/ikZi4XM.jpg
+ - https://i.imgur.com/Z7T3TWL.jpg
 draft: false
 ---
 

@@ -5,7 +5,7 @@ tags: ["React Native", "cpp", "Java"]
 date: 2021-07-23T00:08:43+05:30
 draft: false
 images:
- - https://i.imgur.com/pkz1D9P.png
+ - https://i.imgur.com/yeKb8dn.png
 ---
 
 <a href='https://play.google.com/store/apps/details?id=com.pdfunlockr&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img height="192px" width="192px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
@@ -43,7 +43,7 @@ The basic structure of `PDFUnlockR` consists of mainly 3 screens.
 - `Processing `
 - `Decrypt(Final Results) `
 
-![](https://i.imgur.com/CzMuWhP.png)
+![](https://i.imgur.com/fBTnKbV.png)
 
 Components used are a combination of vanilla react native and [react-native-paper](https://callstack.github.io/react-native-paper/)
 

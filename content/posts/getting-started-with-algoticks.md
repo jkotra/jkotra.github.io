@@ -4,7 +4,7 @@ date: 2020-07-02T03:06:47Z
 description: This is a quick "Getting Started" Guide to algoticks trading simulator.
 tags: ["C", "algoticks"]
 images:
-  - https://i.imgur.com/2EVP0SE.gif
+  - /images/algoticks_demo.gif
 draft: false
 
 ---
