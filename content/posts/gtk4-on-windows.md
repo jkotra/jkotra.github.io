@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with GTK4 on Windows"
 description: "Setup - Compile - Debug and Cross Platform 🤩"
-date: 2021-09-05T23:16:02Z
+date: 2021-09-04T23:16:02Z
 tags: ["C", "gtk"]
 images:
   - https://www.gtk.org/assets/img/logo-gtk-sm.png
