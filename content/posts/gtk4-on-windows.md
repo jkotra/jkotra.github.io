@@ -5,7 +5,7 @@ date: 2021-09-05T23:16:02Z
 tags: ["C", "gtk"]
 images:
   - https://www.gtk.org/assets/img/logo-gtk-sm.png
-draft: true
+draft: false
 ---
 
 # Introduction
