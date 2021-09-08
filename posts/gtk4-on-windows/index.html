@@ -10,7 +10,7 @@
     
 
     
-    <meta name="description" content="Setup - Compile - Debug and Cross Platform 🤩" />
+    <meta name="description" content="Setup - Compile - Debug 🤩" />
     
     
     <meta name="language" content="en">
@@ -25,7 +25,7 @@
     <link rel="icon" type="image/png" href=/static/chip.png />
 
     <meta property="og:title" content="Getting Started with GTK4 on Windows" />
-<meta property="og:description" content="Setup - Compile - Debug and Cross Platform 🤩" />
+<meta property="og:description" content="Setup - Compile - Debug 🤩" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/gtk4-on-windows/" />
 <meta property="og:image" content="https://www.gtk.org/assets/img/logo-gtk-sm.png" />
@@ -36,7 +36,7 @@
 <meta name="twitter:image" content="https://www.gtk.org/assets/img/logo-gtk-sm.png"/>
 
 <meta name="twitter:title" content="Getting Started with GTK4 on Windows"/>
-<meta name="twitter:description" content="Setup - Compile - Debug and Cross Platform 🤩"/>
+<meta name="twitter:description" content="Setup - Compile - Debug 🤩"/>
 
 
     <meta name="theme-color" content=#2e2847 />
@@ -170,7 +170,7 @@
 <p>GTK (formerly GIMP ToolKit then GTK+) is a free and open-source cross-platform widget toolkit for creating graphical user interfaces (GUIs).</p>
 <p><a href="https://en.wikipedia.org/wiki/GTK#Windows">[wikipedia]</a> <a href="https://gtk.org">[Official Website]</a></p>
 <h1 id="setup">Setup</h1>
-<div class="notices info" ><p><p>GTK can also be compiled with MSVC / Visual Studio. while compiling with MSVC makes it more compatible with the Visual Studio ecosystem it limits the libraries we can include in our project as mixing MSYS2 and MSVC causes many problems.</p>
+<div class="notices info" ><p><p>GTK can also be compiled with MSVC / Visual Studio. while compiling with MSVC makes it more compatible with the Visual Studio ecosystem, it limits the libraries we can include in our project. mixing MSYS2 and MSVC libraries cause problems.</p>
 <p>To compile with MSVC:</p>
 <ul>
 <li><a href="https://download.gnome.org/sources/gtk/">Get the latest tarball</a>.</li>
@@ -204,7 +204,7 @@ C:\\msys64\\mingw64\\lib
 </ol>
 <p>It will produce something like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">-mfpmath=sse -msse -msse2 -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-4.0 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/fribidi -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/gdk-pixbuf-2.0 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/cairo -IC:/msys64/mingw64/include/lzo -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/freetype2 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pixman-1 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/graphene-1.0 -IC:/msys64/mingw64/lib/graphene-1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/glib-2.0 -IC:/msys64/mingw64/lib/glib-2.0/include -IC:/msys64/mingw64/include -LC:/msys64/mingw64/lib -lgtk-4 -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -lgdk_pixbuf-2.0 -lcairo-gobject -lcairo -lvulkan -lgraphene-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl
-</code></pre></div><p>copy the output and add it as a System Variable:</p>
+</code></pre></div><p>copy the output and add it as a System Variable (I saved it as <code>GTK4-PKG-CONFIG</code>):</p>
 <p>
   <img src="https://i.imgur.com/oxcoJbA.png" alt="https://i.imgur.com/oxcoJbA.png">
 </p>
@@ -229,7 +229,7 @@ C:\\msys64\\mingw64\\lib
     <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="mi">4</span>
 <span class="p">}</span>
 
-</code></pre></div><p>notice the <code>C:/msys64/mingw64/include/**</code> <code>C:/msys64/mingw64/lib/glib-2.0/include</code> and <code>C:/msys64/mingw64/lib/graphene-1.0/include</code>. these are the header files we need for auto complete suggestions which will make our life easier.</p>
+</code></pre></div><p>notice the <code>C:/msys64/mingw64/include/**</code>, <code>C:/msys64/mingw64/lib/glib-2.0/include</code> and <code>C:/msys64/mingw64/lib/graphene-1.0/include</code>. these are the header files we need for auto complete suggestions which will make our life easier.</p>
 <ol start="3">
 <li>create a new file, <code>hello_world.c</code> file, and paste the <code>Hello World</code> C program from <a href="https://gtk.org">GTK.org</a>:</li>
 </ol>
@@ -264,7 +264,7 @@ C:\\msys64\\mingw64\\lib
   <img src="https://i.imgur.com/oHf7ZqG.png" alt="https://i.imgur.com/oHf7ZqG.png">
 </p>
 <h3 id="debugging">Debugging</h3>
-<p>Setting up debugging is quite easy. Defaults should just work fine as long as you select the correct compiler when prompted, I&rsquo;ve added <code>-mwindows</code> to compile flags for good measure.</p>
+<p>Setting up debugging enviroment is quite easy. Defaults should just work fine as long as you select the correct compiler when prompted, I&rsquo;ve added <code>-mwindows</code> to compile flags for good measure.</p>
 <p><code>.vscode/launch.json</code></p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
@@ -332,11 +332,14 @@ C:\\msys64\\mingw64\\lib
 <p>Let&rsquo;s make things a little complicated, suppose we want to make an application to show the current time using Win32 API, this is how it can be done:</p>
 <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;ShellScalingApi.h&gt;</span><span class="cp">
 </span><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
 </span><span class="cp"></span>
+
 <span class="kt">void</span> <span class="nf">get_current_time</span><span class="p">(</span><span class="n">GtkButton</span> <span class="o">*</span><span class="n">btn</span><span class="p">,</span> <span class="n">GtkLabel</span> <span class="o">*</span><span class="n">label</span><span class="p">){</span>
 
   <span class="n">SYSTEMTIME</span> <span class="n">st</span><span class="p">,</span> <span class="n">lt</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Button Clicked!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
     
   <span class="n">GetSystemTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">st</span><span class="p">);</span>
   <span class="n">GetLocalTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">);</span>
@@ -352,12 +355,11 @@ C:\\msys64\\mingw64\\lib
 </span><span class="c1"></span>  <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="n">gtk_application_window_new</span> <span class="p">(</span><span class="n">app</span><span class="p">);</span>
 
   <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">box</span> <span class="o">=</span> <span class="n">gtk_box_new</span><span class="p">(</span><span class="n">GTK_ORIENTATION_VERTICAL</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-  <span class="n">gtk_widget_set_margin_top</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
-  <span class="n">gtk_widget_set_margin_bottom</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
+
   <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">label</span> <span class="o">=</span> <span class="n">gtk_label_new</span><span class="p">(</span><span class="s">&#34;Hello GTK!&#34;</span><span class="p">);</span>
   <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">btn</span> <span class="o">=</span> <span class="n">gtk_button_new_with_label</span><span class="p">(</span><span class="s">&#34;Get Current Time&#34;</span><span class="p">);</span>
-  <span class="n">gtk_widget_set_margin_start</span><span class="p">(</span><span class="n">GTK_BUTTON</span><span class="p">(</span><span class="n">btn</span><span class="p">),</span> <span class="mi">4</span><span class="p">);</span>
-  <span class="n">gtk_widget_set_margin_end</span><span class="p">(</span><span class="n">GTK_BUTTON</span><span class="p">(</span><span class="n">btn</span><span class="p">),</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="n">gtk_widget_set_margin_start</span><span class="p">(</span><span class="n">GTK_WIDGET</span><span class="p">(</span><span class="n">btn</span><span class="p">),</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="n">gtk_widget_set_margin_end</span><span class="p">(</span><span class="n">GTK_WIDGET</span><span class="p">(</span><span class="n">btn</span><span class="p">),</span> <span class="mi">4</span><span class="p">);</span>
   <span class="n">g_signal_connect_after</span><span class="p">(</span><span class="n">btn</span> <span class="p">,</span> <span class="s">&#34;clicked&#34;</span><span class="p">,</span> <span class="p">(</span><span class="n">GCallback</span><span class="p">)</span><span class="n">get_current_time</span><span class="p">,</span> <span class="n">label</span><span class="p">);</span>
 
   <span class="n">gtk_box_append</span><span class="p">(</span><span class="n">GTK_BOX</span><span class="p">(</span><span class="n">box</span><span class="p">),</span> <span class="n">label</span><span class="p">);</span>
@@ -379,6 +381,22 @@ C:\\msys64\\mingw64\\lib
 <p>
   <img src="https://i.imgur.com/YURHuEM.png" alt="https://i.imgur.com/YURHuEM.png">
 </p>
+<h3 id="meson-build-system">Meson Build System</h3>
+<p><a href="https://github.com/jkotra/WhatIsMyTime">Available on Github</a>.</p>
+<p>Meson is the official build system used by GNOME. I&rsquo;ve taken the above example and made it into a Meson Project.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">tree
+├── meson.build
+├── README.md
+└── src
+    ├── meson.build
+    └── whatismytime.c
+
+1 directory, 4 files
+</code></pre></div><div class="notices info" ><p><code>meson</code> uses <code>ninja</code> to build/compile. get the latest <code>ninja</code> from <a href="https://github.com/ninja-build/ninja/releases">their Github page</a> and add the extracted directory to System Path.</p></div>
+<p>to build:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">meson build
+ninja -C build
+</code></pre></div><p>and then navigate to <code>build/src</code> and execute <code>whatismtime.exe</code></p>
 
 </div>
 
