@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with GTK4 on Windows"
-description: "Setup - Compile - Debug and Cross Platform 🤩"
+description: "Setup - Compile - Debug 🤩"
 date: 2021-09-04T23:16:02Z
 tags: ["C", "gtk"]
 images:
@@ -23,7 +23,7 @@ GTK (formerly GIMP ToolKit then GTK+) is a free and open-source cross-platform w
 # Setup
 
 {{% notice info %}}
-GTK can also be compiled with MSVC / Visual Studio. while compiling with MSVC makes it more compatible with the Visual Studio ecosystem it limits the libraries we can include in our project as mixing MSYS2 and MSVC causes many problems.
+GTK can also be compiled with MSVC / Visual Studio. while compiling with MSVC makes it more compatible with the Visual Studio ecosystem, it limits the libraries we can include in our project. mixing MSYS2 and MSVC libraries cause problems.
 
 To compile with MSVC:
 * [Get the latest tarball](https://download.gnome.org/sources/gtk/).
@@ -68,7 +68,7 @@ It will produce something like this:
 -mfpmath=sse -msse -msse2 -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-4.0 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/fribidi -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/gdk-pixbuf-2.0 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/cairo -IC:/msys64/mingw64/include/lzo -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/freetype2 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pixman-1 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/graphene-1.0 -IC:/msys64/mingw64/lib/graphene-1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/glib-2.0 -IC:/msys64/mingw64/lib/glib-2.0/include -IC:/msys64/mingw64/include -LC:/msys64/mingw64/lib -lgtk-4 -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -lgdk_pixbuf-2.0 -lcairo-gobject -lcairo -lvulkan -lgraphene-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl
 ```
 
-copy the output and add it as a System Variable:
+copy the output and add it as a System Variable (I saved it as `GTK4-PKG-CONFIG`):
 
 ![https://i.imgur.com/oxcoJbA.png](https://i.imgur.com/oxcoJbA.png)
 
@@ -97,7 +97,7 @@ I prefer Visual studio code for all my coding tasks. You can get the latest vers
 
 ```
 
-notice the `C:/msys64/mingw64/include/**` `C:/msys64/mingw64/lib/glib-2.0/include` and `C:/msys64/mingw64/lib/graphene-1.0/include`. these are the header files we need for auto complete suggestions which will make our life easier.
+notice the `C:/msys64/mingw64/include/**`, `C:/msys64/mingw64/lib/glib-2.0/include` and `C:/msys64/mingw64/lib/graphene-1.0/include`. these are the header files we need for auto complete suggestions which will make our life easier.
 
 3. create a new file, `hello_world.c` file, and paste the `Hello World` C program from [GTK.org](https://gtk.org):
 
@@ -134,7 +134,7 @@ int main (int argc, char *argv[]) {
 
 ### Debugging
 
-Setting up debugging is quite easy. Defaults should just work fine as long as you select the correct compiler when prompted, I've added `-mwindows` to compile flags for good measure.
+Setting up debugging enviroment is quite easy. Defaults should just work fine as long as you select the correct compiler when prompted, I've added `-mwindows` to compile flags for good measure.
 
 `.vscode/launch.json`
 
@@ -203,7 +203,7 @@ Setting up debugging is quite easy. Defaults should just work fine as long as yo
 
 ```
 
-Add breakpoint wherever you wish and debug away!
+Add breakpoint wherever you wish and debug away! 
 
 ![https://i.imgur.com/QVZD3Bq.png](https://i.imgur.com/QVZD3Bq.png)
 
@@ -214,11 +214,14 @@ Let's make things a little complicated, suppose we want to make an application t
 ```c
 #include <stdio.h>
 #include <windows.h>
+#include <ShellScalingApi.h>
 #include <gtk/gtk.h>
+
 
 void get_current_time(GtkButton *btn, GtkLabel *label){
 
   SYSTEMTIME st, lt;
+  printf("Button Clicked!\n");
     
   GetSystemTime(&st);
   GetLocalTime(&lt);
@@ -234,12 +237,11 @@ static void on_activate (GtkApplication *app) {
   GtkWidget *window = gtk_application_window_new (app);
 
   GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);
-  gtk_widget_set_margin_top(box, 12);
-  gtk_widget_set_margin_bottom(box, 12);
+
   GtkWidget *label = gtk_label_new("Hello GTK!");
   GtkWidget *btn = gtk_button_new_with_label("Get Current Time");
-  gtk_widget_set_margin_start(GTK_BUTTON(btn), 4);
-  gtk_widget_set_margin_end(GTK_BUTTON(btn), 4);
+  gtk_widget_set_margin_start(GTK_WIDGET(btn), 4);
+  gtk_widget_set_margin_end(GTK_WIDGET(btn), 4);
   g_signal_connect_after(btn , "clicked", (GCallback)get_current_time, label);
 
   gtk_box_append(GTK_BOX(box), label);
@@ -263,3 +265,33 @@ Compile the program with:
 `gcc whatismytime.c -o whatismytime -mwindows %GTK4-PKG-CONFIG%`
 
 ![https://i.imgur.com/YURHuEM.png](https://i.imgur.com/YURHuEM.png)
+
+### Meson Build System
+
+[Available on Github](https://github.com/jkotra/WhatIsMyTime).
+
+Meson is the official build system used by GNOME. I've taken the above example and made it into a Meson Project.
+
+```
+tree
+├── meson.build
+├── README.md
+└── src
+    ├── meson.build
+    └── whatismytime.c
+
+1 directory, 4 files
+```
+
+
+{{% notice info %}}
+`meson` uses `ninja` to build/compile. get the latest `ninja` from [their Github page](https://github.com/ninja-build/ninja/releases) and add the extracted directory to System Path. 
+{{% /notice %}}
+
+to build:
+```
+meson build
+ninja -C build
+```
+
+and then navigate to `build/src` and execute `whatismtime.exe`
