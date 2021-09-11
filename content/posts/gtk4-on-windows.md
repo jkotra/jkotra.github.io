@@ -146,14 +146,14 @@ Setting up debugging enviroment is quite easy. Defaults should just work fine as
             "name": "gcc.exe - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\\\${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\\\msys64\\\\mingw64\\\\bin\\\\gdb.exe",
+            "miDebuggerPath": "C:\\msys64\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -176,12 +176,12 @@ Setting up debugging enviroment is quite easy. Defaults should just work fine as
         {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe build active file",
-            "command": "C:\\\\msys64\\\\mingw64\\\\bin\\\\gcc.exe",
+            "command": "C:\\msys64\\mingw64\\bin\\gcc.exe",
             "args": [
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\\\${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-mwindows",
                 "%GTK4-PKG-CONFIG%"
             ],
@@ -294,4 +294,4 @@ meson build
 ninja -C build
 ```
 
-and then navigate to `build/src` and execute `whatismtime.exe`
+and then navigate to `build/src` and execute `whatismytime.exe`
