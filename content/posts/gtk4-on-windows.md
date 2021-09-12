@@ -85,10 +85,10 @@ I prefer Visual studio code for all my coding tasks. You can get the latest vers
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/msys64/mingw64/include/**",
-                "C:/msys64/mingw64/lib/glib-2.0/include",
-                "C:/msys64/mingw64/lib/graphene-1.0/include"
+                "${workspaceFolder}\\**",
+                "C:\\msys64\\mingw64\\include\\**",
+                "C:\\msys64\\mingw64\\lib\\glib-2.0\\include",
+                "C:\\msys64\\mingw64\\lib\\graphene-1.0\\include"
             ]
         }
     ],
@@ -97,7 +97,7 @@ I prefer Visual studio code for all my coding tasks. You can get the latest vers
 
 ```
 
-notice the `C:/msys64/mingw64/include/**`, `C:/msys64/mingw64/lib/glib-2.0/include` and `C:/msys64/mingw64/lib/graphene-1.0/include`. these are the header files we need for auto complete suggestions which will make our life easier.
+notice the `C:\msys64\mingw64\include\**`, `C:\msys64\mingw64\lib\glib-2.0\include` and `C:\msys64\mingw64\lib\graphene-1.0\include`. these are the header files we need for auto complete suggestions which will make our life easier.
 
 3. create a new file, `hello_world.c` file, and paste the `Hello World` C program from [GTK.org](https://gtk.org):
 
