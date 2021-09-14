@@ -49,7 +49,7 @@ Made with <a href="https://reactnative.dev/">React Native.</a>
 
 ## [eOVPN](https://github.com/jkotra/eOVPN)
 
-<img src="https://raw.githubusercontent.com/jkotra/eOVPN/master/static/connected.png" width="180" height="340" alt="eOVPN" align="right">
+<img src="https://raw.githubusercontent.com/jkotra/eOVPN/master/static/window_connected_with_flag.png" width="400" alt="eOVPN" align="right">
 
 `eOVPN` is a application to connect, manage and update(from remote <i>.zip</i>) OpenVPN configurations.
 
