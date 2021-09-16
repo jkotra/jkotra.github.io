@@ -214,7 +214,6 @@ Let's make things a little complicated, suppose we want to make an application t
 ```c
 #include <stdio.h>
 #include <windows.h>
-#include <ShellScalingApi.h>
 #include <gtk/gtk.h>
 
 
