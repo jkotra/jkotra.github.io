@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deep Learning on &lt;stdin&gt;</title>
-    <link>/tags/deep-learning/</link>
+    <link>https://stdin.top/tags/deep-learning/</link>
     <description>Recent content in Deep Learning on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Oct 2019 23:41:53 +0530</lastBuildDate><atom:link href="/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Oct 2019 23:41:53 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pollution forecasting using Time series and LSTM with MXnet</title>
-      <link>/posts/lstm-mxnet/</link>
+      <link>https://stdin.top/posts/lstm-mxnet/</link>
       <pubDate>Mon, 21 Oct 2019 23:41:53 +0530</pubDate>
       
-      <guid>/posts/lstm-mxnet/</guid>
+      <guid>https://stdin.top/posts/lstm-mxnet/</guid>
       <description>Time series Time series analysis is a statistical technique that deals with time series data, or trend analysis.</description>
     </item>
     

@@ -2,118 +2,118 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C on &lt;stdin&gt;</title>
-    <link>/tags/c/</link>
+    <link>https://stdin.top/tags/c/</link>
     <description>Recent content in C on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Sep 2021 23:16:02 +0000</lastBuildDate><atom:link href="/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Sep 2021 23:16:02 +0000</lastBuildDate><atom:link href="https://stdin.top/tags/c/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Getting Started with GTK4 on Windows</title>
-      <link>/posts/gtk4-on-windows/</link>
+      <link>https://stdin.top/posts/gtk4-on-windows/</link>
       <pubDate>Sat, 04 Sep 2021 23:16:02 +0000</pubDate>
       
-      <guid>/posts/gtk4-on-windows/</guid>
+      <guid>https://stdin.top/posts/gtk4-on-windows/</guid>
       <description>Introduction This article guides how to set up and write applications with GTK4 on the windows operating system.</description>
     </item>
     
     <item>
       <title>Algoticks v2.0 - improving memory efficiency</title>
-      <link>/posts/algoticks_2.0/</link>
+      <link>https://stdin.top/posts/algoticks_2.0/</link>
       <pubDate>Wed, 17 Mar 2021 01:24:18 +0000</pubDate>
       
-      <guid>/posts/algoticks_2.0/</guid>
+      <guid>https://stdin.top/posts/algoticks_2.0/</guid>
       <description>Github
  it&amp;rsquo;s been in my mind for a few months, but I always said &amp;ldquo;it&amp;rsquo;s just a few megabytes pff.</description>
     </item>
     
     <item>
       <title>Porting (coinflip-gtk) to GTK4</title>
-      <link>/posts/experience_porting_gtk4/</link>
+      <link>https://stdin.top/posts/experience_porting_gtk4/</link>
       <pubDate>Fri, 19 Feb 2021 19:50:28 +0530</pubDate>
       
-      <guid>/posts/experience_porting_gtk4/</guid>
+      <guid>https://stdin.top/posts/experience_porting_gtk4/</guid>
       <description>Introduction Recently, I decided to fix some lingering bugs in my toy project coinflip-gtk which I made a few months back to get a taste of GTK.</description>
     </item>
     
     <item>
       <title>Parse HTTPS website(s) in C with OpenSSL</title>
-      <link>/posts/https_parse_openssl/</link>
+      <link>https://stdin.top/posts/https_parse_openssl/</link>
       <pubDate>Sun, 20 Sep 2020 20:07:40 +0530</pubDate>
       
-      <guid>/posts/https_parse_openssl/</guid>
+      <guid>https://stdin.top/posts/https_parse_openssl/</guid>
       <description>Introduction In this article, I will explain how to parse a website that uses HTTPS.</description>
     </item>
     
     <item>
       <title>Sending mail using SMTP protocol</title>
-      <link>/posts/smtp-sendmail/</link>
+      <link>https://stdin.top/posts/smtp-sendmail/</link>
       <pubDate>Thu, 17 Sep 2020 00:47:17 +0530</pubDate>
       
-      <guid>/posts/smtp-sendmail/</guid>
+      <guid>https://stdin.top/posts/smtp-sendmail/</guid>
       <description>Introduction This article introduces the SMTP protocol and associated code and jargon.</description>
     </item>
     
     <item>
       <title>DNS resolution in C</title>
-      <link>/posts/dns-resolve/</link>
+      <link>https://stdin.top/posts/dns-resolve/</link>
       <pubDate>Tue, 08 Sep 2020 01:20:42 +0530</pubDate>
       
-      <guid>/posts/dns-resolve/</guid>
+      <guid>https://stdin.top/posts/dns-resolve/</guid>
       <description>Introduction DNS resolution is the process of converting Domain name (example.</description>
     </item>
     
     <item>
       <title>Communicating between server and client using UDP</title>
-      <link>/posts/udp-server-client/</link>
+      <link>https://stdin.top/posts/udp-server-client/</link>
       <pubDate>Sun, 06 Sep 2020 00:34:58 +0530</pubDate>
       
-      <guid>/posts/udp-server-client/</guid>
+      <guid>https://stdin.top/posts/udp-server-client/</guid>
       <description>Introduction This article provides a brief introduction to the UDP protocol, what makes it different from TCP.</description>
     </item>
     
     <item>
       <title>Network Programming Pt 2 - TCP client</title>
-      <link>/posts/network-programming-pt2/</link>
+      <link>https://stdin.top/posts/network-programming-pt2/</link>
       <pubDate>Mon, 31 Aug 2020 01:49:14 +0530</pubDate>
       
-      <guid>/posts/network-programming-pt2/</guid>
+      <guid>https://stdin.top/posts/network-programming-pt2/</guid>
       <description>Introduction HTTP is powered by TCP, websites can be retrieved by communicating through TCP socket.</description>
     </item>
     
     <item>
       <title>Network programming Pt. 1 - TCP and Hello World!</title>
-      <link>/posts/network-programming-pt1/</link>
+      <link>https://stdin.top/posts/network-programming-pt1/</link>
       <pubDate>Thu, 27 Aug 2020 16:40:15 +0530</pubDate>
       
-      <guid>/posts/network-programming-pt1/</guid>
+      <guid>https://stdin.top/posts/network-programming-pt1/</guid>
       <description>Introduction a short introduction to TCP and code walkthrough of a simple TCP web server.</description>
     </item>
     
     <item>
       <title>C11 Threads</title>
-      <link>/posts/c11-threads/</link>
+      <link>https://stdin.top/posts/c11-threads/</link>
       <pubDate>Mon, 03 Aug 2020 11:23:52 +0530</pubDate>
       
-      <guid>/posts/c11-threads/</guid>
+      <guid>https://stdin.top/posts/c11-threads/</guid>
       <description>Introduction this is a simple introduction to threading in C. I will be using inbuild C threading library threads.</description>
     </item>
     
     <item>
       <title>Getting Started With Algoticks</title>
-      <link>/posts/getting-started-with-algoticks/</link>
+      <link>https://stdin.top/posts/getting-started-with-algoticks/</link>
       <pubDate>Thu, 02 Jul 2020 03:06:47 +0000</pubDate>
       
-      <guid>/posts/getting-started-with-algoticks/</guid>
+      <guid>https://stdin.top/posts/getting-started-with-algoticks/</guid>
       <description>Updated: 10-Mar-2021
  Updated things that are changed in algoticks v2.</description>
     </item>
     
     <item>
       <title>Reading CSV files in C</title>
-      <link>/posts/csv-in-c/</link>
+      <link>https://stdin.top/posts/csv-in-c/</link>
       <pubDate>Sun, 14 Jun 2020 23:32:29 +0530</pubDate>
       
-      <guid>/posts/csv-in-c/</guid>
+      <guid>https://stdin.top/posts/csv-in-c/</guid>
       <description>Introduction In this, I will show you how to read CSV files in C.</description>
     </item>
     

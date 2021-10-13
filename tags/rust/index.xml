@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rust on &lt;stdin&gt;</title>
-    <link>/tags/rust/</link>
+    <link>https://stdin.top/tags/rust/</link>
     <description>Recent content in Rust on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jan 2021 02:07:19 +0530</lastBuildDate><atom:link href="/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jan 2021 02:07:19 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>What changed in WPC 1.0? a lot.</title>
-      <link>/posts/what-changed-in-wpc-1.0-a-lot/</link>
+      <link>https://stdin.top/posts/what-changed-in-wpc-1.0-a-lot/</link>
       <pubDate>Thu, 14 Jan 2021 02:07:19 +0530</pubDate>
       
-      <guid>/posts/what-changed-in-wpc-1.0-a-lot/</guid>
+      <guid>https://stdin.top/posts/what-changed-in-wpc-1.0-a-lot/</guid>
       <description>Introduction WPC 1.0 has been released and with a whole set of new features and most importantly readable, refactored and saner code which should make things easy for any hackers/tinkerers out there.</description>
     </item>
     
     <item>
       <title>Overview of WPC: Writing a wallpaper changer in Rust</title>
-      <link>/posts/wpc-overview/</link>
+      <link>https://stdin.top/posts/wpc-overview/</link>
       <pubDate>Fri, 13 Mar 2020 10:30:06 +0530</pubDate>
       
-      <guid>/posts/wpc-overview/</guid>
+      <guid>https://stdin.top/posts/wpc-overview/</guid>
       <description>WPC stands for Wall Paper Changer
 Github
  Changelog (09-07-2020)  WPC v0.</description>

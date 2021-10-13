@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vapoursynth on &lt;stdin&gt;</title>
-    <link>/tags/vapoursynth/</link>
+    <link>https://stdin.top/tags/vapoursynth/</link>
     <description>Recent content in vapoursynth on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Mar 2020 22:03:21 +0530</lastBuildDate><atom:link href="/tags/vapoursynth/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Mar 2020 22:03:21 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/vapoursynth/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vapoursynth - Merge clips using MaskedMerge</title>
-      <link>/posts/vapoursynth-maskedmerge/</link>
+      <link>https://stdin.top/posts/vapoursynth-maskedmerge/</link>
       <pubDate>Tue, 03 Mar 2020 22:03:21 +0530</pubDate>
       
-      <guid>/posts/vapoursynth-maskedmerge/</guid>
+      <guid>https://stdin.top/posts/vapoursynth-maskedmerge/</guid>
       <description>std.MaskedMerge(clip clipa, clip clipb, clip mask[, int[] planes, bint first_plane=0, bint premultiplied=0])</description>
     </item>
     

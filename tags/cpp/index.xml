@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cpp on &lt;stdin&gt;</title>
-    <link>/tags/cpp/</link>
+    <link>https://stdin.top/tags/cpp/</link>
     <description>Recent content in cpp on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Jul 2021 00:08:43 +0530</lastBuildDate><atom:link href="/tags/cpp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jul 2021 00:08:43 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/cpp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Making the best PDF Unlocker / Decryptor App</title>
-      <link>/posts/pdfunlockr-technical-essay/</link>
+      <link>https://stdin.top/posts/pdfunlockr-technical-essay/</link>
       <pubDate>Fri, 23 Jul 2021 00:08:43 +0530</pubDate>
       
-      <guid>/posts/pdfunlockr-technical-essay/</guid>
+      <guid>https://stdin.top/posts/pdfunlockr-technical-essay/</guid>
       <description>Preface My foray into React native happened approximately a month before of publishing date of this article, I know of very little javascript (non ES6) and almost a newb with React ecosystem.</description>
     </item>
     
     <item>
       <title>Xcard library</title>
-      <link>/posts/xcard/</link>
+      <link>https://stdin.top/posts/xcard/</link>
       <pubDate>Thu, 20 Aug 2020 22:36:03 +0530</pubDate>
       
-      <guid>/posts/xcard/</guid>
+      <guid>https://stdin.top/posts/xcard/</guid>
       <description>Introduction xcard is a library to generate and validate credit/debit cards.</description>
     </item>
     

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>python on &lt;stdin&gt;</title>
-    <link>/tags/python/</link>
+    <link>https://stdin.top/tags/python/</link>
     <description>Recent content in python on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Aug 2020 15:52:50 +0530</lastBuildDate><atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Aug 2020 15:52:50 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>They are Billions - Automatic game saving utility</title>
-      <link>/posts/trbsg/</link>
+      <link>https://stdin.top/posts/trbsg/</link>
       <pubDate>Sun, 09 Aug 2020 15:52:50 +0530</pubDate>
       
-      <guid>/posts/trbsg/</guid>
+      <guid>https://stdin.top/posts/trbsg/</guid>
       <description>Github repository
  Introduction technical overview of TRBSG. the purpose of the tool is to automatically backup(zip) save files of They are Billions and easily restore them afterward.</description>
     </item>
