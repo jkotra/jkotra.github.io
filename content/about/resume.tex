@@ -1,10 +1,12 @@
 \documentclass{article}
 \date{}
+\usepackage{enumitem}
+\setlist{nolistsep}
 \usepackage{geometry}
  \geometry{
  a4paper,
- top=4mm,
- bottom=8mm,
+ top=8mm,
+ bottom=4mm,
  }
 \usepackage{multicol}
 \usepackage{hyperref}
@@ -16,12 +18,15 @@
 }
 \usepackage{authblk}
 
-
 \begin{document}
+
+
 
 \title{\LARGE  Resume}
 \author{\LARGE \textbf{Jagadeesh Kotra}}
-\affil{\small Hyderabad, India | \href{tel:+919392420045}{+91 9392420045} | \href{mailto:jagadeesh@stdin.top}{jagadeesh@stdin.top} | \href{https://stdin.top}{stdin.top}}
+\affil{\small Hyderabad, India | \href{tel:+919392420045}{+91 9392420045} |
+\href{mailto:jagadeesh@stdin.top}{jagadeesh@stdin.top}
+ | \href{https://stdin.top}{stdin.top}}
 \maketitle
 
 \section{Introduction}
@@ -43,21 +48,19 @@ I can make an impact on anything with my out-of-box thinking and the perseveranc
     \end{itemize}
 \end{multicols}
 
-\iffalse
+
 \subsection{Frameworks}
 \begin{multicols}{4}
     \begin{itemize}
         \item React Native
         \item React
         \item GTK
-        \item Qt
-        \item TensorFlow
         \item Pytorch
+        \item Tensorflow/Keras
         \item Sklearn
-        \item Pandas
     \end{itemize}
 \end{multicols}
-\fi
+
 
 \subsection{Human Languages}
 \begin{itemize}
@@ -71,46 +74,60 @@ I can make an impact on anything with my out-of-box thinking and the perseveranc
     \item \textbf{PDFUnlockr}
     \subitem
     \begin{itemize}
+        \vspace{-0.25cm}
         \item Android Application made with React Native and \href{http://qpdf.sourceforge.net/}{qpdf}.
         \item uses React Native Native Modules to bridge between JavaScript and C++.
         \item Clean and clutter-free UI design. No limitation on decryption.
         \item Ability to process multiple files at a time AKA Bulk Processing.
         \item \href{https://play.google.com/store/apps/details?id=com.pdfunlockr}{Available on Google Play Store}.
+        \vspace{0.35cm}
     \end{itemize}
     
     \item \textbf{OUResults}
     \subitem
     \begin{itemize}
+        \vspace{-0.25cm}
         \item Android Application to view examination/semester results. made with React Native.
         \item Utilizes publicly available endpoints to parse results from HTML.
         \item Persistence requests model to combat slow response during initial hours.
         \item \href{https://play.google.com/store/apps/details?id=com.ouresults}{Available on Google Play Store}.
+        \vspace{0.35cm}
     \end{itemize}
 
     
     \item \textbf{eOVPN}
     \subitem
     \begin{itemize}
+        \vspace{-0.25cm}
         \item Desktop GUI Application to Manage, Update and connect to OpenVPN Configurations. Made with \href{https://gtk.org/}{GTK}.
         \item Utilizes GNOME ecosystem of libraries -- GLib Gio, Gdk to seamlessly integrate with GNOME Desktop Environment.
         \item Open-source - \href{https://github.com/jkotra/eOVPN}{Available at Github}.
+        \vspace{0.35cm}
     \end{itemize}
-    \pagebreak 
+    
+
     \item \textbf{Algoticks}
     \subitem
     \begin{itemize}
+        \vspace{-0.25cm}
         \item Algorithmic Trading simulator written in C. Optimized for one thing - SPEED. it can process up to 0.8 million \textit{lines / sec}.
         \item input data agnostic simulation.
         \item Easy to write algorithm template, supports custom callback modules (ex. logging)
         \item Open-source - \href{https://github.com/jkotra/algoticks/}{Available on Github}.
+        \vspace{0.35cm}
     \end{itemize}
+    
+    \pagebreak
+    
     \item \textbf{WPC}
     \subitem
     \begin{itemize}
+        \vspace{-0.25cm}
         \item WPC - Wallpaper Changer is a cross-platform timer-based wallpaper changer. Written in Rust.
         \item It can automatically scrap wallpapers from different sources.
         \item Actively used and promoted by one of the popular internet wallpaper community.
         \item Open-source - \href{https://github.com/jkotra/wpc/}{Available on Github}.
+        \vspace{0.35cm}
     \end{itemize}
     
     \item An up to date collection of all my projects is \href{https://stdin.top/portfolio/}{available on my blog}.                  
