@@ -5,7 +5,10 @@ draft: false
 type: "page"
 ---
 
+
 Hi, I'm Jagadeesh Kotra. 
+
+( [📄 resume](resume.pdf) | [📧 e-mail](mailto:jagadeesh@stdin.top) | [📞 Call](tel:+919392420045) )
 
 I am a self-taught programmer and an avid open-source contributor.
 
@@ -15,15 +18,14 @@ I utilize my spare time either by spending time on my hobbies such as video prog
 
 My favorite language for scripting in python. for compiled applications/libraries, I usually choose rust for its memory safety features. 
 
-My top 4 programming languages are: 
+My top 4 favourite programming languages are: 
 1. [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 2. [C/C++](https://en.wikipedia.org/wiki/C%2B%2B)
 3. [Rust](https://en.wikipedia.org/wiki/Rust_(programming_language)) 
 4. [Javascript](https://en.wikipedia.org/wiki/JavaScript) 
 
 
-You can view my portfolio [here](/portfolio/), where my most recent works are compiled. 
-If you require, download [my resume 📄](resume.pdf).
+You can view my portfolio [here](/portfolio/), where my most recent works are compiled.
 
 ---
 
