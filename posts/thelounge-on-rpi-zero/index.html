@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="https://stdin.top/posts/lstm-mxnet/">
+    <base href="https://stdin.top/posts/thelounge-on-rpi-zero/">
     
     
 
     
-    <meta name="description" content="Predicting Pollution 🏭 to save planet 🌎" />
+    <meta name="description" content="self-host IRC client on your rpi and stay connected 🌏" />
     
     
     <meta name="language" content="en">
@@ -19,24 +19,24 @@
     
     
     
-    <title>Pollution forecasting using Time series and LSTM with MXnet :: &lt;stdin&gt;</title>
+    <title>Install thelounge on Raspberry Pi Zero :: &lt;stdin&gt;</title>
     
 
     <link rel="icon" type="image/png" href=/static/chip.png />
 
-    <meta property="og:title" content="Pollution forecasting using Time series and LSTM with MXnet" />
-<meta property="og:description" content="Predicting Pollution 🏭 to save planet 🌎" />
+    <meta property="og:title" content="Install thelounge on Raspberry Pi Zero" />
+<meta property="og:description" content="self-host IRC client on your rpi and stay connected 🌏" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://stdin.top/posts/lstm-mxnet/" />
-<meta property="og:image" content="https://i.imgur.com/RFE2udJ.jpg" />
-<meta property="article:published_time" content="2019-10-21T23:41:53+05:30" />
-<meta property="article:modified_time" content="2019-10-21T23:41:53+05:30" />
+<meta property="og:url" content="https://stdin.top/posts/thelounge-on-rpi-zero/" />
+<meta property="og:image" content="https://stdin.top/images/thelounge.png" />
+<meta property="article:published_time" content="2022-01-16T19:20:12+05:30" />
+<meta property="article:modified_time" content="2022-01-16T19:20:12+05:30" />
 
     <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://i.imgur.com/RFE2udJ.jpg"/>
+<meta name="twitter:image" content="https://stdin.top/images/thelounge.png"/>
 
-<meta name="twitter:title" content="Pollution forecasting using Time series and LSTM with MXnet"/>
-<meta name="twitter:description" content="Predicting Pollution 🏭 to save planet 🌎"/>
+<meta name="twitter:title" content="Install thelounge on Raspberry Pi Zero"/>
+<meta name="twitter:description" content="self-host IRC client on your rpi and stay connected 🌏"/>
 
 
     <meta name="theme-color" content=#2e2847 />
@@ -154,47 +154,85 @@
     
 <div class= "post">
 <div class="post-header">
-	<h1 class="title">Pollution forecasting using Time series and LSTM with MXnet</h1>
+	<h1 class="title">Install thelounge on Raspberry Pi Zero</h1>
 	
-	<div class="meta">Posted at &mdash; Oct 21, 2019</div>
+	<div class="meta">Posted at &mdash; Jan 16, 2022</div>
 	
 </div>
 
 <div class="markdown">
 	<p>
-  <img src="https://i.imgur.com/RFE2udJ.jpg" alt="Photo by &lt;a href=&#34;https://unsplash.com/@jakehills?utm_source=medium&amp;amp;utm_medium=referral&#34;&gt;Jake Hills&lt;/a&gt; on &lt;a href=&#34;https://unsplash.com?utm_source=medium&amp;amp;utm_medium=referral&#34;&gt;Unsplash&lt;/a&gt;">
+  <figure>
+    <img src="/images/thelounge.png" alt="">
+    <figcaption>thelounge running on my Raspberry Pi Zero W</figcaption>
+  </figure>
 </p>
-<h2 id="time-series">Time series</h2>
-<p>Time series analysis is a statistical technique that deals with time series data, or trend analysis. Time series data means that data is in a series of particular time periods or intervals.</p>
-<p>TSA(Time series analysis) applications:</p>
+<h1 id="introduction">Introduction</h1>
+<p>This is a short tutorial to install <a href="https://thelounge.chat/">thelounge</a> on <a href="https://www.raspberrypi.com/products/raspberry-pi-zero-w/">Raspberry Pi Zero / W</a>. I assume you have already set up your rpi and connected to the internet.</p>
+<h1 id="1-installing-dependencies">1. Installing dependencies</h1>
+<p><a href="https://thelounge.chat/">thelounge</a> depends on <code>nodejs</code> LTS or greater. current <code>nodejs</code> LTS version is 17.x (as of writing this article) but only 12.x is available in raspbian OS repository. even though, nodejs discontinued <em>official</em> support for <code>armv6</code>, we can still get precompiled binaries from <a href="https://unofficial-builds.nodejs.org/">unoffical builds</a>. just don&rsquo;t expect any kind of support if you run into any problems 😑️</p>
+<ol>
+<li><a href="https://unofficial-builds.nodejs.org/download/release/v17.4.0/">Download</a> <em>nodejs</em> LTS for armv6.</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">wget https://unofficial-builds.nodejs.org/download/release/v17.4.0/node-v17.4.0-linux-armv6l.tar.gz
+</code></pre></div><ol start="2">
+<li>extract the downloaded file.</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">tar -xvf node-v17.4.0-linux-armv6l.tar.gz
+</code></pre></div><ol start="3">
+<li>install</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="nb">cd</span> node-v17.4.0-linux-armv6l
+sudo cp * -R /usr
+</code></pre></div><ol start="4">
+<li>confirm by checking version</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">node -v
+</code></pre></div><h1 id="2-install-yarn">2. Install yarn</h1>
+<p><code>nodejs</code> is prepackaged with <code>npm</code> package manager. we can use <code>npm</code> to install <code>yarn</code> which is recommended to use with <code>thelounge</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">sudo npm install yarn --global
+</code></pre></div><h1 id="3-install-thelounge">3. install thelounge</h1>
+<div class="notices tip" ><p><p>I recommend setting a static IP to your rpi. this makes it easier to access services hosted on our pi with a single memorable address (usually <em>192.168.x.x</em>)</p>
+<p><a href="https://www.makeuseof.com/raspberry-pi-set-static-ip/">How Do I Set a Static IP Address on Raspberry Pi?</a></p>
+</p></div>
+<ol>
+<li>
+<p>get latest .deb from <a href="https://github.com/thelounge/thelounge/releases">github release page</a>.</p>
+</li>
+<li>
+<p>as we installed <code>nodejs</code> from an unofficial source (and not through <code>apt</code> package manager), it will not satisfy the <code>nodejs</code> requirement of <code>.deb</code> file. we can skip dependency checks in two ways.</p>
+</li>
+</ol>
 <ul>
-<li>
-<p>Pattern recognition</p>
-</li>
-<li>
-<p>Earthquake prediction</p>
-</li>
-<li>
-<p>Weather forecast</p>
-</li>
-<li>
-<p>Financial statistics</p>
+<li>force <code>dpkg</code>
+<ul>
+<li><code>dpkg --force-all -i thelounge.deb</code></li>
+</ul>
 </li>
 </ul>
-<p>and many more…</p>
-<h2 id="problem">Problem</h2>
-<p>
-  <img src="https://i.imgur.com/Hg1tYSG.jpg" alt="">
-</p>
-<blockquote>
-<p><em>with a newly-minted elite and an economic growth rate of over 10 percent, the environment has taken a backseat in China, the world’s most populous country. Growing pollution has led to unusable waterways, increased incidence of birth defects, and some of the dirtiest air on earth. It’s so nasty that there’s now a word for it: “smogpocalypse”.</em></p>
-</blockquote>
-<p><a href="https://allthatsinteresting.com/pollution-in-china-photographs">Source</a></p>
+<p><em>(OR)</em></p>
+<ul>
+<li>edit <code>.deb</code> dependencies
+<ul>
+<li><a href="https://forums.linuxmint.com/viewtopic.php?t=35136">How To: Change .deb Package Dependencies</a></li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>add (default) user to <code>thelounge</code></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">sudo thelounge add ircuser
+</code></pre></div><p>it will prompt for a password, choose any password. you can then head to <code>http://192.168.x.x:9000</code> and log in.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>A suggestion in good faith: don&rsquo;t buy <code>armv6</code> boards. they are already obsolete and as time goes on, compatible software will be hard t come by.</p>
+<section class="footnotes" role="doc-endnotes">
 <hr>
-<p>Read the Article @ <a href="https://towardsdatascience.com/pollution-forecasting-using-time-series-and-lstm-with-mxnet-16fe9180ee1">Towards DS/Medium</a></p>
-<hr>
-<p>Hope this article helped in your quest.</p>
-<div class="notices tip" ><p><a href="https://colab.research.google.com/drive/1ktpx04H1uZtezRd934De3-IIqD43mhn2">Run this Notebook in Google Colab</a></p></div>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://thelounge.chat/docs/install-and-upgrade#debian-and-ubuntu-based-distributions">thelounge documentation</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
 
 </div>
 
@@ -204,9 +242,7 @@
 	<nav class="nav tags">
 		<ul class="flat">
 			
-			<li><a href="/tags/deep-learning">Deep Learning</a></li>
-			
-			<li><a href="/tags/mxnet">MXNet</a></li>
+			<li><a href="/tags/tutorial">tutorial</a></li>
 			
 		</ul>
 	</nav>

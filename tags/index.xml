@@ -6,7 +6,16 @@
     <description>Recent content in Tags on &lt;stdin&gt;</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Sep 2021 23:16:02 +0000</lastBuildDate><atom:link href="https://stdin.top/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Jan 2022 19:20:12 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tutorial</title>
+      <link>https://stdin.top/tags/tutorial/</link>
+      <pubDate>Sun, 16 Jan 2022 19:20:12 +0530</pubDate>
+      
+      <guid>https://stdin.top/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>C</title>
       <link>https://stdin.top/tags/c/</link>
