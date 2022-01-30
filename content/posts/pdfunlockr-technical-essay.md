@@ -117,6 +117,14 @@ JNI acts as a bridge between java and NDK/C++.
 
 The process of putting all these together starts with the bottom, our pure C++ library which uses `qpdf` to decrypt the file. 
 
+{{% notice warning %}}
+
+**Update [30/01/2022]**
+
+Passing file descriptor to C++ seems to cause problems with `targetSdkVersion` >= 30 due to [fdsan](https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md). I solved thisd issue by reading the file on java side and passing `byteArray` to JNI and further. Refer [ContentResolver](https://developer.android.com/reference/android/content/ContentResolver#openInputStream(android.net.Uri))
+
+{{% /notice %}}
+
 An excerpt is given below: 
 
 ```cpp
