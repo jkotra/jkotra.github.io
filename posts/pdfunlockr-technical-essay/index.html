@@ -226,6 +226,9 @@
 <p>JNI acts as a bridge between java and NDK/C++.</p>
 <h2 id="stitching-it-all-together">Stitching it all together</h2>
 <p>The process of putting all these together starts with the bottom, our pure C++ library which uses <code>qpdf</code> to decrypt the file.</p>
+<div class="notices warning" ><p><p><strong>Update [30/01/2022]</strong></p>
+<p>Passing file descriptor to C++ seems to cause problems with <code>targetSdkVersion</code> &gt;= 30 due to <a href="https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md">fdsan</a>. I solved thisd issue by reading the file on java side and passing <code>byteArray</code> to JNI and further. Refer <a href="https://developer.android.com/reference/android/content/ContentResolver#openInputStream(android.net.Uri)">ContentResolver</a></p>
+</p></div>
 <p>An excerpt is given below:</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">decryptPDF_wFD</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">filename</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">out</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">password</span><span class="p">)</span>
 <span class="p">{</span>
