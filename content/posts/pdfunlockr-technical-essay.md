@@ -74,7 +74,13 @@ Here, I've chosen to use the library for all 4 (`'x86', 'x86_64', 'armeabi-v7a',
 
 I've included links to gists of bash scripts to cross-compile these dependencies and also `qpdf` itself. 
 
-[Github Gist](https://gist.github.com/jkotra/e5cfa6f2b06c97dafe11384594000a4a)
+[Github Gist](https://gist.github.com/jkotra/75d6ceedbd472583bc80c584347999f8)
+
+{{% notice note %}}
+
+for every change in `targetSdkVersion` and `compileSdkVersion`, QPDF need to be recompiled again to prevent app from crashing on invoking native code.
+
+{{% /notice %}}
 
 {{% notice note %}}
 
@@ -121,48 +127,31 @@ The process of putting all these together starts with the bottom, our pure C++ l
 
 **Update [30/01/2022]**
 
-Passing file descriptor to C++ seems to cause problems with `targetSdkVersion` >= 30 due to [fdsan](https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md). I solved thisd issue by reading the file on java side and passing `byteArray` to JNI and further. Refer [ContentResolver](https://developer.android.com/reference/android/content/ContentResolver#openInputStream(android.net.Uri))
+Passing file descriptor to C++ seems to cause problems with `targetSdkVersion` >= 30 due to [fdsan](https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md). I solved this issue by reading the file on java side and passing `byteArray` to JNI and further. Refer [ContentResolver](https://developer.android.com/reference/android/content/ContentResolver#openInputStream(android.net.Uri)).
 
 {{% /notice %}}
 
 An excerpt is given below: 
 
 ```cpp
-bool decryptPDF_wFD(int fd, std::string filename, std::string out, size_t size, std::string password)
+bool decryptPDF(char* data, std::string filename, std::string out, size_t size, std::string password)
 {
     
-    __android_log_print(ANDROID_LOG_DEBUG,
-     "PDFUnlockR",
-      "%s%d\n", "decryptPDF_wFD Received FD:", fd);
-
-    //read from FD
-    FILE *fp = fdopen(fd, "r");
-    if (fp == NULL){
-        throw("Cannot open file descriptor.");
-    }
-
-    //malloc
-    char* data = (char *)malloc(size * sizeof(char));
-    fread(data, sizeof(data), size, fp);
-    
-    __android_log_print(ANDROID_LOG_DEBUG, "PDFUnlockR", "FD loaded!\n");
 
     QPDF qpdf;
 
     try
     {
-        __android_log_print(ANDROID_LOG_DEBUG, "PDFUnlockR", "received inputs: %s %s %d %s\n", filename.c_str(), out.c_str(), size, password.c_str());
-        qpdf.processMemoryFile(filename.c_str(), (const char *)data, size, password.c_str());
+        __android_log_print(ANDROID_LOG_DEBUG, APPNAME, "received inputs: %s %s %zu %s\n", filename.c_str(), out.c_str(), size, password.c_str());
+        qpdf.processMemoryFile(filename.c_str(), data, size, password.c_str());
         QPDFWriter w(qpdf, out.c_str());
         w.setPreserveEncryption(false);
         w.write();
-        free(data);
         return true;
     }
     catch (std::exception& err)
     {
-        __android_log_print(ANDROID_LOG_DEBUG, "PDFUnlockR", "Decrypt Error: %s\n", err.what());
-        free(data);
+        __android_log_print(ANDROID_LOG_DEBUG, APPNAME, "Decrypt Error: %s\n", err.what());
         throw(&err);
     }
 
@@ -174,20 +163,23 @@ Next comes the JNI C++, which acts as a glue between java and our code mentioned
 ```cpp
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_pdfunlockr_QPDFModule_decryptPDF(JNIEnv *env, jclass type, jint fd, jstring filename, jlong pdf_size, jstring password, jstring out) {
+Java_com_pdfunlockr_QPDFModule_decryptPDF(JNIEnv *env, jclass type, jbyteArray data, jstring filename, jlong pdf_size, jstring password, jstring out) {
     const char* input_fname = env->GetStringUTFChars(filename, NULL);
     const char* passwd = env->GetStringUTFChars(password, NULL);
     const char* output = env->GetStringUTFChars(out, NULL);
+    jbyte* f_bytes = env->GetByteArrayElements(data, JNI_FALSE);
     size_t size = (long)pdf_size;
     bool result = false;
 
     try{
-    result = decryptPDF_wFD(fd, std::string(input_fname), std::string(output), size, std::string(passwd));
+    result = decryptPDF((char *)f_bytes, std::string(input_fname), std::string(output), size, std::string(passwd));
     } catch(std::exception *e){
+        env->ReleaseByteArrayElements(data, f_bytes, JNI_ABORT);
         jclass exp = env->FindClass("java/lang/Exception");
         env->ThrowNew(exp, e->what());
     };
-
+    
+    env->ReleaseByteArrayElements(data, f_bytes, JNI_ABORT);
     return jboolean(result);
 }
 ```
@@ -205,11 +197,12 @@ Finally, these native functions can be used in java, and using React native modu
       output_file = ctx.getCacheDir().getAbsolutePath() + "/" + filename;
       
       try {
-          ParcelFileDescriptor fd = resolver.openFileDescriptor(uri, "r");
-          int pdf_fd = fd.getFd();
+          InputStream is = resolver.openInputStream(uri);
+          byte[] data = new byte[is.available()];
+          is.read(data, 0, is.available());
           long lsize = Long.parseLong(pdf_size);
-          boolean out = decryptPDF(pdf_fd, filename, lsize, password, output_file);
-          fd.close();
+          boolean out = decryptPDF(data, filename, lsize, password, output_file);
+          is.close();
           promise.resolve(output_file);
       }catch(Exception e){
         Log.d("PDFUnlockr", e.getMessage());
@@ -218,7 +211,7 @@ Finally, these native functions can be used in java, and using React native modu
 
    }
    
-   public static native boolean decryptPDF(int in_fd, String filename, long pdf_size, String password, String output);
+public static native boolean decryptPDF(byte[] data, String filename, long pdf_size, String password, String output);
 ```
 
 {{% notice tip %}}
