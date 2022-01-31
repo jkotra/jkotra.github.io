@@ -13,9 +13,6 @@ pygmentsUseClasses=true
 pygmentscodefencesguesssyntax = true
 enableGitInfo = true
 
-[frontmatter]
-lastmod = [":fileModTime", ":default"]
-
 [params]
 description = "My writings about technology and other things. Herein I document my experiences on various topics."
 DefaultContentLanguage = "en"
