@@ -1,254 +1,163 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html><html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="https://stdin.top/posts/network-programming-pt2/">
-    
-    
-
-    
-    <meta name="description" content="communicate with TCP servers and websites(HTTP)🌎" />
-    
-    
-    <meta name="language" content="en">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://stdin.top/sitemap.xml" /> 
-
-    
-    
-    
-    <title>Network Programming Pt 2 - TCP client :: &lt;stdin&gt;</title>
-    
-
-    <link rel="icon" type="image/png" href=/static/chip.png />
-
-    <meta property="og:title" content="Network Programming Pt 2 - TCP client" />
-<meta property="og:description" content="communicate with TCP servers and websites(HTTP)🌎" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://stdin.top/posts/network-programming-pt2/" />
-<meta property="og:image" content="https://i.imgur.com/8g8yX84.jpg" />
-<meta property="article:published_time" content="2020-08-31T01:49:14+05:30" />
-<meta property="article:modified_time" content="2022-01-31T19:36:38+00:00" />
-
-    <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://i.imgur.com/8g8yX84.jpg"/>
-
-<meta name="twitter:title" content="Network Programming Pt 2 - TCP client"/>
-<meta name="twitter:description" content="communicate with TCP servers and websites(HTTP)🌎"/>
-
-
-    <meta name="theme-color" content=#2e2847 />
-
-    
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
-
-    
-    
-    <script src="https://stdin.top/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
-    
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css" integrity="sha512-sPgt&#43;jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==" />
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css" integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom&#43;cEXhbNubipA&#43;X6Z1SFMj591gypw==" />
-    
-    
-    <link rel="stylesheet" type="text/css" href="https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css" media="(prefers-color-scheme: dark)">
-
-
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
-
-
-    
-    
-
-    
-
-    
-
-    
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<base href=https://stdin.top/posts/network-programming-pt2/>
+<meta name=description content="communicate with TCP servers and websites(HTTP)🌎">
+<meta name=language content="en">
+<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
+<title>Network Programming Pt 2 - TCP client :: &lt;stdin></title>
+<link rel=icon type=image/png href=/static/chip.png>
+<meta property="og:title" content="Network Programming Pt 2 - TCP client">
+<meta property="og:description" content="communicate with TCP servers and websites(HTTP)🌎">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://stdin.top/posts/network-programming-pt2/"><meta property="og:image" content="https://i.imgur.com/8g8yX84.jpg"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-08-31T01:49:14+05:30">
+<meta property="article:modified_time" content="2022-01-31T20:18:06+00:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://i.imgur.com/8g8yX84.jpg">
+<meta name=twitter:title content="Network Programming Pt 2 - TCP client">
+<meta name=twitter:description content="communicate with TCP servers and websites(HTTP)🌎">
+<meta name=theme-color content="#2e2847">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
+<script src=https://stdin.top/js/main.min.f8a31813e8097da432d631743cdb3eb23254823b561107d20d1e7c7ff648b1adbfdce37b9c6846505abf6476d90b9a5e0b26356dc195e8416276eb962c21dc23.js integrity="sha512-+KMYE+gJfaQy1jF0PNs+sjJUgjtWEQfSDR58f/ZIsa2/3ON7nGhGUFq/ZHbZC5peCyY1bcGV6EFiduuWLCHcIw=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css integrity="sha512-sPgt+jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom+cEXhbNubipA+X6Z1SFMj591gypw==">
+<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css integrity="sha512-ESwE0m+hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', "G-YW8V9DTR0N" );
-</script>
-
-
-
-    
-    
-    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-YW8V9DTR0N")</script>
+<script data-ad-client=ca-pub-8658473214995139 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 </head>
-
 <body>
-    <div class="container wrapper">
-    <div class="header">
-	<base href="https://stdin.top/">
-	<h1 class="site-title">
-		
-		<a href="https://stdin.top/">&lt;stdin&gt;</a>
-		
-		<span class="blinking-cursor">|</span>
-		
-	</h1>
-
-	<div class="site-description">
-		
-		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
-		
-
-		<nav class="nav social">
-			<ul class="flat">
-				
-				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
-				
-				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
-				
-				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
-				
-				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
-				
-			</ul>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/about/">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags/">Tags</a>
-			</li>
-			
-			<li>
-				<a href="/portfolio/">Portfolio</a>
-			</li>
-			
-			<li>
-				<a href="/pgp/">PGP</a>
-			</li>
-			
-		</ul>
-	</nav>
+<div class="container wrapper">
+<div class=header>
+<base href=https://stdin.top/>
+<h1 class=site-title>
+<a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span>
+</h1>
+<div class=site-description>
+<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
+<nav class="nav social">
+<ul class=flat>
+<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
+<a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
+</ul>
 </div>
-
-    
-<div class= "post">
-<div class="post-header">
-	<h1 class="title">Network Programming Pt 2 - TCP client</h1>
-	
-	<div class="meta">Posted at &mdash; Aug 31, 2020
-		
-	
-	
-		
-			| Last Modified on &mdash; Jan 31, 2022</div>
-				
-	
-
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/about/>About</a>
+</li>
+<li>
+<a href=/tags/>Tags</a>
+</li>
+<li>
+<a href=/portfolio/>Portfolio</a>
+</li>
+<li>
+<a href=/pgp/>PGP</a>
+</li>
+</ul>
+</nav>
 </div>
-
-<div class="markdown">
-	<h1 id="introduction">Introduction</h1>
+<div class=post>
+<div class=post-header>
+<h1 class=title>Network Programming Pt 2 - TCP client</h1>
+<div class=meta>Posted at &mdash; Aug 31, 2020
+| Last Modified on &mdash; Jan 31, 2022</div>
+</div>
+<div class=markdown>
+<h1 id=introduction>Introduction</h1>
 <p>HTTP is powered by TCP, websites can be retrieved by communicating through TCP socket. this a code walkthrough of c program to retrieve <code>example.com</code></p>
-<h1 id="tcp-client">TCP client</h1>
-<div class="notices note" ><p>the code explained here can be found in my <a href="https://github.com/jkotra/NetworkProgramming/blob/master/tcp_client_classic.c">NetworkProgramming GitHub repository</a>.</p></div>
+<h1 id=tcp-client>TCP client</h1>
+<div class="notices note"><p>the code explained here can be found in my <a href=https://github.com/jkotra/NetworkProgramming/blob/master/tcp_client_classic.c>NetworkProgramming GitHub repository</a>.</p></div>
 <p>
-  <figure>
-    <img src="/images/tcp_client.png" alt="Flowchart">
-    <figcaption>TCP client flowchart</figcaption>
-  </figure>
+<figure>
+<img src=/images/tcp_client.png alt=Flowchart>
+<figcaption>TCP client flowchart</figcaption>
+</figure>
 </p>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=k>struct</span> <span class=n>addrinfo</span> <span class=n>hints</span><span class=p>;</span>
 
-    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span>
+    <span class=n>memset</span><span class=p>(</span><span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>hints</span><span class=p>));</span>
 
-    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">peer</span><span class="p">;</span>
-    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_STREAM</span><span class="p">;</span>
+    <span class=k>struct</span> <span class=n>addrinfo</span> <span class=o>*</span><span class=n>peer</span><span class=p>;</span>
+    <span class=n>hints</span><span class=p>.</span><span class=n>ai_socktype</span> <span class=o>=</span> <span class=n>SOCK_STREAM</span><span class=p>;</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;args: %s %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;args: %s %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>argv</span><span class=p>[</span><span class=mi>2</span><span class=p>]);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">peer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>getaddrinfo</span><span class=p>(</span><span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>argv</span><span class=p>[</span><span class=mi>2</span><span class=p>],</span> <span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>peer</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=p>{</span>
 
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;addrinfo() error!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;addrinfo() error!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=p>}</span>
 
 </code></pre></div><ol>
 <li>we start by declaring a <code>addrinfo</code> struct <code>hints</code>. we then call <code>getaddrinfo()</code>. <code>getaddrinfo()</code> resolves domain name into IP address.</li>
 <li>note that unlike in server, we only need to set <code>hints.ai_socktype = SOCK_STREAM;</code> other fields are filled automatically by <code>getaddrinfo()</code> based on IP we are connecting to.</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="kt">char</span> <span class="n">peer_addr</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
-    <span class="kt">char</span> <span class="n">peer_protocol</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
-    <span class="n">getnameinfo</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">,</span> <span class="n">peer_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">peer_addr</span><span class="p">),</span> <span class="n">peer_protocol</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">peer_protocol</span><span class="p">),</span> <span class="n">NI_NUMERICHOST</span><span class="p">);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=kt>char</span> <span class=n>peer_addr</span><span class=p>[</span><span class=mi>100</span><span class=p>];</span>
+    <span class=kt>char</span> <span class=n>peer_protocol</span><span class=p>[</span><span class=mi>100</span><span class=p>];</span>
+    <span class=n>getnameinfo</span><span class=p>(</span><span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_addr</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_addrlen</span><span class=p>,</span> <span class=n>peer_addr</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>peer_addr</span><span class=p>),</span> <span class=n>peer_protocol</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>peer_protocol</span><span class=p>),</span> <span class=n>NI_NUMERICHOST</span><span class=p>);</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;ip: %s | protocol: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">peer_addr</span><span class="p">,</span> <span class="n">peer_protocol</span><span class="p">);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;ip: %s | protocol: %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>peer_addr</span><span class=p>,</span> <span class=n>peer_protocol</span><span class=p>);</span>
 
-</code></pre></div><ol start="0">
+</code></pre></div><ol start=0>
 <li>we can print the domain and protocol using the code above (Optional)</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">//family socket_type protocol
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socket_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=c1>//family socket_type protocol
+</span><span class=c1></span>    <span class=kt>int</span> <span class=n>socket_fd</span> <span class=o>=</span> <span class=n>socket</span><span class=p>(</span><span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_family</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_socktype</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_protocol</span><span class=p>);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">socket_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;socket error.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>socket_fd</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;socket error.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=p>}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;connect error.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>connect</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_addr</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_addrlen</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;connect error.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=p>}</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;connected!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;connected!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
 </code></pre></div><ol>
 <li>we start by creating a socket using <code>peer</code> fields are arguments.</li>
 <li>we then need to call <code>connect()</code> to connect to a remote address.<code>connect()</code> returns a negative number on error.</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="kt">char</span> <span class="o">*</span><span class="n">header</span> <span class="o">=</span> <span class="s">&#34;GET /index.html HTTP/1.1</span><span class="se">\r\n</span><span class="s">Host: www.example.com</span><span class="se">\r\n\r\n</span><span class="s">&#34;</span><span class="p">;</span>
-    <span class="n">send</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">header</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=kt>char</span> <span class=o>*</span><span class=n>header</span> <span class=o>=</span> <span class=s>&#34;GET /index.html HTTP/1.1</span><span class=se>\r\n</span><span class=s>Host: www.example.com</span><span class=se>\r\n\r\n</span><span class=s>&#34;</span><span class=p>;</span>
+    <span class=n>send</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>header</span><span class=p>,</span> <span class=n>strlen</span><span class=p>(</span><span class=n>header</span><span class=p>),</span> <span class=mi>0</span><span class=p>);</span>
 
-    <span class="kt">char</span> <span class="n">res</span><span class="p">[</span><span class="mi">4096</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;bytes_received: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">bytes_received</span><span class="p">);</span>
+    <span class=kt>char</span> <span class=n>res</span><span class=p>[</span><span class=mi>4096</span><span class=p>];</span>
+    <span class=kt>int</span> <span class=n>bytes_received</span> <span class=o>=</span> <span class=n>recv</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>res</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;bytes_received: %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>bytes_received</span><span class=p>);</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>res</span><span class=p>);</span>
 
-    <span class="n">close</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">);</span>
+    <span class=n>close</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>);</span>
 </code></pre></div><ol>
 <li>declare a string <strong>header</strong>, this needs to be sent to the server to get a response.</li>
 <li>we can then call <code>recv()</code>, this stores response from the web server into <code>res</code></li>
 <li>the response is printed to <code>stdout</code> using <code>printf()</code></li>
 </ol>
-<h1 id="lets-test-it-out">Let&rsquo;s test it out!</h1>
+<h1 id=lets-test-it-out>Let&rsquo;s test it out!</h1>
 <p>compile the program using <code>gcc</code></p>
 <p><code>gcc tcp_client_classic.c -o tcp_client</code></p>
 <p>run the program with required args: <code>domain</code> and <code>protocol</code></p>
 <p><code>./tcp_client example.com http</code></p>
 <p>Output:</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html">
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html>
 args: example.com http
 ip: 93.184.216.34 | protocol: http
 connected!
@@ -267,111 +176,80 @@ Vary: Accept-Encoding
 X-Cache: HIT
 Content-Length: 1256
 
-<span class="cp">&lt;!doctype html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Example Domain<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class=cp>&lt;!doctype html&gt;</span>
+<span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>title</span><span class=p>&gt;</span>Example Domain<span class=p>&lt;/</span><span class=nt>title</span><span class=p>&gt;</span>
 
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&#34;Content-type&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;text/html; charset=utf-8&#34;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1&#34;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span><span class="p">&gt;</span>
-    <span class="nt">body</span> <span class="p">{</span>
-        <span class="k">background-color</span><span class="p">:</span> <span class="mh">#f0f0f2</span><span class="p">;</span>
-        <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">font-family</span><span class="p">:</span> <span class="o">-</span><span class="n">apple-system</span><span class="p">,</span> <span class="n">system-ui</span><span class="p">,</span> <span class="n">BlinkMacSystemFont</span><span class="p">,</span> <span class="s2">&#34;Segoe UI&#34;</span><span class="p">,</span> <span class="s2">&#34;Open Sans&#34;</span><span class="p">,</span> <span class="s2">&#34;Helvetica Neue&#34;</span><span class="p">,</span> <span class="n">Helvetica</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span> <span class="kc">sans-serif</span><span class="p">;</span>
+    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;utf-8&#34;</span> <span class=p>/&gt;</span>
+    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>http-equiv</span><span class=o>=</span><span class=s>&#34;Content-type&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;text/html; charset=utf-8&#34;</span> <span class=p>/&gt;</span>
+    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;viewport&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;width=device-width, initial-scale=1&#34;</span> <span class=p>/&gt;</span>
+    <span class=p>&lt;</span><span class=nt>style</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/css&#34;</span><span class=p>&gt;</span>
+    <span class=nt>body</span> <span class=p>{</span>
+        <span class=k>background-color</span><span class=p>:</span> <span class=mh>#f0f0f2</span><span class=p>;</span>
+        <span class=k>margin</span><span class=p>:</span> <span class=mi>0</span><span class=p>;</span>
+        <span class=k>padding</span><span class=p>:</span> <span class=mi>0</span><span class=p>;</span>
+        <span class=k>font-family</span><span class=p>:</span> <span class=o>-</span><span class=n>apple-system</span><span class=p>,</span> <span class=n>system-ui</span><span class=p>,</span> <span class=n>BlinkMacSystemFont</span><span class=p>,</span> <span class=s2>&#34;Segoe UI&#34;</span><span class=p>,</span> <span class=s2>&#34;Open Sans&#34;</span><span class=p>,</span> <span class=s2>&#34;Helvetica Neue&#34;</span><span class=p>,</span> <span class=n>Helvetica</span><span class=p>,</span> <span class=n>Arial</span><span class=p>,</span> <span class=kc>sans-serif</span><span class=p>;</span>
         
-    <span class="p">}</span>
-    <span class="nt">div</span> <span class="p">{</span>
-        <span class="k">width</span><span class="p">:</span> <span class="mi">600</span><span class="kt">px</span><span class="p">;</span>
-        <span class="k">margin</span><span class="p">:</span> <span class="mi">5</span><span class="kt">em</span> <span class="kc">auto</span><span class="p">;</span>
-        <span class="k">padding</span><span class="p">:</span> <span class="mi">2</span><span class="kt">em</span><span class="p">;</span>
-        <span class="k">background-color</span><span class="p">:</span> <span class="mh">#fdfdff</span><span class="p">;</span>
-        <span class="k">border-radius</span><span class="p">:</span> <span class="mf">0.5</span><span class="kt">em</span><span class="p">;</span>
-        <span class="k">box-shadow</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span> <span class="mi">3</span><span class="kt">px</span> <span class="mi">7</span><span class="kt">px</span> <span class="mi">2</span><span class="kt">px</span> <span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.02</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nt">a</span><span class="p">:</span><span class="nd">link</span><span class="o">,</span> <span class="nt">a</span><span class="p">:</span><span class="nd">visited</span> <span class="p">{</span>
-        <span class="k">color</span><span class="p">:</span> <span class="mh">#38488f</span><span class="p">;</span>
-        <span class="k">text-decoration</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">max-width</span><span class="o">:</span> <span class="nt">700px</span><span class="o">)</span> <span class="p">{</span>
-        <span class="nt">div</span> <span class="p">{</span>
-            <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="kc">auto</span><span class="p">;</span>
-            <span class="k">width</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>    
-<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class=p>}</span>
+    <span class=nt>div</span> <span class=p>{</span>
+        <span class=k>width</span><span class=p>:</span> <span class=mi>600</span><span class=kt>px</span><span class=p>;</span>
+        <span class=k>margin</span><span class=p>:</span> <span class=mi>5</span><span class=kt>em</span> <span class=kc>auto</span><span class=p>;</span>
+        <span class=k>padding</span><span class=p>:</span> <span class=mi>2</span><span class=kt>em</span><span class=p>;</span>
+        <span class=k>background-color</span><span class=p>:</span> <span class=mh>#fdfdff</span><span class=p>;</span>
+        <span class=k>border-radius</span><span class=p>:</span> <span class=mf>0.5</span><span class=kt>em</span><span class=p>;</span>
+        <span class=k>box-shadow</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span> <span class=mi>3</span><span class=kt>px</span> <span class=mi>7</span><span class=kt>px</span> <span class=mi>2</span><span class=kt>px</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=mf>0.02</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=nt>a</span><span class=p>:</span><span class=nd>link</span><span class=o>,</span> <span class=nt>a</span><span class=p>:</span><span class=nd>visited</span> <span class=p>{</span>
+        <span class=k>color</span><span class=p>:</span> <span class=mh>#38488f</span><span class=p>;</span>
+        <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>none</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=p>@</span><span class=k>media</span> <span class=o>(</span><span class=nt>max-width</span><span class=o>:</span> <span class=nt>700px</span><span class=o>)</span> <span class=p>{</span>
+        <span class=nt>div</span> <span class=p>{</span>
+            <span class=k>margin</span><span class=p>:</span> <span class=mi>0</span> <span class=kc>auto</span><span class=p>;</span>
+            <span class=k>width</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>    
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
 
-<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Example Domain<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This domain is for use in illustrative examples in documents. You may use this
-    domain in literature without prior coordination or asking for permission.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;https://www.iana.org/domains/example&#34;</span><span class="p">&gt;</span>More information...<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>Example Domain<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;https://www.iana.org/domains/example&#34;</span><span class=p>&gt;</span>More information...<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
 
-</code></pre></div><h1 id="conclusion">Conclusion</h1>
+</code></pre></div><h1 id=conclusion>Conclusion</h1>
 <p>This article covered a code walkthrough on how to retrieve a web page using sockets.</p>
-
 </div>
-
-<div class="post-tags">
-	
-	
-	<nav class="nav tags">
-		<ul class="flat">
-			
-			<li><a href="/tags/network-programming">network programming</a></li>
-			
-			<li><a href="/tags/c">c</a></li>
-			
-		</ul>
-	</nav>
-	
-	
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/network-programming>network programming</a></li>
+<li><a href=/tags/c>c</a></li>
+</ul>
+</nav>
 </div>
-
-<div id="commento"></div>
-
-<script id="comments" src="https://utteranc.es/client.js" repo="jkotra/stdin.top-comments" issue-term="pathname"
-	label="💬" theme="github-light" crossorigin="anonymous" async>
-	</script>
-
+<div id=commento></div>
+<script id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
 <noscript>Please enable JavaScript to view the
-	<a href="https://commento.io/">comments powered by Commento.</a>
+<a href=https://commento.io/>comments powered by Commento.</a>
 </noscript>
-
 </div>
-
-
-
-
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-
-
+<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
 </div>
-
-
-    </div>
-
-    <div class="footer wrapper">
-
-			
-
-	<nav class="nav">
-		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
-		<div> <a href="https://github.com/jkotra/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
 </div>
-
+<div class="footer wrapper">
+<nav class=nav>
+<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
+<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
 </body>
-
 </html>

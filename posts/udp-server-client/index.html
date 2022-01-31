@@ -1,180 +1,89 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html><html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="https://stdin.top/posts/udp-server-client/">
-    
-    
-
-    
-    <meta name="description" content="Fire and Forget 🔫" />
-    
-    
-    <meta name="language" content="en">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://stdin.top/sitemap.xml" /> 
-
-    
-    
-    
-    <title>Communicating between server and client using UDP :: &lt;stdin&gt;</title>
-    
-
-    <link rel="icon" type="image/png" href=/static/chip.png />
-
-    <meta property="og:title" content="Communicating between server and client using UDP" />
-<meta property="og:description" content="Fire and Forget 🔫" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://stdin.top/posts/udp-server-client/" />
-<meta property="og:image" content="https://i.imgur.com/8g8yX84.jpg" />
-<meta property="article:published_time" content="2020-09-06T00:34:58+05:30" />
-<meta property="article:modified_time" content="2022-01-31T19:36:38+00:00" />
-
-    <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://i.imgur.com/8g8yX84.jpg"/>
-
-<meta name="twitter:title" content="Communicating between server and client using UDP"/>
-<meta name="twitter:description" content="Fire and Forget 🔫"/>
-
-
-    <meta name="theme-color" content=#2e2847 />
-
-    
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
-
-    
-    
-    <script src="https://stdin.top/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
-    
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css" integrity="sha512-sPgt&#43;jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==" />
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css" integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom&#43;cEXhbNubipA&#43;X6Z1SFMj591gypw==" />
-    
-    
-    <link rel="stylesheet" type="text/css" href="https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css" media="(prefers-color-scheme: dark)">
-
-
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
-
-
-    
-    
-
-    
-
-    
-
-    
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<base href=https://stdin.top/posts/udp-server-client/>
+<meta name=description content="Fire and Forget 🔫">
+<meta name=language content="en">
+<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
+<title>Communicating between server and client using UDP :: &lt;stdin></title>
+<link rel=icon type=image/png href=/static/chip.png>
+<meta property="og:title" content="Communicating between server and client using UDP">
+<meta property="og:description" content="Fire and Forget 🔫">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://stdin.top/posts/udp-server-client/"><meta property="og:image" content="https://i.imgur.com/8g8yX84.jpg"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-09-06T00:34:58+05:30">
+<meta property="article:modified_time" content="2022-01-31T20:18:06+00:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://i.imgur.com/8g8yX84.jpg">
+<meta name=twitter:title content="Communicating between server and client using UDP">
+<meta name=twitter:description content="Fire and Forget 🔫">
+<meta name=theme-color content="#2e2847">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
+<script src=https://stdin.top/js/main.min.f8a31813e8097da432d631743cdb3eb23254823b561107d20d1e7c7ff648b1adbfdce37b9c6846505abf6476d90b9a5e0b26356dc195e8416276eb962c21dc23.js integrity="sha512-+KMYE+gJfaQy1jF0PNs+sjJUgjtWEQfSDR58f/ZIsa2/3ON7nGhGUFq/ZHbZC5peCyY1bcGV6EFiduuWLCHcIw=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css integrity="sha512-sPgt+jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom+cEXhbNubipA+X6Z1SFMj591gypw==">
+<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css integrity="sha512-ESwE0m+hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', "G-YW8V9DTR0N" );
-</script>
-
-
-
-    
-    
-    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-YW8V9DTR0N")</script>
+<script data-ad-client=ca-pub-8658473214995139 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 </head>
-
 <body>
-    <div class="container wrapper">
-    <div class="header">
-	<base href="https://stdin.top/">
-	<h1 class="site-title">
-		
-		<a href="https://stdin.top/">&lt;stdin&gt;</a>
-		
-		<span class="blinking-cursor">|</span>
-		
-	</h1>
-
-	<div class="site-description">
-		
-		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
-		
-
-		<nav class="nav social">
-			<ul class="flat">
-				
-				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
-				
-				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
-				
-				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
-				
-				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
-				
-			</ul>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/about/">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags/">Tags</a>
-			</li>
-			
-			<li>
-				<a href="/portfolio/">Portfolio</a>
-			</li>
-			
-			<li>
-				<a href="/pgp/">PGP</a>
-			</li>
-			
-		</ul>
-	</nav>
+<div class="container wrapper">
+<div class=header>
+<base href=https://stdin.top/>
+<h1 class=site-title>
+<a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span>
+</h1>
+<div class=site-description>
+<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
+<nav class="nav social">
+<ul class=flat>
+<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
+<a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
+</ul>
 </div>
-
-    
-<div class= "post">
-<div class="post-header">
-	<h1 class="title">Communicating between server and client using UDP</h1>
-	
-	<div class="meta">Posted at &mdash; Sep 6, 2020
-		
-	
-	
-		
-			| Last Modified on &mdash; Jan 31, 2022</div>
-				
-	
-
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/about/>About</a>
+</li>
+<li>
+<a href=/tags/>Tags</a>
+</li>
+<li>
+<a href=/portfolio/>Portfolio</a>
+</li>
+<li>
+<a href=/pgp/>PGP</a>
+</li>
+</ul>
+</nav>
 </div>
-
-<div class="markdown">
-	<h1 id="introduction">Introduction</h1>
+<div class=post>
+<div class=post-header>
+<h1 class=title>Communicating between server and client using UDP</h1>
+<div class=meta>Posted at &mdash; Sep 6, 2020
+| Last Modified on &mdash; Jan 31, 2022</div>
+</div>
+<div class=markdown>
+<h1 id=introduction>Introduction</h1>
 <p>This article provides a brief introduction to the UDP protocol, what makes it different from TCP. we further delve into how to set up a server and a client to communicate with each other using UDP protocol.</p>
-<h2 id="gentle-introduction-to-udp">Gentle introduction to UDP</h2>
+<h2 id=gentle-introduction-to-udp>Gentle introduction to UDP</h2>
 <blockquote>
 <p>UDP (User Datagram Protocol) is a communications protocol that is primarily used for establishing low-latency and loss-tolerating connections between applications on the internet. It speeds up transmissions by enabling the transfer of data before an agreement is provided by the receiving party. As a result, UDP is beneficial in time-sensitive communications, including voice over Internet Protocol (VoIP), domain name system (DNS) lookup, and video or audio playback. UDP is an alternative to Transmission Control Protocol (TCP).</p>
 </blockquote>
-<p>Source: <a href="https://searchnetworking.techtarget.com/definition/UDP-User-Datagram-Protocol">techtarget.com</a></p>
+<p>Source: <a href=https://searchnetworking.techtarget.com/definition/UDP-User-Datagram-Protocol>techtarget.com</a></p>
 <br>
 <p><u>Salient features of UDP</u>:</p>
 <ul>
@@ -183,110 +92,110 @@
 <li>UDP is the primary protocol for DNS resolution, most DNS servers support TCP as a fallback.</li>
 <li>UDP is fast compared to TCP, because of the low overhead.</li>
 </ul>
-<h1 id="udp-server">UDP Server</h1>
-<div class="notices note" ><p>the code explained here can be found in my <a href="https://github.com/jkotra/NetworkProgramming/blob/master/udp/udp_server_select.c">NetworkProgramming GitHub repository</a>.</p></div>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
-    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span>
+<h1 id=udp-server>UDP Server</h1>
+<div class="notices note"><p>the code explained here can be found in my <a href=https://github.com/jkotra/NetworkProgramming/blob/master/udp/udp_server_select.c>NetworkProgramming GitHub repository</a>.</p></div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=k>struct</span> <span class=n>addrinfo</span> <span class=n>hints</span><span class=p>;</span>
+    <span class=n>memset</span><span class=p>(</span><span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=mi>0</span> <span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>hints</span><span class=p>));</span>
 
-    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">bind_addr</span><span class="p">;</span>
+    <span class=k>struct</span> <span class=n>addrinfo</span> <span class=o>*</span><span class=n>bind_addr</span><span class=p>;</span>
 
-    <span class="n">hints</span><span class="p">.</span><span class="n">ai_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span> <span class="c1">//ipv4
-</span><span class="c1"></span>    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_DGRAM</span><span class="p">;</span> <span class="c1">// UDP
-</span><span class="c1"></span>    <span class="n">hints</span><span class="p">.</span><span class="n">ai_flags</span> <span class="o">=</span> <span class="n">AI_PASSIVE</span><span class="p">;</span>
+    <span class=n>hints</span><span class=p>.</span><span class=n>ai_family</span> <span class=o>=</span> <span class=n>AF_INET</span><span class=p>;</span> <span class=c1>//ipv4
+</span><span class=c1></span>    <span class=n>hints</span><span class=p>.</span><span class=n>ai_socktype</span> <span class=o>=</span> <span class=n>SOCK_DGRAM</span><span class=p>;</span> <span class=c1>// UDP
+</span><span class=c1></span>    <span class=n>hints</span><span class=p>.</span><span class=n>ai_flags</span> <span class=o>=</span> <span class=n>AI_PASSIVE</span><span class=p>;</span>
 
-    <span class="n">getaddrinfo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#34;8080&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bind_addr</span><span class="p">);</span>
+    <span class=n>getaddrinfo</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=s>&#34;8080&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>bind_addr</span><span class=p>);</span>
 
 </code></pre></div><ol>
 <li>we start by declaring <code>addrinfo</code> struct. we set the contents of <code>hints</code> to <code>0</code> using <code>memset()</code></li>
 <li>we need to set required fields in <code>hints</code>,</li>
 </ol>
 <p>Notice the <code>hints.ai_socktype</code> is set to <code>SOCK_DGRAM</code>. this indicates that we want a UDP address. use <code>SOCK_STREAM</code> for TCP.</p>
-<ol start="3">
+<ol start=3>
 <li>we then call <code>getaddrinfo()</code> with the required parameters. the result will be stored in <code>bind_addr</code> struct.</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">//bind it
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socket_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;socket_fd: %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">socket_fd</span><span class="p">);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=c1>//bind it
+</span><span class=c1></span>    <span class=kt>int</span> <span class=n>socket_fd</span> <span class=o>=</span> <span class=n>socket</span><span class=p>(</span><span class=n>bind_addr</span><span class=o>-&gt;</span><span class=n>ai_family</span><span class=p>,</span> <span class=n>bind_addr</span><span class=o>-&gt;</span><span class=n>ai_socktype</span><span class=p>,</span> <span class=n>bind_addr</span><span class=o>-&gt;</span><span class=n>ai_protocol</span><span class=p>);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;socket_fd: %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>socket_fd</span><span class=p>);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">socket_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>socket_fd</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>){</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=p>}</span>
 
-    <span class="k">if</span> <span class="p">(</span> <span class="n">bind</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">bind_addr</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">){</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;UDP server listing on 127.0.0.1:8080</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=n>bind</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>bind_addr</span><span class=o>-&gt;</span><span class=n>ai_addr</span><span class=p>,</span> <span class=n>bind_addr</span><span class=o>-&gt;</span><span class=n>ai_addrlen</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>0</span> <span class=p>){</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=k>else</span><span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;UDP server listing on 127.0.0.1:8080</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+    <span class=p>}</span>
 </code></pre></div><ol>
 <li>create a socket. it returns a negative number on failure.</li>
 <li>we can then bind the address to the port, we do it by calling <code>bind()</code> with socket descriptor, address, and address length.</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="n">client_address</span><span class="p">;</span>
-    <span class="n">socklen_t</span> <span class="n">client_len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">client_address</span><span class="p">);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=k>struct</span> <span class=n>sockaddr_storage</span> <span class=n>client_address</span><span class=p>;</span>
+    <span class=n>socklen_t</span> <span class=n>client_len</span> <span class=o>=</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>client_address</span><span class=p>);</span>
 
-    <span class="kt">char</span> <span class="n">read</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">recvfrom</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_address</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_len</span><span class="p">);</span>
+    <span class=kt>char</span> <span class=n>read</span><span class=p>[</span><span class=mi>1024</span><span class=p>];</span>
+    <span class=kt>int</span> <span class=n>bytes_received</span> <span class=o>=</span> <span class=n>recvfrom</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>read</span><span class=p>,</span> <span class=mi>1024</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=p>(</span><span class=k>struct</span> <span class=n>sockaddr</span><span class=o>*</span><span class=p>)</span><span class=o>&amp;</span><span class=n>client_address</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>client_len</span><span class=p>);</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">read</span><span class="p">);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>read</span><span class=p>);</span>
 
-    <span class="n">close</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">);</span>
+    <span class=n>close</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>);</span>
 </code></pre></div><ol>
 <li>declare <code>sockaddr_storage</code> struct. this is used to store the address of the client.</li>
 <li>declare <code>client_len</code> of type <code>socklen_t</code>. this stores the length of the client address.</li>
 <li>declare a char array of length <code>1024</code>.</li>
 <li>we then call <code>recvfrom()</code>. this is where UDP defers from TCP in a major way. in UDP we do not need to call <code>accept()</code> or any other handshake procedure, the data can be directly sent to the client.</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">bytes_received</span> <span class="o">=</span> <span class="n">recvfrom</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">read</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_address</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_len</span><span class="p">);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>int</span> <span class=n>bytes_received</span> <span class=o>=</span> <span class=n>recvfrom</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>read</span><span class=p>,</span> <span class=mi>1024</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=p>(</span><span class=k>struct</span> <span class=n>sockaddr</span><span class=o>*</span><span class=p>)</span><span class=o>&amp;</span><span class=n>client_address</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>client_len</span><span class=p>);</span>
 </code></pre></div><p><code>socket_fd</code> - socket descriptor.</p>
 <p><code>read</code> - message buffer. the response will be stored here.</p>
 <p><code>1024</code> - length of <code>read</code>.</p>
 <p><code>0</code> - Flags.</p>
-<p><code>(struct sockaddr*)&amp;client_address</code> - client address will be stored in this on connection.</p>
-<p><code>&amp;client_len</code> - length of client address.</p>
+<p><code>(struct sockaddr*)&client_address</code> - client address will be stored in this on connection.</p>
+<p><code>&client_len</code> - length of client address.</p>
 <br>
 <p>we finally close the socket after reading from the client using <code>close()</code></p>
 <hr>
-<h1 id="udp-client">UDP Client</h1>
-<div class="notices note" ><p>the code explained here can be found in my <a href="https://github.com/jkotra/NetworkProgramming/blob/master/udp/udp_client.c">NetworkProgramming GitHub repository</a>.</p></div>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
+<h1 id=udp-client>UDP Client</h1>
+<div class="notices note"><p>the code explained here can be found in my <a href=https://github.com/jkotra/NetworkProgramming/blob/master/udp/udp_client.c>NetworkProgramming GitHub repository</a>.</p></div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span>
+<span class=p>{</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">){</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;invalid no of args.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>argc</span> <span class=o>&lt;</span> <span class=mi>3</span><span class=p>){</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;invalid no of args.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=p>}</span>
 
-    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">;</span>
+    <span class=k>struct</span> <span class=n>addrinfo</span> <span class=n>hints</span><span class=p>;</span>
 
-    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">hints</span><span class="p">));</span>
+    <span class=n>memset</span><span class=p>(</span><span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>hints</span><span class=p>));</span>
 
-    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">peer</span><span class="p">;</span>
-    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_DGRAM</span><span class="p">;</span>
+    <span class=k>struct</span> <span class=n>addrinfo</span> <span class=o>*</span><span class=n>peer</span><span class=p>;</span>
+    <span class=n>hints</span><span class=p>.</span><span class=n>ai_socktype</span> <span class=o>=</span> <span class=n>SOCK_DGRAM</span><span class=p>;</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;args: %s %s %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;args: %s %s %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>argv</span><span class=p>[</span><span class=mi>2</span><span class=p>],</span> <span class=n>argv</span><span class=p>[</span><span class=mi>3</span><span class=p>]);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">peer</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="p">{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>getaddrinfo</span><span class=p>(</span><span class=n>argv</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>argv</span><span class=p>[</span><span class=mi>2</span><span class=p>],</span> <span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>peer</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=p>{</span>
 
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;addrinfo() error!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;addrinfo() error!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=p>}</span>
 
 </code></pre></div><ol>
 <li>as always, we start by declaring <code>hints</code> and set required fields, in this case, we only need to set the required socket type i.e UDP <code>hints.ai_socktype = SOCK_DGRAM;</code></li>
 <li>we call <code>getaddrinfo()</code> with user arguments, example (<em>argv[1]</em> = <code>example.com</code> and <em>argv[2]</em> = <code>80</code> or <code>http</code>). result is stored in <code>peer</code> struct.</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">    <span class="c1">//create socket
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">socket_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=c1>//create socket
+</span><span class=c1></span>    <span class=kt>int</span> <span class=n>socket_fd</span> <span class=o>=</span> <span class=n>socket</span><span class=p>(</span><span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_family</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_socktype</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_protocol</span><span class=p>);</span>
     
-    <span class="kt">char</span> <span class="n">msg</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
-    <span class="n">strncpy</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1024</span><span class="p">);</span>
-    <span class="kt">int</span> <span class="n">bytes_sent</span> <span class="o">=</span> <span class="n">sendto</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">peer</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">);</span>
+    <span class=kt>char</span> <span class=n>msg</span><span class=p>[</span><span class=mi>1024</span><span class=p>];</span>
+    <span class=n>strncpy</span><span class=p>(</span><span class=n>msg</span><span class=p>,</span> <span class=n>argv</span><span class=p>[</span><span class=mi>3</span><span class=p>],</span> <span class=mi>1024</span><span class=p>);</span>
+    <span class=kt>int</span> <span class=n>bytes_sent</span> <span class=o>=</span> <span class=n>sendto</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>msg</span><span class=p>,</span> <span class=n>strlen</span><span class=p>(</span><span class=n>msg</span><span class=p>),</span> <span class=mi>0</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_addr</span><span class=p>,</span> <span class=n>peer</span><span class=o>-&gt;</span><span class=n>ai_addrlen</span><span class=p>);</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Sent %s (%d bytes)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">bytes_sent</span><span class="p">);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Sent %s (%d bytes)</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>msg</span><span class=p>,</span> <span class=n>bytes_sent</span><span class=p>);</span>
 
-    <span class="n">close</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">);</span>
+    <span class=n>close</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>);</span>
 </code></pre></div><ol>
 <li>create a socket.</li>
 <li>declare a char array of length <code>1024</code> <code>msg</code>.</li>
@@ -295,85 +204,54 @@
 <li>finally close the socket using <code>close()</code></li>
 </ol>
 <p>&ndash;</p>
-<h2 id="lets-chat">Let&rsquo;s chat!</h2>
+<h2 id=lets-chat>Let&rsquo;s chat!</h2>
 <p>compile both server and client using <code>GCC</code></p>
 <p><code>gcc udp_server_select.c -o server</code></p>
 <p><code>gcc udp_client.c -o client</code></p>
 <ol>
 <li>First, run the <code>server</code></li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">~/Documents/Projects/network_programming/udp<span class="o">(</span>master*<span class="o">)</span> » ./server                                              jojo@synk
-socket_fd: <span class="m">3</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>~/Documents/Projects/network_programming/udp<span class=o>(</span>master*<span class=o>)</span> » ./server                                              jojo@synk
+socket_fd: <span class=m>3</span>
 UDP server listing on 127.0.0.1:8080
-</code></pre></div><ol start="2">
+</code></pre></div><ol start=2>
 <li>once the server is up and running, we can test it out by sending messages from our <code>client</code></li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./client 127.0.0.1 <span class="m">8080</span> hello
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>./client 127.0.0.1 <span class=m>8080</span> hello
 </code></pre></div><p>you should see <code>hello</code> printed to in server window.</p>
 <p>
-  <figure>
-    <img src="https://i.imgur.com/DSN1YQa.gif" alt="">
-    <figcaption>UDP Demo</figcaption>
-  </figure>
+<figure>
+<img src=https://i.imgur.com/DSN1YQa.gif alt>
+<figcaption>UDP Demo</figcaption>
+</figure>
 </p>
-<h1 id="conclusion">Conclusion</h1>
+<h1 id=conclusion>Conclusion</h1>
 <p>this article demonstrates/code walkthrough on how to set up a server and client and communicate using UDP protocol.</p>
-
 </div>
-
-<div class="post-tags">
-	
-	
-	<nav class="nav tags">
-		<ul class="flat">
-			
-			<li><a href="/tags/network-programming">network programming</a></li>
-			
-			<li><a href="/tags/c">c</a></li>
-			
-		</ul>
-	</nav>
-	
-	
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/network-programming>network programming</a></li>
+<li><a href=/tags/c>c</a></li>
+</ul>
+</nav>
 </div>
-
-<div id="commento"></div>
-
-<script id="comments" src="https://utteranc.es/client.js" repo="jkotra/stdin.top-comments" issue-term="pathname"
-	label="💬" theme="github-light" crossorigin="anonymous" async>
-	</script>
-
+<div id=commento></div>
+<script id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
 <noscript>Please enable JavaScript to view the
-	<a href="https://commento.io/">comments powered by Commento.</a>
+<a href=https://commento.io/>comments powered by Commento.</a>
 </noscript>
-
 </div>
-
-
-
-
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-
-
+<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
 </div>
-
-
-    </div>
-
-    <div class="footer wrapper">
-
-			
-
-	<nav class="nav">
-		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
-		<div> <a href="https://github.com/jkotra/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
 </div>
-
+<div class="footer wrapper">
+<nav class=nav>
+<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
+<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
 </body>
-
 </html>

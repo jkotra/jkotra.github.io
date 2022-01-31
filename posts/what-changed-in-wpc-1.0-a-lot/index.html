@@ -1,258 +1,137 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html><html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="https://stdin.top/posts/what-changed-in-wpc-1.0-a-lot/">
-    
-    
-
-    
-    <meta name="description" content="Changelog and motivations behind WPC 1.0." />
-    
-    
-    <meta name="language" content="en">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://stdin.top/sitemap.xml" /> 
-
-    
-    
-    
-    <title>What changed in WPC 1.0? a lot. :: &lt;stdin&gt;</title>
-    
-
-    <link rel="icon" type="image/png" href=/static/chip.png />
-
-    <meta property="og:title" content="What changed in WPC 1.0? a lot." />
-<meta property="og:description" content="Changelog and motivations behind WPC 1.0." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://stdin.top/posts/what-changed-in-wpc-1.0-a-lot/" />
-<meta property="og:image" content="https://stdin.top/images/wpc_featured.jpg" />
-<meta property="article:published_time" content="2021-01-14T02:07:19+05:30" />
-<meta property="article:modified_time" content="2022-01-31T19:36:38+00:00" />
-
-    <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://stdin.top/images/wpc_featured.jpg"/>
-
-<meta name="twitter:title" content="What changed in WPC 1.0? a lot."/>
-<meta name="twitter:description" content="Changelog and motivations behind WPC 1.0."/>
-
-
-    <meta name="theme-color" content=#2e2847 />
-
-    
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
-
-    
-    
-    <script src="https://stdin.top/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
-    
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css" integrity="sha512-sPgt&#43;jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==" />
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css" integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom&#43;cEXhbNubipA&#43;X6Z1SFMj591gypw==" />
-    
-    
-    <link rel="stylesheet" type="text/css" href="https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css" media="(prefers-color-scheme: dark)">
-
-
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
-
-
-    
-    
-
-    
-
-    
-
-    
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<base href=https://stdin.top/posts/what-changed-in-wpc-1.0-a-lot/>
+<meta name=description content="Changelog and motivations behind WPC 1.0.">
+<meta name=language content="en">
+<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
+<title>What changed in WPC 1.0? a lot. :: &lt;stdin></title>
+<link rel=icon type=image/png href=/static/chip.png>
+<meta property="og:title" content="What changed in WPC 1.0? a lot.">
+<meta property="og:description" content="Changelog and motivations behind WPC 1.0.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://stdin.top/posts/what-changed-in-wpc-1.0-a-lot/"><meta property="og:image" content="https://stdin.top/images/wpc_featured.jpg"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-01-14T02:07:19+05:30">
+<meta property="article:modified_time" content="2022-01-31T20:18:06+00:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://stdin.top/images/wpc_featured.jpg">
+<meta name=twitter:title content="What changed in WPC 1.0? a lot.">
+<meta name=twitter:description content="Changelog and motivations behind WPC 1.0.">
+<meta name=theme-color content="#2e2847">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
+<script src=https://stdin.top/js/main.min.f8a31813e8097da432d631743cdb3eb23254823b561107d20d1e7c7ff648b1adbfdce37b9c6846505abf6476d90b9a5e0b26356dc195e8416276eb962c21dc23.js integrity="sha512-+KMYE+gJfaQy1jF0PNs+sjJUgjtWEQfSDR58f/ZIsa2/3ON7nGhGUFq/ZHbZC5peCyY1bcGV6EFiduuWLCHcIw=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css integrity="sha512-sPgt+jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom+cEXhbNubipA+X6Z1SFMj591gypw==">
+<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css integrity="sha512-ESwE0m+hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', "G-YW8V9DTR0N" );
-</script>
-
-
-
-    
-    
-    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-YW8V9DTR0N")</script>
+<script data-ad-client=ca-pub-8658473214995139 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 </head>
-
 <body>
-    <div class="container wrapper">
-    <div class="header">
-	<base href="https://stdin.top/">
-	<h1 class="site-title">
-		
-		<a href="https://stdin.top/">&lt;stdin&gt;</a>
-		
-		<span class="blinking-cursor">|</span>
-		
-	</h1>
-
-	<div class="site-description">
-		
-		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
-		
-
-		<nav class="nav social">
-			<ul class="flat">
-				
-				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
-				
-				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
-				
-				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
-				
-				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
-				
-			</ul>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/about/">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags/">Tags</a>
-			</li>
-			
-			<li>
-				<a href="/portfolio/">Portfolio</a>
-			</li>
-			
-			<li>
-				<a href="/pgp/">PGP</a>
-			</li>
-			
-		</ul>
-	</nav>
+<div class="container wrapper">
+<div class=header>
+<base href=https://stdin.top/>
+<h1 class=site-title>
+<a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span>
+</h1>
+<div class=site-description>
+<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
+<nav class="nav social">
+<ul class=flat>
+<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
+<a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
+</ul>
 </div>
-
-    
-<div class= "post">
-<div class="post-header">
-	<h1 class="title">What changed in WPC 1.0? a lot.</h1>
-	
-	<div class="meta">Posted at &mdash; Jan 14, 2021
-		
-	
-	
-		
-			| Last Modified on &mdash; Jan 31, 2022</div>
-				
-	
-
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/about/>About</a>
+</li>
+<li>
+<a href=/tags/>Tags</a>
+</li>
+<li>
+<a href=/portfolio/>Portfolio</a>
+</li>
+<li>
+<a href=/pgp/>PGP</a>
+</li>
+</ul>
+</nav>
 </div>
-
-<div class="markdown">
-	<h1 id="introduction">Introduction</h1>
+<div class=post>
+<div class=post-header>
+<h1 class=title>What changed in WPC 1.0? a lot.</h1>
+<div class=meta>Posted at &mdash; Jan 14, 2021
+| Last Modified on &mdash; Jan 31, 2022</div>
+</div>
+<div class=markdown>
+<h1 id=introduction>Introduction</h1>
 <p><code>WPC 1.0</code> has been released and with a whole set of new features and most importantly readable, refactored and <em>saner</em> code which should make things easy for any hackers/tinkerers out there.</p>
 <p>Compared to a mid-release (<code>0.5</code>) which up to that point is pretty much bug fixing there are some noticeable new features to end user that started in <code>0.5</code> and finally stable in <code>1.0</code>:</p>
 <ul>
 <li>Asynchronous downloads.</li>
-<li>Asynchronous API calls to <a href="https://reddit.com/">Reddit</a> and Bing.</li>
+<li>Asynchronous API calls to <a href=https://reddit.com/>Reddit</a> and Bing.</li>
 <li>download wallpapers from any subreddit. (<code>--reddit</code>)</li>
 <li>convert image to grayscale before setting it as wallpaper (<code>--grayscale</code>)</li>
 <li>filter based on the age of the file. (<code>--maxage</code>)</li>
 </ul>
-<h1 id="refactoring">Refactoring</h1>
+<h1 id=refactoring>Refactoring</h1>
 <p>This took the most time, even more so than any feature. my decision(obviously not well thought of 😕) not to come up with a flexible design pattern at the start of the project led to this, something that looked worse than a script with hard interdependency. The refactoring is not necessary for working functionality but it&rsquo;s of much significance if any more features are to be implemented(or removed) in the future.</p>
 <p>Much of <code>main.rs</code> has been further cleaned. any new web plugins can be implemented in just a few lines of code as the process of downloading and saving the file(s) has been abstracted away to their respective files in the <code>web</code> dir of the project.</p>
 <p>for example, in the previous versions, the <code>main()</code> handled everything: the calls, parsing, downloading and it became a huge mess. with <code>1.0</code> all of this has been abstracted into their respective file and <code>main()</code> simply calls <code>update()</code> on the struct, the arguments are all the same for all, <code>savepath</code>, <code>maxage</code>, and reference to <code>WPCDebug</code> impl. which prints out messages if debug is enabled (<code>-D</code>)</p>
 <p>an example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-rs" data-lang="rs"><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Bing</span><span class="p">;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Bing</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">update</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">savepath</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">wpc_debug</span>: <span class="kp">&amp;</span><span class="nc">WPCDebug</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w">  </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">get</span><span class="p">().</span><span class="k">await</span><span class="p">;</span><span class="w">
-</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">file_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">misc</span>::<span class="n">download_wallpapers</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">savepath</span><span class="p">,</span><span class="w"> </span><span class="n">wpc_debug</span><span class="p">).</span><span class="k">await</span><span class="p">;</span><span class="w">
-</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">file_list</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">get_bing_wpod</span><span class="p">().</span><span class="k">await</span><span class="p">;</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=k>pub</span><span class=w> </span><span class=k>struct</span> <span class=nc>Bing</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>impl</span><span class=w> </span><span class=n>Bing</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w>    </span><span class=k>pub</span><span class=w> </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>update</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>savepath</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>wpc_debug</span>: <span class=kp>&amp;</span><span class=nc>WPCDebug</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Vec</span><span class=o>&lt;</span><span class=nb>String</span><span class=o>&gt;</span><span class=w>  </span><span class=p>{</span><span class=w>
+</span><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>url</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=bp>self</span><span class=p>.</span><span class=n>get</span><span class=p>().</span><span class=k>await</span><span class=p>;</span><span class=w>
+</span><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>file_list</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>misc</span>::<span class=n>download_wallpapers</span><span class=p>(</span><span class=n>url</span><span class=p>,</span><span class=w> </span><span class=n>savepath</span><span class=p>,</span><span class=w> </span><span class=n>wpc_debug</span><span class=p>).</span><span class=k>await</span><span class=p>;</span><span class=w>
+</span><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>file_list</span><span class=p>;</span><span class=w>
+</span><span class=w>    </span><span class=p>}</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>get</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Vec</span><span class=o>&lt;</span><span class=nb>String</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>get_bing_wpod</span><span class=p>().</span><span class=k>await</span><span class=p>;</span><span class=w>
+</span><span class=w>    </span><span class=p>}</span><span class=w>
+</span><span class=w></span><span class=p>}</span><span class=w>
 </span></code></pre></div><p>(a number too many to note down) small typos and bugs have been fixed to achieve what I believe is now feature complete. I don&rsquo;t intend to do any radical/breaking changes, just enough bug fixes to keep it sweet, simple, and most importantly functional.</p>
-<p>a major reason for refactoring the code is also because of the prospect that web sources may die or change API among other zillion things that could go wrong when depending on 3rd party APIs. If I were to maintain this (i mostly use local images anyway), the Web API dependent code must be independent of the program itself to some degree and a clear distinction between OS API&rsquo;s (the process of changing wallpaper for example, which is unlikely to change in future (hopefully  😉).</p>
-<div class="notices info" ><p>Previous developments to WPC have been documented in <a href="/posts/wpc-overview">this</a> article.</p></div>
-
+<p>a major reason for refactoring the code is also because of the prospect that web sources may die or change API among other zillion things that could go wrong when depending on 3rd party APIs. If I were to maintain this (i mostly use local images anyway), the Web API dependent code must be independent of the program itself to some degree and a clear distinction between OS API&rsquo;s (the process of changing wallpaper for example, which is unlikely to change in future (hopefully 😉).</p>
+<div class="notices info"><p>Previous developments to WPC have been documented in <a href=/posts/wpc-overview>this</a> article.</p></div>
 </div>
-
-<div class="post-tags">
-	
-	
-	<nav class="nav tags">
-		<ul class="flat">
-			
-			<li><a href="/tags/rust">Rust</a></li>
-			
-		</ul>
-	</nav>
-	
-	
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/rust>Rust</a></li>
+</ul>
+</nav>
 </div>
-
-<div id="commento"></div>
-
-<script id="comments" src="https://utteranc.es/client.js" repo="jkotra/stdin.top-comments" issue-term="pathname"
-	label="💬" theme="github-light" crossorigin="anonymous" async>
-	</script>
-
+<div id=commento></div>
+<script id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
 <noscript>Please enable JavaScript to view the
-	<a href="https://commento.io/">comments powered by Commento.</a>
+<a href=https://commento.io/>comments powered by Commento.</a>
 </noscript>
-
 </div>
-
-
-
-
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-
-
+<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
 </div>
-
-
-    </div>
-
-    <div class="footer wrapper">
-
-			
-
-	<nav class="nav">
-		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
-		<div> <a href="https://github.com/jkotra/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
 </div>
-
+<div class="footer wrapper">
+<nav class=nav>
+<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
+<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
 </body>
-
 </html>

@@ -1,198 +1,107 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html><html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="https://stdin.top/posts/gtk4-on-windows/">
-    
-    
-
-    
-    <meta name="description" content="Setup - Compile - Debug 🤩" />
-    
-    
-    <meta name="language" content="en">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://stdin.top/sitemap.xml" /> 
-
-    
-    
-    
-    <title>Getting Started with GTK4 on Windows :: &lt;stdin&gt;</title>
-    
-
-    <link rel="icon" type="image/png" href=/static/chip.png />
-
-    <meta property="og:title" content="Getting Started with GTK4 on Windows" />
-<meta property="og:description" content="Setup - Compile - Debug 🤩" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://stdin.top/posts/gtk4-on-windows/" />
-<meta property="og:image" content="https://www.gtk.org/assets/img/logo-gtk-sm.png" />
-<meta property="article:published_time" content="2021-09-04T23:16:02+00:00" />
-<meta property="article:modified_time" content="2022-01-31T19:36:38+00:00" />
-
-    <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://www.gtk.org/assets/img/logo-gtk-sm.png"/>
-
-<meta name="twitter:title" content="Getting Started with GTK4 on Windows"/>
-<meta name="twitter:description" content="Setup - Compile - Debug 🤩"/>
-
-
-    <meta name="theme-color" content=#2e2847 />
-
-    
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">    
-
-    
-    
-    <script src="https://stdin.top/js/main.min.ecbcd6a34b475cd2e844a02b80083902ac50d4c1f119178abd429ba42d436bfd4b5529b4a51b9127c9330664e1ad9e846c06f856295b40105bea6d7e2a6c3326.js" integrity="sha512-7LzWo0tHXNLoRKArgAg5AqxQ1MHxGReKvUKbpC1Da/1LVSm0pRuRJ8kzBmThrZ6EbAb4VilbQBBb6m1&#43;KmwzJg=="></script>
-
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css" integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css" integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css" integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css" integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin="anonymous" />
-    
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css" integrity="sha512-sPgt&#43;jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==" />
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css" integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom&#43;cEXhbNubipA&#43;X6Z1SFMj591gypw==" />
-    
-    
-    <link rel="stylesheet" type="text/css" href="https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css" media="(prefers-color-scheme: dark)">
-
-
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css" integrity="sha512-ESwE0m&#43;hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==" />
-
-
-    
-    
-
-    
-
-    
-
-    
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<base href=https://stdin.top/posts/gtk4-on-windows/>
+<meta name=description content="Setup - Compile - Debug 🤩">
+<meta name=language content="en">
+<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
+<title>Getting Started with GTK4 on Windows :: &lt;stdin></title>
+<link rel=icon type=image/png href=/static/chip.png>
+<meta property="og:title" content="Getting Started with GTK4 on Windows">
+<meta property="og:description" content="Setup - Compile - Debug 🤩">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://stdin.top/posts/gtk4-on-windows/"><meta property="og:image" content="https://www.gtk.org/assets/img/logo-gtk-sm.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-09-04T23:16:02+00:00">
+<meta property="article:modified_time" content="2022-01-31T20:18:06+00:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://www.gtk.org/assets/img/logo-gtk-sm.png">
+<meta name=twitter:title content="Getting Started with GTK4 on Windows">
+<meta name=twitter:description content="Setup - Compile - Debug 🤩">
+<meta name=theme-color content="#2e2847">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
+<script src=https://stdin.top/js/main.min.f8a31813e8097da432d631743cdb3eb23254823b561107d20d1e7c7ff648b1adbfdce37b9c6846505abf6476d90b9a5e0b26356dc195e8416276eb962c21dc23.js integrity="sha512-+KMYE+gJfaQy1jF0PNs+sjJUgjtWEQfSDR58f/ZIsa2/3ON7nGhGUFq/ZHbZC5peCyY1bcGV6EFiduuWLCHcIw=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.b0f82dfa3be98b006168dc4e9043b68d550111f82540ea70e437a2ee7f72f634384b23fdfd43b64a533c3494748051375f93bd4e4465d01f4a22196c26f60946.css integrity="sha512-sPgt+jvpiwBhaNxOkEO2jVUBEfglQOpw5Dei7n9y9jQ4SyP9/UO2SlM8NJR0gFE3X5O9TkRl0B9KIhlsJvYJRg==">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom+cEXhbNubipA+X6Z1SFMj591gypw==">
+<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.112c04d26fa13a6d29cec753a0959b82339c03760baa50dc705accbb85d7b83e02b7a3691b24d116b6e619c311eacb3f2f96529bcf0b45d8ae35759f9f35d52e.css integrity="sha512-ESwE0m+hOm0pzsdToJWbgjOcA3YLqlDccFrMu4XXuD4Ct6NpGyTRFrbmGcMR6ss/L5ZSm88LRdiuNXWfnzXVLg==">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', "G-YW8V9DTR0N" );
-</script>
-
-
-
-    
-    
-    <script data-ad-client=ca-pub-8658473214995139 async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
-    
-
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config',"G-YW8V9DTR0N")</script>
+<script data-ad-client=ca-pub-8658473214995139 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 </head>
-
 <body>
-    <div class="container wrapper">
-    <div class="header">
-	<base href="https://stdin.top/">
-	<h1 class="site-title">
-		
-		<a href="https://stdin.top/">&lt;stdin&gt;</a>
-		
-		<span class="blinking-cursor">|</span>
-		
-	</h1>
-
-	<div class="site-description">
-		
-		<h2 class="cursive">My Thoughts, Trials and Adventures</h2>
-		
-
-		<nav class="nav social">
-			<ul class="flat">
-				
-				<a href="mailto:jagadeesh@stdin.top" title="Mail"><i class="far fa-envelope"></i></a>
-				
-				<a href="https://github.com/jkotra/" title="Github"><i class="fab fa-github"></i></a>
-				
-				<a href="https://twitter.com/jagadeesh_kotra" title="Twitter"><i class="fab fa-twitter"></i></a>
-				
-				<a href="index.xml" title="RSS"><i class="fas fa-rss"></i></a>
-				
-			</ul>
-	</div>
-
-	<nav class="nav">
-		<ul class="flat">
-			
-			<li>
-				<a href="/about/">About</a>
-			</li>
-			
-			<li>
-				<a href="/tags/">Tags</a>
-			</li>
-			
-			<li>
-				<a href="/portfolio/">Portfolio</a>
-			</li>
-			
-			<li>
-				<a href="/pgp/">PGP</a>
-			</li>
-			
-		</ul>
-	</nav>
+<div class="container wrapper">
+<div class=header>
+<base href=https://stdin.top/>
+<h1 class=site-title>
+<a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span>
+</h1>
+<div class=site-description>
+<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
+<nav class="nav social">
+<ul class=flat>
+<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
+<a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
+</ul>
 </div>
-
-    
-<div class= "post">
-<div class="post-header">
-	<h1 class="title">Getting Started with GTK4 on Windows</h1>
-	
-	<div class="meta">Posted at &mdash; Sep 4, 2021
-		
-	
-	
-		
-			| Last Modified on &mdash; Jan 31, 2022</div>
-				
-	
-
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/about/>About</a>
+</li>
+<li>
+<a href=/tags/>Tags</a>
+</li>
+<li>
+<a href=/portfolio/>Portfolio</a>
+</li>
+<li>
+<a href=/pgp/>PGP</a>
+</li>
+</ul>
+</nav>
 </div>
-
-<div class="markdown">
-	<h1 id="introduction">Introduction</h1>
+<div class=post>
+<div class=post-header>
+<h1 class=title>Getting Started with GTK4 on Windows</h1>
+<div class=meta>Posted at &mdash; Sep 4, 2021
+| Last Modified on &mdash; Jan 31, 2022</div>
+</div>
+<div class=markdown>
+<h1 id=introduction>Introduction</h1>
 <p>This article guides how to set up and write applications with GTK4 on the windows operating system.</p>
-<h1 id="gtk">GTK</h1>
+<h1 id=gtk>GTK</h1>
 <p>
-  <img src="https://www.gtk.org/assets/img/logo-gtk-sm.png" alt="https://www.gtk.org/assets/img/logo-gtk-sm.png">
+<img src=https://www.gtk.org/assets/img/logo-gtk-sm.png alt=https://www.gtk.org/assets/img/logo-gtk-sm.png>
 </p>
 <p>GTK (formerly GIMP ToolKit then GTK+) is a free and open-source cross-platform widget toolkit for creating graphical user interfaces (GUIs).</p>
-<p><a href="https://en.wikipedia.org/wiki/GTK#Windows">[wikipedia]</a> <a href="https://gtk.org">[Official Website]</a></p>
-<h1 id="setup">Setup</h1>
-<div class="notices info" ><p><p>GTK can also be compiled with MSVC / Visual Studio. while compiling with MSVC makes it more compatible with the Visual Studio ecosystem, it limits the libraries we can include in our project. mixing MSYS2 and MSVC libraries cause problems.</p>
+<p><a href=https://en.wikipedia.org/wiki/GTK#Windows>[wikipedia]</a> <a href=https://gtk.org>[Official Website]</a></p>
+<h1 id=setup>Setup</h1>
+<div class="notices info"><p><p>GTK can also be compiled with MSVC / Visual Studio. while compiling with MSVC makes it more compatible with the Visual Studio ecosystem, it limits the libraries we can include in our project. mixing MSYS2 and MSVC libraries cause problems.</p>
 <p>To compile with MSVC:</p>
 <ul>
-<li><a href="https://download.gnome.org/sources/gtk/">Get the latest tarball</a>.</li>
+<li><a href=https://download.gnome.org/sources/gtk/>Get the latest tarball</a>.</li>
 <li>Run the following Commands:</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">meson setup -Dmedia-gstreamer=disabled -Dbuild-tests=disabled build
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>meson setup -Dmedia-gstreamer=disabled -Dbuild-tests=disabled build
 meson compile -C build
 meson install -C build
-</code></pre></div><p>Refer: <a href="https://www.collabora.com/news-and-blog/blog/2021/03/18/build-and-run-gtk-4-applications-with-visual-studio/">Build and run GTK 4 applications with Visual Studio</a></p>
+</code></pre></div><p>Refer: <a href=https://www.collabora.com/news-and-blog/blog/2021/03/18/build-and-run-gtk-4-applications-with-visual-studio/>Build and run GTK 4 applications with Visual Studio</a></p>
 </p></div>
-<h3 id="msys2">MSYS2</h3>
+<h3 id=msys2>MSYS2</h3>
 <p><strong>MSYS2</strong> is a collection of tools and libraries providing you with an easy-to-use environment for building, installing, and running native Windows software.</p>
 <ol>
-<li>Install the latest version MSYS2 <a href="https://www.msys2.org/">from their website</a>.</li>
-<li>Navigate to  <code>C:\msys2\</code> and launch <code>mingw64.exe</code>.</li>
+<li>Install the latest version MSYS2 <a href=https://www.msys2.org/>from their website</a>.</li>
+<li>Navigate to <code>C:\msys2\</code> and launch <code>mingw64.exe</code>.</li>
 <li>to update available repositories and packages, run:
 <code>pacman -Syyu</code></li>
 <li>install <code>gtk4</code>, <code>gcc</code> (<code>llvm</code> should work too!), <code>pkg-config</code>:
@@ -200,197 +109,197 @@ meson install -C build
 </ol>
 <p>Now add Mingw64 directories to System Path so that windows can find them:
 add the following to the system path:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">C:\\msys64\\mingw64\\include
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>C:\\msys64\\mingw64\\include
 C:\\msys64\\mingw64\\bin
 C:\\msys64\\mingw64\\lib
 </code></pre></div><p>
-  <img src="https://i.imgur.com/9nD9ZCp.png" alt="https://i.imgur.com/9nD9ZCp.png">
+<img src=https://i.imgur.com/9nD9ZCp.png alt=https://i.imgur.com/9nD9ZCp.png>
 </p>
 <ol>
 <li>We also need to pass the output of <code>pkg-config</code> to <code>gcc</code> while compiling. firstly, open <code>CMD</code> and get the output of <code>pkg-config --cflags --libs gtk4</code>.</li>
 </ol>
 <p>It will produce something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">-mfpmath=sse -msse -msse2 -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-4.0 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/fribidi -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/gdk-pixbuf-2.0 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/cairo -IC:/msys64/mingw64/include/lzo -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/freetype2 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pixman-1 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/graphene-1.0 -IC:/msys64/mingw64/lib/graphene-1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/glib-2.0 -IC:/msys64/mingw64/lib/glib-2.0/include -IC:/msys64/mingw64/include -LC:/msys64/mingw64/lib -lgtk-4 -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -lgdk_pixbuf-2.0 -lcairo-gobject -lcairo -lvulkan -lgraphene-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>-mfpmath=sse -msse -msse2 -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-4.0 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/fribidi -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/gdk-pixbuf-2.0 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/cairo -IC:/msys64/mingw64/include/lzo -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/freetype2 -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/pixman-1 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/graphene-1.0 -IC:/msys64/mingw64/lib/graphene-1.0/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/glib-2.0 -IC:/msys64/mingw64/lib/glib-2.0/include -IC:/msys64/mingw64/include -LC:/msys64/mingw64/lib -lgtk-4 -lpangowin32-1.0 -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -lgdk_pixbuf-2.0 -lcairo-gobject -lcairo -lvulkan -lgraphene-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lintl
 </code></pre></div><p>copy the output and add it as a System Variable (I saved it as <code>GTK4-PKG-CONFIG</code>):</p>
 <p>
-  <img src="https://i.imgur.com/oxcoJbA.png" alt="https://i.imgur.com/oxcoJbA.png">
+<img src=https://i.imgur.com/oxcoJbA.png alt=https://i.imgur.com/oxcoJbA.png>
 </p>
-<h3 id="visual-studio-code">Visual Studio Code</h3>
-<p>I prefer Visual studio code for all my coding tasks. You can get the latest version of Visual studio code <a href="https://code.visualstudio.com/">from their website</a>.</p>
+<h3 id=visual-studio-code>Visual Studio Code</h3>
+<p>I prefer Visual studio code for all my coding tasks. You can get the latest version of Visual studio code <a href=https://code.visualstudio.com/>from their website</a>.</p>
 <ol>
 <li>Create a new folder and open it in VSCode.</li>
 <li>create a new file <code>.vscode/c_cpp_properties.json</code> and put the following in it:</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Win32&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;includePath&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&#34;${workspaceFolder}\\**&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;C:\\msys64\\mingw64\\include\\**&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;C:\\msys64\\mingw64\\lib\\glib-2.0\\include&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;C:\\msys64\\mingw64\\lib\\graphene-1.0\\include&#34;</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="mi">4</span>
-<span class="p">}</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+    <span class=nt>&#34;configurations&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=p>{</span>
+            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Win32&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;includePath&#34;</span><span class=p>:</span> <span class=p>[</span>
+                <span class=s2>&#34;${workspaceFolder}\\**&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;C:\\msys64\\mingw64\\include\\**&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;C:\\msys64\\mingw64\\lib\\glib-2.0\\include&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;C:\\msys64\\mingw64\\lib\\graphene-1.0\\include&#34;</span>
+            <span class=p>]</span>
+        <span class=p>}</span>
+    <span class=p>],</span>
+    <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>4</span>
+<span class=p>}</span>
 
 </code></pre></div><p>notice the <code>C:\msys64\mingw64\include\**</code>, <code>C:\msys64\mingw64\lib\glib-2.0\include</code> and <code>C:\msys64\mingw64\lib\graphene-1.0\include</code>. these are the header files we need for auto complete suggestions which will make our life easier.</p>
-<ol start="3">
-<li>create a new file, <code>hello_world.c</code> file, and paste the <code>Hello World</code> C program from <a href="https://gtk.org">GTK.org</a>:</li>
+<ol start=3>
+<li>create a new file, <code>hello_world.c</code> file, and paste the <code>Hello World</code> C program from <a href=https://gtk.org>GTK.org</a>:</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="c1">// Include gtk
-</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">on_activate</span> <span class="p">(</span><span class="n">GtkApplication</span> <span class="o">*</span><span class="n">app</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Create a new window
-</span><span class="c1"></span>  <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="n">gtk_application_window_new</span> <span class="p">(</span><span class="n">app</span><span class="p">);</span>
-  <span class="c1">// Create a new button
-</span><span class="c1"></span>  <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="n">gtk_button_new_with_label</span> <span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">);</span>
-  <span class="c1">// When the button is clicked, close the window passed as an argument
-</span><span class="c1"></span>  <span class="n">g_signal_connect_swapped</span> <span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="s">&#34;clicked&#34;</span><span class="p">,</span> <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">gtk_window_close</span><span class="p">),</span> <span class="n">window</span><span class="p">);</span>
-  <span class="n">gtk_window_set_child</span> <span class="p">(</span><span class="n">GTK_WINDOW</span> <span class="p">(</span><span class="n">window</span><span class="p">),</span> <span class="n">button</span><span class="p">);</span>
-  <span class="n">gtk_window_present</span> <span class="p">(</span><span class="n">GTK_WINDOW</span> <span class="p">(</span><span class="n">window</span><span class="p">));</span>
-<span class="p">}</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=c1>// Include gtk
+</span><span class=c1></span><span class=cp>#include</span> <span class=cpf>&lt;gtk/gtk.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=k>static</span> <span class=kt>void</span> <span class=nf>on_activate</span> <span class=p>(</span><span class=n>GtkApplication</span> <span class=o>*</span><span class=n>app</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// Create a new window
+</span><span class=c1></span>  <span class=n>GtkWidget</span> <span class=o>*</span><span class=n>window</span> <span class=o>=</span> <span class=n>gtk_application_window_new</span> <span class=p>(</span><span class=n>app</span><span class=p>);</span>
+  <span class=c1>// Create a new button
+</span><span class=c1></span>  <span class=n>GtkWidget</span> <span class=o>*</span><span class=n>button</span> <span class=o>=</span> <span class=n>gtk_button_new_with_label</span> <span class=p>(</span><span class=s>&#34;Hello, World!&#34;</span><span class=p>);</span>
+  <span class=c1>// When the button is clicked, close the window passed as an argument
+</span><span class=c1></span>  <span class=n>g_signal_connect_swapped</span> <span class=p>(</span><span class=n>button</span><span class=p>,</span> <span class=s>&#34;clicked&#34;</span><span class=p>,</span> <span class=n>G_CALLBACK</span> <span class=p>(</span><span class=n>gtk_window_close</span><span class=p>),</span> <span class=n>window</span><span class=p>);</span>
+  <span class=n>gtk_window_set_child</span> <span class=p>(</span><span class=n>GTK_WINDOW</span> <span class=p>(</span><span class=n>window</span><span class=p>),</span> <span class=n>button</span><span class=p>);</span>
+  <span class=n>gtk_window_present</span> <span class=p>(</span><span class=n>GTK_WINDOW</span> <span class=p>(</span><span class=n>window</span><span class=p>));</span>
+<span class=p>}</span>
 
-<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-  <span class="c1">// Create a new application
-</span><span class="c1"></span>  <span class="n">GtkApplication</span> <span class="o">*</span><span class="n">app</span> <span class="o">=</span> <span class="n">gtk_application_new</span> <span class="p">(</span><span class="s">&#34;com.example.GtkApplication&#34;</span><span class="p">,</span>
-                                             <span class="n">G_APPLICATION_FLAGS_NONE</span><span class="p">);</span>
-  <span class="n">g_signal_connect</span> <span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s">&#34;activate&#34;</span><span class="p">,</span> <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">on_activate</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">g_application_run</span> <span class="p">(</span><span class="n">G_APPLICATION</span> <span class="p">(</span><span class="n">app</span><span class="p">),</span> <span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
-<span class="p">}</span>
+<span class=kt>int</span> <span class=nf>main</span> <span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
+  <span class=c1>// Create a new application
+</span><span class=c1></span>  <span class=n>GtkApplication</span> <span class=o>*</span><span class=n>app</span> <span class=o>=</span> <span class=n>gtk_application_new</span> <span class=p>(</span><span class=s>&#34;com.example.GtkApplication&#34;</span><span class=p>,</span>
+                                             <span class=n>G_APPLICATION_FLAGS_NONE</span><span class=p>);</span>
+  <span class=n>g_signal_connect</span> <span class=p>(</span><span class=n>app</span><span class=p>,</span> <span class=s>&#34;activate&#34;</span><span class=p>,</span> <span class=n>G_CALLBACK</span> <span class=p>(</span><span class=n>on_activate</span><span class=p>),</span> <span class=nb>NULL</span><span class=p>);</span>
+  <span class=k>return</span> <span class=n>g_application_run</span> <span class=p>(</span><span class=n>G_APPLICATION</span> <span class=p>(</span><span class=n>app</span><span class=p>),</span> <span class=n>argc</span><span class=p>,</span> <span class=n>argv</span><span class=p>);</span>
+<span class=p>}</span>
 
-</code></pre></div><ol start="4">
+</code></pre></div><ol start=4>
 <li>Compile the program:
 <code>gcc hello_world.c -o hello_world.exe -mwindows %GTK4-PKG-CONFIG%</code></li>
 <li>Run the program by clicking on generated <code>.exe</code> file.</li>
 </ol>
 <p>
-  <img src="https://i.imgur.com/oHf7ZqG.png" alt="https://i.imgur.com/oHf7ZqG.png">
+<img src=https://i.imgur.com/oHf7ZqG.png alt=https://i.imgur.com/oHf7ZqG.png>
 </p>
-<h3 id="debugging">Debugging</h3>
+<h3 id=debugging>Debugging</h3>
 <p>Setting up debugging enviroment is quite easy. Defaults should just work fine as long as you select the correct compiler when prompted, I&rsquo;ve added <code>-mwindows</code> to compile flags for good measure.</p>
 <p><code>.vscode/launch.json</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;gcc.exe - Build and debug active file&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;cppdbg&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;program&#34;</span><span class="p">:</span> <span class="s2">&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&#34;stopAtEntry&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-            <span class="nt">&#34;cwd&#34;</span><span class="p">:</span> <span class="s2">&#34;${fileDirname}&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;environment&#34;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="nt">&#34;externalConsole&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-            <span class="nt">&#34;MIMode&#34;</span><span class="p">:</span> <span class="s2">&#34;gdb&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;miDebuggerPath&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\msys64\\mingw64\\bin\\gdb.exe&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;setupCommands&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="p">{</span>
-                    <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Enable pretty-printing for gdb&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;text&#34;</span><span class="p">:</span> <span class="s2">&#34;-enable-pretty-printing&#34;</span><span class="p">,</span>
-                    <span class="nt">&#34;ignoreFailures&#34;</span><span class="p">:</span> <span class="kc">true</span>
-                <span class="p">}</span>
-            <span class="p">],</span>
-            <span class="nt">&#34;preLaunchTask&#34;</span><span class="p">:</span> <span class="s2">&#34;C/C++: gcc.exe build active file&#34;</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+    <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=s2>&#34;0.2.0&#34;</span><span class=p>,</span>
+    <span class=nt>&#34;configurations&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=p>{</span>
+            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;gcc.exe - Build and debug active file&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;cppdbg&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;request&#34;</span><span class=p>:</span> <span class=s2>&#34;launch&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;program&#34;</span><span class=p>:</span> <span class=s2>&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[],</span>
+            <span class=nt>&#34;stopAtEntry&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+            <span class=nt>&#34;cwd&#34;</span><span class=p>:</span> <span class=s2>&#34;${fileDirname}&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;environment&#34;</span><span class=p>:</span> <span class=p>[],</span>
+            <span class=nt>&#34;externalConsole&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
+            <span class=nt>&#34;MIMode&#34;</span><span class=p>:</span> <span class=s2>&#34;gdb&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;miDebuggerPath&#34;</span><span class=p>:</span> <span class=s2>&#34;C:\\msys64\\mingw64\\bin\\gdb.exe&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;setupCommands&#34;</span><span class=p>:</span> <span class=p>[</span>
+                <span class=p>{</span>
+                    <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Enable pretty-printing for gdb&#34;</span><span class=p>,</span>
+                    <span class=nt>&#34;text&#34;</span><span class=p>:</span> <span class=s2>&#34;-enable-pretty-printing&#34;</span><span class=p>,</span>
+                    <span class=nt>&#34;ignoreFailures&#34;</span><span class=p>:</span> <span class=kc>true</span>
+                <span class=p>}</span>
+            <span class=p>],</span>
+            <span class=nt>&#34;preLaunchTask&#34;</span><span class=p>:</span> <span class=s2>&#34;C/C++: gcc.exe build active file&#34;</span>
+        <span class=p>}</span>
+    <span class=p>]</span>
+<span class=p>}</span>
 
 </code></pre></div><p><code>.vscode/tasks.json</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;tasks&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;cppbuild&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;label&#34;</span><span class="p">:</span> <span class="s2">&#34;C/C++: gcc.exe build active file&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;command&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\msys64\\mingw64\\bin\\gcc.exe&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&#34;-g&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;${file}&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;-o&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;-mwindows&#34;</span><span class="p">,</span>
-                <span class="s2">&#34;%GTK4-PKG-CONFIG%&#34;</span>
-            <span class="p">],</span>
-            <span class="nt">&#34;options&#34;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="nt">&#34;cwd&#34;</span><span class="p">:</span> <span class="s2">&#34;${fileDirname}&#34;</span>
-            <span class="p">},</span>
-            <span class="nt">&#34;problemMatcher&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&#34;$gcc&#34;</span>
-            <span class="p">],</span>
-            <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="nt">&#34;kind&#34;</span><span class="p">:</span> <span class="s2">&#34;build&#34;</span><span class="p">,</span>
-                <span class="nt">&#34;isDefault&#34;</span><span class="p">:</span> <span class="kc">true</span>
-            <span class="p">},</span>
-            <span class="nt">&#34;detail&#34;</span><span class="p">:</span> <span class="s2">&#34;Task generated by Debugger.&#34;</span>
-        <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;2.0.0&#34;</span>
-<span class="p">}</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+    <span class=nt>&#34;tasks&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=p>{</span>
+            <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;cppbuild&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;label&#34;</span><span class=p>:</span> <span class=s2>&#34;C/C++: gcc.exe build active file&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=s2>&#34;C:\\msys64\\mingw64\\bin\\gcc.exe&#34;</span><span class=p>,</span>
+            <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[</span>
+                <span class=s2>&#34;-g&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;${file}&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;-o&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;${fileDirname}\\${fileBasenameNoExtension}.exe&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;-mwindows&#34;</span><span class=p>,</span>
+                <span class=s2>&#34;%GTK4-PKG-CONFIG%&#34;</span>
+            <span class=p>],</span>
+            <span class=nt>&#34;options&#34;</span><span class=p>:</span> <span class=p>{</span>
+                <span class=nt>&#34;cwd&#34;</span><span class=p>:</span> <span class=s2>&#34;${fileDirname}&#34;</span>
+            <span class=p>},</span>
+            <span class=nt>&#34;problemMatcher&#34;</span><span class=p>:</span> <span class=p>[</span>
+                <span class=s2>&#34;$gcc&#34;</span>
+            <span class=p>],</span>
+            <span class=nt>&#34;group&#34;</span><span class=p>:</span> <span class=p>{</span>
+                <span class=nt>&#34;kind&#34;</span><span class=p>:</span> <span class=s2>&#34;build&#34;</span><span class=p>,</span>
+                <span class=nt>&#34;isDefault&#34;</span><span class=p>:</span> <span class=kc>true</span>
+            <span class=p>},</span>
+            <span class=nt>&#34;detail&#34;</span><span class=p>:</span> <span class=s2>&#34;Task generated by Debugger.&#34;</span>
+        <span class=p>}</span>
+    <span class=p>],</span>
+    <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=s2>&#34;2.0.0&#34;</span>
+<span class=p>}</span>
 
 </code></pre></div><p>Add breakpoint wherever you wish and debug away!</p>
 <p>
-  <img src="https://i.imgur.com/QVZD3Bq.png" alt="https://i.imgur.com/QVZD3Bq.png">
+<img src=https://i.imgur.com/QVZD3Bq.png alt=https://i.imgur.com/QVZD3Bq.png>
 </p>
-<h2 id="a-bit-complicated-example">A bit complicated example&hellip;</h2>
+<h2 id=a-bit-complicated-example>A bit complicated example&mldr;</h2>
 <p>Let&rsquo;s make things a little complicated, suppose we want to make an application to show the current time using Win32 API, this is how it can be done:</p>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;gtk/gtk.h&gt;</span><span class=cp>
+</span><span class=cp></span>
 
-<span class="kt">void</span> <span class="nf">get_current_time</span><span class="p">(</span><span class="n">GtkButton</span> <span class="o">*</span><span class="n">btn</span><span class="p">,</span> <span class="n">GtkLabel</span> <span class="o">*</span><span class="n">label</span><span class="p">){</span>
+<span class=kt>void</span> <span class=nf>get_current_time</span><span class=p>(</span><span class=n>GtkButton</span> <span class=o>*</span><span class=n>btn</span><span class=p>,</span> <span class=n>GtkLabel</span> <span class=o>*</span><span class=n>label</span><span class=p>){</span>
 
-  <span class="n">SYSTEMTIME</span> <span class="n">st</span><span class="p">,</span> <span class="n">lt</span><span class="p">;</span>
-  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Button Clicked!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+  <span class=n>SYSTEMTIME</span> <span class=n>st</span><span class=p>,</span> <span class=n>lt</span><span class=p>;</span>
+  <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Button Clicked!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
     
-  <span class="n">GetSystemTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">st</span><span class="p">);</span>
-  <span class="n">GetLocalTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">);</span>
+  <span class=n>GetSystemTime</span><span class=p>(</span><span class=o>&amp;</span><span class=n>st</span><span class=p>);</span>
+  <span class=n>GetLocalTime</span><span class=p>(</span><span class=o>&amp;</span><span class=n>lt</span><span class=p>);</span>
 
-  <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
-  <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">&#34;%02d:%02d:%02d %d/%d/%d&#34;</span><span class="p">,</span> <span class="n">st</span><span class="p">.</span><span class="n">wHour</span><span class="p">,</span> <span class="n">st</span><span class="p">.</span><span class="n">wMinute</span><span class="p">,</span> <span class="n">st</span><span class="p">.</span><span class="n">wSecond</span><span class="p">,</span> <span class="n">st</span><span class="p">.</span><span class="n">wDay</span><span class="p">,</span> <span class="n">st</span><span class="p">.</span><span class="n">wMonth</span><span class="p">,</span> <span class="n">st</span><span class="p">.</span><span class="n">wYear</span><span class="p">);</span>
-  <span class="n">gtk_label_set_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+  <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=mi>1024</span><span class=p>];</span>
+  <span class=n>sprintf</span><span class=p>(</span><span class=n>buf</span><span class=p>,</span> <span class=s>&#34;%02d:%02d:%02d %d/%d/%d&#34;</span><span class=p>,</span> <span class=n>st</span><span class=p>.</span><span class=n>wHour</span><span class=p>,</span> <span class=n>st</span><span class=p>.</span><span class=n>wMinute</span><span class=p>,</span> <span class=n>st</span><span class=p>.</span><span class=n>wSecond</span><span class=p>,</span> <span class=n>st</span><span class=p>.</span><span class=n>wDay</span><span class=p>,</span> <span class=n>st</span><span class=p>.</span><span class=n>wMonth</span><span class=p>,</span> <span class=n>st</span><span class=p>.</span><span class=n>wYear</span><span class=p>);</span>
+  <span class=n>gtk_label_set_label</span><span class=p>(</span><span class=n>label</span><span class=p>,</span> <span class=n>buf</span><span class=p>);</span>
   
-<span class="p">}</span>
+<span class=p>}</span>
 
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">on_activate</span> <span class="p">(</span><span class="n">GtkApplication</span> <span class="o">*</span><span class="n">app</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Create a new window
-</span><span class="c1"></span>  <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="n">gtk_application_window_new</span> <span class="p">(</span><span class="n">app</span><span class="p">);</span>
+<span class=k>static</span> <span class=kt>void</span> <span class=nf>on_activate</span> <span class=p>(</span><span class=n>GtkApplication</span> <span class=o>*</span><span class=n>app</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// Create a new window
+</span><span class=c1></span>  <span class=n>GtkWidget</span> <span class=o>*</span><span class=n>window</span> <span class=o>=</span> <span class=n>gtk_application_window_new</span> <span class=p>(</span><span class=n>app</span><span class=p>);</span>
 
-  <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">box</span> <span class="o">=</span> <span class="n">gtk_box_new</span><span class="p">(</span><span class="n">GTK_ORIENTATION_VERTICAL</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+  <span class=n>GtkWidget</span> <span class=o>*</span><span class=n>box</span> <span class=o>=</span> <span class=n>gtk_box_new</span><span class=p>(</span><span class=n>GTK_ORIENTATION_VERTICAL</span><span class=p>,</span> <span class=mi>4</span><span class=p>);</span>
 
-  <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">label</span> <span class="o">=</span> <span class="n">gtk_label_new</span><span class="p">(</span><span class="s">&#34;Hello GTK!&#34;</span><span class="p">);</span>
-  <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">btn</span> <span class="o">=</span> <span class="n">gtk_button_new_with_label</span><span class="p">(</span><span class="s">&#34;Get Current Time&#34;</span><span class="p">);</span>
-  <span class="n">gtk_widget_set_margin_start</span><span class="p">(</span><span class="n">GTK_WIDGET</span><span class="p">(</span><span class="n">btn</span><span class="p">),</span> <span class="mi">4</span><span class="p">);</span>
-  <span class="n">gtk_widget_set_margin_end</span><span class="p">(</span><span class="n">GTK_WIDGET</span><span class="p">(</span><span class="n">btn</span><span class="p">),</span> <span class="mi">4</span><span class="p">);</span>
-  <span class="n">g_signal_connect_after</span><span class="p">(</span><span class="n">btn</span> <span class="p">,</span> <span class="s">&#34;clicked&#34;</span><span class="p">,</span> <span class="p">(</span><span class="n">GCallback</span><span class="p">)</span><span class="n">get_current_time</span><span class="p">,</span> <span class="n">label</span><span class="p">);</span>
+  <span class=n>GtkWidget</span> <span class=o>*</span><span class=n>label</span> <span class=o>=</span> <span class=n>gtk_label_new</span><span class=p>(</span><span class=s>&#34;Hello GTK!&#34;</span><span class=p>);</span>
+  <span class=n>GtkWidget</span> <span class=o>*</span><span class=n>btn</span> <span class=o>=</span> <span class=n>gtk_button_new_with_label</span><span class=p>(</span><span class=s>&#34;Get Current Time&#34;</span><span class=p>);</span>
+  <span class=n>gtk_widget_set_margin_start</span><span class=p>(</span><span class=n>GTK_WIDGET</span><span class=p>(</span><span class=n>btn</span><span class=p>),</span> <span class=mi>4</span><span class=p>);</span>
+  <span class=n>gtk_widget_set_margin_end</span><span class=p>(</span><span class=n>GTK_WIDGET</span><span class=p>(</span><span class=n>btn</span><span class=p>),</span> <span class=mi>4</span><span class=p>);</span>
+  <span class=n>g_signal_connect_after</span><span class=p>(</span><span class=n>btn</span> <span class=p>,</span> <span class=s>&#34;clicked&#34;</span><span class=p>,</span> <span class=p>(</span><span class=n>GCallback</span><span class=p>)</span><span class=n>get_current_time</span><span class=p>,</span> <span class=n>label</span><span class=p>);</span>
 
-  <span class="n">gtk_box_append</span><span class="p">(</span><span class="n">GTK_BOX</span><span class="p">(</span><span class="n">box</span><span class="p">),</span> <span class="n">label</span><span class="p">);</span>
-  <span class="n">gtk_box_append</span><span class="p">(</span><span class="n">GTK_BOX</span><span class="p">(</span><span class="n">box</span><span class="p">),</span> <span class="n">btn</span><span class="p">);</span>
+  <span class=n>gtk_box_append</span><span class=p>(</span><span class=n>GTK_BOX</span><span class=p>(</span><span class=n>box</span><span class=p>),</span> <span class=n>label</span><span class=p>);</span>
+  <span class=n>gtk_box_append</span><span class=p>(</span><span class=n>GTK_BOX</span><span class=p>(</span><span class=n>box</span><span class=p>),</span> <span class=n>btn</span><span class=p>);</span>
 
-  <span class="n">gtk_window_set_child</span> <span class="p">(</span><span class="n">GTK_WINDOW</span> <span class="p">(</span><span class="n">window</span><span class="p">),</span> <span class="n">box</span><span class="p">);</span>
-  <span class="n">gtk_window_present</span> <span class="p">(</span><span class="n">GTK_WINDOW</span> <span class="p">(</span><span class="n">window</span><span class="p">));</span>
-<span class="p">}</span>
+  <span class=n>gtk_window_set_child</span> <span class=p>(</span><span class=n>GTK_WINDOW</span> <span class=p>(</span><span class=n>window</span><span class=p>),</span> <span class=n>box</span><span class=p>);</span>
+  <span class=n>gtk_window_present</span> <span class=p>(</span><span class=n>GTK_WINDOW</span> <span class=p>(</span><span class=n>window</span><span class=p>));</span>
+<span class=p>}</span>
 
-<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-  <span class="c1">// Create a new application
-</span><span class="c1"></span>  <span class="n">GtkApplication</span> <span class="o">*</span><span class="n">app</span> <span class="o">=</span> <span class="n">gtk_application_new</span> <span class="p">(</span><span class="s">&#34;com.example.GtkApplication&#34;</span><span class="p">,</span>
-                                             <span class="n">G_APPLICATION_FLAGS_NONE</span><span class="p">);</span>
-  <span class="n">g_signal_connect</span> <span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s">&#34;activate&#34;</span><span class="p">,</span> <span class="n">G_CALLBACK</span> <span class="p">(</span><span class="n">on_activate</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">g_application_run</span> <span class="p">(</span><span class="n">G_APPLICATION</span> <span class="p">(</span><span class="n">app</span><span class="p">),</span> <span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
-<span class="p">}</span>
+<span class=kt>int</span> <span class=nf>main</span> <span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
+  <span class=c1>// Create a new application
+</span><span class=c1></span>  <span class=n>GtkApplication</span> <span class=o>*</span><span class=n>app</span> <span class=o>=</span> <span class=n>gtk_application_new</span> <span class=p>(</span><span class=s>&#34;com.example.GtkApplication&#34;</span><span class=p>,</span>
+                                             <span class=n>G_APPLICATION_FLAGS_NONE</span><span class=p>);</span>
+  <span class=n>g_signal_connect</span> <span class=p>(</span><span class=n>app</span><span class=p>,</span> <span class=s>&#34;activate&#34;</span><span class=p>,</span> <span class=n>G_CALLBACK</span> <span class=p>(</span><span class=n>on_activate</span><span class=p>),</span> <span class=nb>NULL</span><span class=p>);</span>
+  <span class=k>return</span> <span class=n>g_application_run</span> <span class=p>(</span><span class=n>G_APPLICATION</span> <span class=p>(</span><span class=n>app</span><span class=p>),</span> <span class=n>argc</span><span class=p>,</span> <span class=n>argv</span><span class=p>);</span>
+<span class=p>}</span>
 </code></pre></div><p>Compile the program with:</p>
 <p><code>gcc whatismytime.c -o whatismytime -mwindows %GTK4-PKG-CONFIG%</code></p>
 <p>
-  <img src="https://i.imgur.com/YURHuEM.png" alt="https://i.imgur.com/YURHuEM.png">
+<img src=https://i.imgur.com/YURHuEM.png alt=https://i.imgur.com/YURHuEM.png>
 </p>
-<h3 id="meson-build-system">Meson Build System</h3>
-<p><a href="https://github.com/jkotra/WhatIsMyTime">Available on Github</a>.</p>
+<h3 id=meson-build-system>Meson Build System</h3>
+<p><a href=https://github.com/jkotra/WhatIsMyTime>Available on Github</a>.</p>
 <p>Meson is the official build system used by GNOME. I&rsquo;ve taken the above example and made it into a Meson Project.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">tree
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>tree
 ├── meson.build
 ├── README.md
 └── src
@@ -398,67 +307,36 @@ C:\\msys64\\mingw64\\lib
     └── whatismytime.c
 
 1 directory, 4 files
-</code></pre></div><div class="notices info" ><p><code>meson</code> uses <code>ninja</code> to build/compile. get the latest <code>ninja</code> from <a href="https://github.com/ninja-build/ninja/releases">their Github page</a> and add the extracted directory to System Path.</p></div>
+</code></pre></div><div class="notices info"><p><code>meson</code> uses <code>ninja</code> to build/compile. get the latest <code>ninja</code> from <a href=https://github.com/ninja-build/ninja/releases>their Github page</a> and add the extracted directory to System Path.</p></div>
 <p>to build:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">meson build
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>meson build
 ninja -C build
 </code></pre></div><p>and then navigate to <code>build/src</code> and execute <code>whatismytime.exe</code></p>
-
 </div>
-
-<div class="post-tags">
-	
-	
-	<nav class="nav tags">
-		<ul class="flat">
-			
-			<li><a href="/tags/c">C</a></li>
-			
-			<li><a href="/tags/gtk">gtk</a></li>
-			
-		</ul>
-	</nav>
-	
-	
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/c>C</a></li>
+<li><a href=/tags/gtk>gtk</a></li>
+</ul>
+</nav>
 </div>
-
-<div id="commento"></div>
-
-<script id="comments" src="https://utteranc.es/client.js" repo="jkotra/stdin.top-comments" issue-term="pathname"
-	label="💬" theme="github-light" crossorigin="anonymous" async>
-	</script>
-
+<div id=commento></div>
+<script id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
 <noscript>Please enable JavaScript to view the
-	<a href="https://commento.io/">comments powered by Commento.</a>
+<a href=https://commento.io/>comments powered by Commento.</a>
 </noscript>
-
 </div>
-
-
-
-
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-
-
+<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
 </div>
-
-
-    </div>
-
-    <div class="footer wrapper">
-
-			
-
-	<nav class="nav">
-		<div class="badge"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="/cc/by-sa.png"></a></div>
-		<div> <a href="https://github.com/jkotra/kavi-hugo-theme">Kavi</a> (based on <a href="https://github.com/vividvilla/ezhil">ezhil</a>)</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
 </div>
-
+<div class="footer wrapper">
+<nav class=nav>
+<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
+<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
 </body>
-
 </html>
