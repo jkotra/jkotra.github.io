@@ -11,6 +11,7 @@ summaryLength = 10 # Configure how long the post summary should be on the homepa
 pygmentscodefences = true
 pygmentsUseClasses=true
 pygmentscodefencesguesssyntax = true
+enableGitInfo = true
 
 [frontmatter]
 lastmod = [":fileModTime", ":default"]
