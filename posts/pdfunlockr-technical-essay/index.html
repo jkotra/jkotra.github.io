@@ -30,7 +30,7 @@
 <meta property="og:url" content="https://stdin.top/posts/pdfunlockr-technical-essay/" />
 <meta property="og:image" content="https://i.imgur.com/yeKb8dn.png" />
 <meta property="article:published_time" content="2021-07-23T00:08:43+05:30" />
-<meta property="article:modified_time" content="2021-07-23T00:08:43+05:30" />
+<meta property="article:modified_time" content="2022-01-31T15:25:40+05:30" />
 
     <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://i.imgur.com/yeKb8dn.png"/>
@@ -60,10 +60,10 @@
     
     <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/main.min.4553dd9a6323428609f8aed3a202018ea75e6cce429c095eb89587a95202fdde448c0d48d155638dbf041d633d5663623ba770e1f55654a61385d24731b70588.css" integrity="sha512-RVPdmmMjQoYJ&#43;K7TogIBjqdebM5CnAleuJWHqVIC/d5EjA1I0VVjjb8EHWM9VmNiO6dw4fVWVKYThdJHMbcFiA==" />
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/custom.min.3cfc3b65e14c57ead2c15971b0db9ea0e07766bdbd6b9d5e0c505cbaaba1ba9ebb679e5a3d1f7cbc87e9d4aa682a5faa0f6cd0fde39048f75616e7e407814468.css" integrity="sha512-PPw7ZeFMV&#43;rSwVlxsNueoOB3Zr29a51eDFBcuquhup67Z55aPR98vIfp1KpoKl&#43;qD2zQ/eOQSPdWFufkB4FEaA==" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://stdin.top/css/custom.min.8fa80f5da1a6009294b0f8fb625bb96579e5260dae5d62f437841b6407444b39f2ced657b53c81079a04a26f9c11785b36e6e2a40f97e99d5214c8f9f75832a7.css" integrity="sha512-j6gPXaGmAJKUsPj7Ylu5ZXnlJg2uXWL0N4QbZAdESznyztZXtTyBB5oEom&#43;cEXhbNubipA&#43;X6Z1SFMj591gypw==" />
     
     
-    <link rel="stylesheet" type="text/css" href="https://stdin.top/css/dark.min.8b7574ad484fc264c1e2be2b8c75871c9328f1c475636b49272fa87905f42930344c006d93c4f331d67975f828c102df22a55b2a3c330fc58c2c83cc5163848d.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" type="text/css" href="https://stdin.top/css/dark.min.2987074ffe7f94e99cae25b1587c9d3e0e6a6c0160bdb12b15668e7b5f5271eee53ff2f1c46f0325256881d1f0085cb3facc027d729e070551abb940a6bf5de9.css" media="(prefers-color-scheme: dark)">
 
 
     
@@ -156,8 +156,13 @@
 <div class="post-header">
 	<h1 class="title">Making the best PDF Unlocker / Decryptor App</h1>
 	
-	<div class="meta">Posted at &mdash; Jul 23, 2021</div>
+	<div class="meta">Posted at &mdash; Jul 23, 2021
+		
 	
+	
+		| Last Modified at &mdash; Jan 31, 2022</div>
+			
+
 </div>
 
 <div class="markdown">
@@ -202,7 +207,8 @@
 <li><a href="http://www.ijg.org/files/jpegsrc.v9d.tar.gz">libjpeg</a></li>
 </ul>
 <p>I&rsquo;ve included links to gists of bash scripts to cross-compile these dependencies and also <code>qpdf</code> itself.</p>
-<p><a href="https://gist.github.com/jkotra/e5cfa6f2b06c97dafe11384594000a4a">Github Gist</a></p>
+<p><a href="https://gist.github.com/jkotra/75d6ceedbd472583bc80c584347999f8">Github Gist</a></p>
+<div class="notices note" ><p>for every change in <code>targetSdkVersion</code> and <code>compileSdkVersion</code>, QPDF need to be recompiled again to prevent app from crashing on invoking native code.</p></div>
 <div class="notices note" ><p><p>compilation of QPDF will fail during cross-compilation due to its inability to confirm the existence of <code>/dev/urandom</code>. This check must be disabled in <code>configure</code></p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh"><span class="c1">#ln 16476 - version - 10.3.2</span>
 <span class="nb">test</span> <span class="s2">&#34;</span><span class="nv">$cross_compiling</span><span class="s2">&#34;</span> <span class="o">=</span> no <span class="o">&amp;&amp;</span>
@@ -227,44 +233,27 @@
 <h2 id="stitching-it-all-together">Stitching it all together</h2>
 <p>The process of putting all these together starts with the bottom, our pure C++ library which uses <code>qpdf</code> to decrypt the file.</p>
 <div class="notices warning" ><p><p><strong>Update [30/01/2022]</strong></p>
-<p>Passing file descriptor to C++ seems to cause problems with <code>targetSdkVersion</code> &gt;= 30 due to <a href="https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md">fdsan</a>. I solved thisd issue by reading the file on java side and passing <code>byteArray</code> to JNI and further. Refer <a href="https://developer.android.com/reference/android/content/ContentResolver#openInputStream(android.net.Uri)">ContentResolver</a></p>
+<p>Passing file descriptor to C++ seems to cause problems with <code>targetSdkVersion</code> &gt;= 30 due to <a href="https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md">fdsan</a>. I solved this issue by reading the file on java side and passing <code>byteArray</code> to JNI and further. Refer <a href="https://developer.android.com/reference/android/content/ContentResolver#openInputStream(android.net.Uri)">ContentResolver</a>.</p>
 </p></div>
 <p>An excerpt is given below:</p>
-<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">decryptPDF_wFD</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">filename</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">out</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">password</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">decryptPDF</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">filename</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">out</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">password</span><span class="p">)</span>
 <span class="p">{</span>
     
-    <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span>
-     <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span>
-      <span class="s">&#34;%s%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="s">&#34;decryptPDF_wFD Received FD:&#34;</span><span class="p">,</span> <span class="n">fd</span><span class="p">);</span>
-
-    <span class="c1">//read from FD
-</span><span class="c1"></span>    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
-        <span class="k">throw</span><span class="p">(</span><span class="s">&#34;Cannot open file descriptor.&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">//malloc
-</span><span class="c1"></span>    <span class="kt">char</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">));</span>
-    <span class="n">fread</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
-    
-    <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span> <span class="s">&#34;FD loaded!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 
     <span class="n">QPDF</span> <span class="n">qpdf</span><span class="p">;</span>
 
     <span class="k">try</span>
     <span class="p">{</span>
-        <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span> <span class="s">&#34;received inputs: %s %s %d %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">filename</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">out</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">size</span><span class="p">,</span> <span class="n">password</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
-        <span class="n">qpdf</span><span class="p">.</span><span class="n">processMemoryFile</span><span class="p">(</span><span class="n">filename</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">password</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+        <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="n">APPNAME</span><span class="p">,</span> <span class="s">&#34;received inputs: %s %s %zu %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">filename</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">out</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">size</span><span class="p">,</span> <span class="n">password</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+        <span class="n">qpdf</span><span class="p">.</span><span class="n">processMemoryFile</span><span class="p">(</span><span class="n">filename</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">password</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
         <span class="n">QPDFWriter</span> <span class="n">w</span><span class="p">(</span><span class="n">qpdf</span><span class="p">,</span> <span class="n">out</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
         <span class="n">w</span><span class="p">.</span><span class="n">setPreserveEncryption</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
         <span class="n">w</span><span class="p">.</span><span class="n">write</span><span class="p">();</span>
-        <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
         <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span> <span class="n">err</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="s">&#34;PDFUnlockR&#34;</span><span class="p">,</span> <span class="s">&#34;Decrypt Error: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
-        <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+        <span class="n">__android_log_print</span><span class="p">(</span><span class="n">ANDROID_LOG_DEBUG</span><span class="p">,</span> <span class="n">APPNAME</span><span class="p">,</span> <span class="s">&#34;Decrypt Error: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">err</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
         <span class="k">throw</span><span class="p">(</span><span class="o">&amp;</span><span class="n">err</span><span class="p">);</span>
     <span class="p">}</span>
 
@@ -272,20 +261,23 @@
 </code></pre></div><p>Next comes the JNI C++, which acts as a glue between java and our code mentioned above:</p>
 <div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
 <span class="n">JNIEXPORT</span> <span class="n">jboolean</span> <span class="n">JNICALL</span>
-<span class="n">Java_com_pdfunlockr_QPDFModule_decryptPDF</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">type</span><span class="p">,</span> <span class="n">jint</span> <span class="n">fd</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">filename</span><span class="p">,</span> <span class="n">jlong</span> <span class="n">pdf_size</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">password</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">Java_com_pdfunlockr_QPDFModule_decryptPDF</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">type</span><span class="p">,</span> <span class="n">jbyteArray</span> <span class="n">data</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">filename</span><span class="p">,</span> <span class="n">jlong</span> <span class="n">pdf_size</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">password</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_fname</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">passwd</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">jbyte</span><span class="o">*</span> <span class="n">f_bytes</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetByteArrayElements</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">JNI_FALSE</span><span class="p">);</span>
     <span class="n">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">pdf_size</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">result</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
 
     <span class="k">try</span><span class="p">{</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">decryptPDF_wFD</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">input_fname</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">output</span><span class="p">),</span> <span class="n">size</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">passwd</span><span class="p">));</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">decryptPDF</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">f_bytes</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">input_fname</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">output</span><span class="p">),</span> <span class="n">size</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">passwd</span><span class="p">));</span>
     <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="o">*</span><span class="n">e</span><span class="p">){</span>
+        <span class="n">env</span><span class="o">-&gt;</span><span class="n">ReleaseByteArrayElements</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f_bytes</span><span class="p">,</span> <span class="n">JNI_ABORT</span><span class="p">);</span>
         <span class="n">jclass</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;java/lang/Exception&#34;</span><span class="p">);</span>
         <span class="n">env</span><span class="o">-&gt;</span><span class="n">ThrowNew</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">what</span><span class="p">());</span>
     <span class="p">};</span>
-
+    
+    <span class="n">env</span><span class="o">-&gt;</span><span class="n">ReleaseByteArrayElements</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f_bytes</span><span class="p">,</span> <span class="n">JNI_ABORT</span><span class="p">);</span>
     <span class="k">return</span> <span class="nf">jboolean</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div><p>Finally, these native functions can be used in java, and using React native modules, these wrapped methods can be invoked from javascript.</p>
@@ -299,11 +291,12 @@
       <span class="n">output_file</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">getCacheDir</span><span class="o">().</span><span class="na">getAbsolutePath</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;/&#34;</span> <span class="o">+</span> <span class="n">filename</span><span class="o">;</span>
       
       <span class="k">try</span> <span class="o">{</span>
-          <span class="n">ParcelFileDescriptor</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="na">openFileDescriptor</span><span class="o">(</span><span class="n">uri</span><span class="o">,</span> <span class="s">&#34;r&#34;</span><span class="o">);</span>
-          <span class="kt">int</span> <span class="n">pdf_fd</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="na">getFd</span><span class="o">();</span>
+          <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="na">openInputStream</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+          <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">is</span><span class="o">.</span><span class="na">available</span><span class="o">()];</span>
+          <span class="n">is</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">is</span><span class="o">.</span><span class="na">available</span><span class="o">());</span>
           <span class="kt">long</span> <span class="n">lsize</span> <span class="o">=</span> <span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">pdf_size</span><span class="o">);</span>
-          <span class="kt">boolean</span> <span class="n">out</span> <span class="o">=</span> <span class="n">decryptPDF</span><span class="o">(</span><span class="n">pdf_fd</span><span class="o">,</span> <span class="n">filename</span><span class="o">,</span> <span class="n">lsize</span><span class="o">,</span> <span class="n">password</span><span class="o">,</span> <span class="n">output_file</span><span class="o">);</span>
-          <span class="n">fd</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+          <span class="kt">boolean</span> <span class="n">out</span> <span class="o">=</span> <span class="n">decryptPDF</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">filename</span><span class="o">,</span> <span class="n">lsize</span><span class="o">,</span> <span class="n">password</span><span class="o">,</span> <span class="n">output_file</span><span class="o">);</span>
+          <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
           <span class="n">promise</span><span class="o">.</span><span class="na">resolve</span><span class="o">(</span><span class="n">output_file</span><span class="o">);</span>
       <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span>
         <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&#34;PDFUnlockr&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
@@ -312,7 +305,7 @@
 
    <span class="o">}</span>
    
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">decryptPDF</span><span class="o">(</span><span class="kt">int</span> <span class="n">in_fd</span><span class="o">,</span> <span class="n">String</span> <span class="n">filename</span><span class="o">,</span> <span class="kt">long</span> <span class="n">pdf_size</span><span class="o">,</span> <span class="n">String</span> <span class="n">password</span><span class="o">,</span> <span class="n">String</span> <span class="n">output</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">decryptPDF</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span><span class="o">,</span> <span class="n">String</span> <span class="n">filename</span><span class="o">,</span> <span class="kt">long</span> <span class="n">pdf_size</span><span class="o">,</span> <span class="n">String</span> <span class="n">password</span><span class="o">,</span> <span class="n">String</span> <span class="n">output</span><span class="o">);</span>
 </code></pre></div><div class="notices tip" ><p>Refer to <a href="https://reactnative.dev/docs/native-modules-android">RN Documentation</a> on how to bridge <code>Java &lt;-&gt; Javascript</code>.</p></div>
 <div class="notices info" ><p>My code is highly inspired at initial setup stage by <a href="https://github.com/reime005/react-native-cpp-code">reime005&rsquo;s react-native-cpp-code</a></p></div>
 <div class="notices note" ><p><p>Exception handling is a <strong>MUST</strong> if you want to remain sane during the development. Without exception handling, if an error occurs, the app abruptly crashes.</p>
