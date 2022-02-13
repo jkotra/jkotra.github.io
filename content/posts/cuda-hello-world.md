@@ -186,7 +186,7 @@ int index = blockDim.x * blockIdx.x + threadIdx.x;
 
 This is one of the main limitations of CUDA, things work a lit bit differently inside CUDA kernel.
 
-![](https://i.imgur.com/zVDXn7E.png)
+![](https://i.imgur.com/bsm1T76.png)
 (Source[^1])
 
 `if` condition is used to prevent memory overflow, this can be useful in the case of variable input size.
@@ -243,4 +243,4 @@ int* add_vec(int *a, int *b){
 This post serves as an example-first intro to CUDA, I skipped a lot of jargon about CUDA and NVIDIA architecture. I intend to cover some important topics like Matrix Multiplication and Image processing in future articles :bowtie:
 
 
-[^1]: http://study.marearts.com/2015/03/meaning-of-threadidx-blockidx-blockdim.html
+[^1]: [Jason Sanders, Edward Kandrot - CUDA by Example - An Introduction to General-Purpose GPU Programming (2010) - P71](http://www.mat.unimi.it/users/sansotte/cuda/CUDA_by_Example.pdf)
