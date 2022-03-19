@@ -3,11 +3,12 @@ title: "Eclipse IDE Essentials"
 description: "Saner defaults, Themes and plugins 💫"
 date: 2022-03-17T14:14:03+05:30
 draft: false
+tags: ["eclipse", "java"]
 images:
     - https://i.imgur.com/XO0GmiH.png
 ---
 
-![My Eclipse setup](https://i.imgur.com/ucKScjF.png "My IDE")
+![My Eclipse setup](https://i.imgur.com/ucKScjF.png "My eclipse IDE")
 
 # Introduction
 
@@ -23,7 +24,7 @@ I'd recommend going with the [vanilla version](https://www.eclipse.org/downloads
 
 ![Content Assist in Action](https://i.imgur.com/KOGUReO.png "Content Assist in Action")
 
-Content Assist (or) AutoComplete is essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).
+Content Assist (or) Auto Complete is essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).
 
 *Window->Preferences->Editor->Content Assist->Advanced*
 
@@ -44,7 +45,7 @@ you can sort the above as per your liking, generally eclipse to smart enough to 
 
 ### Content Assist Triggers
 
-it's always a good idea to trigger autocomplete on every character (like in every other IDE!) and not just the default `.` character.
+it's always a good idea to trigger auto complete on every character (like in every other IDE!) and not just the default `.` character.
 
 *Window->Preferences->Editor->Content Assist->Auto Activation*
 
@@ -70,7 +71,7 @@ Some settings in eclipse are not persisted through a restart. we have to enable 
 | [archive.org mirror](https://web.archive.org/web/20220318170730/https://www.tabnine.com/blog/top-eclipse-ide-themes/)
 
 {{% notice tip %}}
-If you are using Linux and especially Gnome DE, the dark theme of the eclipse while the system is using a light variant theme seems broken. one way to mitigate this is to use the `GTK_THEME` env. variable to force eclipse to use a dark theme for its components.
+If you are using Linux and especially Gnome DE, the dark theme of the eclipse while the system is using a light variant theme seems broken. one way to mitigate this is to use the `GTK_THEME` environment variable to force eclipse to use a dark theme for its components.
 
 `GTK_THEME=Adwaita:dark ./eclipse`
 {{% /notice %}}
@@ -85,6 +86,7 @@ If you are using Linux and especially Gnome DE, the dark theme of the eclipse wh
 
 **Eclipse Web Developer Tools** given all the necessary support for common types of web files you may encounter like HTML, CSS or YAML, etc...
 
+you can install plugins from Eclipse marketplace (*Help->Eclipse Marketplace*)
 
 ### Misc.
 
