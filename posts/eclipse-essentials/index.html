@@ -14,7 +14,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://stdin.top/posts/eclipse-essentials/"><meta property="og:image" content="https://i.imgur.com/XO0GmiH.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-03-17T14:14:03+05:30">
-<meta property="article:modified_time" content="2022-03-19T13:35:03+05:30">
+<meta property="article:modified_time" content="2022-04-01T10:46:22+05:30">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://i.imgur.com/XO0GmiH.png">
 <meta name=twitter:title content="Eclipse IDE Essentials">
@@ -74,7 +74,7 @@
 <div class=post-header>
 <h1 class=title>Eclipse IDE Essentials</h1>
 <div class=meta>Posted at &mdash; Mar 17, 2022
-| Last Modified on &mdash; Mar 19, 2022</div>
+| Last Modified on &mdash; Apr 1, 2022</div>
 </div>
 <div class=markdown>
 <p>
@@ -95,7 +95,7 @@
 <figcaption>Content Assist in Action</figcaption>
 </figure>
 </p>
-<p>Content Assist (or) Auto Complete is essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).</p>
+<p>Content Assist (or) Auto Complete is an essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).</p>
 <p><em>Window->Preferences->Editor->Content Assist->Advanced</em></p>
 <p>enable the following under <strong>Default Proposal Kinds</strong>:</p>
 <ul>
@@ -108,7 +108,7 @@
 <li>Template Proposals</li>
 <li>Language Server Proposals</li>
 </ul>
-<p>you can sort the above as per your liking, generally eclipse to smart enough to suggest best match at the top without manual intervention.</p>
+<p>you can sort the above as per your liking, generally eclipse to smart enough to suggest the best match at the top without manual intervention.</p>
 <hr>
 <h3 id=content-assist-triggers>Content Assist Triggers</h3>
 <p>it&rsquo;s always a good idea to trigger auto complete on every character (like in every other IDE!) and not just the default <code>.</code> character.</p>
@@ -133,19 +133,20 @@
 <div class="notices tip"><p><p>If you are using Linux and especially Gnome DE, the dark theme of the eclipse while the system is using a light variant theme seems broken. one way to mitigate this is to use the <code>GTK_THEME</code> environment variable to force eclipse to use a dark theme for its components.</p>
 <p><code>GTK_THEME=Adwaita:dark ./eclipse</code></p>
 </p></div>
+<p>These color themes work best with <a href=https://marketplace.eclipse.org/content/darkest-dark-theme-devstyle>Darkest Dark Theme with DevStyle</a> plugin. It also brings with it modern icons and tries to polish some rough edges. Using the above color themes with the default Light/Dark theme may result in broken HTML and XML foreground and background.</p>
 <hr>
 <h1 id=plugins>Plugins</h1>
 <h3 id=web-development>Web Development</h3>
 <p><a href=https://marketplace.eclipse.org/content/eclipse-web-developer-tools-0>Eclipse Web Developer Tools</a></p>
 <p><strong>Eclipse Web Developer Tools</strong> given all the necessary support for common types of web files you may encounter like HTML, CSS or YAML, etc&mldr;</p>
-<p>you can install plugins from Eclipse marketplace (<em>Help->Eclipse Marketplace</em>)</p>
+<p>you can install plugins from the Eclipse marketplace (<em>Help->Eclipse Marketplace</em>)</p>
 <h3 id=misc>Misc.</h3>
 <ul>
-<li><a href=https://projectlombok.org/setup/eclipse>Lombak</a></li>
+<li><a href=https://projectlombok.org/setup/eclipse>Lombak</a> - Automatically generates getters and setters when a class is annotated with <code>@Data</code>. Also provides other convenient annotations.</li>
 </ul>
 <hr>
 <h1 id=conclusion>Conclusion</h1>
-<p>Eclipse is hard on the beginner&rsquo;s often overwhelming them with many options and (tiny!) icons. it&rsquo;s definitely worth it to get familiarized with eclipse as it&rsquo;s the go-to choice of many small/medium/startups who are cost conscious.</p>
+<p>Eclipse is hard on the beginner&rsquo;s often overwhelming them with many options and (tiny!) icons. it&rsquo;s worth it to get familiarized with eclipse as it&rsquo;s the go-to choice of many small/medium/startups who are cost-conscious.</p>
 </div>
 <div class=post-tags>
 <nav class="nav tags">
