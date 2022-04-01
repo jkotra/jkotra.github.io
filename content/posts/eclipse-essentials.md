@@ -24,7 +24,7 @@ I'd recommend going with the [vanilla version](https://www.eclipse.org/downloads
 
 ![Content Assist in Action](https://i.imgur.com/KOGUReO.png "Content Assist in Action")
 
-Content Assist (or) Auto Complete is essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).
+Content Assist (or) Auto Complete is an essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).
 
 *Window->Preferences->Editor->Content Assist->Advanced*
 
@@ -39,7 +39,7 @@ enable the following under **Content Assist cycling**:
 * Template Proposals
 * Language Server Proposals
 
-you can sort the above as per your liking, generally eclipse to smart enough to suggest best match at the top without manual intervention.
+you can sort the above as per your liking, generally eclipse to smart enough to suggest the best match at the top without manual intervention.
 
 ---
 
@@ -76,6 +76,8 @@ If you are using Linux and especially Gnome DE, the dark theme of the eclipse wh
 `GTK_THEME=Adwaita:dark ./eclipse`
 {{% /notice %}}
 
+These color themes work best with [Darkest Dark Theme with DevStyle](https://marketplace.eclipse.org/content/darkest-dark-theme-devstyle) plugin. It also brings with it modern icons and tries to polish some rough edges. Using the above color themes with the default Light/Dark theme may result in broken  HTML and XML foreground and background.
+
 ---
 
 # Plugins
@@ -86,15 +88,15 @@ If you are using Linux and especially Gnome DE, the dark theme of the eclipse wh
 
 **Eclipse Web Developer Tools** given all the necessary support for common types of web files you may encounter like HTML, CSS or YAML, etc...
 
-you can install plugins from Eclipse marketplace (*Help->Eclipse Marketplace*)
+you can install plugins from the Eclipse marketplace (*Help->Eclipse Marketplace*)
 
 ### Misc.
 
-* [Lombak](https://projectlombok.org/setup/eclipse)
+* [Lombak](https://projectlombok.org/setup/eclipse) - Automatically generates getters and setters when a class is annotated with `@Data`. Also provides other convenient annotations. 
 
 ---
 
 # Conclusion
 
-Eclipse is hard on the beginner's often overwhelming them with many options and (tiny!) icons. it's definitely worth it to get familiarized with eclipse as it's the go-to choice of many small/medium/startups who are cost conscious.
+Eclipse is hard on the beginner's often overwhelming them with many options and (tiny!) icons. it's worth it to get familiarized with eclipse as it's the go-to choice of many small/medium/startups who are cost-conscious.
 
