@@ -88,7 +88,20 @@ These color themes work best with [Darkest Dark Theme with DevStyle](https://mar
 
 **Eclipse Web Developer Tools** given all the necessary support for common types of web files you may encounter like HTML, CSS or YAML, etc...
 
-you can install plugins from the Eclipse marketplace (*Help->Eclipse Marketplace*)
+you can install plugins from the Eclipse marketplace (*Help->Eclipse Marketplace*).
+
+You may also want to install features from EE edition that are not part of the plugin, these include specific wizards.
+
+1. Select your version from [releases page](https://download.eclipse.org/releases/). Copy the URL.
+
+2. Navigate to *Help->Install New Software*.
+
+3. Paste the URL in **Work with** field.
+
+![](https://i.imgur.com/4xNnBtk.png "Install New Software Window")
+
+4. Select `Web, XML, Java EE and OSGi Enterprise Development` and install it.
+
 
 ### Misc.
 
