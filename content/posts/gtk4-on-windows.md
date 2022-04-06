@@ -132,6 +132,12 @@ int main (int argc, char *argv[]) {
 
 ![https://i.imgur.com/oHf7ZqG.png](https://i.imgur.com/oHf7ZqG.png)
 
+{{% notice note %}}
+If you are running Windows on a **virtual machine** and facing any issues with rendering such as bulky black borders, use `CAIRO` backend for now. support for VGPU (provided by the hypervisor) is very basic and unstable.
+
+`$env:GSK_RENDERER = "CAIRO"`
+{{% /notice %}}
+
 ### Debugging
 
 Setting up debugging enviroment is quite easy. Defaults should just work fine as long as you select the correct compiler when prompted, I've added `-mwindows` to compile flags for good measure.
