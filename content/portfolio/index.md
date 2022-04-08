@@ -14,9 +14,9 @@ description: Compilation of my works.
 <img src="/images/pdfunlockr.png" width="120" height="180" alt="PDFUnlockR" align="right">
 
 <div>
-PDFUnlockR is a powerful app to remove passwords and encryption from PDF files. It is capable of bulk processing.
+PDFUnlockR is a powerful app to remove passwords and encryption from PDF files. It is capable of bulk processing (decryption).
 
-Made with <a href="https://reactnative.dev/">React Native.</a> and under the hood, uses <a href="https://github.com/qpdf/qpdf">QPDF</a> library.
+Made with <a href="https://reactnative.dev/">React Native</a>, and under the hood, uses <a href="https://github.com/qpdf/qpdf">QPDF</a> library.
 
 <a href="/posts/pdfunlockr-technical-essay/">Read: Making the best PDF Unlocker / Decryptor App</a>
 
@@ -74,7 +74,7 @@ It is made with [GTK toolkit](https://www.gtk.org/) and written in python.
 
 _WPC_ stands for **W**all **P**aper **C**hanger
 
-_WPC_ is a wallpaper changer for **Windows**/**Linux**. It can optionally retrieve wallpapers from wallhaven, Bing and Reddit.
+_WPC_ is a wallpaper changer for **Windows**/**Linux**. It can optionally retrieve wallpapers from wallhaven and Reddit.
 
 ---
 
