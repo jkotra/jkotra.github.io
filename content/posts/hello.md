@@ -3,6 +3,7 @@ title: "Hello"
 date: 1971-01-01T11:54:58+05:30
 draft: true
 description: "Hello, Hugo!"
+description_meta: "this is an SEO-friendly loong description of my post! blah blah blah"
 tags: ["Hello"]
 js: ["https://cdn.jsdelivr.net/npm/chart.js@2.8.0"]
 ---
