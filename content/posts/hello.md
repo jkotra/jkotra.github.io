@@ -29,7 +29,6 @@ $$\int_{a}^{b} x^2 dx$$
 A notice disclaimer
 {{% /notice %}}
 
-
 {{% notice info %}}
 An information disclaimer
 {{% /notice %}}
@@ -41,7 +40,6 @@ A tip disclaimer
 {{% notice warning %}}
 A warning disclaimer
 {{% /notice %}}
-
 
 ---
 
@@ -77,7 +75,7 @@ var chart = new Chart(ctx, {
 Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
 ```rust
-pub fn wallheaven_wallpaperinfo(apikey: &str, id: &str) -> Result<serde_json::value::Value, Box<dyn std::error::Error>> 
+pub fn wallheaven_wallpaperinfo(apikey: &str, id: &str) -> Result<serde_json::value::Value, Box<dyn std::error::Error>>
 
 pub fn wallheaven_search(apikey: &str, query: HashMap<&str, &str>) -> Result<Value, Box<dyn std::error::Error>>
 
@@ -91,6 +89,33 @@ pub fn wallheaven_getcoll(username: &str, collid: i64) -> Result<serde_json::val
 
 ```
 
-[^1]: This is the first footnote.
+{{< highlight c "hl_lines=8-12, linenos=inline" >}}
+int change_in_modified_date(char *filename)
+{
 
+    if (stat(filename, &stat_info) != 1)
+    {
+
+        // if datasource_lastmodified is -1 then it's initial check
+        if (datasource_lastmodified == -1)
+        {
+            datasource_lastmodified = stat_info.st_mtime;
+            return false;
+        }
+
+        // if file modified
+        if (datasource_lastmodified != stat_info.st_mtime)
+        {
+
+            // update var.
+            datasource_lastmodified = stat_info.st_mtime;
+            return true;
+        }
+    }
+
+    return false;
+}
+{{< / highlight >}}
+
+[^1]: This is the first footnote.
 [^bignote]: Here's one with multiple paragraphs and code.
