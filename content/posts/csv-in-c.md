@@ -13,9 +13,6 @@ images:
 
 In this, I will show you how to read CSV files in C.
 
-{{% adsense Top %}}
-{{% /adsense %}}
-
 # Example.csv
 
 Let's take a look at `example.csv`
@@ -116,11 +113,9 @@ Row: 2020-03-11 09:29:00,26755.65,26779.7,26755.65,26760.65,0%
 
 # Tokenizing
 
-{{% adsense Bottom %}}
 Tokenizing is the processing of splitting a string by any given character, in our case we want to split it by `,`.
 
 we use `strtok()` from `string.h`
-{{% /adsense %}}
 
 ### code
 
