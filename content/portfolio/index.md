@@ -13,10 +13,10 @@ description: Compilation of my works.
 
 <img src="/images/pdfunlockr.png" width="120" height="180" alt="PDFUnlockR" align="right">
 
-<div>
+<div style="margin-right: 140px">
 PDFUnlockR is a powerful app to remove passwords and encryption from PDF files. It is capable of bulk processing (decryption).
 
-Made with <a href="https://reactnative.dev/">React Native</a>, and under the hood, uses <a href="https://github.com/qpdf/qpdf">QPDF</a> library.
+Built with <a href="https://reactnative.dev/">React Native</a>, and under the hood, uses <a href="https://github.com/qpdf/qpdf">QPDF</a> library.
 
 <a href="/posts/pdfunlockr-technical-essay/">Read: Making the best PDF Unlocker / Decryptor App</a>
 
@@ -37,12 +37,29 @@ Made with <a href="https://reactnative.dev/">React Native</a>, and under the hoo
 <div style="margin-left: 140px">
 OUResults app lets you check your examination results conducted by Osmania University, Hyderabad.
 
-Made with <a href="https://reactnative.dev/">React Native.</a>
+Built with <a href="https://reactnative.dev/">React Native.</a>
 
 </div>
 
 <div style="padding-bottom: 70px">
 <a href='https://play.google.com/store/apps/details?id=com.ouresults&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img height="192px" width="192px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+</div>
+
+---
+
+
+## [Nag](https://play.google.com/store/apps/details?id=top.stdin.nag)
+
+<img src="/images/nag.png" width="100" height="160" alt="Nag" align="right">
+
+<div style="margin-top: 20px; margin-right: 140px;">
+Nag enables you to set repeated reminders ⏰ sent as notifications 💬 at customizable intervals.
+
+Built with <a href="https://reactnative.dev/">React Native</a> and <a href="https://m3.material.io/">MaterialYou</href> Guidelines.
+</div>
+
+<div style="padding-bottom: 60px">
+<a href='https://play.google.com/store/apps/details?id=top.stdin.nag&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height='192' width='192' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 </div>
 
 ---
