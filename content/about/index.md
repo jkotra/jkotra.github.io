@@ -14,7 +14,7 @@ I am a self-taught programmer and an avid open-source contributor.
 
 I like to learn and experiment on subjects related to CS - Programming, Software development, Machine Learning/DL, and other fields. I like dipping my feet into uncharted waters now and then such as Web development occasionally. I enjoy learning and discovering new things.
 
-I utilize my spare time either by spending time on my hobbies such as video programming, reading a book, or just binge on a Netflix series. 
+I utilize my spare time either by spending time on my hobbies such as video programming, reading a book, or just binge on a TV series. 
 
 My favorite language for scripting in python. for compiled applications/libraries, I usually choose rust for its memory safety features. 
 
