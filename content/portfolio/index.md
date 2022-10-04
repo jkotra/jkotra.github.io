@@ -25,16 +25,15 @@ Built with [GTK toolkit](https://www.gtk.org/) and written in Python.
 
 ## [unlockr](https://github.com/jkotra/unlockr)
 
-<img src="https://github.com/jkotra/unlockr/raw/main/static/light.png" width="300" alt="unlockr" align="right">
+<img src="https://github.com/jkotra/unlockr/raw/main/static/light.png" width="256" alt="unlockr" align="center">
 
 A simple tool to decrypt PDF files.
 
 Built with [GTK toolkit](https://www.gtk.org/) and written in C.
 
-<br>
+
 
 <a href='https://flathub.org/apps/details/com.github.jkotra.unlockr'><img width='140' alt='Download on Flathub' style="padding-bottom: 80px" src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
-<br>
 
 ---
 
