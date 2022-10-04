@@ -9,6 +9,35 @@ description: Compilation of my works.
 
 <!-- start from here -->
 
+
+## [eOVPN](https://github.com/jkotra/eOVPN)
+
+<img src="https://raw.githubusercontent.com/jkotra/eOVPN/master/static/window_connected_with_flag.png" width="400" alt="eOVPN" align="right">
+
+`eOVPN` is a application to connect, manage and update(from remote <i>.zip</i>) OpenVPN configurations.
+
+Built with [GTK toolkit](https://www.gtk.org/) and written in Python.
+
+<a href='https://flathub.org/apps/details/com.github.jkotra.eovpn'><img width='140' alt='Download on Flathub' style="padding-bottom: 80px" src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<br>
+
+---
+
+## [unlockr](https://github.com/jkotra/unlockr)
+
+<img src="https://github.com/jkotra/unlockr/raw/main/static/light.png" width="300" alt="unlockr" align="right">
+
+A simple tool to decrypt PDF files.
+
+Built with [GTK toolkit](https://www.gtk.org/) and written in C.
+
+<br>
+
+<a href='https://flathub.org/apps/details/com.github.jkotra.unlockr'><img width='140' alt='Download on Flathub' style="padding-bottom: 80px" src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+<br>
+
+---
+
 ## [PDFUnlockR](https://play.google.com/store/apps/details?id=com.pdfunlockr)
 
 <img src="/images/pdfunlockr.png" width="120" height="180" alt="PDFUnlockR" align="right">
@@ -61,19 +90,6 @@ Built with <a href="https://reactnative.dev/">React Native</a> and <a href="http
 <div style="padding-bottom: 60px">
 <a href='https://play.google.com/store/apps/details?id=top.stdin.nag&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height='192' width='192' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 </div>
-
----
-
-## [eOVPN](https://github.com/jkotra/eOVPN)
-
-<img src="https://raw.githubusercontent.com/jkotra/eOVPN/master/static/window_connected_with_flag.png" width="400" alt="eOVPN" align="right">
-
-`eOVPN` is a application to connect, manage and update(from remote <i>.zip</i>) OpenVPN configurations.
-
-It is made with [GTK toolkit](https://www.gtk.org/) and written in python.
-
-<a href='https://flathub.org/apps/details/com.github.jkotra.eovpn'><img width='140' alt='Download on Flathub' style="padding-bottom: 80px" src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
-<br>
 
 ---
 
