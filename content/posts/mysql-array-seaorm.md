@@ -200,6 +200,8 @@ Points to note in the above code:
 
 The combination of `Employee` and `Projects` tables gives us `EmployeeModel` that we defined in the beginning.
 
+![ER Diagram](https://i.imgur.com/F26YnMf.png)
+
 ### Inserting Employee
 
 Take a look at the `insert` fn of our app.
