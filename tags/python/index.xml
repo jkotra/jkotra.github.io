@@ -1,2 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python on &lt;stdin></title><link>https://stdin.top/tags/python/</link><description>Recent content in python on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 Aug 2020 15:52:50 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>They are Billions - Automatic game saving utility</title><link>https://stdin.top/posts/trbsg/</link><pubDate>Sun, 09 Aug 2020 15:52:50 +0530</pubDate><guid>https://stdin.top/posts/trbsg/</guid><description>Github repository
-Introduction technical overview of TRBSG. the purpose of the tool is to automatically backup(zip) save files of They are Billions and easily restore them afterward.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python on &lt;stdin></title><link>https://stdin.top/tags/python/</link><description>Recent content in python on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 Aug 2020 15:52:50 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>They are Billions - Automatic game saving utility</title><link>https://stdin.top/posts/trbsg/</link><pubDate>Sun, 09 Aug 2020 15:52:50 +0530</pubDate><guid>https://stdin.top/posts/trbsg/</guid><description>&lt;p>&lt;a href="https://github.com/jkotra/trbsg">Github repository&lt;/a>&lt;/p>
+&lt;hr>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>technical overview of &lt;a href="https://github.com/jkotra/trbsg">TRBSG&lt;/a>. the purpose of the tool is to automatically backup(zip) save files of &lt;a href="https://en.wikipedia.org/wiki/They_Are_Billions">They are Billions&lt;/a> and easily restore them afterward.&lt;/p>
+&lt;h2 id="usecase">Usecase&lt;/h2>
+&lt;ul>
+&lt;li>start from anytime the game is saved.&lt;/li>
+&lt;li>easy to restore (&lt;code>-r&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;h2 id="how">How&lt;/h2>
+&lt;div class="notices note" >&lt;p>save directory is by default set to &lt;code>C:\\Users\{user}\Documents\My Games\They Are Billions\&lt;/code>.
+non-default value can be passed using &lt;code>--path&lt;/code> arg.&lt;/p>&lt;/div>
+&lt;p>This is a small script(&lt;em>&amp;lt; 80 ln&lt;/em>) written in python (&amp;gt;= &lt;em>3.0&lt;/em>). this script repeatedly checks for a change in modified date of files ending with &lt;code>*zx*&lt;/code> file extension as an indication that savefiles are modified.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">watch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Watching: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">modified_times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">root&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">walk&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">file&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">files&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s2">&amp;#34;.zx&amp;#34;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">modified_times&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getmtime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">root&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;span class="k">while&lt;/span> &lt;span class="kc">True&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">current_modified_times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">root&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">files&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">walk&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">file&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">files&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s2">&amp;#34;.zx&amp;#34;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">current_modified_times&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">getmtime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">root&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">)))&lt;/span>
+&lt;span class="k">except&lt;/span> &lt;span class="ne">FileNotFoundError&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">continue&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">current_modified_times&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">modified_times&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">modified_times&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">current_modified_times&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">modified_times&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">current_modified_times&lt;/span>
+&lt;span class="n">zipSave&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">continue&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>1st loop stores the initial &lt;code>modified time&lt;/code> of files in a list. this is later compared every time in an infinite loop to check for a change in the modified timestamp. if any change is detected, it calls &lt;code>zipSave(path)&lt;/code> and sets &lt;code>modified_times = current_modified_times&lt;/code>&lt;/p>
+&lt;p>&lt;code>zipSave()&lt;/code> uses &lt;code>shutil.make_archive()&lt;/code> to make zip file and store it under &lt;code>saves/&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">zipSave&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">zipfname&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;saves&lt;/span>&lt;span class="se">\\&lt;/span>&lt;span class="si">{n}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">listdir&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;saves&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">shutil&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">make_archive&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">zipfname&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;zip&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Backup completed &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">zipfname&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>the user has 2 option to restore the backup(s),&lt;/p>
+&lt;ol>
+&lt;li>extract zip file directly to save directory, relacing files.
+(or)&lt;/li>
+&lt;li>use &lt;code>-r&lt;/code> option&lt;/li>
+&lt;/ol>
+&lt;h2 id="demo">Demo&lt;/h2>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe src="https://www.youtube-nocookie.com/embed/LzF1HebMW1Y" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video">&lt;/iframe>
+&lt;/div>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>this is a very simple script to backup your progress in the game and restart conveniently. this makes playing &amp;lsquo;They are Billions&amp;rsquo; a bit easier. 😊&lt;/p></description></item></channel></rss>

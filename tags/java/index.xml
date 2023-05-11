@@ -1,1 +1,233 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>java on &lt;stdin></title><link>https://stdin.top/tags/java/</link><description>Recent content in java on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 17 Mar 2022 14:14:03 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Eclipse IDE Essentials</title><link>https://stdin.top/posts/eclipse-essentials/</link><pubDate>Thu, 17 Mar 2022 14:14:03 +0530</pubDate><guid>https://stdin.top/posts/eclipse-essentials/</guid><description>My eclipse IDE Introduction In this article, I will briefly go over settings and modifications to eclipse IDE that is essential in my opinion to work smoothly with various projects and look closer to a modern-day IDE.</description></item><item><title>Making the best PDF Unlocker / Decryptor App</title><link>https://stdin.top/posts/pdfunlockr-technical-essay/</link><pubDate>Fri, 23 Jul 2021 00:08:43 +0530</pubDate><guid>https://stdin.top/posts/pdfunlockr-technical-essay/</guid><description>Preface My foray into React native happened approximately a month before of publishing date of this article, I know of very little javascript (non ES6) and almost a newb with React ecosystem.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>java on &lt;stdin></title><link>https://stdin.top/tags/java/</link><description>Recent content in java on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 17 Mar 2022 14:14:03 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Eclipse IDE Essentials</title><link>https://stdin.top/posts/eclipse-essentials/</link><pubDate>Thu, 17 Mar 2022 14:14:03 +0530</pubDate><guid>https://stdin.top/posts/eclipse-essentials/</guid><description>&lt;p>
+&lt;figure>
+&lt;img src="https://stdin.top/images/ucKScjF.png" alt="My Eclipse setup">
+&lt;figcaption>My eclipse IDE&lt;/figcaption>
+&lt;/figure>
+&lt;/p>
+&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;p>In this article, I will briefly go over settings and modifications to eclipse IDE that is essential in my opinion to work smoothly with various projects and look closer to a modern-day IDE.&lt;/p>
+&lt;p>I&amp;rsquo;d recommend going with the &lt;a href="https://www.eclipse.org/downloads/">vanilla version&lt;/a> of Eclipse IDE, it comes with bare essentials. anything/everything else can be installed through eclipse marketplace/plugins.&lt;/p>
+&lt;hr>
+&lt;h1 id="essential-settings--options">Essential Settings &amp;amp; Options&lt;/h1>
+&lt;h3 id="content-assist">Content Assist&lt;/h3>
+&lt;p>
+&lt;figure>
+&lt;img src="https://stdin.top/images/KOGUReO.png" alt="Content Assist in Action">
+&lt;figcaption>Content Assist in Action&lt;/figcaption>
+&lt;/figure>
+&lt;/p>
+&lt;p>Content Assist (or) Auto Complete is an essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).&lt;/p>
+&lt;p>&lt;em>Window-&amp;gt;Preferences-&amp;gt;Editor-&amp;gt;Content Assist-&amp;gt;Advanced&lt;/em>&lt;/p>
+&lt;p>enable the following under &lt;strong>Default Proposal Kinds&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Java Proposals&lt;/li>
+&lt;li>Template Proposals&lt;/li>
+&lt;/ul>
+&lt;p>enable the following under &lt;strong>Content Assist cycling&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Java Type Proposals&lt;/li>
+&lt;li>Template Proposals&lt;/li>
+&lt;li>Language Server Proposals&lt;/li>
+&lt;/ul>
+&lt;p>you can sort the above as per your liking, generally eclipse to smart enough to suggest the best match at the top without manual intervention.&lt;/p>
+&lt;hr>
+&lt;h3 id="content-assist-triggers">Content Assist Triggers&lt;/h3>
+&lt;p>it&amp;rsquo;s always a good idea to trigger auto complete on every character (like in every other IDE!) and not just the default &lt;code>.&lt;/code> character.&lt;/p>
+&lt;p>&lt;em>Window-&amp;gt;Preferences-&amp;gt;Editor-&amp;gt;Content Assist-&amp;gt;Auto Activation&lt;/em>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>enable auto activation.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>to trigger content assist on all common key presses, paste the following into &lt;em>Auto Activation Triggers for Java&lt;/em>:&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>.@_abcdefghijklmnopqrstuvwxyz&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h3 id="enable-oomph-recorder">Enable Oomph Recorder&lt;/h3>
+&lt;p>Some settings in eclipse are not persisted through a restart. we have to enable &lt;em>Oomph recorder&lt;/em> that will save our settings permanently.&lt;/p>
+&lt;p>&lt;em>Window-&amp;gt;Preferences-&amp;gt;Oomph&lt;/em>&lt;/p>
+&lt;hr>
+&lt;h1 id="color-themes">Color Themes&lt;/h1>
+&lt;p>&lt;a href="">Top 12 Eclipse IDE Themes&lt;/a>
+| &lt;a href="https://web.archive.org/web/20220318170730/https://www.tabnine.com/blog/top-eclipse-ide-themes/">archive.org mirror&lt;/a>&lt;/p>
+&lt;div class="notices tip" >&lt;p>&lt;p>If you are using Linux and especially Gnome DE, the dark theme of the eclipse while the system is using a light variant theme seems broken. one way to mitigate this is to use the &lt;code>GTK_THEME&lt;/code> environment variable to force eclipse to use a dark theme for its components.&lt;/p>
+&lt;p>&lt;code>GTK_THEME=Adwaita:dark ./eclipse&lt;/code>&lt;/p>
+&lt;/p>&lt;/div>
+&lt;p>These color themes work best with &lt;a href="https://marketplace.eclipse.org/content/darkest-dark-theme-devstyle">Darkest Dark Theme with DevStyle&lt;/a> plugin. It also brings with it modern icons and tries to polish some rough edges. Using the above color themes with the default Light/Dark theme may result in broken HTML and XML foreground and background.&lt;/p>
+&lt;hr>
+&lt;h1 id="plugins">Plugins&lt;/h1>
+&lt;h3 id="web-development">Web Development&lt;/h3>
+&lt;p>&lt;a href="https://marketplace.eclipse.org/content/eclipse-web-developer-tools-0">Eclipse Web Developer Tools&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Eclipse Web Developer Tools&lt;/strong> given all the necessary support for common types of web files you may encounter like HTML, CSS or YAML, etc&amp;hellip;&lt;/p>
+&lt;p>you can install plugins from the Eclipse marketplace (&lt;em>Help-&amp;gt;Eclipse Marketplace&lt;/em>).&lt;/p>
+&lt;p>You may also want to install features from EE edition that are not part of the plugin, these include specific wizards.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Select your version from &lt;a href="https://download.eclipse.org/releases/">releases page&lt;/a>. Copy the URL.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Navigate to &lt;em>Help-&amp;gt;Install New Software&lt;/em>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Paste the URL in &lt;strong>Work with&lt;/strong> field.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>
+&lt;figure>
+&lt;img src="https://stdin.top/images/4xNnBtk.png" alt="">
+&lt;figcaption>Install New Software Window&lt;/figcaption>
+&lt;/figure>
+&lt;/p>
+&lt;ol start="4">
+&lt;li>Select &lt;code>Web, XML, Java EE and OSGi Enterprise Development&lt;/code> and install it.&lt;/li>
+&lt;/ol>
+&lt;h3 id="misc">Misc.&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://projectlombok.org/setup/eclipse">Lombak&lt;/a> - Automatically generates getters and setters when a class is annotated with &lt;code>@Data&lt;/code>. Also provides other convenient annotations.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;p>Eclipse is hard on the beginner&amp;rsquo;s often overwhelming them with many options and (tiny!) icons. it&amp;rsquo;s worth it to get familiarized with eclipse as it&amp;rsquo;s the go-to choice of many small/medium/startups who are cost-conscious.&lt;/p></description></item><item><title>Making the best PDF Unlocker / Decryptor App</title><link>https://stdin.top/posts/pdfunlockr-technical-essay/</link><pubDate>Fri, 23 Jul 2021 00:08:43 +0530</pubDate><guid>https://stdin.top/posts/pdfunlockr-technical-essay/</guid><description>&lt;p>&lt;a href='https://play.google.com/store/apps/details?id=com.pdfunlockr&amp;pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>&lt;img height="192px" width="192px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/>&lt;/a>&lt;/p>
+&lt;h2 id="preface">Preface&lt;/h2>
+&lt;p>My foray into React native happened approximately a month before of publishing date of this article, I know of very little javascript (non ES6) and almost a &lt;em>newb&lt;/em> with React ecosystem. It almost felt like an adventure, after many months developing and improving my libraries and application written in a language(s) I&amp;rsquo;m comfortable with.&lt;/p>
+&lt;p>As of writing this, I feel like a pro of javascript. No wonder JS rules across the tech industry, the ease of learning makes it easy for a beginner like me. Even though I&amp;rsquo;m no stranger to the programming paradigm, it must be said that JS(ES6 variant) is the easiest to write, debug and extend.&lt;/p>
+&lt;p>With a mixture of learning &lt;a href="https://www.newline.co/fullstack-react-native/">from a book&lt;/a>, &lt;a href="https://www.udemy.com/course/react-native-the-practical-guide/">Udemy course&lt;/a>, and tinkering around with examples, I made a simple app to view semester results of my university. It&amp;rsquo;s now &lt;a href="https://play.google.com/store/apps/details?id=com.ouresults">available on the Google play store&lt;/a>.&lt;/p>
+&lt;h2 id="problem">Problem&lt;/h2>
+&lt;p>You have a pdf file, and it has a password. The aim is to generate a new file from input with password / any other encryption removed.&lt;/p>
+&lt;h3 id="but-why">But why?&lt;/h3>
+&lt;p>In general, it&amp;rsquo;s a hassle to enter the password every time you need to view it. The default PDF viewer on android does not have a feature to remember passwords.&lt;/p>
+&lt;p>Often, Financial institutions request bank statements other KYC documents which are often encrypted with a password(for example, eAadhar in India). There are several tools available online with varying downsides. I discussed these issues in the section below.&lt;/p>
+&lt;h2 id="competition-research">Competition Research&lt;/h2>
+&lt;p>A &lt;a href="https://play.google.com/store/search?q=pdf%20unlocker">search&lt;/a> for &amp;ldquo;&lt;em>pdf unlocker&lt;/em>&amp;rdquo; on google play store returns at least 6 that claim to do the job. But after I tested each one of them(excluding corporate type, discussed in next paragraph) I find their functionality ranging from unusable to badly designed UI to just crash. I don&amp;rsquo;t want to take the name of the developers here, I have immense respect for my colleagues in the trades irrespective of skill. The problem is quite possibly API and old age(depreciation). Many years after writing this article, my app might as well join them becoming unusable, the trick here is to use a newer SDK for future-proofing. I have a good feeling this is good for at least the next 4-5 Android versions. For this reason, &lt;code>PDFUnlockR&lt;/code> requires a minimum SDK of 24 (API) (Android 7)&lt;/p>
+&lt;p>Those which work and look nice are the corporate variety. An example is &lt;a href="https://play.google.com/store/apps/details?id=com.smallpdf.app.android&amp;amp;hl=en_IN&amp;amp;gl=US">Smallpdf&lt;/a> and &lt;a href="https://play.google.com/store/apps/details?id=com.ilovepdf.www&amp;amp;hl=en_IN&amp;amp;gl=US">iLovePDF&lt;/a>. Both of these are in a way more than a tool, they have a business model, charging users money if they exceed a certain limit of files. I feel this is a very dubious practice because of two reasons, they offer no value and little convenience, just jump on a computer and there are many programs to decrypt unlimited no. of files with no catch. 2nd reason is even though a guess, they are probably using some open-source library under the hood. The license of said Open source library may even explicitly prohibit profiting from their code.&lt;/p>
+&lt;h2 id="uiux-design">UI/UX Design&lt;/h2>
+&lt;p>The basic structure of &lt;code>PDFUnlockR&lt;/code> consists of mainly 3 screens.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Home / Queue&lt;/code>&lt;/li>
+&lt;li>&lt;code>Processing &lt;/code>&lt;/li>
+&lt;li>&lt;code>Decrypt(Final Results) &lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>
+&lt;img src="https://stdin.top/images/fBTnKbV.png" alt="">
+&lt;/p>
+&lt;p>Components used are a combination of vanilla react native and &lt;a href="https://callstack.github.io/react-native-paper/">react-native-paper&lt;/a>&lt;/p>
+&lt;h2 id="the-best-pdf-library---qpdf-theres-a-problem-though">the best PDF library - QPDF. There&amp;rsquo;s a problem though&amp;hellip;&lt;/h2>
+&lt;p>I&amp;rsquo;m quite confident QPDF is the best &lt;em>opensource&lt;/em> PDF library out there. The emphasis on open-source is important here, during my research I&amp;rsquo;ve encountered many closed source libraries with java bindings(that would have made my life easier, not having to deal with JNI). The problem is that QPDF is a c++ library and the way to connect it with java is through JNI(Java Native Interface)&lt;/p>
+&lt;h3 id="cross-compiling-qpdf-to-multiple--cpu-architectures">Cross Compiling QPDF to multiple CPU architectures.&lt;/h3>
+&lt;p>We first need to compile the library into a shared object(&lt;code>.so&lt;/code>) file to include in our project.&lt;/p>
+&lt;p>From &lt;code>android/app/gradle.build&lt;/code> we can specify the architectures we can target:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gradle" data-lang="gradle"> &lt;span class="n">externalNativeBuild&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;span class="n">cmake&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;span class="n">cppFlags&lt;/span> &lt;span class="s2">&amp;#34;-O2 -frtti -fexceptions -Wall -fstack-protector-all&amp;#34;&lt;/span>
+&lt;span class="n">abiFilters&lt;/span> &lt;span class="s1">&amp;#39;x86&amp;#39;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="s1">&amp;#39;x86_64&amp;#39;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="s1">&amp;#39;armeabi-v7a&amp;#39;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="s1">&amp;#39;arm64-v8a&amp;#39;&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here, I&amp;rsquo;ve chosen to use the library for all 4 (&lt;code>'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'&lt;/code>) architecture, cross-compiling is pretty straightforward once you figure out ins and outs of NDK compilers.&lt;/p>
+&lt;p>&lt;a href="https://sourceforge.net/projects/qpdf/files/qpdf/">QPDF&lt;/a> depends on one other library:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://www.ijg.org/files/jpegsrc.v9d.tar.gz">libjpeg&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>I&amp;rsquo;ve included links to gists of bash scripts to cross-compile these dependencies and also &lt;code>qpdf&lt;/code> itself.&lt;/p>
+&lt;p>&lt;a href="https://gist.github.com/jkotra/75d6ceedbd472583bc80c584347999f8">Github Gist&lt;/a>&lt;/p>
+&lt;div class="notices note" >&lt;p>for every change in &lt;code>targetSdkVersion&lt;/code> and &lt;code>compileSdkVersion&lt;/code>, QPDF need to be recompiled again to prevent app from crashing on invoking native code.&lt;/p>&lt;/div>
+&lt;div class="notices note" >&lt;p>&lt;p>compilation of QPDF will fail during cross-compilation due to its inability to confirm the existence of &lt;code>/dev/urandom&lt;/code>. This check must be disabled in &lt;code>configure&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="c1">#ln 16476 - version - 10.3.2&lt;/span>
+&lt;span class="nb">test&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$cross_compiling&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> no &lt;span class="o">&amp;amp;&amp;amp;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/p>&lt;/div>
+&lt;p>Running the above bash scripts should produce binary &lt;code>.so&lt;/code> for each architecture.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">.
+├── arm64-v8a
+│   ├── libjpeg.so
+│   └── libqpdf.so
+├── armeabi-v7a
+│   ├── libjpeg.so
+│   └── libqpdf.so
+├── x86
+│   ├── libjpeg.so
+│   └── libqpdf.so
+└── x86_64
+├── libjpeg.so
+└── libqpdf.so
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="jni--ndk">JNI + NDK&lt;/h3>
+&lt;p>&lt;a href="https://en.wikipedia.org/wiki/Java_Native_Interface">JNI&lt;/a> stands for &lt;strong>J&lt;/strong>ava &lt;strong>N&lt;/strong>ative &lt;strong>I&lt;/strong>nterface. &lt;a href="https://developer.android.com/ndk">NDK&lt;/a> (&lt;strong>N&lt;/strong>ative &lt;strong>D&lt;/strong>evelopment &lt;strong>K&lt;/strong>it) is what allows us to run C++ natively on the android platform.&lt;/p>
+&lt;p>JNI acts as a bridge between java and NDK/C++.&lt;/p>
+&lt;h2 id="stitching-it-all-together">Stitching it all together&lt;/h2>
+&lt;p>The process of putting all these together starts with the bottom, our pure C++ library which uses &lt;code>qpdf&lt;/code> to decrypt the file.&lt;/p>
+&lt;div class="notices warning" >&lt;p>&lt;p>&lt;strong>Update [30/01/2022]&lt;/strong>&lt;/p>
+&lt;p>Passing file descriptor to C++ seems to cause problems with &lt;code>targetSdkVersion&lt;/code> &amp;gt;= 30 due to &lt;a href="https://android.googlesource.com/platform/bionic/+/master/docs/fdsan.md">fdsan&lt;/a>. I solved this issue by reading the file on java side and passing &lt;code>byteArray&lt;/code> to JNI and further. Refer &lt;a href="https://developer.android.com/reference/android/content/ContentResolver#openInputStream(android.net.Uri)">ContentResolver&lt;/a>.&lt;/p>
+&lt;/p>&lt;/div>
+&lt;p>An excerpt is given below:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="kt">bool&lt;/span> &lt;span class="nf">decryptPDF&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">char&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">out&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size_t&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="n">QPDF&lt;/span> &lt;span class="n">qpdf&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">try&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="n">__android_log_print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ANDROID_LOG_DEBUG&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">APPNAME&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;received inputs: %s %s %zu %s&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">c_str&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">out&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">c_str&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">c_str&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;span class="n">qpdf&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">processMemoryFile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">filename&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">c_str&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">c_str&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;span class="n">QPDFWriter&lt;/span> &lt;span class="n">w&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">qpdf&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">out&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">c_str&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;span class="n">w&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">setPreserveEncryption&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">w&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">write&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">catch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">exception&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">err&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="n">__android_log_print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ANDROID_LOG_DEBUG&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">APPNAME&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Decrypt Error: %s&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">err&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">what&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;span class="k">throw&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">err&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Next comes the JNI C++, which acts as a glue between java and our code mentioned above:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="k">extern&lt;/span> &lt;span class="s">&amp;#34;C&amp;#34;&lt;/span>
+&lt;span class="n">JNIEXPORT&lt;/span> &lt;span class="n">jboolean&lt;/span> &lt;span class="n">JNICALL&lt;/span>
+&lt;span class="n">Java_com_pdfunlockr_QPDFModule_decryptPDF&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">JNIEnv&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">env&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">jclass&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">jbyteArray&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">jstring&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">jlong&lt;/span> &lt;span class="n">pdf_size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">jstring&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">jstring&lt;/span> &lt;span class="n">out&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">const&lt;/span> &lt;span class="kt">char&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">input_fname&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">GetStringUTFChars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">filename&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">const&lt;/span> &lt;span class="kt">char&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">passwd&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">GetStringUTFChars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">password&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">const&lt;/span> &lt;span class="kt">char&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">output&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">GetStringUTFChars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">out&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">jbyte&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">f_bytes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">GetByteArrayElements&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">JNI_FALSE&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">size_t&lt;/span> &lt;span class="n">size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">long&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">pdf_size&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kt">bool&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">try&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">decryptPDF&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">f_bytes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">input_fname&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">output&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">string&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">passwd&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">catch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">exception&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">ReleaseByteArrayElements&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">f_bytes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">JNI_ABORT&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">jclass&lt;/span> &lt;span class="n">exp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">FindClass&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;java/lang/Exception&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">ThrowNew&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">exp&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">what&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;span class="n">env&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">ReleaseByteArrayElements&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">f_bytes&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">JNI_ABORT&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nf">jboolean&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally, these native functions can be used in java, and using React native modules, these wrapped methods can be invoked from javascript.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java"> &lt;span class="nd">@ReactMethod&lt;/span>
+&lt;span class="kd">public&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">QPDFdecryptPDF&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">String&lt;/span> &lt;span class="n">file_uri&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="n">pdf_size&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="kd">final&lt;/span> &lt;span class="n">Promise&lt;/span> &lt;span class="n">promise&lt;/span>&lt;span class="o">){&lt;/span>
+&lt;span class="n">Uri&lt;/span> &lt;span class="n">uri&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Uri&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">parse&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">file_uri&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;span class="n">ContentResolver&lt;/span> &lt;span class="n">resolver&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getContentResolver&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;span class="n">String&lt;/span> &lt;span class="n">output_file&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;span class="n">output_file&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ctx&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getCacheDir&lt;/span>&lt;span class="o">().&lt;/span>&lt;span class="na">getAbsolutePath&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s">&amp;#34;/&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;span class="k">try&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;span class="n">InputStream&lt;/span> &lt;span class="n">is&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">resolver&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">openInputStream&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">uri&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;span class="kt">byte&lt;/span>&lt;span class="o">[]&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="kt">byte&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="n">is&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">available&lt;/span>&lt;span class="o">()];&lt;/span>
+&lt;span class="n">is&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">read&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">0&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">is&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">available&lt;/span>&lt;span class="o">());&lt;/span>
+&lt;span class="kt">long&lt;/span> &lt;span class="n">lsize&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Long&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">parseLong&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">pdf_size&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;span class="kt">boolean&lt;/span> &lt;span class="n">out&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">decryptPDF&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">lsize&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">output_file&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;span class="n">is&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">close&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;span class="n">promise&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">resolve&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">output_file&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;span class="o">}&lt;/span>&lt;span class="k">catch&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">Exception&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="o">){&lt;/span>
+&lt;span class="n">Log&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">d&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;PDFUnlockr&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getMessage&lt;/span>&lt;span class="o">());&lt;/span>
+&lt;span class="n">promise&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">reject&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getMessage&lt;/span>&lt;span class="o">());&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="o">}&lt;/span>
+&lt;span class="kd">public&lt;/span> &lt;span class="kd">static&lt;/span> &lt;span class="kd">native&lt;/span> &lt;span class="kt">boolean&lt;/span> &lt;span class="nf">decryptPDF&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="kt">byte&lt;/span>&lt;span class="o">[]&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="n">filename&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">pdf_size&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="n">output&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="notices tip" >&lt;p>Refer to &lt;a href="https://reactnative.dev/docs/native-modules-android">RN Documentation&lt;/a> on how to bridge &lt;code>Java &amp;lt;-&amp;gt; Javascript&lt;/code>.&lt;/p>&lt;/div>
+&lt;div class="notices info" >&lt;p>My code is highly inspired at initial setup stage by &lt;a href="https://github.com/reime005/react-native-cpp-code">reime005&amp;rsquo;s react-native-cpp-code&lt;/a>&lt;/p>&lt;/div>
+&lt;div class="notices note" >&lt;p>&lt;p>Exception handling is a &lt;strong>MUST&lt;/strong> if you want to remain sane during the development. Without exception handling, if an error occurs, the app abruptly crashes.&lt;/p>
+&lt;p>The only way to debug what caused the crash is to look for hints in &lt;code>adb logcat&lt;/code>.this ordeal is comparable to finding a needle in a haystack.&lt;/p>
+&lt;/p>&lt;/div>
+&lt;h2 id="monetization">Monetization&lt;/h2>
+&lt;p>I placed just 2 ads.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://developers.google.com/admob/android/banner">Banner Ad&lt;/a> in Processing Screen&lt;/li>
+&lt;li>&lt;a href="https://developers.google.com/admob/android/interstitial">Interstitial Ad&lt;/a> on final/decrypt stage&lt;/li>
+&lt;/ul>
+&lt;p>There&amp;rsquo;s a lot of ad placement potential in here, At this point, I don&amp;rsquo;t feel like adding more ads that might make the app less functional and annoying.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>Over and all, I&amp;rsquo;m still surprised how fast this whole journey has been thanks to JS. Considering how little if anything about making apps before jumping in just a week ago. I still do not know a lot of vanilla java / Kotlin principles and practices. This is not a deficiency of me or a supposedly steep learning curve of Vanilla Android Development, rather the point here is that &lt;strong>React Native just WORKS!&lt;/strong>&lt;/p></description></item></channel></rss>

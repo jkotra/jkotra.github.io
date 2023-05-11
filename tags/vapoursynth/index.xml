@@ -1,1 +1,71 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vapoursynth on &lt;stdin></title><link>https://stdin.top/tags/vapoursynth/</link><description>Recent content in vapoursynth on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 03 Mar 2020 22:03:21 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/vapoursynth/index.xml" rel="self" type="application/rss+xml"/><item><title>Vapoursynth - Merge clips using MaskedMerge</title><link>https://stdin.top/posts/vapoursynth-maskedmerge/</link><pubDate>Tue, 03 Mar 2020 22:03:21 +0530</pubDate><guid>https://stdin.top/posts/vapoursynth-maskedmerge/</guid><description>std.MaskedMerge(clip clipa, clip clipb, clip mask[, int[] planes, bint first_plane=0, bint premultiplied=0])</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vapoursynth on &lt;stdin></title><link>https://stdin.top/tags/vapoursynth/</link><description>Recent content in vapoursynth on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 03 Mar 2020 22:03:21 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/vapoursynth/index.xml" rel="self" type="application/rss+xml"/><item><title>Vapoursynth - Merge clips using MaskedMerge</title><link>https://stdin.top/posts/vapoursynth-maskedmerge/</link><pubDate>Tue, 03 Mar 2020 22:03:21 +0530</pubDate><guid>https://stdin.top/posts/vapoursynth-maskedmerge/</guid><description>&lt;div class="notices note" >&lt;p>&lt;p>&lt;code>std.MaskedMerge(clip clipa, clip clipb, clip mask[, int[] planes, bint first_plane=0, bint premultiplied=0]) &lt;/code>&lt;/p>
+&lt;p>&lt;a href="http://www.vapoursynth.com/doc/functions/maskedmerge.html#std.MaskedMerge">&lt;strong>MaskedMerge&lt;/strong>&lt;/a> merges &lt;em>clipa&lt;/em> with &lt;em>clipb&lt;/em> using the per pixel weights in the mask, where 0 means that clipa is returned unchanged. If mask is a grayscale clip or if first_plane is true, the mask’s first plane will be used as the mask for merging all planes. The mask will be bilinearly resized if necessary.&lt;/p>
+&lt;/p>&lt;/div>
+&lt;hr>
+&lt;h1 id="objective">Objective&lt;/h1>
+&lt;p>To demonstrate the use of &lt;code>std.MaskedMerge&lt;/code> function. I will show how you can merge two clips using a mask.&lt;/p>
+&lt;p>Two small clips (&lt;em>00:01:00&lt;/em> each) are extracted from &lt;a href="https://en.wikipedia.org/wiki/Gemini_Man_(film)">Gemini Man (film)&lt;/a> for example usage. No copyright infringement intended.&lt;/p>
+&lt;div class="notices tip" >&lt;p>The code and resources used in this article are availabe in &lt;a href="https://github.com/jkotra/maskedmerge_vs">Github repo&lt;/a>.
+&lt;br>
+Video Files:
+&lt;br>
+&lt;a href="https://drive.google.com/open?id=1O5my4F0cX4vrT-1NWfSdV9WCrlSMYf-A">GM_clip_1.mkv&lt;/a>
+&lt;br>
+&lt;a href="https://drive.google.com/open?id=1wcBgSDxO5B_GsfUUqmMGLMOujJdXe_yi">GM_clip_2.mkv&lt;/a>&lt;/p>&lt;/div>
+&lt;hr>
+&lt;p>Requirements:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="http://www.vapoursynth.com/">Vapoursynth&lt;/a> - Obviously!&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/VFR-maniac/L-SMASH-Works">lsmas&lt;/a>- to load clip and extract a frame. (Optional)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.photoshop.com/">Photoshop&lt;/a> &lt;em>or&lt;/em> &lt;a href="https://www.gimp.org/">Gimp&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;ol>
+&lt;li>We use &lt;code>lsmas.LWLibavSource&lt;/code> to load the clip and save a frame as &lt;code>.png&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">clip_a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">lsmas&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LWLibavSource&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">script_path&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/GM_clip_1.mkv&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">6&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="notices info" >&lt;p>you can use any other application/video player such as &lt;a href="https://www.videolan.org/vlc/index.html">VLC player&lt;/a> to save a screenshot.&lt;/p>&lt;/div>
+&lt;p>
+&lt;img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/frame214.png" alt="Frame 214 from GM_clip_1.mkv">
+&lt;/p>
+&lt;ol start="2">
+&lt;li>
+&lt;p>Open the &lt;code>png&lt;/code> in &lt;em>photoshop&lt;/em> and select the area you want to mask. Right-click on the selected area and choose &lt;strong>Layer via cut&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After removing the original layer, we are left with our required mask.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>
+&lt;img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/1.PNG" alt="Frame 214 Mask in Photoshop">
+&lt;/p>
+&lt;ol start="4">
+&lt;li>You can view the mask in &lt;a href="https://bitbucket.org/mystery_keeper/vapoursynth-editor/src/master/">vapoursynth editor&lt;/a> by using the snippet below.&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">mask&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imwri&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Read&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">script_path&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/mask.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">mask&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set_output&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>
+&lt;img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/2.png" alt="">
+&lt;/p>
+&lt;div class="notices tip" >&lt;p>while using &lt;code>alpha=True&lt;/code> with &lt;code>core.imwri.Read&lt;/code> returns list with 2 clips, a normal RGB clip and Gray8 clip.the alpha clip is of index &lt;code>1&lt;/code> (or &lt;code>-1&lt;/code>).&lt;/p>&lt;/div>
+&lt;ol start="5">
+&lt;li>Putting it all together..&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">import&lt;/span> &lt;span class="nn">vapoursynth&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">vs&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;span class="n">script_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dirname&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">abspath&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="vm">__file__&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">core&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">vs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get_core&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">clip_a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">lsmas&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LWLibavSource&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">script_path&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/GM_clip_1.mkv&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">6&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">clip_b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">lsmas&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">LWLibavSource&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">script_path&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/GM_clip_2.mkv&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">threads&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">6&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">mask&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imwri&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Read&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">script_path&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/mask.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">merged_clip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">core&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">std&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">MaskedMerge&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">clip_a&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">clip_b&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">mask&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">merged_clip&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set_output&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>
+&lt;img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/merged.png" alt="Merged">
+&lt;/p></description></item></channel></rss>
