@@ -5,7 +5,7 @@ description: Reading CSV files in C. The fast and efficient way.
 draft: false
 tags: ["CSV", "C"]
 images:
-  - https://i.imgur.com/fFWGUZa.png
+  - /images/fFWGUZa.png
 ---
 
 

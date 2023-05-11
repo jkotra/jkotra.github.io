@@ -4,7 +4,7 @@ description: "Integrate TLS with TCP to securely communicate 🔒"
 date: 2020-09-20T20:07:40+05:30
 tags: ["network programming", "c"]
 images:
- - https://i.imgur.com/YGtDgXv.png
+ - /images/YGtDgXv.png
 draft: false
 ---
 

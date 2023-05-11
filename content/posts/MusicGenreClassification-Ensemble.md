@@ -17,7 +17,7 @@ running a Dense Network on this data, this proved to be the best model giving 5-
 
 The accuracy graph of train and validation sets:
 
-![accuracy graph](https://i.imgur.com/uj6NOks.png)
+![accuracy graph](/images/uj6NOks.png)
 
 ---
 

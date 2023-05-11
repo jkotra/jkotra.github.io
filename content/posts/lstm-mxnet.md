@@ -5,11 +5,11 @@ date: 2019-10-21T23:41:53+05:30
 tags: ["Deep Learning", "MXNet"]
 draft: false
 images:
-  - https://i.imgur.com/RFE2udJ.jpg
+  - /images/RFE2udJ.jpg
 ---
 
 
-![Photo by [Jake Hills](https://unsplash.com/@jakehills?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](https://i.imgur.com/RFE2udJ.jpg)
+![Photo by [Jake Hills](https://unsplash.com/@jakehills?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)](/images/RFE2udJ.jpg)
 
 ## Time series
 
@@ -30,7 +30,7 @@ and many more…
 
 ## Problem
 
-![](https://i.imgur.com/Hg1tYSG.jpg)
+![](/images/Hg1tYSG.jpg)
 >  *with a newly-minted elite and an economic growth rate of over 10 percent, the environment has taken a backseat in China, the world’s most populous country. Growing pollution has led to unusable waterways, increased incidence of birth defects, and some of the dirtiest air on earth. It’s so nasty that there’s now a word for it: “smogpocalypse”.*
 
 [Source](https://allthatsinteresting.com/pollution-in-china-photographs)

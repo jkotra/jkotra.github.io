@@ -3,7 +3,7 @@ title: "Python Decorators demystified"
 description: "🤓 Finally decided to learn something I avoided for years!"
 date: 2020-09-27T22:32:50+05:30
 images:
- - https://i.imgur.com/Lz9fDCK.jpg
+ - /images/Lz9fDCK.jpg
 draft: false
 ---
 

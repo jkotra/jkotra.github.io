@@ -5,7 +5,7 @@ draft: false
 tags: ['gtk', 'c']
 description: My experiences porting my toy app🧸 from GTK3 to GTK4
 images:
- - https://i.imgur.com/NMJ7cge.png
+ - /images/NMJ7cge.png
 ---
 
 # Introduction
@@ -63,7 +63,7 @@ this creates a problem with the current implementation of about dialog in my app
 
 The porting explained here is [available on Github](https://github.com/jkotra/coinflip-gtk). (`gtk4-port` branch)
 
-![](https://i.imgur.com/NMJ7cge.png)
+![](/images/NMJ7cge.png)
 
 [^1]: https://www.reddit.com/r/GTK/comments/jyf5lm/glade_not_recommended/
 [^2]: https://blogs.gnome.org/christopherdavis/2020/11/19/glade-not-recommended/

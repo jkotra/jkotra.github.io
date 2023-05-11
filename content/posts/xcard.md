@@ -4,7 +4,7 @@ description: "Multi-threaded library to generator and validate cards 💳."
 tags: ["cpp"]
 date: 2020-08-20T22:36:03+05:30
 images:
- - https://i.imgur.com/EDamtgl.jpg
+ - /images/EDamtgl.jpg
 draft: false
 ---
 

@@ -3,7 +3,7 @@ title: "Hello CUDA!"
 description: "Quick intro to CUDA and a 'Hello World' Example"
 date: 2020-12-04T18:47:53+05:30
 images:
- - https://i.imgur.com/9mroRtn.jpg
+ - /images/9mroRtn.jpg
 draft: false
 ---
 
@@ -186,7 +186,7 @@ int index = blockDim.x * blockIdx.x + threadIdx.x;
 
 This is one of the main limitations of CUDA, things work a lit bit differently inside CUDA kernel.
 
-![](https://i.imgur.com/bsm1T76.png)
+![](/images/bsm1T76.png)
 (Source[^1])
 
 `if` condition is used to prevent memory overflow, this can be useful in the case of variable input size.

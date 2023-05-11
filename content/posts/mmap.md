@@ -3,7 +3,7 @@ title: "mmap - one-liner to read file to string"
 description: use mmap to read files to a string in single line 🛠️.
 date: 2022-02-22T01:39:15+05:30
 images:
- - https://i.imgur.com/w9X5biT.png
+ - /images/w9X5biT.png
 draft: false
 ---
 

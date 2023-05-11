@@ -4,7 +4,7 @@ date: 2023-01-22T11:25:10+05:30
 description: "Represent Array Data in MySQL. Examples of Insertion and Deletion 📊"
 draft: false
 images:
-    - https://i.imgur.com/QD5snPl.png
+    - /images/QD5snPl.png
 ---
 
 # Introduction
@@ -200,7 +200,7 @@ Points to note in the above code:
 
 The combination of `Employee` and `Projects` tables gives us `EmployeeModel` that we defined in the beginning.
 
-![ER Diagram](https://i.imgur.com/F26YnMf.png)
+![ER Diagram](/images/F26YnMf.png)
 
 ### Inserting Employee
 

@@ -3,7 +3,7 @@ title: "Formatting Code in VScode"
 description: Make your code glitter ✨
 description_meta: How to Setup Automatic Code formatting in Visual Studio Code (per project). Introduction to Prettier for Javascript.
 images:
-  - https://i.imgur.com/sP3e1ph.png
+  - /images/sP3e1ph.png
 date: 2022-04-21T02:48:44+05:30
 draft: false
 ---
@@ -22,7 +22,7 @@ Some unsung advantages of formatting are:
 # VScode
 
 
-{{% resizeimage "https://i.imgur.com/MJn7wQY.png" 128px 128px "VSCode Logo" %}}
+{{% resizeimage "/images/MJn7wQY.png" 128px 128px "VSCode Logo" %}}
 
 
 VScode has the option to format your code on save as well as manually (*Shift + Ctrl + I*) or through Power Menu.
@@ -47,13 +47,13 @@ here, `editor.defaultFormatter` is the formatter with which you want your code t
 
 To see all the available formatters go to `File -> Preferences -> Settings` and search for "Default Formatter". IN the dropdown menu you can find all the available formatters. use your preferred and compatible formatter value in your `settings.json`
 
-{{% resizeimage "https://i.imgur.com/bTDWeG4.png" 256 256 "Available Formatters in VSCode" %}}
+{{% resizeimage "/images/bTDWeG4.png" 256 256 "Available Formatters in VSCode" %}}
 
 You can get more formatters in [VSCode Maketplace](https://marketplace.visualstudio.com/vscode) (Aka. Extensions).
 
 # Prettier
 
-![](https://i.imgur.com/sP3e1ph.png "Prettier Formatting")
+![](/images/sP3e1ph.png "Prettier Formatting")
 
 Prettier is a popular choice for many Javascript developers. I use prettier in my React Native Code to keep my JSX readable.
 

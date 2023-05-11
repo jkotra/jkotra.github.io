@@ -5,7 +5,7 @@ date: 2020-09-06T00:34:58+05:30
 tags: ["network programming", "c"]
 draft: false
 images:
- - https://i.imgur.com/8g8yX84.jpg
+ - /images/8g8yX84.jpg
 ---
 
 
@@ -196,7 +196,7 @@ UDP server listing on 127.0.0.1:8080
 
 you should see `hello` printed to in server window.
 
-![](https://i.imgur.com/DSN1YQa.gif "UDP Demo")
+![](/images/DSN1YQa.gif "UDP Demo")
 
 # Conclusion
 

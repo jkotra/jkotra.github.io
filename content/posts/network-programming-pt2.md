@@ -5,7 +5,7 @@ date: 2020-08-31T01:49:14+05:30
 tags: ["network programming", "c"]
 draft: false
 images:
- - https://i.imgur.com/8g8yX84.jpg
+ - /images/8g8yX84.jpg
 ---
 
 # Introduction

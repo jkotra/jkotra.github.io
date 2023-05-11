@@ -5,7 +5,7 @@ description: Making a 'Know Your IP' page with React.js.
 draft: false
 tags: ["React","Web Development"]
 images:
-  - https://i.imgur.com/zfKFVMX.png
+  - /images/zfKFVMX.png
 ---
 [Demo](https://lab.stdin.top/#/myip/) | [Code](https://gitlab.com/synk.0x1/lab.stdin.top/-/blob/master/src/components/pages/MyIp.js)
 

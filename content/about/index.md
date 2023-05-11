@@ -8,7 +8,7 @@ type: "page"
 
 Hi, I'm Jagadeesh Kotra. 
 
-( [📄 resume](#) | [📧 e-mail](mailto:jagadeesh@stdin.top) | [📞 Call](tel:+919392420045) | 💬 *jkotra* @ [irc.libera.chat](ircs://irc.libera.chat:6697) )
+( [📄 resume](#) | [📧 e-mail](mailto:jagadeesh@stdin.top) | [☎️ Call](tel:+919392420045) | 💬 *jkotra* @ [irc.libera.chat](ircs://irc.libera.chat:6697) )
 
 I am a self-taught programmer and an avid open-source contributor.
 

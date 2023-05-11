@@ -5,7 +5,7 @@ date: 2020-09-17T00:47:17+05:30
 tags: ["network programming", "c"]
 draft: false
 images:
- - https://i.imgur.com/PHC1msC.jpg
+ - /images/PHC1msC.jpg
 ---
 
 # Introduction

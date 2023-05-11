@@ -58,7 +58,7 @@ C:\\msys64\\mingw64\\bin
 C:\\msys64\\mingw64\\lib
 ```
 
-![https://i.imgur.com/9nD9ZCp.png](https://i.imgur.com/9nD9ZCp.png)
+![/images/9nD9ZCp.png](/images/9nD9ZCp.png)
 
 1. We also need to pass the output of `pkg-config` to `gcc` while compiling. firstly, open `CMD` and get the output of `pkg-config --cflags --libs gtk4`.
 
@@ -70,7 +70,7 @@ It will produce something like this:
 
 copy the output and add it as a System Variable (I saved it as `GTK4-PKG-CONFIG`):
 
-![https://i.imgur.com/oxcoJbA.png](https://i.imgur.com/oxcoJbA.png)
+![/images/oxcoJbA.png](/images/oxcoJbA.png)
 
 ### Visual Studio Code
 
@@ -130,7 +130,7 @@ int main (int argc, char *argv[]) {
 `gcc hello_world.c -o hello_world.exe -mwindows %GTK4-PKG-CONFIG%`
 5. Run the program by clicking on generated `.exe` file.
 
-![https://i.imgur.com/oHf7ZqG.png](https://i.imgur.com/oHf7ZqG.png)
+![/images/oHf7ZqG.png](/images/oHf7ZqG.png)
 
 {{% notice note %}}
 If you are running Windows on a **virtual machine** and facing any issues with rendering such as bulky black borders, use `CAIRO` backend for now. support for VGPU (provided by the hypervisor) is very basic and unstable.
@@ -211,7 +211,7 @@ Setting up debugging enviroment is quite easy. Defaults should just work fine as
 
 Add breakpoint wherever you wish and debug away! 
 
-![https://i.imgur.com/QVZD3Bq.png](https://i.imgur.com/QVZD3Bq.png)
+![/images/QVZD3Bq.png](/images/QVZD3Bq.png)
 
 ## A bit complicated example...
 
@@ -269,7 +269,7 @@ Compile the program with:
 
 `gcc whatismytime.c -o whatismytime -mwindows %GTK4-PKG-CONFIG%`
 
-![https://i.imgur.com/YURHuEM.png](https://i.imgur.com/YURHuEM.png)
+![/images/YURHuEM.png](/images/YURHuEM.png)
 
 ### Meson Build System
 

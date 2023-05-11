@@ -5,7 +5,7 @@ description: a short tutorial on how to write an algorithm to use with algoticks
 draft: false
 tags: ["Algoticks"]
 images:
-  - https://i.imgur.com/2wUgnmC.jpg
+  - /images/2wUgnmC.jpg
 ---
 
 # Introduction

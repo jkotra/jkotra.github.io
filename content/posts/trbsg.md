@@ -5,7 +5,7 @@ tags: ["python"]
 draft: false
 description: "python 🐍 script to automatically save and restore 'They are Billions' .ZX* files."
 images:
- - https://i.imgur.com/uCJpz2a.jpg
+ - /images/uCJpz2a.jpg
 ---
 
 [Github repository](https://github.com/jkotra/trbsg)

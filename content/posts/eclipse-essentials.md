@@ -5,10 +5,10 @@ date: 2022-03-17T14:14:03+05:30
 draft: false
 tags: ["eclipse", "java"]
 images:
-    - https://i.imgur.com/XO0GmiH.png
+    - /images/XO0GmiH.png
 ---
 
-![My Eclipse setup](https://i.imgur.com/ucKScjF.png "My eclipse IDE")
+![My Eclipse setup](/images/ucKScjF.png "My eclipse IDE")
 
 # Introduction
 
@@ -22,7 +22,7 @@ I'd recommend going with the [vanilla version](https://www.eclipse.org/downloads
 
 ### Content Assist
 
-![Content Assist in Action](https://i.imgur.com/KOGUReO.png "Content Assist in Action")
+![Content Assist in Action](/images/KOGUReO.png "Content Assist in Action")
 
 Content Assist (or) Auto Complete is an essential part of any IDE. It is enabled by default but proposals might be unchecked (depends on your edition, of course).
 
@@ -98,7 +98,7 @@ You may also want to install features from EE edition that are not part of the p
 
 3. Paste the URL in **Work with** field.
 
-![](https://i.imgur.com/4xNnBtk.png "Install New Software Window")
+![](/images/4xNnBtk.png "Install New Software Window")
 
 4. Select `Web, XML, Java EE and OSGi Enterprise Development` and install it.
 
