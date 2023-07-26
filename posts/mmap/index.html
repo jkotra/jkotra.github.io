@@ -14,7 +14,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://stdin.top/posts/mmap/"><meta property="og:image" content="https://stdin.top/images/w9X5biT.png"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-22T01:39:15+05:30">
-<meta property="article:modified_time" content="2023-05-11T19:55:50+05:30">
+<meta property="article:modified_time" content="2023-07-26T19:54:57+05:30">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://stdin.top/images/w9X5biT.png">
 <meta name=twitter:title content="mmap - one-liner to read file to string">
@@ -74,7 +74,7 @@
 <div class=post-header>
 <h1 class=title>mmap - one-liner to read file to string</h1>
 <div class=meta>Posted at &mdash; Feb 22, 2022
-| Last Modified on &mdash; May 11, 2023</div>
+| Last Modified on &mdash; Jul 26, 2023</div>
 </div>
 <div class=markdown>
 <h1 id=introduction>Introduction</h1>
@@ -103,13 +103,17 @@
 </span><span class=cp>#include</span> <span class=cpf>&lt;sys/mman.h&gt;</span><span class=cp>
 </span><span class=cp>#include</span> <span class=cpf>&lt;sys/stat.h&gt;</span><span class=cp>
 </span><span class=cp></span>
-<span class=kt>int</span> <span class=n>k_fd</span> <span class=o>=</span> <span class=n>open</span><span class=p>(</span><span class=s>&#34;kernel.cl&#34;</span><span class=p>,</span> <span class=n>O_RDONLY</span><span class=p>);</span>
-<span class=k>struct</span> <span class=n>stat</span> <span class=n>s</span><span class=p>;</span>
-<span class=n>fstat</span><span class=p>(</span><span class=n>k_fd</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>s</span><span class=p>);</span>
-<span class=n>printf</span><span class=p>(</span><span class=s>&#34;%d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>s</span><span class=p>.</span><span class=n>st_size</span><span class=p>);</span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+
+       <span class=kt>int</span> <span class=n>k_fd</span> <span class=o>=</span> <span class=n>open</span><span class=p>(</span><span class=s>&#34;kernel.cl&#34;</span><span class=p>,</span> <span class=n>O_RDONLY</span><span class=p>);</span>
+       <span class=k>struct</span> <span class=n>stat</span> <span class=n>s</span><span class=p>;</span>
+       <span class=n>fstat</span><span class=p>(</span><span class=n>k_fd</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>s</span><span class=p>);</span>
+       <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>s</span><span class=p>.</span><span class=n>st_size</span><span class=p>);</span>
 </code></pre></div><p>then we need to allocate memory and call <code>mmap</code>.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>char</span> <span class=o>*</span><span class=n>kernelSource</span> <span class=o>=</span> <span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=n>malloc</span><span class=p>(</span><span class=n>s</span><span class=p>.</span><span class=n>st_size</span> <span class=o>*</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>char</span><span class=p>));</span>
-<span class=n>kernelSource</span> <span class=o>=</span> <span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=n>mmap</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>s</span><span class=p>.</span><span class=n>st_size</span><span class=p>,</span> <span class=n>PROT_READ</span><span class=p>,</span> <span class=n>MAP_PRIVATE</span><span class=p>,</span> <span class=n>k_fd</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>       <span class=kt>char</span><span class=o>*</span> <span class=n>kernelSource</span> <span class=o>=</span> <span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=n>mmap</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>s</span><span class=p>.</span><span class=n>st_size</span><span class=p>,</span> <span class=n>PROT_READ</span><span class=p>,</span> <span class=n>MAP_PRIVATE</span><span class=p>,</span> <span class=n>k_fd</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+       <span class=n>printf</span><span class=p>(</span><span class=s>&#34;file content = %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>kernelSource</span><span class=p>);</span>
+       <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
 </code></pre></div><p><code>mmap</code> returns a void pointer, it&rsquo;s necessary to cast it to a <code>char *</code>.</p>
 <hr>
 <h1 id=conclusion>Conclusion.</h1>
