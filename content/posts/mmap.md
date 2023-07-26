@@ -43,17 +43,21 @@ we need to know the exact size of the file we are going to read. we can do that 
 #include <sys/mman.h>
 #include <sys/stat.h>
 
-int k_fd = open("kernel.cl", O_RDONLY);
-struct stat s;
-fstat(k_fd, &s);
-printf("%d\n", s.st_size);
+int main() {
+
+       int k_fd = open("kernel.cl", O_RDONLY);
+       struct stat s;
+       fstat(k_fd, &s);
+       printf("%d\n", s.st_size);
 ```
 
 then we need to allocate memory and call `mmap`.
 
 ```c
-char *kernelSource = (char *)malloc(s.st_size * sizeof(char));
-kernelSource = (char *)mmap(0, s.st_size, PROT_READ, MAP_PRIVATE, k_fd, 0);
+       char* kernelSource = (char *)mmap(0, s.st_size, PROT_READ, MAP_PRIVATE, k_fd, 0);
+       printf("file content = %s\n", kernelSource);
+       return 0;
+}
 ```
 
 `mmap` returns a void pointer, it's necessary to cast it to a `char *`.
