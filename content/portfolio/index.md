@@ -54,38 +54,6 @@ _WPC_ is a wallpaper changer for **Windows**/**Linux**. It can optionally retrie
 
 ---
 
-## [TimeSeries](https://github.com/jkotra/TimeSeries)
-
-![](/images/timeseries.png)
-
-**Predicting future!**
-
-collection of jupyter notebooks demonstrating various methods of [time series](https://en.wikipedia.org/wiki/Time_series) and [LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory) to predict the stock market and weather patterns.
-
-<details>
-
-- [Predicting Facebook stock price using LSTM's with TensorFlow 2.0+](https://github.com/jkotra/TimeSeries/blob/master/StockPricePrediction/Predicting_StockPrice_TF2.0+.ipynb)
-
-- [Predicting Facebook stock price using LSTM's with Pytorch 1.0+](https://github.com/jkotra/TimeSeries/blob/master/StockPricePrediction/Predicting_StockPrice_Pytorch1.0+.ipynb)
-
-- [Predicting Facebook stock price using LSTM's with MXNet Gluon](https://github.com/jkotra/TimeSeries/blob/master/StockPricePrediction/Predicting_StockPrice_MXNet.ipynb)
-
-### MultiVariate Timeseries
-
-- [Predicting NYC weather using LSTM's with TensorFlow 2.0](https://github.com/jkotra/TimeSeries/blob/master/WeatherForecast/WeatherForecast_TF2.0.ipynb)
-
-</details>
-
----
-
-## [MusicGenreClassification](https://github.com/jkotra/MusicGenreClassification)
-
-![](/images/imr.png)
-
-collection of Jupyter notebooks all about detection and classification of Music.
-
----
-
 ## [LuckSimulations](https://github.com/jkotra/LuckSimulations)
 
 ![](/images/luck.png)
@@ -94,15 +62,6 @@ _Julia snippets for rapid testing and experimentation with random-based games su
 
 ---
 
-## [MNIST Classification](https://github.com/jkotra?utf8=%E2%9C%93&tab=repositories&q=mnist-&type=&language=)
-
-![](/images/mnist.png)
-
-_solving MNIST with TF, Pytorch, and MXNet._
-
-Classifying MNIST dataset using different approaches with Tensorflow, Pytorch, and MXNet.
-
----
 
 ## [LogoNet](https://github.com/jkotra/LogoNet)
 
