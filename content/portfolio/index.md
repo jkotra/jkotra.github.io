@@ -36,44 +36,6 @@ Built with [GTK toolkit](https://www.gtk.org/) and written in C.
 
 ---
 
-## [PDFUnlockR](https://play.google.com/store/apps/details?id=com.pdfunlockr)
-
-<img src="/images/pdfunlockr.png" width="120" height="180" alt="PDFUnlockR" align="right">
-
-<div style="margin-right: 20px">
-PDFUnlockR is a powerful app to remove passwords and encryption from PDF files. It is capable of bulk processing (decryption).
-
-Built with <a href="https://reactnative.dev/">React Native</a>, and under the hood, uses <a href="https://github.com/qpdf/qpdf">QPDF</a> library.
-
-<a href="/posts/pdfunlockr-technical-essay/">Read: Making the best PDF Unlocker / Decryptor App</a>
-
-</div>
-
-
-<div style="margin-bottom: 60px">
-<a href='https://play.google.com/store/apps/details?id=com.pdfunlockr&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img height="192px" width="192px" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
-</div>
-
----
-
-
-## [Nag](https://play.google.com/store/apps/details?id=top.stdin.nag)
-
-<img src="/images/nag.png" width="100" height="160" alt="Nag" align="right">
-
-<div style="margin-top: 20px; margin-right: 20px;">
-Nag enables you to set repeated reminders ⏰ sent as notifications 💬 at customizable intervals.
-
-Built with <a href="https://reactnative.dev/">React Native</a> and <a href="https://m3.material.io/">MaterialYou</href> Guidelines.
-</div>
-
-<div style="padding-bottom: 60px">
-<a href='https://play.google.com/store/apps/details?id=top.stdin.nag&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height='192' width='192' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-</div>
-
----
-
 ## [Algoticks](https://github.com/jkotra/algoticks)
 
 ![](/images/algoticks_demo.gif)
