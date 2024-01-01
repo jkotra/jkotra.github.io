@@ -31,7 +31,7 @@ VScode has the option to format your code on save as well as manually (*Shift + 
 
 2. put the following `JSON` in `settings.json` file.
 
-{{< highlight json "hl_lines=3-4, linenos=inline" >}}
+{{< highlight json "hl_lines=4, linenos=inline" >}}
 {
 
     "editor.defaultFormatter": "ms-vscode.cpptools",
@@ -43,7 +43,7 @@ VScode has the option to format your code on save as well as manually (*Shift + 
 
 here, `editor.defaultFormatter` is the formatter with which you want your code to be formatted. There are different formatters available for every language for example [clang-format](https://clang.llvm.org/docs/ClangFormat.html) is very popular among C/C++ projects and [Pretter](https://prettier.io/) is a goto formatter for all things Javascript (incl. Typescript)
 
-`editor.formatOnSave` : weather automatically formats the code on saving of the file.
+`editor.formatOnSave` : weather to automatically formats the code on saving of the file.
 
 To see all the available formatters go to `File -> Preferences -> Settings` and search for "Default Formatter". IN the dropdown menu you can find all the available formatters. use your preferred and compatible formatter value in your `settings.json`
 
