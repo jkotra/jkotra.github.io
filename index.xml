@@ -2857,45 +2857,19 @@ Video Files:
 &lt;span class="n">merged_clip&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set_output&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>
 &lt;img src="https://raw.githubusercontent.com/jkotra/maskedmerge_vs/master/merged.png" alt="Merged">
-&lt;/p></description></item><item><title>PGP (2023)</title><link>https://stdin.top/pgp/</link><pubDate>Wed, 26 Feb 2020 11:54:58 +0530</pubDate><guid>https://stdin.top/pgp/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">-----BEGIN PGP PUBLIC KEY BLOCK-----
-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
-GtTOAEYBTyOakS93/rBN2ESsdvLlfcbOvSprNRo=
-=6Zpy
+&lt;/p></description></item><item><title>PGP (2024)</title><link>https://stdin.top/pgp/</link><pubDate>Wed, 26 Feb 2020 11:54:58 +0530</pubDate><guid>https://stdin.top/pgp/</guid><description>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+mDMEZgBschYJKwYBBAHaRw8BAQdAtOatEkLXlcyhWoXREH5cUWTtwc3x6kd4TB+r
+67FwmPG0JUphZ2FkZWVzaCBLb3RyYSA8amFnYWRlZXNoQHN0ZGluLnRvcD6ImQQT
+FgoAQRYhBO+RAs43WIsn8eKDDV8tIETulgmbBQJmAGxyAhsDBQkJZgGABQsJCAcC
+AiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEF8tIETulgmbugkA/iSjV3JR33TC+uXB
+G94PanHuaHu5ORm9hjXfqrOSmO7CAPwLQ8oPoWCpa2agwNVjTXmqHnv21KD6wjk3
+zgm2DYXQDrg4BGYAbHISCisGAQQBl1UBBQEBB0D43Y0fDd53nWYcv8N33hdbwvnk
+6ICqZUxnSHsophUGUwMBCAeIfgQYFgoAJhYhBO+RAs43WIsn8eKDDV8tIETulgmb
+BQJmAGxyAhsMBQkJZgGAAAoJEF8tIETulgmbVNUA/310apge0pM9tDd9evR53EjU
+3tRqPv3sH9MV6ad8M5xiAQCRaYxYBr+diKMhNkqdOWDZDPcSTuOlaLVw/1cwU7cr
+Ag==
+=AyyL
 -----END PGP PUBLIC KEY BLOCK-----
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Pollution forecasting using Time series and LSTM with MXnet</title><link>https://stdin.top/posts/lstm-mxnet/</link><pubDate>Mon, 21 Oct 2019 23:41:53 +0530</pubDate><guid>https://stdin.top/posts/lstm-mxnet/</guid><description>&lt;p>
 &lt;img src="https://stdin.top/images/RFE2udJ.jpg" alt="Photo by &amp;lt;a href=&amp;#34;https://unsplash.com/@jakehills?utm_source=medium&amp;amp;amp;utm_medium=referral&amp;#34;&amp;gt;Jake Hills&amp;lt;/a&amp;gt; on &amp;lt;a href=&amp;#34;https://unsplash.com?utm_source=medium&amp;amp;amp;utm_medium=referral&amp;#34;&amp;gt;Unsplash&amp;lt;/a&amp;gt;">
