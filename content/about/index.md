@@ -53,3 +53,9 @@ You can view my portfolio [here](/portfolio/), where my most recent works are co
 ## 📚 Book Recommendations
 
 * [Hands-On Network Programming with C](https://www.packtpub.com/product/hands-on-network-programming-with-c/9781789349863)
+
+## Support Area
+
+{{% adsense bottom-wrap %}}
+Thanks for visiting my blog!
+{{% /adsense %}}

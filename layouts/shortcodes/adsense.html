@@ -1,7 +1,6 @@
 {{ $place := .Get 0 }}
-{{ if eq $place "Top" }}
-
-<!-- stdin_inbetween -->
+{{ if eq $place "top-wrap" }}
+<!-- stdin_in_between -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-8658473214995139"
@@ -11,16 +10,12 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
 {{ end }}
-
 <div>
      <p>{{ .Inner | markdownify }}</p>
 </div>
-
-{{ if eq $place "Bottom" }}
-
-<!-- stdin_inbetween -->
+{{ if eq $place "bottom-wrap" }}
+<!-- stdin_in_between -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-8658473214995139"
@@ -30,5 +25,4 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
 {{ end }}
