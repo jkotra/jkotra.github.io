@@ -1,6 +1,6 @@
 {{ $place := .Get 0 }}
 {{ if eq $place "top-wrap" }}
-<!-- stdin_in_between -->
+<!-- stdin_wrap -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-8658473214995139"
@@ -15,7 +15,7 @@
      <p>{{ .Inner | markdownify }}</p>
 </div>
 {{ if eq $place "bottom-wrap" }}
-<!-- stdin_in_between -->
+<!-- stdin_wrap -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-8658473214995139"

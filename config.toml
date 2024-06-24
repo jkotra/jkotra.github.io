@@ -27,9 +27,8 @@ browserthemecolor="#2e2847"
 
 math = true
 
-googleAnalytics = "G-YW8V9DTR0N"
-
 enableAds = true
+googleAnalytics = "G-YW8V9DTR0N"
 googleAdsense = "ca-pub-8658473214995139"
 
 [author]
