@@ -1,0 +1,263 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<base href=https://stdin.top/posts/dbus-icecream-truck/>
+<meta name=description content="Write an IceCream Truck 🍨 IPC service in Rust.">
+<meta name=language content="en">
+<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
+<title>D-Bus - IPC on Linux :: &lt;stdin></title>
+<link rel=icon type=image/png href=/static/chip.png>
+<meta property="og:title" content="D-Bus - IPC on Linux">
+<meta property="og:description" content="Write an IceCream Truck 🍨 IPC service in Rust.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://stdin.top/posts/dbus-icecream-truck/"><meta property="og:image" content="https://stdin.top/images/icecream-dbus.webp"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2024-08-02T04:21:56+05:30">
+<meta property="article:modified_time" content="2024-08-04T03:59:09+05:30">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://stdin.top/images/icecream-dbus.webp">
+<meta name=twitter:title content="D-Bus - IPC on Linux">
+<meta name=twitter:description content="Write an IceCream Truck 🍨 IPC service in Rust.">
+<meta name=theme-color content="#2e2847">
+<link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
+<script src=https://stdin.top/js/main.min.6b828d297665710573e77091885cc47c1f382bb06242b19f91081cfbe48f7dffe419493e0ac93cf77c00887bbad39f2182abbefa17ee7e4d9d9f7407f22665d2.js integrity="sha512-a4KNKXZlcQVz53CRiFzEfB84K7BiQrGfkQgc++SPff/kGUk+Csk893wAiHu6058hgqu++hfufk2dn3QH8iZl0g=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw==">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A==">
+<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ==">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-YW8V9DTR0N',{anonymize_ip:!1})}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script>
+</head>
+<body>
+<div class="container wrapper">
+<div class=header>
+<base href=https://stdin.top/>
+<h1 class=site-title>
+<a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span>
+</h1>
+<div class=site-description>
+<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
+<nav class="nav social">
+<ul class=flat>
+<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
+<a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
+</ul>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/about/>About</a>
+</li>
+<li>
+<a href=/tags/>Tags</a>
+</li>
+<li>
+<a href=/portfolio/>Portfolio</a>
+</li>
+<li>
+<a href=/pgp/>PGP</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post>
+<div class=post-header>
+<h1 class=title>D-Bus - IPC on Linux</h1>
+<div class=meta>Posted at &mdash; Aug 2, 2024
+| Last Modified on &mdash; Aug 4, 2024</div>
+</div>
+<div class=markdown>
+<p>
+<figure>
+<img src=/images/icecream-dbus.webp alt="IceCream Truck">
+<figcaption>DALL-E rendition of a icecream truck.</figcaption>
+</figure>
+</p>
+<h1 id=introduction>Introduction</h1>
+<blockquote>
+<p>D-Bus is a message bus system, a simple way for applications to talk to one another. In addition to interprocess communication, D-Bus helps coordinate process lifecycle; it makes it simple and reliable to code a &ldquo;single instance&rdquo; application or daemon, and to launch applications and daemons on demand when their services are needed.</p>
+</blockquote>
+<blockquote>
+<p>D-Bus supplies both a system daemon (for events such as &ldquo;new hardware device added&rdquo; or &ldquo;printer queue changed&rdquo;) and a per-user-login-session daemon (for general IPC needs among user applications). Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon).</p>
+<p>&ndash; <em>What is D-Bus?</em> <a href=https://www.freedesktop.org/wiki/Software/dbus/>freedesktop.org</a></p>
+</blockquote>
+<p>Are you looking for a IPC framework for your Linux application that integrates well with existing desktops? look no further, <strong>D-Bus</strong> is an IPC mechanism available by default on all major Linux systems. In my opinion, D-Bus is an option for you if you need a better DX than sockets but do not need the throughput it provides. D-Bus is the perfect option if you are developing an application that needs to integrate with other Linux services tightly.</p>
+<h2 id=----all-abord-the-bus>🚌 📢 - All abord the bus!</h2>
+<p>There are 2 busses available:</p>
+<p><strong>System Bus</strong> - is started when the system first boots up. essential services required for critical functionality are started on the system bus. (eg: <em>systemd</em>, <em>bluetooth</em>)</p>
+<p><strong>Session Bus</strong> - is started upon user login. services that are specific to the user (and work in tandem with system bus) are started on the session bus. (eg: <em>DLNA</em>, <em>time services</em>)</p>
+<h1 id=building-an-icecream-truck-ipc-service>Building an IceCream Truck IPC Service</h1>
+<p>I want to demonstrate how D-Bus works with an example of the IceCream Truck Application. Our application is a daemon that starts on the session bus. a user will be able to place an order and any application can listen to the signal and be aware of the flow of orders.</p>
+<h2 id=prerequisites>Prerequisites</h2>
+<ul>
+<li>Rust - we will be using <code>zbus</code> library for this.</li>
+<li><code>busctl</code> - to monitor messages on the bus.</li>
+</ul>
+<h2 id=zbus>zbus</h2>
+<p><code>zbus</code> is D-Bus implementation written in Rust.
+<a href=https://github.com/dbus2/zbus>Know More</a></p>
+<h2 id=lets-code-an-icecream-truck->Let&rsquo;s Code an IceCream Truck 🍦</h2>
+<p><a href=https://github.com/jkotra/icecream-dbus>Code available on Github.</a></p>
+<p>let&rsquo;s start by defining the required structs and enums:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=k>use</span><span class=w> </span><span class=n>serde</span>::<span class=p>{</span><span class=n>Deserialize</span><span class=p>,</span><span class=w> </span><span class=n>Serialize</span><span class=p>};</span><span class=w>
+</span><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>std</span>::<span class=n>future</span>::<span class=n>pending</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>std</span>::<span class=kt>str</span>::<span class=n>FromStr</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>strum_macros</span>::<span class=p>{</span><span class=n>Display</span><span class=p>,</span><span class=w> </span><span class=n>EnumString</span><span class=p>};</span><span class=w>
+</span><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>zbus</span>::<span class=p>{</span><span class=n>connection</span><span class=p>,</span><span class=w> </span><span class=n>fdo</span><span class=p>,</span><span class=w> </span><span class=n>interface</span><span class=p>,</span><span class=w> </span><span class=n>SignalContext</span><span class=p>};</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=cp>#[derive(Debug, Serialize, Deserialize, EnumString, Display, zbus::zvariant::Type)]</span><span class=w>
+</span><span class=w></span><span class=k>enum</span> <span class=nc>IceCreamFalvour</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w> </span><span class=n>Chocolate</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>Vanilla</span><span class=p>,</span><span class=w>
+</span><span class=w></span><span class=p>}</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=cp>#[derive(Debug, Serialize, Deserialize, zbus::zvariant::Type)]</span><span class=w>
+</span><span class=w></span><span class=k>struct</span> <span class=nc>IceCreamReply</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w> </span><span class=n>flavor</span>: <span class=nc>IceCreamFalvour</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>quantity</span>: <span class=kt>u32</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>total</span>: <span class=kt>f32</span><span class=p>,</span><span class=w>
+</span><span class=w></span><span class=p>}</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=cp>#[allow(dead_code)]</span><span class=w>
+</span><span class=w></span><span class=k>struct</span> <span class=nc>IceCreamTruck</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w> </span><span class=n>name</span>: <span class=nb>String</span><span class=p>,</span><span class=w>
+</span><span class=w></span><span class=p>}</span><span class=w>
+</span></code></pre></div><ul>
+<li><code>IceCreamFalvour</code> is an enum which declares the flavors we intend to sell. this will be used for input validation later on.</li>
+<li><code>IceCreamReply</code> is the struct we want to send to the user upon a successful call to the method.</li>
+<li><code>IceCreamTruck</code> is the base struct, we extend this with <code>zbus</code> macros to define the interface&rsquo;s methods and signals.</li>
+</ul>
+<hr>
+<p>Let&rsquo;s define our method on <code>top.stdin.icecream</code> interface to buy an ice cream and a signal that will send out order details to all subscribers.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=cp>#[interface(name = </span><span class=s>&#34;top.stdin.icecream&#34;</span><span class=cp>)]</span><span class=w>
+</span><span class=w></span><span class=k>impl</span><span class=w> </span><span class=n>IceCreamTruck</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>buy_icecream</span><span class=p>(</span><span class=w>
+</span><span class=w>        </span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>flavor</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>quantity</span>: <span class=kt>u32</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=cp>#[zbus(signal_context)]</span><span class=w> </span><span class=n>ctx</span>: <span class=nc>SignalContext</span><span class=o>&lt;&#39;</span><span class=nb>_</span><span class=o>&gt;</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=p>)</span><span class=w> </span>-&gt; <span class=nc>fdo</span>::<span class=nb>Result</span><span class=o>&lt;</span><span class=n>IceCreamReply</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>flavor</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>match</span><span class=w> </span><span class=n>IceCreamFalvour</span>::<span class=n>from_str</span><span class=p>(</span><span class=n>flavor</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w> </span><span class=nb>Ok</span><span class=p>(</span><span class=n>v</span><span class=p>)</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=n>v</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=nb>Err</span><span class=p>(</span><span class=n>err</span><span class=p>)</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=k>return</span><span class=w> </span><span class=nb>Err</span><span class=p>(</span><span class=n>fdo</span>::<span class=n>Error</span>::<span class=n>Failed</span><span class=p>(</span><span class=fm>format!</span><span class=p>(</span><span class=s>&#34;{:?}&#34;</span><span class=p>,</span><span class=w> </span><span class=n>err</span><span class=p>))),</span><span class=w>
+</span><span class=w> </span><span class=p>};</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span><span class=fm>println!</span><span class=p>(</span><span class=w>
+</span><span class=w>            </span><span class=s>&#34;received order: flavor = {} quantity = {}&#34;</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>flavor</span><span class=p>,</span><span class=w> </span><span class=n>quantity</span><span class=w>
+</span><span class=w> </span><span class=p>);</span><span class=w>
+</span><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>details</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>IceCreamReply</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w> </span><span class=n>flavor</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>quantity</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=n>total</span>: <span class=mf>6.99</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=n>quantity</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=kt>f32</span><span class=p>,</span><span class=w>
+</span><span class=w> </span><span class=p>};</span><span class=w>
+</span><span class=w> </span><span class=bp>Self</span>::<span class=n>orders</span><span class=p>(</span><span class=o>&amp;</span><span class=n>ctx</span><span class=p>,</span><span class=w> </span><span class=o>&amp;</span><span class=n>details</span><span class=p>).</span><span class=k>await</span><span class=p>.</span><span class=n>unwrap</span><span class=p>();</span><span class=w>
+</span><span class=w> </span><span class=nb>Ok</span><span class=p>(</span><span class=n>details</span><span class=p>)</span><span class=w>
+</span><span class=w> </span><span class=p>}</span><span class=w>
+</span><span class=w>
+</span><span class=w> </span><span class=cp>#[zbus(signal)]</span><span class=w>
+</span><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>orders</span><span class=p>(</span><span class=n>ctxt</span>: <span class=kp>&amp;</span><span class=nc>SignalContext</span><span class=o>&lt;&#39;</span><span class=nb>_</span><span class=o>&gt;</span><span class=p>,</span><span class=w> </span><span class=n>details</span>: <span class=kp>&amp;</span><span class=nc>IceCreamReply</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nc>zbus</span>::<span class=nb>Result</span><span class=o>&lt;</span><span class=p>()</span><span class=o>&gt;</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=p>}</span><span class=w>
+</span></code></pre></div><ol>
+<li>we start by adding methods to <code>IceCreamTruck</code> struct we defined earlier. we also add a macro, <code>interface</code> from zbus with our intended interface name.</li>
+<li>define a method <code>buy_icecream</code> which takes in the following args:
+<ul>
+<li><code>flavor</code> - This string should match a value in <code>IceCreamFalvour</code> enum.</li>
+<li><code>quantity</code></li>
+<li><code>ctx</code> - this is a special argument from zbus with a static lifetime. we used this as a parameter to emit the signal.</li>
+</ul>
+</li>
+<li>validate and convert the input string to <code>IceCreamFalvour</code> enum value.</li>
+<li>print the order to the console.</li>
+<li>emit the signal to <code>orders</code> - which takes in the signal context (<code>ctx</code>) and <code>IceCreamReply</code> struct.</li>
+</ol>
+<hr>
+<p>To start the service, put the following in <code>main</code>:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=cp>#[tokio::main]</span><span class=w>
+</span><span class=w></span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>main</span><span class=p>()</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>truck</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>IceCreamTruck</span><span class=w> </span><span class=p>{</span><span class=w>
+</span><span class=w> </span><span class=n>name</span>: <span class=s>&#34;JK&#34;</span><span class=p>.</span><span class=n>to_string</span><span class=p>(),</span><span class=w>
+</span><span class=w> </span><span class=p>};</span><span class=w>
+</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>_conn</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>connection</span>::<span class=n>Builder</span>::<span class=n>session</span><span class=p>()</span><span class=o>?</span><span class=w>
+</span><span class=w>        </span><span class=p>.</span><span class=n>name</span><span class=p>(</span><span class=s>&#34;top.stdin.icecream&#34;</span><span class=p>)</span><span class=o>?</span><span class=w>
+</span><span class=w>        </span><span class=p>.</span><span class=n>serve_at</span><span class=p>(</span><span class=s>&#34;/top/stdin/IceCreamTruck&#34;</span><span class=p>,</span><span class=w> </span><span class=n>truck</span><span class=p>)</span><span class=o>?</span><span class=w>
+</span><span class=w>        </span><span class=p>.</span><span class=n>build</span><span class=p>()</span><span class=w>
+</span><span class=w>        </span><span class=p>.</span><span class=k>await</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=n>pending</span>::<span class=o>&lt;</span><span class=p>()</span><span class=o>&gt;</span><span class=p>().</span><span class=k>await</span><span class=p>;</span><span class=w>
+</span><span class=w> </span><span class=nb>Ok</span><span class=p>(())</span><span class=w>
+</span><span class=w></span><span class=p>}</span><span class=w>
+</span></code></pre></div><ol>
+<li>initialize our struct with <code>name</code> parameter.</li>
+<li>using <code>connection::Builder</code> from <code>zbus</code>, we start on the session bus with the following details:
+<ul>
+<li>name = <code>top.stdin.icecream</code></li>
+<li>interface = <code>/top/stdin/IceCreamTruck</code></li>
+</ul>
+</li>
+<li><code>pending</code> will put our application into an async loop until exit.</li>
+</ol>
+<div class="notices note"><p><p><strong>What is an interface in dbus?</strong></p>
+<p><em>An interface defines the API exposed by object on the bus. They are akin to the concept of interfaces in many programming languages and traits in Rust. Each object can (and typically do) provide multiple interfaces at the same time. A D-Bus interface can have methods, properties and signals.</em></p>
+<p><em>While each interface of a service is identified by a unique name, its API is described by an XML description. It is mostly a machine-level detail. Most services can be queried for this description through a D-Bus standard introspection interface.</em></p>
+<p>Source: <a href=https://dbus2.github.io/zbus/concepts.html#interfaces>zbus Docs - Interfaces</a></p>
+</p></div>
+<h2 id=testing>Testing</h2>
+<p>we can use <code>D-Spy</code> application <sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> to call our interface&rsquo;s method.</p>
+<p>
+<img src=/images/d-spy.png alt>
+</p>
+<p>you can try invoking the <code>BuyIcecream</code> method with parameters: <code>("Chocolate", 1)</code>. You will receive a reply with enum of <code>Chocolate</code> and a total order value.</p>
+<p>you can also listen to all the signal emitted by our interface by running the following command:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>busctl --user monitor --match <span class=s1>&#39;sender=top.stdin.icecream&#39;</span>
+</code></pre></div><p>
+<img src=/images/dbus-signal.png alt>
+</p>
+<h1 id=conclusion>Conclusion</h1>
+<p>I hope this article provided you with an intro to D-Bus and how you could write your service. For more reading on D-Bus and <code>zbus</code> you can refer to their official <a href=https://dbus2.github.io/zbus/introduction.html>docs/book</a>.</p>
+<section class=footnotes role=doc-endnotes>
+<hr>
+<ol>
+<li id=fn:1 role=doc-endnote>
+<p><a href=https://flathub.org/apps/org.gnome.dspy>https://flathub.org/apps/org.gnome.dspy</a>&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/dbus>dbus</a></li>
+</ul>
+</nav>
+</div>
+<div id=commento></div>
+<script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
+<noscript>Please enable JavaScript to view the
+<a href=https://commento.io/>comments powered by Commento.</a>
+</noscript>
+</div>
+<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
+</div>
+</div>
+<div class="footer wrapper">
+<script src=https://stdin.top/js/clipboard.min.72bcd06a245cfb9923791503eaceae3e8abf23f49974babd059aa655d60f738ee8114c6b5ba7f928adc2127af94cbc2d131df343a42b8bc1af2d71c8f497cc6a.js integrity="sha512-crzQaiRc+5kjeRUD6s6uPoq/I/SZdLq9BZqmVdYPc47oEUxrW6f5KK3CEnr5TLwtEx3zQ6Qri8GvLXHI9JfMag=="></script>
+<nav class=nav>
+<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
+<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+</body>
+</html>

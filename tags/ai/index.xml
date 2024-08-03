@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ai on &lt;stdin></title><link>https://stdin.top/tags/ai/</link><description>Recent content in ai on &lt;stdin></description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 24 Jun 2024 00:50:28 +0530</lastBuildDate><atom:link href="https://stdin.top/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>LLM Agents</title><link>https://stdin.top/posts/llm-agents/</link><pubDate>Mon, 24 Jun 2024 00:50:28 +0530</pubDate><guid>https://stdin.top/posts/llm-agents/</guid><description>&lt;p>
+&lt;img src="https://stdin.top/images/llm-agent.webp" alt="LLM as an agent.">
+&lt;/p>
+&lt;h1 id="introduction">Introduction&lt;/h1>
+&lt;p>The core idea of agents is to use a language model to choose a sequence of actions. In chains, a sequence of actions is hardcoded (in code). In agents, a language model is used as a reasoning engine to determine which actions to take and in which order. Agents are also interchangeably called tool use and function calling in various contexts.&lt;/p>
+&lt;p>When writing this article, closed source &amp;amp; commercial LLM offerings demonstrate better ability in function calling. Anthropic Claude, ChatGPT 4, and ChatGPT 4o are some of the best models for building LLM agents.&lt;/p>
+&lt;h1 id="why-use-agents">Why Use Agents?&lt;/h1>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Achieve Complex Tasks&lt;/strong> – A multi-step agent can help you execute tasks combined with the intelligence of an LLM acting as an orchestrator.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Domain Specific Use-Cases&lt;/strong> - LLM&amp;rsquo;s input can be augmented with domain-specific inputs in a self-iterative process to get the desired output with the latest information.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Fine-grained control on moving parts of LLM inputs&lt;/strong> – Manual Validation and Safety Hatches in Agent execution steps enable better control over LLM output.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="usecase">Usecase&lt;/h1>
+&lt;h2 id="function-calling">Function Calling&lt;/h2>
+&lt;p>Function calling is a powerful technique that allows you to extend the capabilities of a language model like ChatGPT or Llama 3 by integrating external functions or APIs. It enables the model to perform tasks or access information that it wouldn’t be able to do on its own.&lt;/p>
+&lt;h2 id="demo-mine-wikipedia">Demo: Mine Wikipedia&lt;/h2>
+&lt;p>In the following demo, we use Wikipedia APIs to create tools that can search, retrieve, and parse. Information on how to use these functions will be provided to the LLM in the prompt. the prompt is as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">You are an AI with access to the latest information via tools. You have access to the following tools:
+- wikipedia_summary
+- help: get a summary of various Wikipedia pages (top 3) based on the search term.
+- usage: wikipedia_summary(&amp;#39;search term&amp;#39;)
+- wikipedia_page_sections
+- help: get all the sections on a Wikipedia page
+- usage: wikipedia_page(&amp;#39;title of the page&amp;#39;)
+- wikipedia_section
+- help: get content of a specific section in a Wikipedia page. this will contain the content of the requested section and all subsections under it.
+- usage: wikipedia_section(&amp;#39;title of the page&amp;#39;, &amp;#39;name of the section&amp;#39;)
+current system time (UTC): {datetime.datetime.now(datetime.UTC).now()}
+based on the given question, call the appropriate tool with relevant arguments. The result will be provided back to you, You can call the tool multiple times until you have relevant information to form a final answer. Only answer the question from context.
+use wikipedia_summary tool to get a summary of Wiki pages. of these, use wikipedia_page_sections tool to get page sections by providing the page title as arg. use wikipedia_section to extract content from the required section.
+Follow the guidelines carefully:
+- Your output must always contain a function call unless it&amp;#39;s your final answer.
+- a call to a function must be enclosed within backticks.
+- DO NOT search based on your own knowledge cutoff timeline. always assume tools will provide the latest information.
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>we then call the LLM iteratively to arrive at a final answer to present using the above-defined tools to call APIs.&lt;/p>
+&lt;p>&lt;a href="https://gist.github.com/jkotra/a249e04f8896badf8c53c2840527bc6b">Complete Jupyter Notebook&lt;/a>&lt;/p>
+&lt;h1 id="risks--limitations-llm-agents-in-production">Risks &amp;amp; Limitations: LLM Agents in Production&lt;/h1>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Hallucination&lt;/strong>: LLM is prone to hallucinations. In the context of agents, this could mean calling functions repeatedly or without correct arguments.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Accuracy&lt;/strong>: Responses from agents are considered better than zero-shot prompting responses. However, some responses cannot be automatically proven to be correct. Such responses, when provided as input to an intermediate step may result in inaccurate conclusions.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Finetune Tradeoff&lt;/strong>: LLM&amp;rsquo;s models which are finetuned for function calling lose capability in other skills. Orchestrating between two models is a suggested middle-ground approach to avoid loss of quality in inference.&lt;/p>
+&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;p>Agents can be thought of as a superpower to LLM allowing them to do actions that are otherwise not possible in a fundamental transformer architecture of token-in - token-out. While agents can help us automate many tasks which had earlier required human interaction or supervision it is important to note that LLMs are still prone to hallucination which can potentially derail the behavior of agents.&lt;/p></description></item></channel></rss>
