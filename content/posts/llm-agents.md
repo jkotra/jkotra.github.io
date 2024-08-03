@@ -5,6 +5,7 @@ draft: false
 description: Create automated autonomous action chains 🛠️ using Large Language Models 🤖 
 images:
  - /images/llm-agent.webp
+tags: ["llm", "ai"]
 ---
 
 ![LLM as an agent.](/images/llm-agent.webp)

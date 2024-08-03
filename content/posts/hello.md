@@ -117,5 +117,7 @@ int change_in_modified_date(char *filename)
 }
 {{< / highlight >}}
 
+![IceCream Truck](/images/icecream-dbus.webp "DALL-E rendition of a icecream truck.")
+
 [^1]: This is the first footnote.
 [^bignote]: Here's one with multiple paragraphs and code.
