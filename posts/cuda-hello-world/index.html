@@ -1,274 +1,131 @@
-<!doctype html><html>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<base href=https://stdin.top/posts/cuda-hello-world/>
-<meta name=description content="Quick intro to CUDA and a 'Hello World' Example">
-<meta name=language content="en">
-<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
-<title>Hello CUDA! :: &lt;stdin></title>
-<link rel=icon type=image/png href=/static/chip.png>
-<meta property="og:title" content="Hello CUDA!">
-<meta property="og:description" content="Quick intro to CUDA and a 'Hello World' Example">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://stdin.top/posts/cuda-hello-world/"><meta property="og:image" content="https://stdin.top/images/9mroRtn.jpg"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-12-04T18:47:53+05:30">
-<meta property="article:modified_time" content="2023-05-11T19:55:50+05:30">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://stdin.top/images/9mroRtn.jpg">
-<meta name=twitter:title content="Hello CUDA!">
-<meta name=twitter:description content="Quick intro to CUDA and a 'Hello World' Example">
-<meta name=theme-color content="#2e2847">
-<link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
-<script src=https://stdin.top/js/main.min.6b828d297665710573e77091885cc47c1f382bb06242b19f91081cfbe48f7dffe419493e0ac93cf77c00887bbad39f2182abbefa17ee7e4d9d9f7407f22665d2.js integrity="sha512-a4KNKXZlcQVz53CRiFzEfB84K7BiQrGfkQgc++SPff/kGUk+Csk893wAiHu6058hgqu++hfufk2dn3QH8iZl0g=="></script>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw==">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A==">
-<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ==">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-YW8V9DTR0N',{anonymize_ip:!1})}</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script>
-</head>
-<body>
-<div class="container wrapper">
-<div class=header>
-<base href=https://stdin.top/>
-<h1 class=site-title>
-<a href=https://stdin.top/>&lt;stdin></a>
-<span class=blinking-cursor>|</span>
-</h1>
-<div class=site-description>
-<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
-<nav class="nav social">
-<ul class=flat>
-<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><base href=https://stdin.top/posts/cuda-hello-world/><meta name=description content="Quick intro to CUDA and a 'Hello World' Example"><meta name=language content="en"><link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml><title>Hello CUDA! :: &lt;stdin></title><link rel=icon type=image/png href=/static/chip.png><meta property="og:title" content="Hello CUDA!"><meta property="og:description" content="Quick intro to CUDA and a 'Hello World' Example"><meta property="og:type" content="article"><meta property="og:url" content="https://stdin.top/posts/cuda-hello-world/"><meta property="og:image" content="https://stdin.top/images/9mroRtn.jpg"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-12-04T18:47:53+05:30"><meta property="article:modified_time" content="2023-05-11T19:55:50+05:30"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://stdin.top/images/9mroRtn.jpg"><meta name=twitter:title content="Hello CUDA!"><meta name=twitter:description content="Quick intro to CUDA and a 'Hello World' Example"><meta name=theme-color content="#2e2847"><link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet><script src=https://stdin.top/js/main.min.6a2ed298f6a8cafbfa5c622ca55cb5be5632cc37b845fc6b58d9d383cf7ec77e9faaedd88196d0d58c0040873d5689898701e5ed30cac06dae52c78f9c0ddc31.js integrity="sha512-ai7SmPaoyvv6XGIspVy1vlYyzDe4RfxrWNnTg89+x36fqu3YgZbQ1YwAQIc9VomJhwHl7TDKwG2uUsePnA3cMQ=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw=="><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A=="><link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)"><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ=="><script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-YW8V9DTR0N",{anonymize_ip:!1})}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script></head><body><div class="container wrapper"><div class=header><base href=https://stdin.top/><h1 class=site-title><a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span></h1><div class=site-description><h2 class=cursive>My Thoughts, Trials and Adventures</h2><nav class="nav social"><ul class=flat><a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
 <a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
 <a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
-<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
-</ul>
-</div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/about/>About</a>
-</li>
-<li>
-<a href=/tags/>Tags</a>
-</li>
-<li>
-<a href=/portfolio/>Portfolio</a>
-</li>
-<li>
-<a href=/pgp/>PGP</a>
-</li>
-</ul>
-</nav>
-</div>
-<div class=post>
-<div class=post-header>
-<h1 class=title>Hello CUDA!</h1>
-<div class=meta>Posted at &mdash; Dec 4, 2020
-| Last Modified on &mdash; May 11, 2023</div>
-</div>
-<div class=markdown>
-<h1 id=introduction>Introduction</h1>
-<p>CUDA is a parallel computing platform and application programming interface model created by Nvidia. It allows software developers and software engineers to use a CUDA-enabled graphics processing unit for general-purpose processing – an approach termed GPGPU.</p>
-<p><strong>CUDA</strong> programs are compiled using <a href=https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>NVCC</a>. NVCC is included with <a href=https://developer.nvidia.com/cuda-toolkit>CUDA toolkit</a>.</p>
-<h2 id=building-blocks>Building Blocks</h2>
-<h3 id=block>Block</h3>
-<p>A group of threads is called a <strong>CUDA block</strong>. <strong>CUDA blocks</strong> are grouped into a grid. A kernel is executed as a grid of <strong>blocks</strong> of threads</p>
-<h3 id=thread>Thread</h3>
-<p><code>Total no of Threads = No Blocks x Threads Per Block</code></p>
-<hr>
-<h2 id=hello-world>Hello World</h2>
-<div class="notices note"><p><a href=https://github.com/jkotra/cuda_samples/tree/main/hello_world>Code on Github</a></p></div>
-<p>Demonstration and code walkthrough of a simple <code>Hello World</code> program.</p>
-<p>To run this, clone the repository and run <code>make</code> command.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span><span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span><span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=n>__global__</span> <span class=kt>void</span> <span class=nf>from_gpu</span><span class=p>(</span><span class=kt>void</span><span class=p>){</span>
-
-    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%d, %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span><span class=p>,</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>);</span>
-
-<span class=p>}</span>
-
-<span class=kt>int</span> <span class=nf>main</span><span class=p>(){</span>
-
-    <span class=n>from_gpu</span><span class=o>&lt;&lt;&lt;</span><span class=mi>10</span><span class=p>,</span> <span class=mi>10</span><span class=o>&gt;&gt;&gt;</span><span class=p>();</span>
-    <span class=n>cudaDeviceSynchronize</span><span class=p>();</span>
-
-    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><p>Output:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>0, 0
-0, 1
-0, 2
-0, 3
-0, 4
-0, 5
-0, 6
-....
-....
-....
-7, 5
-7, 6
-7, 7
-7, 8
-7, 9
-</code></pre></div><hr>
-<h2 id=vector-addition>Vector Addition</h2>
-<div class="notices note"><p><a href=https://github.com/jkotra/cuda_samples/tree/main/vec_add>Code on Github</a></p></div>
-<p>To demonstrate the power of CUDA, let&rsquo;s take <strong>vector multiplication</strong> as an example.</p>
-<p>This example has 2 files:</p>
-<ul>
-<li><a href=https://github.com/jkotra/cuda_samples/blob/main/vec_add/vec_add.cpp>vec_add.cpp</a></li>
-<li><a href=https://github.com/jkotra/cuda_samples/blob/main/vec_add/vec_add_k.cu>vec_add_k.cu</a></li>
-</ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;random&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;vector&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=cp>#include</span> <span class=cpf>&#34;vec_add_k.cuh&#34;</span><span class=cp>
-</span><span class=cp></span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>(){</span>
-
-    <span class=n>std</span><span class=o>::</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>(</span><span class=mi>100</span><span class=p>),</span> <span class=n>b</span><span class=p>(</span><span class=mi>100</span><span class=p>);</span>
-
-    <span class=n>std</span><span class=o>::</span><span class=n>generate</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>a</span><span class=p>.</span><span class=n>end</span><span class=p>(),</span> <span class=p>[</span><span class=o>&amp;</span><span class=p>](){</span> <span class=k>return</span> <span class=n>std</span><span class=o>::</span><span class=n>rand</span><span class=p>()</span> <span class=o>%</span> <span class=mi>10</span><span class=p>;</span> <span class=p>});</span>
-    <span class=n>std</span><span class=o>::</span><span class=n>generate</span><span class=p>(</span><span class=n>b</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>b</span><span class=p>.</span><span class=n>end</span><span class=p>(),</span> <span class=p>[</span><span class=o>&amp;</span><span class=p>](){</span> <span class=k>return</span> <span class=n>std</span><span class=o>::</span><span class=n>rand</span><span class=p>()</span> <span class=o>%</span> <span class=mi>10</span><span class=p>;</span> <span class=p>});</span>
-
-    <span class=kt>int</span> <span class=o>*</span><span class=n>result</span> <span class=o>=</span> <span class=n>add_vec</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=n>data</span><span class=p>(),</span> <span class=n>b</span><span class=p>.</span><span class=n>data</span><span class=p>());</span>
-
-    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
-    <span class=p>{</span>
-        <span class=n>std</span><span class=o>::</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>a</span><span class=p>.</span><span class=n>at</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;+&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>b</span><span class=p>.</span><span class=n>at</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;=&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>result</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>&lt;&lt;</span> <span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
-    <span class=p>}</span>
-
-    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><p>In <code>vec_add.cpp</code>, 2 vectors are defined and are filled with random numbers. These two vectors are then passed to CUDA kernel for computation.</p>
-<h3 id=cuda-kernel>CUDA Kernel</h3>
-<p>we start by importing standard library</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span></code></pre></div><p>create a function called <code>add_vec</code> this takes in the vector from our program <code>vec_add.cpp</code></p>
-<p>declare variables for device storage. (<code>d_a</code>, <code>d_b</code>, <code>d_c</code>)
-to store the result, declare a variable <code>c</code> and allocate memory.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=kt>int</span><span class=o>*</span> <span class=nf>add_vec</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>){</span>
-
-    <span class=kt>int</span> <span class=o>*</span><span class=n>d_a</span><span class=p>,</span> <span class=o>*</span><span class=n>d_b</span><span class=p>,</span> <span class=o>*</span><span class=n>d_c</span><span class=p>;</span>
-    <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>;</span>
-    <span class=n>c</span> <span class=o>=</span> <span class=p>(</span><span class=kt>int</span><span class=o>*</span><span class=p>)</span> <span class=n>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>)</span> <span class=o>*</span> <span class=mi>100</span><span class=p>);</span>
-</code></pre></div><p>compute the size of storage required, Note that we generated 100 randoms numbers each in both vectors.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=kt>int</span> <span class=n>size</span> <span class=o>=</span> <span class=mi>100</span> <span class=o>*</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>);</span>
-</code></pre></div><p>allocate memory to device variable&rsquo;s using <code>cudaMalloc()</code></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp>    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_a</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
-    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_b</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
-    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_c</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
-</code></pre></div><p>Copy host variables into device variables:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
-    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_b</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
-    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_c</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
-</code></pre></div><p>Finally Launch the kernel:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=n>add_vec_cuda</span><span class=o>&lt;&lt;&lt;</span><span class=mi>1</span><span class=p>,</span> <span class=mi>100</span><span class=o>&gt;&gt;&gt;</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>d_b</span><span class=p>,</span> <span class=n>d_c</span><span class=p>);</span>
-</code></pre></div><p>the numbers inside the triple arrow i.e <code>&lt;&lt;&lt;</code> and <code>>>></code> define the size of the kernel, the above line will launch 1 block with 100 threads.</p>
-<p><a href=https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/>More on it</a></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=n>__global__</span> <span class=kt>void</span> <span class=nf>add_vec_cuda</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>){</span>
-
-    <span class=kt>int</span> <span class=n>index</span> <span class=o>=</span> <span class=n>blockDim</span><span class=p>.</span><span class=n>x</span> <span class=o>*</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>;</span>
-    
-    <span class=k>if</span> <span class=p>(</span><span class=n>index</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>){</span>
-        <span class=n>c</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>=</span> <span class=n>a</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>+</span> <span class=n>b</span><span class=p>[</span><span class=n>index</span><span class=p>];</span> 
-    <span class=p>}</span>
-
-<span class=p>}</span>
-</code></pre></div><p>This is where the magic happens, the result of the addition of vector(s) can be calculated independent of other elements in the array. Taking advantage of massive no of Cuda cores and threads, operations like these can be accelerated many times compared to a typical CPU.</p>
-<p>index can be calculated like below:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=kt>int</span> <span class=n>index</span> <span class=o>=</span> <span class=n>blockDim</span><span class=p>.</span><span class=n>x</span> <span class=o>*</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>;</span>
-</code></pre></div><p>This is one of the main limitations of CUDA, things work a lit bit differently inside CUDA kernel.</p>
-<p>
-<img src=/images/bsm1T76.png alt>
-(Source<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>)</p>
-<p><code>if</code> condition is used to prevent memory overflow, this can be useful in the case of variable input size.</p>
-<p>Complete code:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=c1>// vec_add_k.cu
-</span><span class=c1></span>
-<span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=n>__global__</span> <span class=kt>void</span> <span class=nf>add_vec_cuda</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>){</span>
-
-    <span class=kt>int</span> <span class=n>index</span> <span class=o>=</span> <span class=n>blockDim</span><span class=p>.</span><span class=n>x</span> <span class=o>*</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>;</span>
-    
-    <span class=k>if</span> <span class=p>(</span><span class=n>index</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>){</span>
-        <span class=n>c</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>=</span> <span class=n>a</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>+</span> <span class=n>b</span><span class=p>[</span><span class=n>index</span><span class=p>];</span> 
-    <span class=p>}</span>
-
-<span class=p>}</span>
-
-<span class=kt>int</span><span class=o>*</span> <span class=nf>add_vec</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>){</span>
-
-    <span class=kt>int</span> <span class=o>*</span><span class=n>d_a</span><span class=p>,</span> <span class=o>*</span><span class=n>d_b</span><span class=p>,</span> <span class=o>*</span><span class=n>d_c</span><span class=p>;</span>
-    <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>;</span>
-
-    <span class=n>c</span> <span class=o>=</span> <span class=p>(</span><span class=kt>int</span><span class=o>*</span><span class=p>)</span> <span class=n>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>)</span> <span class=o>*</span> <span class=mi>100</span><span class=p>);</span>
-
-    <span class=kt>int</span> <span class=n>size</span> <span class=o>=</span> <span class=mi>100</span> <span class=o>*</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>);</span>
-
-    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_a</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
-    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_b</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
-    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_c</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
-
-    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
-    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_b</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
-    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_c</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
-
-    <span class=n>add_vec_cuda</span><span class=o>&lt;&lt;&lt;</span><span class=mi>1</span><span class=p>,</span> <span class=mi>100</span><span class=o>&gt;&gt;&gt;</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>d_b</span><span class=p>,</span> <span class=n>d_c</span><span class=p>);</span>
-
-    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>c</span><span class=p>,</span> <span class=n>d_c</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyDeviceToHost</span><span class=p>);</span>
-
-    <span class=n>cudaFree</span><span class=p>(</span><span class=n>d_a</span><span class=p>);</span>
-    <span class=n>cudaFree</span><span class=p>(</span><span class=n>d_b</span><span class=p>);</span>
-    <span class=n>cudaFree</span><span class=p>(</span><span class=n>d_c</span><span class=p>);</span>
-
-    <span class=k>return</span> <span class=n>c</span><span class=p>;</span>
-<span class=p>}</span>
-</code></pre></div><h2 id=whats-next>What&rsquo;s Next?</h2>
-<p>This post serves as an example-first intro to CUDA, I skipped a lot of jargon about CUDA and NVIDIA architecture. I intend to cover some important topics like Matrix Multiplication and Image processing in future articles :bowtie:</p>
-<section class=footnotes role=doc-endnotes>
-<hr>
-<ol>
-<li id=fn:1 role=doc-endnote>
-<p><a href=http://www.mat.unimi.it/users/sansotte/cuda/CUDA_by_Example.pdf>Jason Sanders, Edward Kandrot - CUDA by Example - An Introduction to General-Purpose GPU Programming (2010) - P71</a>&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-</div>
-<div class=post-tags>
-</div>
-<div id=commento></div>
-<script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
-<noscript>Please enable JavaScript to view the
-<a href=https://commento.io/>comments powered by Commento.</a>
-</noscript>
-</div>
-<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
-</div>
-</div>
-<div class="footer wrapper">
-<script src=https://stdin.top/js/clipboard.min.72bcd06a245cfb9923791503eaceae3e8abf23f49974babd059aa655d60f738ee8114c6b5ba7f928adc2127af94cbc2d131df343a42b8bc1af2d71c8f497cc6a.js integrity="sha512-crzQaiRc+5kjeRUD6s6uPoq/I/SZdLq9BZqmVdYPc47oEUxrW6f5KK3CEnr5TLwtEx3zQ6Qri8GvLXHI9JfMag=="></script>
-<nav class=nav>
-<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
-<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
-</div>
-</body>
-</html>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a></ul></div><nav class=nav><ul class=flat><li><a href=/about/>About</a></li><li><a href=/tags/>Tags</a></li><li><a href=/portfolio/>Portfolio</a></li><li><a href=/pgp/>PGP</a></li></ul></nav></div><div class=post><div class=post-header><h1 class=title>Hello CUDA!</h1><div class=meta>Posted at &mdash; Dec 4, 2020
+| Last Modified on &mdash; May 11, 2023</div></div><div class=markdown><h1 id=introduction>Introduction</h1><p>CUDA is a parallel computing platform and application programming interface model created by Nvidia. It allows software developers and software engineers to use a CUDA-enabled graphics processing unit for general-purpose processing – an approach termed GPGPU.</p><p><strong>CUDA</strong> programs are compiled using <a href=https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>NVCC</a>. NVCC is included with <a href=https://developer.nvidia.com/cuda-toolkit>CUDA toolkit</a>.</p><h2 id=building-blocks>Building Blocks</h2><h3 id=block>Block</h3><p>A group of threads is called a <strong>CUDA block</strong>. <strong>CUDA blocks</strong> are grouped into a grid. A kernel is executed as a grid of <strong>blocks</strong> of threads</p><h3 id=thread>Thread</h3><p><code>Total no of Threads = No Blocks x Threads Per Block</code></p><hr><h2 id=hello-world>Hello World</h2><div class="notices note"><p><a href=https://github.com/jkotra/cuda_samples/tree/main/hello_world>Code on Github</a></p></div><p>Demonstration and code walkthrough of a simple <code>Hello World</code> program.</p><p>To run this, clone the repository and run <code>make</code> command.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span><span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span><span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=n>__global__</span> <span class=kt>void</span> <span class=nf>from_gpu</span><span class=p>(</span><span class=kt>void</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;%d, %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span><span class=p>,</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>from_gpu</span><span class=o>&lt;&lt;&lt;</span><span class=mi>10</span><span class=p>,</span> <span class=mi>10</span><span class=o>&gt;&gt;&gt;</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=nf>cudaDeviceSynchronize</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Output:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>0, 0
+</span></span><span class=line><span class=cl>0, 1
+</span></span><span class=line><span class=cl>0, 2
+</span></span><span class=line><span class=cl>0, 3
+</span></span><span class=line><span class=cl>0, 4
+</span></span><span class=line><span class=cl>0, 5
+</span></span><span class=line><span class=cl>0, 6
+</span></span><span class=line><span class=cl>....
+</span></span><span class=line><span class=cl>....
+</span></span><span class=line><span class=cl>....
+</span></span><span class=line><span class=cl>7, 5
+</span></span><span class=line><span class=cl>7, 6
+</span></span><span class=line><span class=cl>7, 7
+</span></span><span class=line><span class=cl>7, 8
+</span></span><span class=line><span class=cl>7, 9
+</span></span></code></pre></div><hr><h2 id=vector-addition>Vector Addition</h2><div class="notices note"><p><a href=https://github.com/jkotra/cuda_samples/tree/main/vec_add>Code on Github</a></p></div><p>To demonstrate the power of CUDA, let&rsquo;s take <strong>vector multiplication</strong> as an example.</p><p>This example has 2 files:</p><ul><li><a href=https://github.com/jkotra/cuda_samples/blob/main/vec_add/vec_add.cpp>vec_add.cpp</a></li><li><a href=https://github.com/jkotra/cuda_samples/blob/main/vec_add/vec_add_k.cu>vec_add_k.cu</a></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;random&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;vector&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;vec_add_k.cuh&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>(</span><span class=mi>100</span><span class=p>),</span> <span class=n>b</span><span class=p>(</span><span class=mi>100</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>generate</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>a</span><span class=p>.</span><span class=n>end</span><span class=p>(),</span> <span class=p>[</span><span class=o>&amp;</span><span class=p>](){</span> <span class=k>return</span> <span class=n>std</span><span class=o>::</span><span class=n>rand</span><span class=p>()</span> <span class=o>%</span> <span class=mi>10</span><span class=p>;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>generate</span><span class=p>(</span><span class=n>b</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>b</span><span class=p>.</span><span class=n>end</span><span class=p>(),</span> <span class=p>[</span><span class=o>&amp;</span><span class=p>](){</span> <span class=k>return</span> <span class=n>std</span><span class=o>::</span><span class=n>rand</span><span class=p>()</span> <span class=o>%</span> <span class=mi>10</span><span class=p>;</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=o>*</span><span class=n>result</span> <span class=o>=</span> <span class=n>add_vec</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=n>data</span><span class=p>(),</span> <span class=n>b</span><span class=p>.</span><span class=n>data</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>std</span><span class=o>::</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>a</span><span class=p>.</span><span class=n>at</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;+&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>b</span><span class=p>.</span><span class=n>at</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;=&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>result</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>&lt;&lt;</span> <span class=n>std</span><span class=o>::</span><span class=n>endl</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>In <code>vec_add.cpp</code>, 2 vectors are defined and are filled with random numbers. These two vectors are then passed to CUDA kernel for computation.</p><h3 id=cuda-kernel>CUDA Kernel</h3><p>we start by importing standard library</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span></code></pre></div><p>create a function called <code>add_vec</code> this takes in the vector from our program <code>vec_add.cpp</code></p><p>declare variables for device storage. (<code>d_a</code>, <code>d_b</code>, <code>d_c</code>)
+to store the result, declare a variable <code>c</code> and allocate memory.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span><span class=o>*</span> <span class=nf>add_vec</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=o>*</span><span class=n>d_a</span><span class=p>,</span> <span class=o>*</span><span class=n>d_b</span><span class=p>,</span> <span class=o>*</span><span class=n>d_c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span> <span class=o>=</span> <span class=p>(</span><span class=kt>int</span><span class=o>*</span><span class=p>)</span> <span class=n>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>)</span> <span class=o>*</span> <span class=mi>100</span><span class=p>);</span>
+</span></span></code></pre></div><p>compute the size of storage required, Note that we generated 100 randoms numbers each in both vectors.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=n>size</span> <span class=o>=</span> <span class=mi>100</span> <span class=o>*</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>);</span>
+</span></span></code></pre></div><p>allocate memory to device variable&rsquo;s using <code>cudaMalloc()</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl>    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_a</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_b</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_c</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
+</span></span></code></pre></div><p>Copy host variables into device variables:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_b</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_c</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
+</span></span></code></pre></div><p>Finally Launch the kernel:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>add_vec_cuda</span><span class=o>&lt;&lt;&lt;</span><span class=mi>1</span><span class=p>,</span> <span class=mi>100</span><span class=o>&gt;&gt;&gt;</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>d_b</span><span class=p>,</span> <span class=n>d_c</span><span class=p>);</span>
+</span></span></code></pre></div><p>the numbers inside the triple arrow i.e <code>&lt;&lt;&lt;</code> and <code>>>></code> define the size of the kernel, the above line will launch 1 block with 100 threads.</p><p><a href=https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/>More on it</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>__global__</span> <span class=kt>void</span> <span class=nf>add_vec_cuda</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>index</span> <span class=o>=</span> <span class=n>blockDim</span><span class=p>.</span><span class=n>x</span> <span class=o>*</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>index</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>        <span class=n>c</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>=</span> <span class=n>a</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>+</span> <span class=n>b</span><span class=p>[</span><span class=n>index</span><span class=p>];</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>This is where the magic happens, the result of the addition of vector(s) can be calculated independent of other elements in the array. Taking advantage of massive no of Cuda cores and threads, operations like these can be accelerated many times compared to a typical CPU.</p><p>index can be calculated like below:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=n>index</span> <span class=o>=</span> <span class=n>blockDim</span><span class=p>.</span><span class=n>x</span> <span class=o>*</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>;</span>
+</span></span></code></pre></div><p>This is one of the main limitations of CUDA, things work a lit bit differently inside CUDA kernel.</p><p><img src=/images/bsm1T76.png alt>
+(Source<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>)</p><p><code>if</code> condition is used to prevent memory overflow, this can be useful in the case of variable input size.</p><p>Complete code:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=c1>// vec_add_k.cu
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=n>__global__</span> <span class=kt>void</span> <span class=nf>add_vec_cuda</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>index</span> <span class=o>=</span> <span class=n>blockDim</span><span class=p>.</span><span class=n>x</span> <span class=o>*</span> <span class=n>blockIdx</span><span class=p>.</span><span class=n>x</span> <span class=o>+</span> <span class=n>threadIdx</span><span class=p>.</span><span class=n>x</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>index</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>        <span class=n>c</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>=</span> <span class=n>a</span><span class=p>[</span><span class=n>index</span><span class=p>]</span> <span class=o>+</span> <span class=n>b</span><span class=p>[</span><span class=n>index</span><span class=p>];</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span><span class=o>*</span> <span class=nf>add_vec</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>b</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=o>*</span><span class=n>d_a</span><span class=p>,</span> <span class=o>*</span><span class=n>d_b</span><span class=p>,</span> <span class=o>*</span><span class=n>d_c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=o>*</span><span class=n>c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>c</span> <span class=o>=</span> <span class=p>(</span><span class=kt>int</span><span class=o>*</span><span class=p>)</span> <span class=n>malloc</span><span class=p>(</span><span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>)</span> <span class=o>*</span> <span class=mi>100</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>size</span> <span class=o>=</span> <span class=mi>100</span> <span class=o>*</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_a</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_b</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMalloc</span><span class=p>(</span><span class=o>&amp;</span><span class=n>d_c</span><span class=p>,</span> <span class=n>size</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_b</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>d_c</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyHostToDevice</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>add_vec_cuda</span><span class=o>&lt;&lt;&lt;</span><span class=mi>1</span><span class=p>,</span> <span class=mi>100</span><span class=o>&gt;&gt;&gt;</span><span class=p>(</span><span class=n>d_a</span><span class=p>,</span> <span class=n>d_b</span><span class=p>,</span> <span class=n>d_c</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>cudaMemcpy</span><span class=p>(</span><span class=n>c</span><span class=p>,</span> <span class=n>d_c</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>cudaMemcpyDeviceToHost</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>cudaFree</span><span class=p>(</span><span class=n>d_a</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaFree</span><span class=p>(</span><span class=n>d_b</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>cudaFree</span><span class=p>(</span><span class=n>d_c</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>c</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=whats-next>What&rsquo;s Next?</h2><p>This post serves as an example-first intro to CUDA, I skipped a lot of jargon about CUDA and NVIDIA architecture. I intend to cover some important topics like Matrix Multiplication and Image processing in future articles :bowtie:</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p><a href=http://www.mat.unimi.it/users/sansotte/cuda/CUDA_by_Example.pdf>Jason Sanders, Edward Kandrot - CUDA by Example - An Introduction to General-Purpose GPU Programming (2010) - P71</a>&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></div><div class=post-tags></div><div id=commento></div><script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the
+<a href=https://commento.io/>comments powered by Commento.</a></noscript></div><link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script></div></div><div class="footer wrapper"><script src=https://stdin.top/js/clipboard.min.0152b42292de6653a83b8bb0f671ea67c862632ef4d9bdb0408fdf8b72889c3a6f7e39165902bb7e202f19909e397746ff956e10a08f88d0cfc8373338b36354.js integrity="sha512-AVK0IpLeZlOoO4uw9nHqZ8hiYy702b2wQI/fi3KInDpvfjkWWQK7fiAvGZCeOXdG/5VuEKCPiNDPyDczOLNjVA=="></script><nav class=nav><div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div><div><a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div></body></html>

@@ -1,314 +1,162 @@
-<!doctype html><html>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<base href=https://stdin.top/posts/mysql-array-seaorm/>
-<meta name=description content="Represent Array Data in MySQL. Examples of Insertion and Deletion 📊">
-<meta name=language content="en">
-<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
-<title>Storing Array in MySQL with Rust + SeaORM :: &lt;stdin></title>
-<link rel=icon type=image/png href=/static/chip.png>
-<meta property="og:title" content="Storing Array in MySQL with Rust + SeaORM">
-<meta property="og:description" content="Represent Array Data in MySQL. Examples of Insertion and Deletion 📊">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://stdin.top/posts/mysql-array-seaorm/"><meta property="og:image" content="https://stdin.top/images/QD5snPl.png"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2023-01-22T11:25:10+05:30">
-<meta property="article:modified_time" content="2023-05-11T19:55:50+05:30">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://stdin.top/images/QD5snPl.png">
-<meta name=twitter:title content="Storing Array in MySQL with Rust + SeaORM">
-<meta name=twitter:description content="Represent Array Data in MySQL. Examples of Insertion and Deletion 📊">
-<meta name=theme-color content="#2e2847">
-<link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
-<script src=https://stdin.top/js/main.min.6b828d297665710573e77091885cc47c1f382bb06242b19f91081cfbe48f7dffe419493e0ac93cf77c00887bbad39f2182abbefa17ee7e4d9d9f7407f22665d2.js integrity="sha512-a4KNKXZlcQVz53CRiFzEfB84K7BiQrGfkQgc++SPff/kGUk+Csk893wAiHu6058hgqu++hfufk2dn3QH8iZl0g=="></script>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw==">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A==">
-<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ==">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-YW8V9DTR0N',{anonymize_ip:!1})}</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script>
-</head>
-<body>
-<div class="container wrapper">
-<div class=header>
-<base href=https://stdin.top/>
-<h1 class=site-title>
-<a href=https://stdin.top/>&lt;stdin></a>
-<span class=blinking-cursor>|</span>
-</h1>
-<div class=site-description>
-<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
-<nav class="nav social">
-<ul class=flat>
-<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><base href=https://stdin.top/posts/mysql-array-seaorm/><meta name=description content="Represent Array Data in MySQL. Examples of Insertion and Deletion 📊"><meta name=language content="en"><link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml><title>Storing Array in MySQL with Rust + SeaORM :: &lt;stdin></title><link rel=icon type=image/png href=/static/chip.png><meta property="og:title" content="Storing Array in MySQL with Rust + SeaORM"><meta property="og:description" content="Represent Array Data in MySQL. Examples of Insertion and Deletion 📊"><meta property="og:type" content="article"><meta property="og:url" content="https://stdin.top/posts/mysql-array-seaorm/"><meta property="og:image" content="https://stdin.top/images/QD5snPl.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-01-22T11:25:10+05:30"><meta property="article:modified_time" content="2023-05-11T19:55:50+05:30"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://stdin.top/images/QD5snPl.png"><meta name=twitter:title content="Storing Array in MySQL with Rust + SeaORM"><meta name=twitter:description content="Represent Array Data in MySQL. Examples of Insertion and Deletion 📊"><meta name=theme-color content="#2e2847"><link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet><script src=https://stdin.top/js/main.min.6a2ed298f6a8cafbfa5c622ca55cb5be5632cc37b845fc6b58d9d383cf7ec77e9faaedd88196d0d58c0040873d5689898701e5ed30cac06dae52c78f9c0ddc31.js integrity="sha512-ai7SmPaoyvv6XGIspVy1vlYyzDe4RfxrWNnTg89+x36fqu3YgZbQ1YwAQIc9VomJhwHl7TDKwG2uUsePnA3cMQ=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw=="><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A=="><link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)"><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ=="><script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-YW8V9DTR0N",{anonymize_ip:!1})}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script></head><body><div class="container wrapper"><div class=header><base href=https://stdin.top/><h1 class=site-title><a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span></h1><div class=site-description><h2 class=cursive>My Thoughts, Trials and Adventures</h2><nav class="nav social"><ul class=flat><a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
 <a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
 <a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
-<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
-</ul>
-</div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/about/>About</a>
-</li>
-<li>
-<a href=/tags/>Tags</a>
-</li>
-<li>
-<a href=/portfolio/>Portfolio</a>
-</li>
-<li>
-<a href=/pgp/>PGP</a>
-</li>
-</ul>
-</nav>
-</div>
-<div class=post>
-<div class=post-header>
-<h1 class=title>Storing Array in MySQL with Rust + SeaORM</h1>
-<div class=meta>Posted at &mdash; Jan 22, 2023
-| Last Modified on &mdash; May 11, 2023</div>
-</div>
-<div class=markdown>
-<h1 id=introduction>Introduction</h1>
-<p>MySQL does not support arrays. You must be wondering then how it is still the most popular database that does not have a very essential type of data representation out of the box. I would argue, there are benefits to sticking to basic datatypes and allowing users to represent their data as they wish (such as an array) using constraints. I will demonstrate one such common technique here to store array data with help of Foreign Key Constraint. Usually, this representation is automatically generated in some frameworks, for example, spring boot with the <code>ddl-auto</code> option. However, In a rust ecosystem, things are usually verbose, requiring the programmer to know and understand the representation logic and layout of storing data in DB.</p>
-<p>For this tutorial, I use Rust and seaorm as Object Relation Mapper. Article Assumes working knowledge of seaorm syntax (<a href=https://www.sea-ql.org/sea-orm-tutorial/>Official SeaORM tutorial</a>).</p>
-<h1 id=setup>Setup</h1>
-<div class="notices note"><p><a href=https://github.com/jkotra/seaorm-mysql-array>Code on Github</a></p></div>
-<ol>
-<li>Clone <code>seaorm-mysql-array</code> (see <code>note</code> above)</li>
-<li>log in to your MySQL console and create a table named <code>emp_db</code></li>
-</ol>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-SQL data-lang=SQL><span class=k>CREATE</span><span class=w> </span><span class=k>DATABASE</span><span class=w> </span><span class=n>emp_db</span><span class=p>;</span><span class=w>
-</span></code></pre></div><ol start=3>
-<li>run seaorm migrations. This will drop-create tables.</li>
-</ol>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=nv>DATABASE_URL</span><span class=o>=</span><span class=s2>&#34;mysql://root:password@localhost:3306/emp_db&#34;</span> sea-orm-cli migrate refresh
-</code></pre></div><p>Note: Replace <code>root</code> and <code>password</code> with your credentials respectively.</p>
-<p>now, you can run the program with <code>cargo run</code>. Use <code>--</code> after to pass arguments to the app.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>cargo run
-</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Err! PROGRAM [show|add|rm {id}|clean]
-</code></pre></div><p>App has the following operation:</p>
-<p><code>add</code> - Add Employee</p>
-<p><code>rm {id}</code> - Remove Employee and his projects who has <code>{id}</code></p>
-<p><code>clean</code> - remove all.</p>
-<p><code>show</code> - show/find all.</p>
-<p>An example interaction output is as follows.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh>Employee Name:
-Jagadeesh
-Employee Projects <span class=o>[</span>seperated by comma<span class=o>(</span>,<span class=o>)]</span>:
-Blog, Taxes
-constructed <span class=nv>object</span> <span class=o>=</span> EmployeeModel <span class=o>{</span> id: 0, name: <span class=s2>&#34;Jagadeesh&#34;</span>, projects: <span class=o>[</span><span class=s2>&#34;Blog&#34;</span>, <span class=s2>&#34; Taxes&#34;</span><span class=o>]</span> <span class=o>}</span>
-employee Jagadeesh inserted with <span class=nv>id</span> <span class=o>=</span> <span class=m>24</span>
-project Blog inserted with <span class=nv>id</span> <span class=o>=</span> <span class=m>29</span>
-project  Taxes inserted with <span class=nv>id</span> <span class=o>=</span> <span class=nv>30</span>
-<span class=o>===</span> ALL DATA <span class=nv>length</span><span class=o>=</span><span class=nv>1</span> <span class=o>===</span>
-EmployeeModel <span class=o>{</span> id: 24, name: <span class=s2>&#34;Jagadeesh&#34;</span>, projects: <span class=o>[</span><span class=s2>&#34;Blog&#34;</span>, <span class=s2>&#34; Taxes&#34;</span><span class=o>]</span> <span class=o>}</span>
-<span class=o>===</span> END ALL <span class=nv>DATA</span> <span class=o>===</span>
-</code></pre></div><p>refer to the <a href=https://github.com/jkotra/seaorm-mysql-array>source code</a> to peek behind the curtains ;)</p>
-<h2 id=storing-array-data>Storing Array Data</h2>
-<p>First, we need to define our model at the highest level, the one that we are going to use in our rust app. I defined my <code>Employee</code> Model as follows:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=cp>#[derive(Debug, Default)]</span><span class=w>
-</span><span class=w></span><span class=k>struct</span> <span class=nc>EmployeeModel</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>    </span><span class=n>id</span>: <span class=kt>i64</span><span class=p>,</span><span class=w>
-</span><span class=w>    </span><span class=n>name</span>: <span class=nb>String</span><span class=p>,</span><span class=w>
-</span><span class=w>    </span><span class=n>projects</span>: <span class=nb>Vec</span><span class=o>&lt;</span><span class=nb>String</span><span class=o>&gt;</span><span class=p>,</span><span class=w>
-</span><span class=w></span><span class=p>}</span><span class=w>
-</span></code></pre></div><p>A very simple model, with an <code>id</code>, <code>name</code>, and <code>projects</code> he has been assigned to.</p>
-<p>In the earlier section, we ran migration on DB. It is nothing but creating the schema. The schema of the table <code>Employee</code> can be seen in <code>migration/src/m_17012023_000001_create_employee.rs</code>. An excerpt is given below.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=ln> 1</span><span class=k>use</span><span class=w> </span><span class=n>sea_orm_migration</span>::<span class=n>prelude</span>::<span class=o>*</span><span class=p>;</span><span class=w>
-</span><span class=ln> 2</span><span class=w>
-</span><span class=ln> 3</span><span class=w></span><span class=cp>#[derive(DeriveMigrationName)]</span><span class=w>
-</span><span class=ln> 4</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>struct</span> <span class=nc>Migration</span><span class=p>;</span><span class=w>
-</span><span class=ln> 5</span><span class=w>
-</span><span class=ln> 6</span><span class=w></span><span class=cp>#[async_trait::async_trait]</span><span class=w>
-</span><span class=ln> 7</span><span class=w></span><span class=k>impl</span><span class=w> </span><span class=n>MigrationTrait</span><span class=w> </span><span class=k>for</span><span class=w> </span><span class=n>Migration</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=ln> 8</span><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>up</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=hl><span class=ln> 9</span><span class=w>        </span><span class=n>manager</span><span class=w>
-</span></span><span class=hl><span class=ln>10</span><span class=w>            </span><span class=p>.</span><span class=n>create_table</span><span class=p>(</span><span class=w>
-</span></span><span class=hl><span class=ln>11</span><span class=w>                </span><span class=n>Table</span>::<span class=n>create</span><span class=p>()</span><span class=w>
-</span></span><span class=hl><span class=ln>12</span><span class=w>                    </span><span class=p>.</span><span class=n>table</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Table</span><span class=p>)</span><span class=w>
-</span></span><span class=hl><span class=ln>13</span><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=w>
-</span></span><span class=hl><span class=ln>14</span><span class=w>                        </span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Id</span><span class=p>)</span><span class=w>
-</span></span><span class=hl><span class=ln>15</span><span class=w>                            </span><span class=p>.</span><span class=n>integer</span><span class=p>()</span><span class=w>
-</span></span><span class=hl><span class=ln>16</span><span class=w>                            </span><span class=p>.</span><span class=n>not_null</span><span class=p>()</span><span class=w>
-</span></span><span class=hl><span class=ln>17</span><span class=w>                            </span><span class=p>.</span><span class=n>auto_increment</span><span class=p>()</span><span class=w>
-</span></span><span class=hl><span class=ln>18</span><span class=w>                            </span><span class=p>.</span><span class=n>primary_key</span><span class=p>(),</span><span class=w>
-</span></span><span class=hl><span class=ln>19</span><span class=w>                    </span><span class=p>)</span><span class=w>
-</span></span><span class=hl><span class=ln>20</span><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Name</span><span class=p>).</span><span class=n>string</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
-</span></span><span class=ln>21</span><span class=w>                    </span><span class=p>.</span><span class=n>to_owned</span><span class=p>(),</span><span class=w>
-</span><span class=ln>22</span><span class=w>            </span><span class=p>)</span><span class=w>
-</span><span class=ln>23</span><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
-</span><span class=ln>24</span><span class=w>    </span><span class=p>}</span><span class=w>
-</span><span class=ln>25</span><span class=w>
-</span><span class=ln>26</span><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>down</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=ln>27</span><span class=w>        </span><span class=n>manager</span><span class=w>
-</span><span class=ln>28</span><span class=w>            </span><span class=p>.</span><span class=n>drop_table</span><span class=p>(</span><span class=n>Table</span>::<span class=nb>drop</span><span class=p>().</span><span class=n>table</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Table</span><span class=p>).</span><span class=n>to_owned</span><span class=p>())</span><span class=w>
-</span><span class=ln>29</span><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
-</span><span class=ln>30</span><span class=w>    </span><span class=p>}</span><span class=w>
-</span><span class=ln>31</span><span class=w></span><span class=p>}</span><span class=w>
-</span><span class=ln>32</span><span class=w>
-</span><span class=ln>33</span><span class=w></span><span class=sd>/// Learn more at https://docs.rs/sea-query#iden
-</span><span class=ln>34</span><span class=sd></span><span class=cp>#[derive(Iden)]</span><span class=w>
-</span><span class=ln>35</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>enum</span> <span class=nc>Employee</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=ln>36</span><span class=w>    </span><span class=n>Table</span><span class=p>,</span><span class=w>
-</span><span class=ln>37</span><span class=w>    </span><span class=n>Id</span><span class=p>,</span><span class=w>
-</span><span class=ln>38</span><span class=w>    </span><span class=n>Name</span><span class=p>,</span><span class=w>
-</span><span class=ln>39</span><span class=w></span><span class=p>}</span></code></pre></div>
-<p>Similarly, We use the <code>projects</code> table to store multiple projects assigned to an employee.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=ln> 1</span><span class=k>use</span><span class=w> </span><span class=k>super</span>::<span class=n>m_17012023_000001_create_employee</span>::<span class=n>Employee</span><span class=p>;</span><span class=w>
-</span><span class=ln> 2</span><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>sea_orm_migration</span>::<span class=n>prelude</span>::<span class=o>*</span><span class=p>;</span><span class=w>
-</span><span class=ln> 3</span><span class=w>
-</span><span class=ln> 4</span><span class=w></span><span class=cp>#[derive(DeriveMigrationName)]</span><span class=w>
-</span><span class=ln> 5</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>struct</span> <span class=nc>Migration</span><span class=p>;</span><span class=w>
-</span><span class=ln> 6</span><span class=w>
-</span><span class=ln> 7</span><span class=w></span><span class=cp>#[async_trait::async_trait]</span><span class=w>
-</span><span class=ln> 8</span><span class=w></span><span class=k>impl</span><span class=w> </span><span class=n>MigrationTrait</span><span class=w> </span><span class=k>for</span><span class=w> </span><span class=n>Migration</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=ln> 9</span><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>up</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=ln>10</span><span class=w>        </span><span class=n>manager</span><span class=w>
-</span><span class=ln>11</span><span class=w>            </span><span class=p>.</span><span class=n>create_table</span><span class=p>(</span><span class=w>
-</span><span class=ln>12</span><span class=w>                </span><span class=n>Table</span>::<span class=n>create</span><span class=p>()</span><span class=w>
-</span><span class=ln>13</span><span class=w>                    </span><span class=p>.</span><span class=n>table</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Table</span><span class=p>)</span><span class=w>
-</span><span class=ln>14</span><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=w>
-</span><span class=ln>15</span><span class=w>                        </span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Id</span><span class=p>)</span><span class=w>
-</span><span class=ln>16</span><span class=w>                            </span><span class=p>.</span><span class=n>integer</span><span class=p>()</span><span class=w>
-</span><span class=ln>17</span><span class=w>                            </span><span class=p>.</span><span class=n>not_null</span><span class=p>()</span><span class=w>
-</span><span class=ln>18</span><span class=w>                            </span><span class=p>.</span><span class=n>auto_increment</span><span class=p>()</span><span class=w>
-</span><span class=ln>19</span><span class=w>                            </span><span class=p>.</span><span class=n>primary_key</span><span class=p>(),</span><span class=w>
-</span><span class=ln>20</span><span class=w>                    </span><span class=p>)</span><span class=w>
-</span><span class=hl><span class=ln>21</span><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>EmpId</span><span class=p>).</span><span class=n>integer</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
-</span></span><span class=hl><span class=ln>22</span><span class=w>                    </span><span class=p>.</span><span class=n>foreign_key</span><span class=p>(</span><span class=w>
-</span></span><span class=hl><span class=ln>23</span><span class=w>                        </span><span class=n>ForeignKey</span>::<span class=n>create</span><span class=p>()</span><span class=w>
-</span></span><span class=hl><span class=ln>24</span><span class=w>                            </span><span class=p>.</span><span class=n>name</span><span class=p>(</span><span class=s>&#34;fk-emp-projects&#34;</span><span class=p>)</span><span class=w>
-</span></span><span class=hl><span class=ln>25</span><span class=w>                            </span><span class=p>.</span><span class=n>from</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Table</span><span class=p>,</span><span class=w> </span><span class=n>Projects</span>::<span class=n>EmpId</span><span class=p>)</span><span class=w>
-</span></span><span class=hl><span class=ln>26</span><span class=w>                            </span><span class=p>.</span><span class=n>to</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Table</span><span class=p>,</span><span class=w> </span><span class=n>Employee</span>::<span class=n>Id</span><span class=p>),</span><span class=w>
-</span></span><span class=hl><span class=ln>27</span><span class=w>                    </span><span class=p>)</span><span class=w>
-</span></span><span class=ln>28</span><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Seq</span><span class=p>).</span><span class=n>integer</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
-</span><span class=ln>29</span><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Value</span><span class=p>).</span><span class=n>string</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
-</span><span class=ln>30</span><span class=w>                    </span><span class=p>.</span><span class=n>to_owned</span><span class=p>(),</span><span class=w>
-</span><span class=ln>31</span><span class=w>            </span><span class=p>)</span><span class=w>
-</span><span class=ln>32</span><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
-</span><span class=ln>33</span><span class=w>    </span><span class=p>}</span><span class=w>
-</span><span class=ln>34</span><span class=w>
-</span><span class=ln>35</span><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>down</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=ln>36</span><span class=w>        </span><span class=n>manager</span><span class=w>
-</span><span class=ln>37</span><span class=w>            </span><span class=p>.</span><span class=n>drop_table</span><span class=p>(</span><span class=n>Table</span>::<span class=nb>drop</span><span class=p>().</span><span class=n>table</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Table</span><span class=p>).</span><span class=n>to_owned</span><span class=p>())</span><span class=w>
-</span><span class=ln>38</span><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
-</span><span class=ln>39</span><span class=w>    </span><span class=p>}</span><span class=w>
-</span><span class=ln>40</span><span class=w></span><span class=p>}</span><span class=w>
-</span><span class=ln>41</span><span class=w>
-</span><span class=ln>42</span><span class=w></span><span class=cp>#[derive(Iden)]</span><span class=w>
-</span><span class=ln>43</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>enum</span> <span class=nc>Projects</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=ln>44</span><span class=w>    </span><span class=n>Table</span><span class=p>,</span><span class=w>
-</span><span class=ln>45</span><span class=w>    </span><span class=n>Id</span><span class=p>,</span><span class=w>
-</span><span class=hl><span class=ln>46</span><span class=w>    </span><span class=n>EmpId</span><span class=p>,</span><span class=w>
-</span></span><span class=hl><span class=ln>47</span><span class=w>    </span><span class=n>Seq</span><span class=p>,</span><span class=w>
-</span></span><span class=hl><span class=ln>48</span><span class=w>    </span><span class=n>Value</span><span class=p>,</span><span class=w>
-</span></span><span class=ln>49</span><span class=w></span><span class=p>}</span></code></pre></div>
-<p>Points to note in the above code:</p>
-<ol>
-<li>
-<p><code>Employee</code> has the following columns - <code>id</code>, <code>name</code></p>
-</li>
-<li>
-<p><code>Projects</code> has the following columns:</p>
-<ol>
-<li><code>Id</code></li>
-<li><code>EmpId</code> - Foreign Key</li>
-<li><code>Seq</code> - Sequence / Index</li>
-<li><code>Value</code></li>
-</ol>
-</li>
-<li>
-<p><code>Foreign Key</code> Relation from <code>Employee::Id</code> to <code>Projects::EmpId</code>. This Constraint makes sure that an employee cannot be deleted while corresponding projects exist, thus ensuring data integrity.</p>
-</li>
-</ol>
-<p>The combination of <code>Employee</code> and <code>Projects</code> tables gives us <code>EmployeeModel</code> that we defined in the beginning.</p>
-<p>
-<img src=/images/F26YnMf.png alt="ER Diagram">
-</p>
-<h3 id=inserting-employee>Inserting Employee</h3>
-<p>Take a look at the <code>insert</code> fn of our app.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>insert</span><span class=p>(</span><span class=n>emp</span>: <span class=nc>EmployeeModel</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>db</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>get_db</span><span class=p>().</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
-</span><span class=w>
-</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>e</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>employee</span>::<span class=n>ActiveModel</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>        </span><span class=n>name</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>emp</span><span class=p>.</span><span class=n>name</span><span class=p>.</span><span class=n>clone</span><span class=p>()),</span><span class=w>
-</span><span class=w>        </span><span class=o>..</span><span class=nb>Default</span>::<span class=n>default</span><span class=p>()</span><span class=w>
-</span><span class=w>    </span><span class=p>};</span><span class=w>
-</span><span class=w>
-</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>ires</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Employee</span>::<span class=n>insert</span><span class=p>(</span><span class=n>e</span><span class=p>).</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>).</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
-</span><span class=w>    </span><span class=fm>println!</span><span class=p>(</span><span class=w>
-</span><span class=w>        </span><span class=s>&#34;employee {} inserted with id = {}&#34;</span><span class=p>,</span><span class=w>
-</span><span class=w>        </span><span class=n>emp</span><span class=p>.</span><span class=n>name</span><span class=p>,</span><span class=w> </span><span class=n>ires</span><span class=p>.</span><span class=n>last_insert_id</span><span class=w>
-</span><span class=w>    </span><span class=p>);</span><span class=w>
-</span><span class=w>
-</span><span class=w>    </span><span class=k>for</span><span class=w> </span><span class=n>p</span><span class=w> </span><span class=k>in</span><span class=w> </span><span class=mi>0</span><span class=o>..</span><span class=n>emp</span><span class=p>.</span><span class=n>projects</span><span class=p>.</span><span class=n>len</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>proj_name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>emp</span><span class=p>.</span><span class=n>projects</span><span class=p>.</span><span class=n>clone</span><span class=p>().</span><span class=n>get</span><span class=p>(</span><span class=n>p</span><span class=p>).</span><span class=n>unwrap</span><span class=p>().</span><span class=n>to_string</span><span class=p>();</span><span class=w>
-</span><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=n>proj_name</span><span class=p>.</span><span class=n>len</span><span class=p>()</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>            </span><span class=k>continue</span><span class=p>;</span><span class=w>
-</span><span class=w>        </span><span class=p>};</span><span class=w>
-</span><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>i_proj</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>projects</span>::<span class=n>ActiveModel</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>            </span><span class=n>emp_id</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>ires</span><span class=p>.</span><span class=n>last_insert_id</span><span class=p>),</span><span class=w>
-</span><span class=w>            </span><span class=n>seq</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>p</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=kt>i32</span><span class=p>),</span><span class=w>
-</span><span class=w>            </span><span class=n>value</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>proj_name</span><span class=p>.</span><span class=n>clone</span><span class=p>()),</span><span class=w>
-</span><span class=w>            </span><span class=o>..</span><span class=nb>Default</span>::<span class=n>default</span><span class=p>()</span><span class=w>
-</span><span class=w>        </span><span class=p>};</span><span class=w>
-</span><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>inserted</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Projects</span>::<span class=n>insert</span><span class=p>(</span><span class=n>i_proj</span><span class=p>).</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>).</span><span class=k>await</span><span class=p>.</span><span class=n>unwrap</span><span class=p>();</span><span class=w>
-</span><span class=w>        </span><span class=fm>println!</span><span class=p>(</span><span class=w>
-</span><span class=w>            </span><span class=s>&#34;project {} inserted with id = {}&#34;</span><span class=p>,</span><span class=w>
-</span><span class=w>            </span><span class=n>proj_name</span><span class=p>,</span><span class=w> </span><span class=n>inserted</span><span class=p>.</span><span class=n>last_insert_id</span><span class=w>
-</span><span class=w>        </span><span class=p>);</span><span class=w>
-</span><span class=w>    </span><span class=p>}</span><span class=w>
-</span><span class=w>
-</span><span class=w>    </span><span class=nb>Ok</span><span class=p>(())</span><span class=w>
-</span><span class=w></span><span class=p>}</span><span class=w>
-</span></code></pre></div><p>First, we take <code>EmployeeModel</code> as an argument, this is generated from user input by <code>add_emp</code> fn. Next, We insert <code>e</code> into the <code>employee</code> table (Needs to be converted to <code>ActivateModel</code>).</p>
-<p>inserted id is stored as <code>ires</code> (<code>ires.last_insert_id</code>), This will be used as <code>EmpId</code> for projects related to this employee.</p>
-<p>A range-based loop is used to insert projects into the <code>projects</code> table.</p>
-<h3 id=removing-employee>Removing Employee</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>remove_emp</span><span class=p>(</span><span class=n>id</span>: <span class=kt>i32</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>    </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;removing employee with id = {}&#34;</span><span class=p>,</span><span class=w> </span><span class=n>id</span><span class=p>);</span><span class=w>
-</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>db</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>get_db</span><span class=p>().</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
-</span><span class=w>    </span><span class=n>Projects</span>::<span class=n>delete_many</span><span class=p>()</span><span class=w>
-</span><span class=w>        </span><span class=p>.</span><span class=n>filter</span><span class=p>(</span><span class=n>projects</span>::<span class=n>Column</span>::<span class=n>EmpId</span><span class=p>.</span><span class=n>eq</span><span class=p>(</span><span class=n>id</span><span class=p>))</span><span class=w>
-</span><span class=w>        </span><span class=p>.</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>)</span><span class=w>
-</span><span class=w>        </span><span class=p>.</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
-</span><span class=w>
-</span><span class=w>    </span><span class=n>Employee</span>::<span class=n>delete_by_id</span><span class=p>(</span><span class=n>id</span><span class=p>).</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>).</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
-</span><span class=w>    </span><span class=nb>Ok</span><span class=p>(())</span><span class=w>
-</span><span class=w></span><span class=p>}</span><span class=w>
-</span></code></pre></div><p>Removing an employee is relatively string forward. Note that we need to remove the projects before the employee itself because of Foreign Key Relationship.</p>
-<hr>
-<h1 id=conclusion>Conclusion</h1>
-<p>MySQL is the most popular DB for a lot of use cases. Though, it&rsquo;s only a piece of cake if specific language tools are made to deal with complex data structures and data representations not supported by MySQL by default. If you are looking to start a project in rust and are confused as to which DB to choose, the community recommends PostgreSQL (which has native support for array).</p>
-</div>
-<div class=post-tags>
-</div>
-<div id=commento></div>
-<script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
-<noscript>Please enable JavaScript to view the
-<a href=https://commento.io/>comments powered by Commento.</a>
-</noscript>
-</div>
-<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
-</div>
-</div>
-<div class="footer wrapper">
-<script src=https://stdin.top/js/clipboard.min.72bcd06a245cfb9923791503eaceae3e8abf23f49974babd059aa655d60f738ee8114c6b5ba7f928adc2127af94cbc2d131df343a42b8bc1af2d71c8f497cc6a.js integrity="sha512-crzQaiRc+5kjeRUD6s6uPoq/I/SZdLq9BZqmVdYPc47oEUxrW6f5KK3CEnr5TLwtEx3zQ6Qri8GvLXHI9JfMag=="></script>
-<nav class=nav>
-<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
-<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
-</div>
-</body>
-</html>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a></ul></div><nav class=nav><ul class=flat><li><a href=/about/>About</a></li><li><a href=/tags/>Tags</a></li><li><a href=/portfolio/>Portfolio</a></li><li><a href=/pgp/>PGP</a></li></ul></nav></div><div class=post><div class=post-header><h1 class=title>Storing Array in MySQL with Rust + SeaORM</h1><div class=meta>Posted at &mdash; Jan 22, 2023
+| Last Modified on &mdash; May 11, 2023</div></div><div class=markdown><h1 id=introduction>Introduction</h1><p>MySQL does not support arrays. You must be wondering then how it is still the most popular database that does not have a very essential type of data representation out of the box. I would argue, there are benefits to sticking to basic datatypes and allowing users to represent their data as they wish (such as an array) using constraints. I will demonstrate one such common technique here to store array data with help of Foreign Key Constraint. Usually, this representation is automatically generated in some frameworks, for example, spring boot with the <code>ddl-auto</code> option. However, In a rust ecosystem, things are usually verbose, requiring the programmer to know and understand the representation logic and layout of storing data in DB.</p><p>For this tutorial, I use Rust and seaorm as Object Relation Mapper. Article Assumes working knowledge of seaorm syntax (<a href=https://www.sea-ql.org/sea-orm-tutorial/>Official SeaORM tutorial</a>).</p><h1 id=setup>Setup</h1><div class="notices note"><p><a href=https://github.com/jkotra/seaorm-mysql-array>Code on Github</a></p></div><ol><li>Clone <code>seaorm-mysql-array</code> (see <code>note</code> above)</li><li>log in to your MySQL console and create a table named <code>emp_db</code></li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-SQL data-lang=SQL><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>DATABASE</span><span class=w> </span><span class=n>emp_db</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><ol start=3><li>run seaorm migrations. This will drop-create tables.</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nv>DATABASE_URL</span><span class=o>=</span><span class=s2>&#34;mysql://root:password@localhost:3306/emp_db&#34;</span> sea-orm-cli migrate refresh
+</span></span></code></pre></div><p>Note: Replace <code>root</code> and <code>password</code> with your credentials respectively.</p><p>now, you can run the program with <code>cargo run</code>. Use <code>--</code> after to pass arguments to the app.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cargo run
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Err! PROGRAM [show|add|rm {id}|clean]
+</span></span></code></pre></div><p>App has the following operation:</p><p><code>add</code> - Add Employee</p><p><code>rm {id}</code> - Remove Employee and his projects who has <code>{id}</code></p><p><code>clean</code> - remove all.</p><p><code>show</code> - show/find all.</p><p>An example interaction output is as follows.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>Employee Name:
+</span></span><span class=line><span class=cl>Jagadeesh
+</span></span><span class=line><span class=cl>Employee Projects <span class=o>[</span>seperated by comma<span class=o>(</span>,<span class=o>)]</span>:
+</span></span><span class=line><span class=cl>Blog, Taxes
+</span></span><span class=line><span class=cl>constructed <span class=nv>object</span> <span class=o>=</span> EmployeeModel <span class=o>{</span> id: 0, name: <span class=s2>&#34;Jagadeesh&#34;</span>, projects: <span class=o>[</span><span class=s2>&#34;Blog&#34;</span>, <span class=s2>&#34; Taxes&#34;</span><span class=o>]</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>employee Jagadeesh inserted with <span class=nv>id</span> <span class=o>=</span> <span class=m>24</span>
+</span></span><span class=line><span class=cl>project Blog inserted with <span class=nv>id</span> <span class=o>=</span> <span class=m>29</span>
+</span></span><span class=line><span class=cl>project  Taxes inserted with <span class=nv>id</span> <span class=o>=</span> <span class=nv>30</span>
+</span></span><span class=line><span class=cl><span class=o>===</span> ALL DATA <span class=nv>length</span><span class=o>=</span><span class=nv>1</span> <span class=o>===</span>
+</span></span><span class=line><span class=cl>EmployeeModel <span class=o>{</span> id: 24, name: <span class=s2>&#34;Jagadeesh&#34;</span>, projects: <span class=o>[</span><span class=s2>&#34;Blog&#34;</span>, <span class=s2>&#34; Taxes&#34;</span><span class=o>]</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>===</span> END ALL <span class=nv>DATA</span> <span class=o>===</span>
+</span></span></code></pre></div><p>refer to the <a href=https://github.com/jkotra/seaorm-mysql-array>source code</a> to peek behind the curtains ;)</p><h2 id=storing-array-data>Storing Array Data</h2><p>First, we need to define our model at the highest level, the one that we are going to use in our rust app. I defined my <code>Employee</code> Model as follows:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=line><span class=cl><span class=cp>#[derive(Debug, Default)]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>struct</span> <span class=nc>EmployeeModel</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span>: <span class=kt>i64</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span>: <span class=nb>String</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>projects</span>: <span class=nb>Vec</span><span class=o>&lt;</span><span class=nb>String</span><span class=o>&gt;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>A very simple model, with an <code>id</code>, <code>name</code>, and <code>projects</code> he has been assigned to.</p><p>In the earlier section, we ran migration on DB. It is nothing but creating the schema. The schema of the table <code>Employee</code> can be seen in <code>migration/src/m_17012023_000001_create_employee.rs</code>. An excerpt is given below.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=line><span class=ln> 1</span><span class=cl><span class=k>use</span><span class=w> </span><span class=n>sea_orm_migration</span>::<span class=n>prelude</span>::<span class=o>*</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=ln> 2</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln> 3</span><span class=cl><span class=w></span><span class=cp>#[derive(DeriveMigrationName)]</span><span class=w>
+</span></span></span><span class=line><span class=ln> 4</span><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>struct</span> <span class=nc>Migration</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=ln> 5</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln> 6</span><span class=cl><span class=w></span><span class=cp>#[async_trait::async_trait]</span><span class=w>
+</span></span></span><span class=line><span class=ln> 7</span><span class=cl><span class=w></span><span class=k>impl</span><span class=w> </span><span class=n>MigrationTrait</span><span class=w> </span><span class=k>for</span><span class=w> </span><span class=n>Migration</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=ln> 8</span><span class=cl><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>up</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln> 9</span><span class=cl><span class=w>        </span><span class=n>manager</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>10</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=n>create_table</span><span class=p>(</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>11</span><span class=cl><span class=w>                </span><span class=n>Table</span>::<span class=n>create</span><span class=p>()</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>12</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>table</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Table</span><span class=p>)</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>13</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>14</span><span class=cl><span class=w>                        </span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Id</span><span class=p>)</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>15</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>integer</span><span class=p>()</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>16</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>not_null</span><span class=p>()</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>17</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>auto_increment</span><span class=p>()</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>18</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>primary_key</span><span class=p>(),</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>19</span><span class=cl><span class=w>                    </span><span class=p>)</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>20</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Name</span><span class=p>).</span><span class=n>string</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
+</span></span></span><span class=line><span class=ln>21</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>to_owned</span><span class=p>(),</span><span class=w>
+</span></span></span><span class=line><span class=ln>22</span><span class=cl><span class=w>            </span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=ln>23</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
+</span></span></span><span class=line><span class=ln>24</span><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=ln>25</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln>26</span><span class=cl><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>down</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=ln>27</span><span class=cl><span class=w>        </span><span class=n>manager</span><span class=w>
+</span></span></span><span class=line><span class=ln>28</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=n>drop_table</span><span class=p>(</span><span class=n>Table</span>::<span class=nb>drop</span><span class=p>().</span><span class=n>table</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Table</span><span class=p>).</span><span class=n>to_owned</span><span class=p>())</span><span class=w>
+</span></span></span><span class=line><span class=ln>29</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
+</span></span></span><span class=line><span class=ln>30</span><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=ln>31</span><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=ln>32</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln>33</span><span class=cl><span class=w></span><span class=sd>/// Learn more at https://docs.rs/sea-query#iden
+</span></span></span><span class=line><span class=ln>34</span><span class=cl><span class=sd></span><span class=cp>#[derive(Iden)]</span><span class=w>
+</span></span></span><span class=line><span class=ln>35</span><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>enum</span> <span class=nc>Employee</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=ln>36</span><span class=cl><span class=w>    </span><span class=n>Table</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=ln>37</span><span class=cl><span class=w>    </span><span class=n>Id</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=ln>38</span><span class=cl><span class=w>    </span><span class=n>Name</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=ln>39</span><span class=cl><span class=w></span><span class=p>}</span></span></span></code></pre></div><p>Similarly, We use the <code>projects</code> table to store multiple projects assigned to an employee.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=line><span class=ln> 1</span><span class=cl><span class=k>use</span><span class=w> </span><span class=k>super</span>::<span class=n>m_17012023_000001_create_employee</span>::<span class=n>Employee</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=ln> 2</span><span class=cl><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>sea_orm_migration</span>::<span class=n>prelude</span>::<span class=o>*</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=ln> 3</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln> 4</span><span class=cl><span class=w></span><span class=cp>#[derive(DeriveMigrationName)]</span><span class=w>
+</span></span></span><span class=line><span class=ln> 5</span><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>struct</span> <span class=nc>Migration</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=ln> 6</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln> 7</span><span class=cl><span class=w></span><span class=cp>#[async_trait::async_trait]</span><span class=w>
+</span></span></span><span class=line><span class=ln> 8</span><span class=cl><span class=w></span><span class=k>impl</span><span class=w> </span><span class=n>MigrationTrait</span><span class=w> </span><span class=k>for</span><span class=w> </span><span class=n>Migration</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=ln> 9</span><span class=cl><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>up</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=ln>10</span><span class=cl><span class=w>        </span><span class=n>manager</span><span class=w>
+</span></span></span><span class=line><span class=ln>11</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=n>create_table</span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=ln>12</span><span class=cl><span class=w>                </span><span class=n>Table</span>::<span class=n>create</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=ln>13</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>table</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Table</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=ln>14</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=ln>15</span><span class=cl><span class=w>                        </span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Id</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=ln>16</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>integer</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=ln>17</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>not_null</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=ln>18</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>auto_increment</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=ln>19</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>primary_key</span><span class=p>(),</span><span class=w>
+</span></span></span><span class=line><span class=ln>20</span><span class=cl><span class=w>                    </span><span class=p>)</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>21</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>EmpId</span><span class=p>).</span><span class=n>integer</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>22</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>foreign_key</span><span class=p>(</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>23</span><span class=cl><span class=w>                        </span><span class=n>ForeignKey</span>::<span class=n>create</span><span class=p>()</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>24</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>name</span><span class=p>(</span><span class=s>&#34;fk-emp-projects&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>25</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>from</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Table</span><span class=p>,</span><span class=w> </span><span class=n>Projects</span>::<span class=n>EmpId</span><span class=p>)</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>26</span><span class=cl><span class=w>                            </span><span class=p>.</span><span class=n>to</span><span class=p>(</span><span class=n>Employee</span>::<span class=n>Table</span><span class=p>,</span><span class=w> </span><span class=n>Employee</span>::<span class=n>Id</span><span class=p>),</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>27</span><span class=cl><span class=w>                    </span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=ln>28</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Seq</span><span class=p>).</span><span class=n>integer</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
+</span></span></span><span class=line><span class=ln>29</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>col</span><span class=p>(</span><span class=n>ColumnDef</span>::<span class=n>new</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Value</span><span class=p>).</span><span class=n>string</span><span class=p>().</span><span class=n>not_null</span><span class=p>())</span><span class=w>
+</span></span></span><span class=line><span class=ln>30</span><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>to_owned</span><span class=p>(),</span><span class=w>
+</span></span></span><span class=line><span class=ln>31</span><span class=cl><span class=w>            </span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=ln>32</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
+</span></span></span><span class=line><span class=ln>33</span><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=ln>34</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln>35</span><span class=cl><span class=w>    </span><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>down</span><span class=p>(</span><span class=o>&amp;</span><span class=bp>self</span><span class=p>,</span><span class=w> </span><span class=n>manager</span>: <span class=kp>&amp;</span><span class=nc>SchemaManager</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=ln>36</span><span class=cl><span class=w>        </span><span class=n>manager</span><span class=w>
+</span></span></span><span class=line><span class=ln>37</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=n>drop_table</span><span class=p>(</span><span class=n>Table</span>::<span class=nb>drop</span><span class=p>().</span><span class=n>table</span><span class=p>(</span><span class=n>Projects</span>::<span class=n>Table</span><span class=p>).</span><span class=n>to_owned</span><span class=p>())</span><span class=w>
+</span></span></span><span class=line><span class=ln>38</span><span class=cl><span class=w>            </span><span class=p>.</span><span class=k>await</span><span class=w>
+</span></span></span><span class=line><span class=ln>39</span><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=ln>40</span><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=ln>41</span><span class=cl><span class=w>
+</span></span></span><span class=line><span class=ln>42</span><span class=cl><span class=w></span><span class=cp>#[derive(Iden)]</span><span class=w>
+</span></span></span><span class=line><span class=ln>43</span><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>enum</span> <span class=nc>Projects</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=ln>44</span><span class=cl><span class=w>    </span><span class=n>Table</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=ln>45</span><span class=cl><span class=w>    </span><span class=n>Id</span><span class=p>,</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>46</span><span class=cl><span class=w>    </span><span class=n>EmpId</span><span class=p>,</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>47</span><span class=cl><span class=w>    </span><span class=n>Seq</span><span class=p>,</span><span class=w>
+</span></span></span><span class="line hl"><span class=ln>48</span><span class=cl><span class=w>    </span><span class=n>Value</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=ln>49</span><span class=cl><span class=w></span><span class=p>}</span></span></span></code></pre></div><p>Points to note in the above code:</p><ol><li><p><code>Employee</code> has the following columns - <code>id</code>, <code>name</code></p></li><li><p><code>Projects</code> has the following columns:</p><ol><li><code>Id</code></li><li><code>EmpId</code> - Foreign Key</li><li><code>Seq</code> - Sequence / Index</li><li><code>Value</code></li></ol></li><li><p><code>Foreign Key</code> Relation from <code>Employee::Id</code> to <code>Projects::EmpId</code>. This Constraint makes sure that an employee cannot be deleted while corresponding projects exist, thus ensuring data integrity.</p></li></ol><p>The combination of <code>Employee</code> and <code>Projects</code> tables gives us <code>EmployeeModel</code> that we defined in the beginning.</p><p><img src=/images/F26YnMf.png alt="ER Diagram"></p><h3 id=inserting-employee>Inserting Employee</h3><p>Take a look at the <code>insert</code> fn of our app.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=line><span class=cl><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>insert</span><span class=p>(</span><span class=n>emp</span>: <span class=nc>EmployeeModel</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>db</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>get_db</span><span class=p>().</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>e</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>employee</span>::<span class=n>ActiveModel</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>name</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>emp</span><span class=p>.</span><span class=n>name</span><span class=p>.</span><span class=n>clone</span><span class=p>()),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=o>..</span><span class=nb>Default</span>::<span class=n>default</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>};</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>ires</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Employee</span>::<span class=n>insert</span><span class=p>(</span><span class=n>e</span><span class=p>).</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>).</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=fm>println!</span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=s>&#34;employee </span><span class=si>{}</span><span class=s> inserted with id = </span><span class=si>{}</span><span class=s>&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>emp</span><span class=p>.</span><span class=n>name</span><span class=p>,</span><span class=w> </span><span class=n>ires</span><span class=p>.</span><span class=n>last_insert_id</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>for</span><span class=w> </span><span class=n>p</span><span class=w> </span><span class=k>in</span><span class=w> </span><span class=mi>0</span><span class=o>..</span><span class=n>emp</span><span class=p>.</span><span class=n>projects</span><span class=p>.</span><span class=n>len</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>proj_name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>emp</span><span class=p>.</span><span class=n>projects</span><span class=p>.</span><span class=n>clone</span><span class=p>().</span><span class=n>get</span><span class=p>(</span><span class=n>p</span><span class=p>).</span><span class=n>unwrap</span><span class=p>().</span><span class=n>to_string</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=n>proj_name</span><span class=p>.</span><span class=n>len</span><span class=p>()</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>continue</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>};</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>i_proj</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>projects</span>::<span class=n>ActiveModel</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>emp_id</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>ires</span><span class=p>.</span><span class=n>last_insert_id</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>seq</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>p</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=kt>i32</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>value</span>: <span class=nc>ActiveValue</span>::<span class=n>Set</span><span class=p>(</span><span class=n>proj_name</span><span class=p>.</span><span class=n>clone</span><span class=p>()),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=o>..</span><span class=nb>Default</span>::<span class=n>default</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>};</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>inserted</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Projects</span>::<span class=n>insert</span><span class=p>(</span><span class=n>i_proj</span><span class=p>).</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>).</span><span class=k>await</span><span class=p>.</span><span class=n>unwrap</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=fm>println!</span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;project </span><span class=si>{}</span><span class=s> inserted with id = </span><span class=si>{}</span><span class=s>&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>proj_name</span><span class=p>,</span><span class=w> </span><span class=n>inserted</span><span class=p>.</span><span class=n>last_insert_id</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nb>Ok</span><span class=p>(())</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>First, we take <code>EmployeeModel</code> as an argument, this is generated from user input by <code>add_emp</code> fn. Next, We insert <code>e</code> into the <code>employee</code> table (Needs to be converted to <code>ActivateModel</code>).</p><p>inserted id is stored as <code>ires</code> (<code>ires.last_insert_id</code>), This will be used as <code>EmpId</code> for projects related to this employee.</p><p>A range-based loop is used to insert projects into the <code>projects</code> table.</p><h3 id=removing-employee>Removing Employee</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-rs data-lang=rs><span class=line><span class=cl><span class=k>async</span><span class=w> </span><span class=k>fn</span> <span class=nf>remove_emp</span><span class=p>(</span><span class=n>id</span>: <span class=kt>i32</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=p>(),</span><span class=w> </span><span class=n>DbErr</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;removing employee with id = </span><span class=si>{}</span><span class=s>&#34;</span><span class=p>,</span><span class=w> </span><span class=n>id</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>db</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>get_db</span><span class=p>().</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>Projects</span>::<span class=n>delete_many</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>filter</span><span class=p>(</span><span class=n>projects</span>::<span class=n>Column</span>::<span class=n>EmpId</span><span class=p>.</span><span class=n>eq</span><span class=p>(</span><span class=n>id</span><span class=p>))</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>Employee</span>::<span class=n>delete_by_id</span><span class=p>(</span><span class=n>id</span><span class=p>).</span><span class=n>exec</span><span class=p>(</span><span class=o>&amp;</span><span class=n>db</span><span class=p>).</span><span class=k>await</span><span class=o>?</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nb>Ok</span><span class=p>(())</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>Removing an employee is relatively string forward. Note that we need to remove the projects before the employee itself because of Foreign Key Relationship.</p><hr><h1 id=conclusion>Conclusion</h1><p>MySQL is the most popular DB for a lot of use cases. Though, it&rsquo;s only a piece of cake if specific language tools are made to deal with complex data structures and data representations not supported by MySQL by default. If you are looking to start a project in rust and are confused as to which DB to choose, the community recommends PostgreSQL (which has native support for array).</p></div><div class=post-tags></div><div id=commento></div><script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the
+<a href=https://commento.io/>comments powered by Commento.</a></noscript></div><link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script></div></div><div class="footer wrapper"><script src=https://stdin.top/js/clipboard.min.0152b42292de6653a83b8bb0f671ea67c862632ef4d9bdb0408fdf8b72889c3a6f7e39165902bb7e202f19909e397746ff956e10a08f88d0cfc8373338b36354.js integrity="sha512-AVK0IpLeZlOoO4uw9nHqZ8hiYy702b2wQI/fi3KInDpvfjkWWQK7fiAvGZCeOXdG/5VuEKCPiNDPyDczOLNjVA=="></script><nav class=nav><div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div><div><a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div></body></html>

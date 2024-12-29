@@ -1,233 +1,78 @@
-<!doctype html><html>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<base href=https://stdin.top/posts/wpc-overview/>
-<meta name=description content="Description and Design Overview of WPC - Wallpaper Changer">
-<meta name=language content="en">
-<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
-<title>Overview of WPC: Writing a wallpaper changer in Rust :: &lt;stdin></title>
-<link rel=icon type=image/png href=/static/chip.png>
-<meta property="og:title" content="Overview of WPC: Writing a wallpaper changer in Rust">
-<meta property="og:description" content="Description and Design Overview of WPC - Wallpaper Changer">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://stdin.top/posts/wpc-overview/"><meta property="og:image" content="https://stdin.top/images/wpc_featured.jpg"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-03-13T10:30:06+05:30">
-<meta property="article:modified_time" content="2021-03-07T19:43:34+05:30">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://stdin.top/images/wpc_featured.jpg">
-<meta name=twitter:title content="Overview of WPC: Writing a wallpaper changer in Rust">
-<meta name=twitter:description content="Description and Design Overview of WPC - Wallpaper Changer">
-<meta name=theme-color content="#2e2847">
-<link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
-<script src=https://stdin.top/js/main.min.6b828d297665710573e77091885cc47c1f382bb06242b19f91081cfbe48f7dffe419493e0ac93cf77c00887bbad39f2182abbefa17ee7e4d9d9f7407f22665d2.js integrity="sha512-a4KNKXZlcQVz53CRiFzEfB84K7BiQrGfkQgc++SPff/kGUk+Csk893wAiHu6058hgqu++hfufk2dn3QH8iZl0g=="></script>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw==">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A==">
-<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ==">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-YW8V9DTR0N',{anonymize_ip:!1})}</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script>
-</head>
-<body>
-<div class="container wrapper">
-<div class=header>
-<base href=https://stdin.top/>
-<h1 class=site-title>
-<a href=https://stdin.top/>&lt;stdin></a>
-<span class=blinking-cursor>|</span>
-</h1>
-<div class=site-description>
-<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
-<nav class="nav social">
-<ul class=flat>
-<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><base href=https://stdin.top/posts/wpc-overview/><meta name=description content="Description and Design Overview of WPC - Wallpaper Changer"><meta name=language content="en"><link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml><title>Overview of WPC: Writing a wallpaper changer in Rust :: &lt;stdin></title><link rel=icon type=image/png href=/static/chip.png><meta property="og:title" content="Overview of WPC: Writing a wallpaper changer in Rust"><meta property="og:description" content="Description and Design Overview of WPC - Wallpaper Changer"><meta property="og:type" content="article"><meta property="og:url" content="https://stdin.top/posts/wpc-overview/"><meta property="og:image" content="https://stdin.top/images/wpc_featured.jpg"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-03-13T10:30:06+05:30"><meta property="article:modified_time" content="2021-03-07T19:43:34+05:30"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://stdin.top/images/wpc_featured.jpg"><meta name=twitter:title content="Overview of WPC: Writing a wallpaper changer in Rust"><meta name=twitter:description content="Description and Design Overview of WPC - Wallpaper Changer"><meta name=theme-color content="#2e2847"><link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet><script src=https://stdin.top/js/main.min.6a2ed298f6a8cafbfa5c622ca55cb5be5632cc37b845fc6b58d9d383cf7ec77e9faaedd88196d0d58c0040873d5689898701e5ed30cac06dae52c78f9c0ddc31.js integrity="sha512-ai7SmPaoyvv6XGIspVy1vlYyzDe4RfxrWNnTg89+x36fqu3YgZbQ1YwAQIc9VomJhwHl7TDKwG2uUsePnA3cMQ=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw=="><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A=="><link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)"><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ=="><script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-YW8V9DTR0N",{anonymize_ip:!1})}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script></head><body><div class="container wrapper"><div class=header><base href=https://stdin.top/><h1 class=site-title><a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span></h1><div class=site-description><h2 class=cursive>My Thoughts, Trials and Adventures</h2><nav class="nav social"><ul class=flat><a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
 <a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
 <a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
-<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
-</ul>
-</div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/about/>About</a>
-</li>
-<li>
-<a href=/tags/>Tags</a>
-</li>
-<li>
-<a href=/portfolio/>Portfolio</a>
-</li>
-<li>
-<a href=/pgp/>PGP</a>
-</li>
-</ul>
-</nav>
-</div>
-<div class=post>
-<div class=post-header>
-<h1 class=title>Overview of WPC: Writing a wallpaper changer in Rust</h1>
-<div class=meta>Posted at &mdash; Mar 13, 2020
-| Last Modified on &mdash; Mar 7, 2021</div>
-</div>
-<div class=markdown>
-<p><a href=https://travis-ci.org/jkotra/wpc>
-<img src="https://travis-ci.org/jkotra/wpc.svg?branch=master" alt="Build Status">
-</a>
-<img src=https://img.shields.io/github/languages/code-size/jkotra/wpc alt>
-</p>
-<p>WPC stands for <strong>W</strong>all <strong>P</strong>aper <strong>C</strong>hanger</p>
-<p><a href=https://github.com/jkotra/wpc>Github</a></p>
-<hr>
-<h2 id=changelog>Changelog</h2>
-<h3 id=09-07-2020>(09-07-2020)</h3>
-<ul>
-<li><a href=https://github.com/jkotra/wpc/releases/tag/0.5>WPC v0.5</a> is a major release. <code>main.rs</code> is mostly rewritten.</li>
-</ul>
-<h3 id=14-01-2021>(14-01-2021)</h3>
-<div class="notices warning"><p><p><code>WPC</code> gained partial <code>async</code> support from <code>0.7</code> and almost full <code>async</code> (except for <code>wallhaven_api</code>) from <code>1.0</code> on wards. <strong>some parts of this article may not be relevant anymore</strong>, but may still be useful. I&rsquo;ve written a short <a href=/posts/what-changed-in-wpc-1.0-a-lot/>&ldquo;What changed in 1.0? a lot!"</a> to provide a general change log and overview of the project.</p>
-<ul>
-<li><a href=https://github.com/jkotra/wpc/tree/0.1.4>this tag</a> might be the last tree where this article is 100% relevant.</li>
-</ul>
-</p></div>
-<hr>
-<h3 id=why>Why?</h3>
-<p>I have a dual boot setup (Arch Linux/Windows 10) and I use Gnome DE in my arch Linux which lacks automatic wallpaper changing functionality.</p>
-<p>Even in the case of windows 10, While there is a <em>Slideshow</em> of wallpapers, it does not have an option like interval or web source.</p>
-<p>both of these reasons led me to develop my own application. I want it to be simple, fast and reliable so I chose Rust.</p>
-<h3 id=how>How?</h3>
-<p>WPC is written in rust with a modular design in mind.</p>
-<p>APIs are divided into modules and used in main.rs as required based on the platform.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>.
-├── Cargo.lock
-├── Cargo.toml
-├── LICENSE.md
-├── README.md
-└── src
-    ├── changer
-    │   ├── linux
-    │   │   └── DE
-    │   │       ├── gnome.rs
-    │   │       └── startup.rs
-    │   └── windows
-    │       └── windows.rs
-    ├── cli.yml
-    ├── main.rs
-    ├── misc.rs
-    └── web
-        ├── bing_wpod.rs
-        └── wallheaven_api.rs
-
-6 directories, 12 files
-
-</code></pre></div><hr>
-<h3 id=dependencies>Dependencies</h3>
-<p><code>config.toml</code></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=p>[</span><span class=nx>package</span><span class=p>]</span>
-<span class=nx>name</span> <span class=p>=</span> <span class=s2>&#34;wpc&#34;</span>
-<span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;0.1.1&#34;</span>
-<span class=nx>authors</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;Jagadeesh Kotra &lt;jagadeesh@stdin.top&gt;&#34;</span><span class=p>]</span>
-<span class=nx>edition</span> <span class=p>=</span> <span class=s2>&#34;2018&#34;</span>
-
-<span class=c># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
-
-<span class=p>[</span><span class=nx>dependencies</span><span class=p>]</span>
-<span class=nx>serde</span> <span class=p>=</span> <span class=s2>&#34;1.0.104&#34;</span>
-<span class=nx>serde_json</span> <span class=p>=</span> <span class=s2>&#34;1.0.48&#34;</span>
-<span class=nx>reqwest</span> <span class=p>=</span> <span class=p>{</span> <span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;0.10&#34;</span><span class=p>,</span> <span class=nx>features</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;blocking&#34;</span><span class=p>,</span> <span class=s2>&#34;json&#34;</span><span class=p>]</span> <span class=p>}</span>
-<span class=nx>clap</span> <span class=p>=</span> <span class=p>{</span><span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;2.33&#34;</span><span class=p>,</span> <span class=nx>features</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;yaml&#34;</span><span class=p>]}</span>
-<span class=nx>rand</span> <span class=p>=</span> <span class=s2>&#34;0.7&#34;</span>
-<span class=nx>chrono</span> <span class=p>=</span> <span class=s2>&#34;0.4.10&#34;</span>
-<span class=nx>enquote</span> <span class=p>=</span> <span class=s2>&#34;1.0.3&#34;</span>
-<span class=nx>dirs</span> <span class=p>=</span> <span class=s2>&#34;2.0.2&#34;</span>
-
-<span class=p>[</span><span class=nx>target</span><span class=p>.</span><span class=s1>&#39;cfg(windows)&#39;</span><span class=p>.</span><span class=nx>dependencies</span><span class=p>]</span>
-<span class=nx>winapi</span> <span class=p>=</span> <span class=p>{</span> <span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;0.3&#34;</span><span class=p>,</span> <span class=nx>features</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;winuser&#34;</span><span class=p>]</span> <span class=p>}</span>
-</code></pre></div><p>Some notes,</p>
-<p><code>serde</code> and <code>serde_json</code> is used to deal with JSON data.</p>
-<p><code>reqwest</code> is the used to parse information from web sources.</p>
-<p><code>winapi</code> provides access to Windows API</p>
-<hr>
-<h3 id=wallheaven-api>Wallheaven API</h3>
-<p>One of the main features of WPC is its ability to parse wallpapers from the web. Namely, <a href=https://wallhaven.cc/>Wallheaven</a> and Bing WPOD are implemented.</p>
-<p><a href=https://wallhaven.cc/help/api>wallheaven API</a> is implemented in Rust
-It uses <code>reqwest::blocking</code> to make GET requests and convert them to JSON.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rust data-lang=rust><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_wallpaperinfo</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>id</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w> 
-</span><span class=w>
-</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_search</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>query</span>: <span class=nc>HashMap</span><span class=o>&lt;&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=o>&amp;</span><span class=kt>str</span><span class=o>&gt;</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_taginfo</span><span class=p>(</span><span class=n>id</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_usersettings</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_getid</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_getcoll</span><span class=p>(</span><span class=n>username</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>collid</span>: <span class=kt>i64</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
-</span><span class=w>
-</span></code></pre></div><p><a href=https://github.com/jkotra/wpc/blob/master/src/web/wallheaven_api.rs>wallhaven.rs</a></p>
-<hr>
-<h3 id=bing-api>Bing API</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rust data-lang=rust><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>get_wallpaper_of_the_day</span><span class=p>()</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>resp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>reqwest</span>::<span class=n>blocking</span>::<span class=n>get</span><span class=p>(</span><span class=s>&#34;https://www.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;mkt=en-US&#34;</span><span class=p>).</span><span class=n>expect</span><span class=p>(</span><span class=s>&#34;Unable to make GET request!&#34;</span><span class=p>)</span><span class=w>
-</span><span class=w>        </span><span class=p>.</span><span class=n>text</span><span class=p>()</span><span class=o>?</span><span class=p>;</span><span class=w>
-</span><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>v</span>: <span class=nc>Value</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>serde_json</span>::<span class=n>from_str</span><span class=p>(</span><span class=o>&amp;</span><span class=n>resp</span><span class=p>)</span><span class=w>
-</span><span class=w>        </span><span class=p>.</span><span class=n>expect</span><span class=p>(</span><span class=s>&#34;Cannot Decode JSON Data!&#34;</span><span class=p>);</span><span class=w>
-</span><span class=w>    </span><span class=nb>Ok</span><span class=p>(</span><span class=n>v</span><span class=p>)</span><span class=w>
-</span><span class=w></span><span class=p>}</span><span class=w>
-</span></code></pre></div><p>Output: <code>JSON</code></p>
-<hr>
-<h3 id=tests>Tests</h3>
-<div class="notices warning"><p>Network Connectivity is required for the following tests:
-<br>
-<code>fn bing_test_is_jpg()</code>
-<br>
-<code>fn bing_test_is_downloadable()</code>
-<br>
-<code>fn wallheaven_get_wallpapers()</code>
-<br></p></div>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-rust data-lang=rust><span class=w>
-</span><span class=w></span><span class=k>fn</span> <span class=nf>it_works</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
-</span><span class=w>        </span><span class=fm>assert_eq!</span><span class=p>(</span><span class=mi>2</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>4</span><span class=p>);</span><span class=w>
-</span><span class=w></span><span class=p>}</span><span class=w>
-</span><span class=w></span><span class=k>fn</span> <span class=nf>bing_test_is_jpg</span><span class=p>()</span><span class=w> 
-</span><span class=w></span><span class=k>fn</span> <span class=nf>bing_test_is_downloadable</span><span class=p>()</span><span class=w> 
-</span><span class=w></span><span class=k>fn</span> <span class=nf>wallheaven_get_wallpapers</span><span class=p>()</span><span class=w>
-</span><span class=w>
-</span></code></pre></div><hr>
-<h2 id=conclusion>Conclusion</h2>
-<p>Creating this application has been a great journey. PR/Issues are welcome.</p>
-<p><a href=https://github.com/jkotra/wpc>Github</a></p>
-</div>
-<div class=post-tags>
-<nav class="nav tags">
-<ul class=flat>
-<li><a href=/tags/rust>Rust</a></li>
-</ul>
-</nav>
-</div>
-<div id=commento></div>
-<script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
-<noscript>Please enable JavaScript to view the
-<a href=https://commento.io/>comments powered by Commento.</a>
-</noscript>
-</div>
-<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
-</div>
-</div>
-<div class="footer wrapper">
-<script src=https://stdin.top/js/clipboard.min.72bcd06a245cfb9923791503eaceae3e8abf23f49974babd059aa655d60f738ee8114c6b5ba7f928adc2127af94cbc2d131df343a42b8bc1af2d71c8f497cc6a.js integrity="sha512-crzQaiRc+5kjeRUD6s6uPoq/I/SZdLq9BZqmVdYPc47oEUxrW6f5KK3CEnr5TLwtEx3zQ6Qri8GvLXHI9JfMag=="></script>
-<nav class=nav>
-<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
-<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
-</div>
-</body>
-</html>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a></ul></div><nav class=nav><ul class=flat><li><a href=/about/>About</a></li><li><a href=/tags/>Tags</a></li><li><a href=/portfolio/>Portfolio</a></li><li><a href=/pgp/>PGP</a></li></ul></nav></div><div class=post><div class=post-header><h1 class=title>Overview of WPC: Writing a wallpaper changer in Rust</h1><div class=meta>Posted at &mdash; Mar 13, 2020
+| Last Modified on &mdash; Mar 7, 2021</div></div><div class=markdown><p><a href=https://travis-ci.org/jkotra/wpc><img src="https://travis-ci.org/jkotra/wpc.svg?branch=master" alt="Build Status"></a>
+<img src=https://img.shields.io/github/languages/code-size/jkotra/wpc alt></p><p>WPC stands for <strong>W</strong>all <strong>P</strong>aper <strong>C</strong>hanger</p><p><a href=https://github.com/jkotra/wpc>Github</a></p><hr><h2 id=changelog>Changelog</h2><h3 id=09-07-2020>(09-07-2020)</h3><ul><li><a href=https://github.com/jkotra/wpc/releases/tag/0.5>WPC v0.5</a> is a major release. <code>main.rs</code> is mostly rewritten.</li></ul><h3 id=14-01-2021>(14-01-2021)</h3><div class="notices warning"><p><p><code>WPC</code> gained partial <code>async</code> support from <code>0.7</code> and almost full <code>async</code> (except for <code>wallhaven_api</code>) from <code>1.0</code> on wards. <strong>some parts of this article may not be relevant anymore</strong>, but may still be useful. I&rsquo;ve written a short <a href=/posts/what-changed-in-wpc-1.0-a-lot/>&ldquo;What changed in 1.0? a lot!&rdquo;</a> to provide a general change log and overview of the project.</p><ul><li><a href=https://github.com/jkotra/wpc/tree/0.1.4>this tag</a> might be the last tree where this article is 100% relevant.</li></ul></p></div><hr><h3 id=why>Why?</h3><p>I have a dual boot setup (Arch Linux/Windows 10) and I use Gnome DE in my arch Linux which lacks automatic wallpaper changing functionality.</p><p>Even in the case of windows 10, While there is a <em>Slideshow</em> of wallpapers, it does not have an option like interval or web source.</p><p>both of these reasons led me to develop my own application. I want it to be simple, fast and reliable so I chose Rust.</p><h3 id=how>How?</h3><p>WPC is written in rust with a modular design in mind.</p><p>APIs are divided into modules and used in main.rs as required based on the platform.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>├── Cargo.lock
+</span></span><span class=line><span class=cl>├── Cargo.toml
+</span></span><span class=line><span class=cl>├── LICENSE.md
+</span></span><span class=line><span class=cl>├── README.md
+</span></span><span class=line><span class=cl>└── src
+</span></span><span class=line><span class=cl>    ├── changer
+</span></span><span class=line><span class=cl>    │   ├── linux
+</span></span><span class=line><span class=cl>    │   │   └── DE
+</span></span><span class=line><span class=cl>    │   │       ├── gnome.rs
+</span></span><span class=line><span class=cl>    │   │       └── startup.rs
+</span></span><span class=line><span class=cl>    │   └── windows
+</span></span><span class=line><span class=cl>    │       └── windows.rs
+</span></span><span class=line><span class=cl>    ├── cli.yml
+</span></span><span class=line><span class=cl>    ├── main.rs
+</span></span><span class=line><span class=cl>    ├── misc.rs
+</span></span><span class=line><span class=cl>    └── web
+</span></span><span class=line><span class=cl>        ├── bing_wpod.rs
+</span></span><span class=line><span class=cl>        └── wallheaven_api.rs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>6 directories, 12 files
+</span></span></code></pre></div><hr><h3 id=dependencies>Dependencies</h3><p><code>config.toml</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=p>[</span><span class=nx>package</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>name</span> <span class=p>=</span> <span class=s2>&#34;wpc&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;0.1.1&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>authors</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;Jagadeesh Kotra &lt;jagadeesh@stdin.top&gt;&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>edition</span> <span class=p>=</span> <span class=s2>&#34;2018&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>dependencies</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>serde</span> <span class=p>=</span> <span class=s2>&#34;1.0.104&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>serde_json</span> <span class=p>=</span> <span class=s2>&#34;1.0.48&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>reqwest</span> <span class=p>=</span> <span class=p>{</span> <span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;0.10&#34;</span><span class=p>,</span> <span class=nx>features</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;blocking&#34;</span><span class=p>,</span> <span class=s2>&#34;json&#34;</span><span class=p>]</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>clap</span> <span class=p>=</span> <span class=p>{</span><span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;2.33&#34;</span><span class=p>,</span> <span class=nx>features</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;yaml&#34;</span><span class=p>]}</span>
+</span></span><span class=line><span class=cl><span class=nx>rand</span> <span class=p>=</span> <span class=s2>&#34;0.7&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>chrono</span> <span class=p>=</span> <span class=s2>&#34;0.4.10&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>enquote</span> <span class=p>=</span> <span class=s2>&#34;1.0.3&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>dirs</span> <span class=p>=</span> <span class=s2>&#34;2.0.2&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>target</span><span class=p>.</span><span class=s1>&#39;cfg(windows)&#39;</span><span class=p>.</span><span class=nx>dependencies</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>winapi</span> <span class=p>=</span> <span class=p>{</span> <span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;0.3&#34;</span><span class=p>,</span> <span class=nx>features</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;winuser&#34;</span><span class=p>]</span> <span class=p>}</span>
+</span></span></code></pre></div><p>Some notes,</p><p><code>serde</code> and <code>serde_json</code> is used to deal with JSON data.</p><p><code>reqwest</code> is the used to parse information from web sources.</p><p><code>winapi</code> provides access to Windows API</p><hr><h3 id=wallheaven-api>Wallheaven API</h3><p>One of the main features of WPC is its ability to parse wallpapers from the web. Namely, <a href=https://wallhaven.cc/>Wallheaven</a> and Bing WPOD are implemented.</p><p><a href=https://wallhaven.cc/help/api>wallheaven API</a> is implemented in Rust
+It uses <code>reqwest::blocking</code> to make GET requests and convert them to JSON.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-rust data-lang=rust><span class=line><span class=cl><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_wallpaperinfo</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>id</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_search</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>query</span>: <span class=nc>HashMap</span><span class=o>&lt;&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=o>&amp;</span><span class=kt>str</span><span class=o>&gt;</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_taginfo</span><span class=p>(</span><span class=n>id</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_usersettings</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_getid</span><span class=p>(</span><span class=n>apikey</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>wallheaven_getcoll</span><span class=p>(</span><span class=n>username</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>collid</span>: <span class=kt>i64</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w>
+</span></span></span></code></pre></div><p><a href=https://github.com/jkotra/wpc/blob/master/src/web/wallheaven_api.rs>wallhaven.rs</a></p><hr><h3 id=bing-api>Bing API</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-rust data-lang=rust><span class=line><span class=cl><span class=k>pub</span><span class=w> </span><span class=k>fn</span> <span class=nf>get_wallpaper_of_the_day</span><span class=p>()</span><span class=w> </span>-&gt; <span class=nb>Result</span><span class=o>&lt;</span><span class=n>serde_json</span>::<span class=n>value</span>::<span class=n>Value</span><span class=p>,</span><span class=w> </span><span class=nb>Box</span><span class=o>&lt;</span><span class=k>dyn</span><span class=w> </span><span class=n>std</span>::<span class=n>error</span>::<span class=n>Error</span><span class=o>&gt;&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>resp</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>reqwest</span>::<span class=n>blocking</span>::<span class=n>get</span><span class=p>(</span><span class=s>&#34;https://www.bing.com/HPImageArchive.aspx?format=js&amp;idx=0&amp;n=1&amp;mkt=en-US&#34;</span><span class=p>).</span><span class=n>expect</span><span class=p>(</span><span class=s>&#34;Unable to make GET request!&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>text</span><span class=p>()</span><span class=o>?</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>v</span>: <span class=nc>Value</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>serde_json</span>::<span class=n>from_str</span><span class=p>(</span><span class=o>&amp;</span><span class=n>resp</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>expect</span><span class=p>(</span><span class=s>&#34;Cannot Decode JSON Data!&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nb>Ok</span><span class=p>(</span><span class=n>v</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>Output: <code>JSON</code></p><hr><h3 id=tests>Tests</h3><div class="notices warning"><p>Network Connectivity is required for the following tests:<br><code>fn bing_test_is_jpg()</code><br><code>fn bing_test_is_downloadable()</code><br><code>fn wallheaven_get_wallpapers()</code><br></p></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-rust data-lang=rust><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>it_works</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=fm>assert_eq!</span><span class=p>(</span><span class=mi>2</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>4</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>bing_test_is_jpg</span><span class=p>()</span><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>bing_test_is_downloadable</span><span class=p>()</span><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>wallheaven_get_wallpapers</span><span class=p>()</span><span class=w>
+</span></span></span></code></pre></div><hr><h2 id=conclusion>Conclusion</h2><p>Creating this application has been a great journey. PR/Issues are welcome.</p><p><a href=https://github.com/jkotra/wpc>Github</a></p></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/rust>Rust</a></li></ul></nav></div><div id=commento></div><script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the
+<a href=https://commento.io/>comments powered by Commento.</a></noscript></div><link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script></div></div><div class="footer wrapper"><script src=https://stdin.top/js/clipboard.min.0152b42292de6653a83b8bb0f671ea67c862632ef4d9bdb0408fdf8b72889c3a6f7e39165902bb7e202f19909e397746ff956e10a08f88d0cfc8373338b36354.js integrity="sha512-AVK0IpLeZlOoO4uw9nHqZ8hiYy702b2wQI/fi3KInDpvfjkWWQK7fiAvGZCeOXdG/5VuEKCPiNDPyDczOLNjVA=="></script><nav class=nav><div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div><div><a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div></body></html>

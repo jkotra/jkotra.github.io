@@ -1,346 +1,210 @@
-<!doctype html><html>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<base href=https://stdin.top/posts/smtp-sendmail/>
-<meta name=description content="Communicate with an SMTP server to send emails 📧">
-<meta name=language content="en">
-<link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml>
-<title>Sending mail using SMTP protocol :: &lt;stdin></title>
-<link rel=icon type=image/png href=/static/chip.png>
-<meta property="og:title" content="Sending mail using SMTP protocol">
-<meta property="og:description" content="Communicate with an SMTP server to send emails 📧">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://stdin.top/posts/smtp-sendmail/"><meta property="og:image" content="https://stdin.top/images/PHC1msC.jpg"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-09-17T00:47:17+05:30">
-<meta property="article:modified_time" content="2023-05-11T19:55:50+05:30">
-<meta name=twitter:card content="summary_large_image">
-<meta name=twitter:image content="https://stdin.top/images/PHC1msC.jpg">
-<meta name=twitter:title content="Sending mail using SMTP protocol">
-<meta name=twitter:description content="Communicate with an SMTP server to send emails 📧">
-<meta name=theme-color content="#2e2847">
-<link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet>
-<script src=https://stdin.top/js/main.min.6b828d297665710573e77091885cc47c1f382bb06242b19f91081cfbe48f7dffe419493e0ac93cf77c00887bbad39f2182abbefa17ee7e4d9d9f7407f22665d2.js integrity="sha512-a4KNKXZlcQVz53CRiFzEfB84K7BiQrGfkQgc++SPff/kGUk+Csk893wAiHu6058hgqu++hfufk2dn3QH8iZl0g=="></script>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous>
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw==">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A==">
-<link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ==">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-YW8V9DTR0N',{anonymize_ip:!1})}</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script>
-</head>
-<body>
-<div class="container wrapper">
-<div class=header>
-<base href=https://stdin.top/>
-<h1 class=site-title>
-<a href=https://stdin.top/>&lt;stdin></a>
-<span class=blinking-cursor>|</span>
-</h1>
-<div class=site-description>
-<h2 class=cursive>My Thoughts, Trials and Adventures</h2>
-<nav class="nav social">
-<ul class=flat>
-<a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><base href=https://stdin.top/posts/smtp-sendmail/><meta name=description content="Communicate with an SMTP server to send emails 📧"><meta name=language content="en"><link rel=sitemap type=application/xml title=Sitemap href=https://stdin.top/sitemap.xml><title>Sending mail using SMTP protocol :: &lt;stdin></title><link rel=icon type=image/png href=/static/chip.png><meta property="og:title" content="Sending mail using SMTP protocol"><meta property="og:description" content="Communicate with an SMTP server to send emails 📧"><meta property="og:type" content="article"><meta property="og:url" content="https://stdin.top/posts/smtp-sendmail/"><meta property="og:image" content="https://stdin.top/images/PHC1msC.jpg"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-09-17T00:47:17+05:30"><meta property="article:modified_time" content="2023-05-11T19:55:50+05:30"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://stdin.top/images/PHC1msC.jpg"><meta name=twitter:title content="Sending mail using SMTP protocol"><meta name=twitter:description content="Communicate with an SMTP server to send emails 📧"><meta name=theme-color content="#2e2847"><link defer href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet><link defer href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel=stylesheet><script src=https://stdin.top/js/main.min.6a2ed298f6a8cafbfa5c622ca55cb5be5632cc37b845fc6b58d9d383cf7ec77e9faaedd88196d0d58c0040873d5689898701e5ed30cac06dae52c78f9c0ddc31.js integrity="sha512-ai7SmPaoyvv6XGIspVy1vlYyzDe4RfxrWNnTg89+x36fqu3YgZbQ1YwAQIc9VomJhwHl7TDKwG2uUsePnA3cMQ=="></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css integrity="sha512-8jdwayz5n8F2cnW26l9vpV6+yGOcRAqz6HTu+DQ3FtVIAts2gTdlFZOGpYhvBMXkWEgxPN3Y22UWyZXuDowNLA==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/regular.min.css integrity="sha512-qgtcTTDJDk6Fs9eNeN1tnuQwYjhnrJ8wdTVxJpUTkeafKKP6vprqRx5Sj/rB7Q57hoYDbZdtHR4krNZ/11zONg==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/brands.min.css integrity="sha512-AMDXrE+qaoUHsd0DXQJr5dL4m5xmpkGLxXZQik2TvR2VCVKT/XRPQ4e/LTnwl84mCv+eFm92UG6ErWDtGM/Q5Q==" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/solid.min.css integrity="sha512-QN7X/bUbbeel9bbq6JVNJXk1Zowt+n+QPN+DjhEmTa4TdL1YPCsCey5JrvfRW8xp28LDYgGG/waNVdrhwMQmVQ==" crossorigin=anonymous><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/main.min.dc3edd6ae540bf87b9aeab2175e2a0d0f2445f17589e60d223f6d57cf330c8f3b6dced4c45491d9dd6b3d91aa4776adbda6cd10e2ec77fc67671618970ebd7ab.css integrity="sha512-3D7dauVAv4e5rqshdeKg0PJEXxdYnmDSI/bVfPMwyPO23O1MRUkdndaz2Rqkd2rb2mzRDi7Hf8Z2cWGJcOvXqw=="><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/custom.min.e3b8c3006f21dc289228781954e8b26d47e4f7029abd87580316a659310a9fa4e9810bd7a1b2ba54d7e316859fda32f44128575248b0016744d601db0b0b27dc.css integrity="sha512-47jDAG8h3CiSKHgZVOiybUfk9wKavYdYAxamWTEKn6TpgQvXobK6VNfjFoWf2jL0QShXUkiwAWdE1gHbCwsn3A=="><link rel=stylesheet type=text/css href=https://stdin.top/css/dark.min.d3b9684400bd73b3085291610d75bff0d61b94a67cbb30d73434039f65135480bf3b9c67300192c093825a30bd535219a16be7ad4346c0a00f6a58cd5a4c3f90.css media="(prefers-color-scheme: dark)"><link rel=stylesheet type=text/css media=screen href=https://stdin.top/css/normalize.min.15dd2454cf02be612cd84be5a0307ecae7e9c84d08f88ab2d1e9332717d10fe9b63484bb4c5352072da0915d1a6d48fa41994fb99c120c891cca431b4448f44d.css integrity="sha512-Fd0kVM8CvmEs2EvloDB+yufpyE0I+Iqy0ekzJxfRD+m2NIS7TFNSBy2gkV0abUj6QZlPuZwSDIkcykMbREj0TQ=="><script async src="https://www.googletagmanager.com/gtag/js?id=G-YW8V9DTR0N"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-YW8V9DTR0N",{anonymize_ip:!1})}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8658473214995139" crossorigin=anonymous></script></head><body><div class="container wrapper"><div class=header><base href=https://stdin.top/><h1 class=site-title><a href=https://stdin.top/>&lt;stdin></a>
+<span class=blinking-cursor>|</span></h1><div class=site-description><h2 class=cursive>My Thoughts, Trials and Adventures</h2><nav class="nav social"><ul class=flat><a href=mailto:jagadeesh@stdin.top title=Mail><i class="far fa-envelope"></i></a>
 <a href=https://github.com/jkotra/ title=Github><i class="fab fa-github"></i></a>
 <a href=https://twitter.com/jagadeesh_kotra title=Twitter><i class="fab fa-twitter"></i></a>
-<a href=index.xml title=RSS><i class="fas fa-rss"></i></a>
-</ul>
-</div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/about/>About</a>
-</li>
-<li>
-<a href=/tags/>Tags</a>
-</li>
-<li>
-<a href=/portfolio/>Portfolio</a>
-</li>
-<li>
-<a href=/pgp/>PGP</a>
-</li>
-</ul>
-</nav>
-</div>
-<div class=post>
-<div class=post-header>
-<h1 class=title>Sending mail using SMTP protocol</h1>
-<div class=meta>Posted at &mdash; Sep 17, 2020
-| Last Modified on &mdash; May 11, 2023</div>
-</div>
-<div class=markdown>
-<h1 id=introduction>Introduction</h1>
-<p>This article introduces the SMTP protocol and associated code and jargon. Next, we make a quick walkthrough of code to send mail to the smtp server.</p>
-<h2 id=smtp-commands>SMTP commands.</h2>
-<p><a href=https://users.cs.cf.ac.uk/Dave.Marshall/PERL/node175.html>Read Here</a></p>
-<h3 id=flow>Flow</h3>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>(ON CONNECT) (expect 220)
-HELO BOOMER (expect 250)
-MAIL FROM (expect 250)
-RCPT TO (expect 250)
-DATA (expect 354)
-(ON END OF EMAIL BODY) (expect 250)
-QUIT (expect 221)
-</code></pre></div><hr>
-<div class="notices note"><p>the code explained here can be found in my <a href=https://github.com/jkotra/NetworkProgramming/blob/master/smtp/sendmail.c>NetworkProgramming GitHub repository</a>.</p></div>
-<h1 id=sending-mail>Sending mail</h1>
-<p>we start by importing required headers.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;sys/types.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;sys/socket.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;sys/select.h&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=cp>#include</span> <span class=cpf>&lt;netinet/in.h&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=cp>#include</span> <span class=cpf>&lt;netdb.h&gt;</span><span class=cp>
-</span><span class=cp></span>
-<span class=cp>#include</span> <span class=cpf>&lt;ctype.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;time.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;string.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;stdbool.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
-</span><span class=cp>#include</span> <span class=cpf>&lt;errno.h&gt;</span><span class=cp>
-</span></code></pre></div><p>SMTP server address and port are <code>#define</code>ed at start for ease of use later on.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#define SMTPSERVER &#34;gmail-smtp-in.l.google.com&#34;
-</span><span class=cp>#define SMTPPORT &#34;25&#34;
-</span></code></pre></div><p>there are 3 functions in this program:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>void parse_code(char *server_response, char *resp);
-int wait_for_response(int socket_fd, char *code);
-int send_response(int socket_fd, char *request);
-</code></pre></div><h3 id=parsing-code-from-a-string>Parsing code from a string</h3>
-<p>code parsing from the string is handled by <code>parse_code</code> function.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>void</span> <span class=nf>parse_code</span><span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=n>server_response</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>resp</span><span class=p>)</span>
-<span class=p>{</span>
-
-    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>strlen</span><span class=p>(</span><span class=n>server_response</span><span class=p>);</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
-    <span class=p>{</span>
-        <span class=k>if</span> <span class=p>(</span><span class=n>isdigit</span><span class=p>(</span><span class=n>server_response</span><span class=p>[</span><span class=n>i</span><span class=p>])</span> <span class=o>&amp;&amp;</span> <span class=n>isdigit</span><span class=p>(</span><span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>])</span> <span class=o>&amp;&amp;</span> <span class=n>isdigit</span><span class=p>(</span><span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>]))</span>
-        <span class=p>{</span>
-            <span class=n>resp</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>2</span><span class=p>];</span>
-            <span class=n>resp</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
-            <span class=n>resp</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>=</span> <span class=n>server_response</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
-
-            <span class=k>break</span><span class=p>;</span>
-        <span class=p>}</span>
-    <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></div><p>The above function takes two parameters <code>char *server_response, char *resp</code>. the result if found will be stored in <code>resp</code>.</p>
-<h1 id=sending-and-receiving>Sending and Receiving</h1>
-<p>Sending and Receiving from the server is handled by two functions - <code>wait_for_response</code> and <code>send_response</code> respectively.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>int</span> <span class=nf>wait_for_response</span><span class=p>(</span><span class=kt>int</span> <span class=n>socket_fd</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>code</span><span class=p>)</span>
-<span class=p>{</span>
-
-    <span class=kt>char</span> <span class=n>response</span><span class=p>[</span><span class=mi>1024</span><span class=p>];</span>
-    <span class=kt>char</span> <span class=n>code_resp</span><span class=p>[</span><span class=mi>4</span><span class=p>];</span>
-
-    <span class=kt>int</span> <span class=n>recv_bytes</span> <span class=o>=</span> <span class=n>recv</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>response</span><span class=p>,</span> <span class=mi>1024</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
-    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Server: %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>response</span><span class=p>);</span>
-
-    <span class=n>parse_code</span><span class=p>(</span><span class=n>response</span><span class=p>,</span> <span class=n>code_resp</span><span class=p>);</span>
-
-    <span class=k>if</span> <span class=p>(</span><span class=n>strcmp</span><span class=p>(</span><span class=n>code_resp</span><span class=p>,</span> <span class=n>code</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
-    <span class=p>{</span>
-        <span class=k>return</span> <span class=nb>true</span><span class=p>;</span>
-    <span class=p>}</span>
-    <span class=k>else</span>
-    <span class=p>{</span>
-        <span class=k>return</span> <span class=nb>false</span><span class=p>;</span>
-    <span class=p>}</span>
-<span class=p>}</span>
-
-<span class=kt>int</span> <span class=nf>send_response</span><span class=p>(</span><span class=kt>int</span> <span class=n>socket_fd</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>request</span><span class=p>)</span>
-<span class=p>{</span>
-
-
-    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Client: %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-    <span class=kt>int</span> <span class=n>sent_bytes</span> <span class=o>=</span> <span class=n>send</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>request</span><span class=p>,</span> <span class=n>strlen</span><span class=p>(</span><span class=n>request</span><span class=p>),</span> <span class=mi>0</span><span class=p>);</span>
-
-<span class=p>}</span>
-</code></pre></div><hr>
-<h2 id=main><code>main()</code></h2>
-<p>we start the main function by initiating a socket.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>   <span class=k>struct</span> <span class=n>addrinfo</span> <span class=n>hints</span><span class=p>;</span>
-    <span class=n>memset</span><span class=p>(</span><span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>hints</span><span class=p>));</span>
-    <span class=n>hints</span><span class=p>.</span><span class=n>ai_socktype</span> <span class=o>=</span> <span class=n>SOCK_STREAM</span><span class=p>;</span>
-    <span class=k>struct</span> <span class=n>addrinfo</span> <span class=o>*</span><span class=n>peer_address</span><span class=p>;</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>getaddrinfo</span><span class=p>(</span><span class=n>SMTPSERVER</span><span class=p>,</span> <span class=n>SMTPPORT</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>peer_address</span><span class=p>))</span>
-    <span class=p>{</span>
-        <span class=n>fprintf</span><span class=p>(</span><span class=n>stderr</span><span class=p>,</span> <span class=s>&#34;getaddrinfo() failed.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-
-
-    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Creating socket...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-    <span class=kt>int</span> <span class=n>server</span><span class=p>;</span>
-    <span class=n>server</span> <span class=o>=</span> <span class=n>socket</span><span class=p>(</span><span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_family</span><span class=p>,</span>
-                    <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_socktype</span><span class=p>,</span> <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_protocol</span><span class=p>);</span>
-
-    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Connecting...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-    <span class=k>if</span> <span class=p>(</span><span class=n>connect</span><span class=p>(</span><span class=n>server</span><span class=p>,</span>
-                <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_addr</span><span class=p>,</span> <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_addrlen</span><span class=p>))</span>
-    <span class=p>{</span>
-        <span class=n>fprintf</span><span class=p>(</span><span class=n>stderr</span><span class=p>,</span> <span class=s>&#34;connect() failed.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-
-    <span class=n>freeaddrinfo</span><span class=p>(</span><span class=n>peer_address</span><span class=p>);</span>
-
-    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Connected!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-    
-</code></pre></div><p>The above code takes care of address resolution and other things, for a detailed explanation see my posts with <code>network programming</code> tag.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;220&#34;</span><span class=p>)){</span>
-        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-</code></pre></div><p>on connection with SMTP server, we expect a welcome message with code <code>220</code>. The program will exit if the code is mismatched.</p>
-<p>Example response from SMTP server:</p>
-<p><code>Server: 220 mx.google.com ESMTP s28si3735353pgn.104 - gsmtp</code></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;HELO BOOMER</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
-        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-</code></pre></div><p>Next, we need to identify ourself to the server, this can be done by a messagein the format of <code>HELO [YOURNAME]</code></p>
-<p>The SMTP server will greet us with code <code>250</code> followed by a vendor-specific human greeting.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>
-    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;MAIL FROM:&lt;hekko@xyz.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-
-    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
-        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-    
-    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;RCPT TO:&lt;testing@gmail.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-
-    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
-        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-</code></pre></div><p>We then send the details about our ourself and the recipient. we expect a <code>250</code> response from the server.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;DATA</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-
-    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;354&#34;</span><span class=p>)){</span>
-        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-</code></pre></div><p>We tell the server that we are going to send email data from the next message onwards by sending it a single word <code>DATA\r\n</code>. we expect the <code>354</code> code in response, this indicates the server is ready to receive data.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;From:&lt;hekko@xyz.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;To:&lt;hello@gmail.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;Subject:SMTP TEST</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-</code></pre></div><p>the above code will the required details in the body to the server, note that all of these can be sent in one message (headers and body) subject to server acceptance.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=n>time_t</span> <span class=n>timer</span><span class=p>;</span>
-    <span class=n>time</span><span class=p>(</span><span class=o>&amp;</span><span class=n>timer</span><span class=p>);</span>
-
-    <span class=k>struct</span> <span class=n>tm</span> <span class=o>*</span><span class=n>timeinfo</span><span class=p>;</span>
-    <span class=n>timeinfo</span> <span class=o>=</span> <span class=n>gmtime</span><span class=p>(</span><span class=o>&amp;</span><span class=n>timer</span><span class=p>);</span>
-
-    <span class=kt>char</span> <span class=n>date</span><span class=p>[</span><span class=mi>128</span><span class=p>];</span>
-    <span class=n>strftime</span><span class=p>(</span><span class=n>date</span><span class=p>,</span> <span class=mi>128</span><span class=p>,</span> <span class=s>&#34;%a, %d %b %Y %H:%M:%S +0000&#34;</span><span class=p>,</span> <span class=n>timeinfo</span><span class=p>);</span>
-    <span class=n>sprintf</span><span class=p>(</span><span class=n>date</span><span class=p>,</span> <span class=s>&#34;Date:%s</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>date</span><span class=p>);</span>
-    
-    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=n>date</span><span class=p>);</span>
-    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
-</code></pre></div><p>our message must include a timestamp. we generate a timestamp to include in our email using <code>strftime()</code>.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=kt>char</span> <span class=n>helloworld_body</span><span class=p>[</span><span class=mi>128</span><span class=p>]</span> <span class=o>=</span> <span class=s>&#34;Hello World.</span><span class=se>\r\n</span><span class=s>.</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>;</span>
-
-    <span class=n>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=n>helloworld_body</span><span class=p>);</span>
-
-    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
-        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-</code></pre></div><p>This the body of our mail, write your heart&rsquo;s content here 😄 a simple <code>.</code> separated by <code>\r\n</code> will indicate that message is over.the server should return <code>250</code> code.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=n>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;221&#34;</span><span class=p>)){</span>
-        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
-        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
-    <span class=p>}</span>
-
-
-    <span class=n>close</span><span class=p>(</span><span class=n>server</span><span class=p>);</span>
-</code></pre></div><p>Finally, we send <code>QUIT\r\n</code> to the SMTP server. this formally completes our communication with the server. we then close the socket (<code>server</code>)</p>
-<p>Congratulation, If everything works correctly, you should be able to send email using just C code.</p>
-<div class="notices warning"><p>Most residential IP&rsquo;s are blocked to send an email. GMAIL does not allow it&rsquo;s SMTP servers to be used by individuals, the email we try to send is rejected by google for obvious reasons. See output below.</p></div>
-<p>Output:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>Creating socket...
-Connecting...
-Connected!
-Server: <span class=m>220</span> mx.google.com ESMTP s28si3735353pgn.104 - gsmtp
-
-Client: HELO BOOMER
-
-Server: <span class=m>250</span> mx.google.com at your service
-
-Client: MAIL FROM:&lt;hekko@xyz.com&gt;
-
-Server: <span class=m>250</span> 2.1.0 OK s28si3735353pgn.104 - gsmtp
-�-�
-Client: RCPT TO:&lt;00.xog.00@gmail.com&gt;
-
-Server: <span class=m>250</span> 2.1.5 OK s28si3735353pgn.104 - gsmtp
-�-�
-Client: DATA
-
-Server: <span class=m>354</span>  Go ahead s28si3735353pgn.104 - gsmtp
--�
-Client: From:&lt;hekko@xyz.com&gt;
-
-Client: To:&lt;hello@gmail.com&gt;
-
-Client: Subject:SMTP TEST
-
-Client: Date:Date:17 Sep <span class=m>2020</span> 09:31:23 +0000
-
-Client: 
-
-Client: Hello World.
-.
-
-Server: 421-4.7.0 <span class=o>[</span>223.230.89.223      15<span class=o>]</span> Our system has detected that this message is
-421-4.7.0 suspicious due to the very low reputation of the sending IP address.
-421-4.7.0 To protect our users from spam, mail sent from your IP address has
-421-4.7.0 been temporarily rate limited. Please visit
-<span class=m>421</span> 4.7.0  https://support.google.com/mail/answer/188131 <span class=k>for</span> more information. s28si3735353pgn.104 - gsmtp
-
-unexpected response
-</code></pre></div><hr>
-<h1 id=conclusion>Conclusion</h1>
-<p>This is a very basic example of SMTP protocol which is a de facto way to send emails to each other.</p>
-<p>I hope you learned something in this article. A working production SMTP client would generally look like this albeit with extra nuts and bolts to handle additional security and authorization.</p>
-</div>
-<div class=post-tags>
-<nav class="nav tags">
-<ul class=flat>
-<li><a href=/tags/network-programming>network programming</a></li>
-<li><a href=/tags/c>c</a></li>
-</ul>
-</nav>
-</div>
-<div id=commento></div>
-<script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script>
-<noscript>Please enable JavaScript to view the
-<a href=https://commento.io/>comments powered by Commento.</a>
-</noscript>
-</div>
-<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
-<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script>
-</div>
-</div>
-<div class="footer wrapper">
-<script src=https://stdin.top/js/clipboard.min.72bcd06a245cfb9923791503eaceae3e8abf23f49974babd059aa655d60f738ee8114c6b5ba7f928adc2127af94cbc2d131df343a42b8bc1af2d71c8f497cc6a.js integrity="sha512-crzQaiRc+5kjeRUD6s6uPoq/I/SZdLq9BZqmVdYPc47oEUxrW6f5KK3CEnr5TLwtEx3zQ6Qri8GvLXHI9JfMag=="></script>
-<nav class=nav>
-<div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div>
-<div> <a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
-</div>
-</body>
-</html>
+<a href=index.xml title=RSS><i class="fas fa-rss"></i></a></ul></div><nav class=nav><ul class=flat><li><a href=/about/>About</a></li><li><a href=/tags/>Tags</a></li><li><a href=/portfolio/>Portfolio</a></li><li><a href=/pgp/>PGP</a></li></ul></nav></div><div class=post><div class=post-header><h1 class=title>Sending mail using SMTP protocol</h1><div class=meta>Posted at &mdash; Sep 17, 2020
+| Last Modified on &mdash; May 11, 2023</div></div><div class=markdown><h1 id=introduction>Introduction</h1><p>This article introduces the SMTP protocol and associated code and jargon. Next, we make a quick walkthrough of code to send mail to the smtp server.</p><h2 id=smtp-commands>SMTP commands.</h2><p><a href=https://users.cs.cf.ac.uk/Dave.Marshall/PERL/node175.html>Read Here</a></p><h3 id=flow>Flow</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(ON CONNECT) (expect 220)
+</span></span><span class=line><span class=cl>HELO BOOMER (expect 250)
+</span></span><span class=line><span class=cl>MAIL FROM (expect 250)
+</span></span><span class=line><span class=cl>RCPT TO (expect 250)
+</span></span><span class=line><span class=cl>DATA (expect 354)
+</span></span><span class=line><span class=cl>(ON END OF EMAIL BODY) (expect 250)
+</span></span><span class=line><span class=cl>QUIT (expect 221)
+</span></span></code></pre></div><hr><div class="notices note"><p>the code explained here can be found in my <a href=https://github.com/jkotra/NetworkProgramming/blob/master/smtp/sendmail.c>NetworkProgramming GitHub repository</a>.</p></div><h1 id=sending-mail>Sending mail</h1><p>we start by importing required headers.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;sys/types.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;sys/socket.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;sys/select.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;netinet/in.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;netdb.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;ctype.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;time.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;string.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdbool.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;errno.h&gt;</span><span class=cp>
+</span></span></span></code></pre></div><p>SMTP server address and port are <code>#define</code>ed at start for ease of use later on.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#define SMTPSERVER &#34;gmail-smtp-in.l.google.com&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#define SMTPPORT &#34;25&#34;
+</span></span></span></code></pre></div><p>there are 3 functions in this program:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>void parse_code(char *server_response, char *resp);
+</span></span><span class=line><span class=cl>int wait_for_response(int socket_fd, char *code);
+</span></span><span class=line><span class=cl>int send_response(int socket_fd, char *request);
+</span></span></code></pre></div><h3 id=parsing-code-from-a-string>Parsing code from a string</h3><p>code parsing from the string is handled by <code>parse_code</code> function.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>parse_code</span><span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=n>server_response</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>resp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=nf>strlen</span><span class=p>(</span><span class=n>server_response</span><span class=p>);</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nf>isdigit</span><span class=p>(</span><span class=n>server_response</span><span class=p>[</span><span class=n>i</span><span class=p>])</span> <span class=o>&amp;&amp;</span> <span class=nf>isdigit</span><span class=p>(</span><span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>])</span> <span class=o>&amp;&amp;</span> <span class=nf>isdigit</span><span class=p>(</span><span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>resp</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>2</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>            <span class=n>resp</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=n>server_response</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>            <span class=n>resp</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>=</span> <span class=n>server_response</span><span class=p>[</span><span class=n>i</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>The above function takes two parameters <code>char *server_response, char *resp</code>. the result if found will be stored in <code>resp</code>.</p><h1 id=sending-and-receiving>Sending and Receiving</h1><p>Sending and Receiving from the server is handled by two functions - <code>wait_for_response</code> and <code>send_response</code> respectively.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=nf>wait_for_response</span><span class=p>(</span><span class=kt>int</span> <span class=n>socket_fd</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>code</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>response</span><span class=p>[</span><span class=mi>1024</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>code_resp</span><span class=p>[</span><span class=mi>4</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>recv_bytes</span> <span class=o>=</span> <span class=nf>recv</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>response</span><span class=p>,</span> <span class=mi>1024</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Server: %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>response</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>parse_code</span><span class=p>(</span><span class=n>response</span><span class=p>,</span> <span class=n>code_resp</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>strcmp</span><span class=p>(</span><span class=n>code_resp</span><span class=p>,</span> <span class=n>code</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>send_response</span><span class=p>(</span><span class=kt>int</span> <span class=n>socket_fd</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>request</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Client: %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>sent_bytes</span> <span class=o>=</span> <span class=nf>send</span><span class=p>(</span><span class=n>socket_fd</span><span class=p>,</span> <span class=n>request</span><span class=p>,</span> <span class=nf>strlen</span><span class=p>(</span><span class=n>request</span><span class=p>),</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><hr><h2 id=main><code>main()</code></h2><p>we start the main function by initiating a socket.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>   <span class=k>struct</span> <span class=n>addrinfo</span> <span class=n>hints</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nf>memset</span><span class=p>(</span><span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>hints</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=n>hints</span><span class=p>.</span><span class=n>ai_socktype</span> <span class=o>=</span> <span class=n>SOCK_STREAM</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>addrinfo</span> <span class=o>*</span><span class=n>peer_address</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>getaddrinfo</span><span class=p>(</span><span class=n>SMTPSERVER</span><span class=p>,</span> <span class=n>SMTPPORT</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>peer_address</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>fprintf</span><span class=p>(</span><span class=n>stderr</span><span class=p>,</span> <span class=s>&#34;getaddrinfo() failed.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Creating socket...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>server</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>server</span> <span class=o>=</span> <span class=nf>socket</span><span class=p>(</span><span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_family</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_socktype</span><span class=p>,</span> <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_protocol</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Connecting...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>connect</span><span class=p>(</span><span class=n>server</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_addr</span><span class=p>,</span> <span class=n>peer_address</span><span class=o>-&gt;</span><span class=n>ai_addrlen</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>fprintf</span><span class=p>(</span><span class=n>stderr</span><span class=p>,</span> <span class=s>&#34;connect() failed.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>freeaddrinfo</span><span class=p>(</span><span class=n>peer_address</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Connected!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    
+</span></span></code></pre></div><p>The above code takes care of address resolution and other things, for a detailed explanation see my posts with <code>network programming</code> tag.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;220&#34;</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></div><p>on connection with SMTP server, we expect a welcome message with code <code>220</code>. The program will exit if the code is mismatched.</p><p>Example response from SMTP server:</p><p><code>Server: 220 mx.google.com ESMTP s28si3735353pgn.104 - gsmtp</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;HELO BOOMER</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></div><p>Next, we need to identify ourself to the server, this can be done by a messagein the format of <code>HELO [YOURNAME]</code></p><p>The SMTP server will greet us with code <code>250</code> followed by a vendor-specific human greeting.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;MAIL FROM:&lt;hekko@xyz.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;RCPT TO:&lt;testing@gmail.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></div><p>We then send the details about our ourself and the recipient. we expect a <code>250</code> response from the server.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;DATA</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;354&#34;</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></div><p>We tell the server that we are going to send email data from the next message onwards by sending it a single word <code>DATA\r\n</code>. we expect the <code>354</code> code in response, this indicates the server is ready to receive data.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;From:&lt;hekko@xyz.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;To:&lt;hello@gmail.com&gt;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;Subject:SMTP TEST</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span></code></pre></div><p>the above code will the required details in the body to the server, note that all of these can be sent in one message (headers and body) subject to server acceptance.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=kt>time_t</span> <span class=n>timer</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nf>time</span><span class=p>(</span><span class=o>&amp;</span><span class=n>timer</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>tm</span> <span class=o>*</span><span class=n>timeinfo</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>timeinfo</span> <span class=o>=</span> <span class=nf>gmtime</span><span class=p>(</span><span class=o>&amp;</span><span class=n>timer</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>date</span><span class=p>[</span><span class=mi>128</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=nf>strftime</span><span class=p>(</span><span class=n>date</span><span class=p>,</span> <span class=mi>128</span><span class=p>,</span> <span class=s>&#34;%a, %d %b %Y %H:%M:%S +0000&#34;</span><span class=p>,</span> <span class=n>timeinfo</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>sprintf</span><span class=p>(</span><span class=n>date</span><span class=p>,</span> <span class=s>&#34;Date:%s</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>date</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=n>date</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span></code></pre></div><p>our message must include a timestamp. we generate a timestamp to include in our email using <code>strftime()</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>helloworld_body</span><span class=p>[</span><span class=mi>128</span><span class=p>]</span> <span class=o>=</span> <span class=s>&#34;Hello World.</span><span class=se>\r\n</span><span class=s>.</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>send_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=n>helloworld_body</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;250&#34;</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></div><p>This the body of our mail, write your heart&rsquo;s content here 😄 a simple <code>.</code> separated by <code>\r\n</code> will indicate that message is over.the server should return <code>250</code> code.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nf>wait_for_response</span><span class=p>(</span><span class=n>server</span><span class=p>,</span> <span class=s>&#34;221&#34;</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;unexpected response</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>close</span><span class=p>(</span><span class=n>server</span><span class=p>);</span>
+</span></span></code></pre></div><p>Finally, we send <code>QUIT\r\n</code> to the SMTP server. this formally completes our communication with the server. we then close the socket (<code>server</code>)</p><p>Congratulation, If everything works correctly, you should be able to send email using just C code.</p><div class="notices warning"><p>Most residential IP&rsquo;s are blocked to send an email. GMAIL does not allow it&rsquo;s SMTP servers to be used by individuals, the email we try to send is rejected by google for obvious reasons. See output below.</p></div><p>Output:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Creating socket...
+</span></span><span class=line><span class=cl>Connecting...
+</span></span><span class=line><span class=cl>Connected!
+</span></span><span class=line><span class=cl>Server: <span class=m>220</span> mx.google.com ESMTP s28si3735353pgn.104 - gsmtp
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client: HELO BOOMER
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server: <span class=m>250</span> mx.google.com at your service
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client: MAIL FROM:&lt;hekko@xyz.com&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server: <span class=m>250</span> 2.1.0 OK s28si3735353pgn.104 - gsmtp
+</span></span><span class=line><span class=cl>�-�
+</span></span><span class=line><span class=cl>Client: RCPT TO:&lt;00.xog.00@gmail.com&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server: <span class=m>250</span> 2.1.5 OK s28si3735353pgn.104 - gsmtp
+</span></span><span class=line><span class=cl>�-�
+</span></span><span class=line><span class=cl>Client: DATA
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server: <span class=m>354</span>  Go ahead s28si3735353pgn.104 - gsmtp
+</span></span><span class=line><span class=cl>-�
+</span></span><span class=line><span class=cl>Client: From:&lt;hekko@xyz.com&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client: To:&lt;hello@gmail.com&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client: Subject:SMTP TEST
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client: Date:Date:17 Sep <span class=m>2020</span> 09:31:23 +0000
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client: 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Client: Hello World.
+</span></span><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Server: 421-4.7.0 <span class=o>[</span>223.230.89.223      15<span class=o>]</span> Our system has detected that this message is
+</span></span><span class=line><span class=cl>421-4.7.0 suspicious due to the very low reputation of the sending IP address.
+</span></span><span class=line><span class=cl>421-4.7.0 To protect our users from spam, mail sent from your IP address has
+</span></span><span class=line><span class=cl>421-4.7.0 been temporarily rate limited. Please visit
+</span></span><span class=line><span class=cl><span class=m>421</span> 4.7.0  https://support.google.com/mail/answer/188131 <span class=k>for</span> more information. s28si3735353pgn.104 - gsmtp
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>unexpected response
+</span></span></code></pre></div><hr><h1 id=conclusion>Conclusion</h1><p>This is a very basic example of SMTP protocol which is a de facto way to send emails to each other.</p><p>I hope you learned something in this article. A working production SMTP client would generally look like this albeit with extra nuts and bolts to handle additional security and authorization.</p></div><div class=post-tags><nav class="nav tags"><ul class=flat><li><a href=/tags/network-programming>network programming</a></li><li><a href=/tags/c>c</a></li></ul></nav></div><div id=commento></div><script onload=setCommentsTheme() id=comments src=https://utteranc.es/client.js repo=jkotra/stdin.top-comments issue-term=pathname label=💬 theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the
+<a href=https://commento.io/>comments powered by Commento.</a></noscript></div><link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css><script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js></script>
+<script type=text/javascript src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script></div></div><div class="footer wrapper"><script src=https://stdin.top/js/clipboard.min.0152b42292de6653a83b8bb0f671ea67c862632ef4d9bdb0408fdf8b72889c3a6f7e39165902bb7e202f19909e397746ff956e10a08f88d0cfc8373338b36354.js integrity="sha512-AVK0IpLeZlOoO4uw9nHqZ8hiYy702b2wQI/fi3KInDpvfjkWWQK7fiAvGZCeOXdG/5VuEKCPiNDPyDczOLNjVA=="></script><nav class=nav><div class=badge><a href=https://creativecommons.org/licenses/by-sa/4.0/><img src=/cc/by-sa.png></a></div><div><a href=https://github.com/jkotra/kavi-hugo-theme>Kavi</a> (based on <a href=https://github.com/vividvilla/ezhil>ezhil</a>)</a> | Built with <a href=https://gohugo.io>Hugo</a></div></nav></div></body></html>
