@@ -32,4 +32,4 @@ Ag==
 * ID: <code id="pgp-id"></code>
 * Expiration: <code id="pgp-expiry"></code>
 
-*Generated with [`pgp-verify-wasm`](https://github.com/jkotra/pgp-verify-wasm) based on [rPGP]("https://github.com/rpgp/rpgp") based via [WebAssembly](https://webassembly.org/)*
+*Generated with [`pgp-verify-wasm`](https://github.com/jkotra/pgp-verify-wasm) based on [rPGP]("https://github.com/rpgp/rpgp") via [WebAssembly](https://webassembly.org/)*
