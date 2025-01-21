@@ -1,0 +1,15 @@
+{
+  "name": "pgp-verify-wasm",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "pgp_verify_wasm_bg.wasm",
+    "pgp_verify_wasm.js",
+    "pgp_verify_wasm.d.ts"
+  ],
+  "main": "pgp_verify_wasm.js",
+  "types": "pgp_verify_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
