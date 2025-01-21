@@ -25,3 +25,11 @@ Ag==
 -----END PGP PUBLIC KEY BLOCK-----
 
 ```
+
+<script type="module" src="pgp-verify-wasm.js"></script>
+
+### Details
+* ID: <code id="pgp-id"></code>
+* Expiration: <code id="pgp-expiry"></code>
+
+*Generated with [`pgp-verify-wasm`](https://github.com/jkotra/pgp-verify-wasm) based on [rPGP]("https://github.com/rpgp/rpgp") based via [WebAssembly](https://webassembly.org/)*
