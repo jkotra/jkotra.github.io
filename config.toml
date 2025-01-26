@@ -56,7 +56,7 @@ url = "https://twitter.com/jagadeesh_kotra"
 [[params.social]]
 name = "RSS"
 icon = "fas fa-rss"
-url = "index.xml"
+url = "/index.xml"
 
 
 # Menu links along the sidebar navigation.
