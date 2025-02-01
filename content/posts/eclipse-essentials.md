@@ -59,7 +59,7 @@ it's always a good idea to trigger auto complete on every character (like in eve
 
 ### Enable Oomph Recorder
 
-Some settings in eclipse are not persisted through a restart. we have to enable *Oomph recorder* that will save our settings permanently.
+Some settings in eclipse are not persisted through a restart. enable *Oomph recorder* to save settings changes permanently.
 
 *Window->Preferences->Oomph*
 
