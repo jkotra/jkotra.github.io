@@ -112,7 +112,7 @@ The above example is quite straightforward, the breakdown is as follows:
 4. Similarly, for `b_chunk` fill it with K to K + 4 column elements from `j`'th column.
 5. Compute element-wise product of `a_chunk` and `b_chunk` in store the sum in `result[i][j]`
 
-Let's also do the same matrix multiplication with A and B in 1D shape. Doing operations on 1D array will make the logic more portable to use on GPGPU programming (which does not support multi-dimensional arrays by default.)
+Let's also do the same matrix multiplication with A and B in 1D shape. Doing operations on 1D array will make the logic more portable to use with GPGPU programming languages (which does not support multi-dimensional arrays by default.)
 
 ```rs
 fn multiply_matrix_simd_1d(matrix_a: Vec<f32>, matrix_b: Vec<f32>, n: usize) -> Vec<f32> {
