@@ -85,21 +85,21 @@ pub fn multiply_matrix_simd(
                     matrix_a[i][k + 1],
                     matrix_a[i][k + 2],
                     matrix_a[i][k + 3],
- ]);
+                ]);
 
                 let b_chunk = f32x4::from_array([
                     matrix_b[k][j],
                     matrix_b[k + 1][j],
                     matrix_b[k + 2][j],
                     matrix_b[k + 3][j],
- ]);
+                ]);
 
                 local_sum += (a_chunk * b_chunk).reduce_sum();
- }
+            }
 
             result[i][j] = local_sum;
- }
- }
+        }
+    }
 
     result
 }
@@ -128,7 +128,7 @@ fn multiply_matrix_simd_1d(matrix_a: Vec<f32>, matrix_b: Vec<f32>, n: usize) -> 
                     matrix_a[i * n + k + 1],
                     matrix_a[i * n + k + 2],
                     matrix_a[i * n + k + 3],
- ]);
+                ]);
 
                 // For matrix B:
                 // We need the j-th column. In row-major order, the element in row k and column j
@@ -138,18 +138,19 @@ fn multiply_matrix_simd_1d(matrix_a: Vec<f32>, matrix_b: Vec<f32>, n: usize) -> 
                     matrix_b[(k + 1) * n + j],
                     matrix_b[(k + 2) * n + j],
                     matrix_b[(k + 3) * n + j],
- ]);
+                ]);
 
-                // Multiply the chunks and sum their values.
+                // Multiply the chunks element-wise and sum their values.
                 local_sum += (a_chunk * b_chunk).reduce_sum();
- }
+            }
 
             result[i * n + j] = local_sum;
- }
- }
+        }
+    }
 
     result.to_vec()
 }
+
 ```
 
 1. take two parmeters `matrix_a` and `matrix_b` which are 1D representations of 256x256 matrices.
@@ -228,8 +229,7 @@ pub fn to_grayscale_simd_u8(width: u32, height: u32, image_data: Vec<u8>) -> Vec
     let b_coeff = u16x8::splat(29);
 
     for chunk in image_data.chunks(8 * 4) {
-        // 8 rgba pixels elements in each loop
-
+        // process 8 RGBA pixels at a time.
         let mut a = [0; 8];
         let mut b = [0; 8];
         let mut c = [0; 8];
@@ -240,7 +240,7 @@ pub fn to_grayscale_simd_u8(width: u32, height: u32, image_data: Vec<u8>) -> Vec
             b[i] = pixel[1];
             c[i] = pixel[2];
             d[i] = pixel[3];
- }
+        }
 
         let r_arr = u8x8::from_slice(&a).cast::<u16>();
         let g_arr = u8x8::from_slice(&b).cast::<u16>();
@@ -248,7 +248,7 @@ pub fn to_grayscale_simd_u8(width: u32, height: u32, image_data: Vec<u8>) -> Vec
 
         let gray = (r_coeff * r_arr) + (g_coeff * g_arr) + (b_coeff * b_arr);
         gray_pixels.extend((gray >> 8).cast::<u8>().to_array());
- }
+    }
 
     gray_pixels
 }
