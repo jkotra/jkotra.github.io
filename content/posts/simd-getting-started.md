@@ -39,7 +39,7 @@ Before we get started though, let's talk about the platform and tooling we are g
 
 ## Rust & SIMD
 
-In the code, I will be using (`simd_portable`)[https://doc.rust-lang.org/beta/unstable-book/library-features/portable-simd.html] feature which is only supported in *nightly* branch of rust. The motivation behind this is to ensure compilation across all the architectures with ease without any compile guards. I have already configured the project to use `nightly` branch of Rust, if it's not available, rustup should automatically do the setup for you.
+In the code, I will be using [`simd_portable`](https://doc.rust-lang.org/beta/unstable-book/library-features/portable-simd.html) feature which is only supported in *nightly* branch of rust. The motivation behind this is to ensure compilation across all the architectures with ease without any compile guards. I have already configured the project to use `nightly` branch of Rust, if it's not available, rustup should automatically do the setup for you.
 
 A very simple `Hello World` in SIMD is below:
 ```rs
@@ -59,7 +59,7 @@ Output:
 SIMD result: [2.0, 4.0, 6.0, 8.0]
 ```
 
-The concept here is simple, here we are using `f32x4` layout, which essentially means that this data structure can hold 4 values of 32-bit floats. Unlike, scalar operations, SIMD instruction execution is truely **Parallel**. This is because SIMD registers in CPU are **dedicated** for cetain type of computations only.
+The concept here is simple, here we are using `f32x4` layout, which essentially means that this data structure can hold 4 values of 32-bit floats. Unlike, scalar operations, SIMD instruction execution is truly **Parallel**. This is because SIMD registers in CPU are **dedicated** for certain type of computations only.
 
 
 ## Matrix Multiplication
