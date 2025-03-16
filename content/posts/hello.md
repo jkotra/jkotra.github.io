@@ -41,6 +41,44 @@ A tip disclaimer
 A warning disclaimer
 {{% /notice %}}
 
+{{% notice note %}}
+Some Code Test Block:
+
+```rs
+pub fn to_grayscale_simd_u8(width: u32, height: u32, image_data: Vec<u8>) -> Vec<u8> {
+    let mut gray_pixels: Vec<u8> = Vec::with_capacity((width * height) as usize);
+
+    let r_coeff = u16x8::splat(77);
+    let g_coeff = u16x8::splat(150);
+    let b_coeff = u16x8::splat(29);
+
+    for chunk in image_data.chunks(8 * 4) {
+        // process 8 RGBA pixels at a time.
+        let mut a = [0; 8];
+        let mut b = [0; 8];
+        let mut c = [0; 8];
+        let mut d = [0; 8];
+
+        for (i, pixel) in chunk.chunks_exact(4).enumerate() {
+            a[i] = pixel[0];
+            b[i] = pixel[1];
+            c[i] = pixel[2];
+            d[i] = pixel[3];
+        }
+
+        let r_arr = u8x8::from_slice(&a).cast::<u16>();
+        let g_arr = u8x8::from_slice(&b).cast::<u16>();
+        let b_arr = u8x8::from_slice(&c).cast::<u16>();
+
+        let gray = (r_coeff * r_arr) + (g_coeff * g_arr) + (b_coeff * b_arr);
+        gray_pixels.extend((gray >> 8).cast::<u8>().to_array());
+    }
+
+    gray_pixels
+}
+```
+{{% /notice %}}
+
 ---
 
 > Quote here.
