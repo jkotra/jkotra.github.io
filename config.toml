@@ -79,6 +79,12 @@ url = "/index.xml"
 	weight = 3
 
 [[menu.main]]
+	name = "Tools"
+	identifier = "tools"
+	url = "/tools/"
+	weight = 4
+
+[[menu.main]]
 	name = "PGP"
 	identifier = "pgp"
 	url = "/pgp/"
