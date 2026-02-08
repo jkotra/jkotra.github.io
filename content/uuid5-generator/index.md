@@ -35,6 +35,10 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
   }
 
   #uuid5-generator button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     background: var(--uuid5-bg);
     color: var(--uuid5-fg);
     border: 1px solid var(--uuid5-border);
@@ -77,6 +81,15 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
     margin-top: 10px;
   }
 
+  .uuid5-row.is-entering {
+    animation: uuid5FadeIn 180ms ease-out;
+  }
+
+  .uuid5-row.is-removing {
+    animation: uuid5FadeOut 180ms ease-in forwards;
+    pointer-events: none;
+  }
+
   .uuid5-row-controls {
     display: flex;
     gap: 10px;
@@ -91,6 +104,79 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
 
   .uuid5-output-wrap {
     margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .uuid5-output-wrap[hidden] {
+    display: none;
+  }
+
+  .uuid5-copy-output-btn {
+    padding: 4px 8px !important;
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .uuid5-copy-output-btn i {
+    width: 1em;
+    text-align: center;
+  }
+
+  .uuid5-copy-feedback {
+    font-size: 0.85rem;
+    color: #1f7a1f;
+  }
+
+  #lock-fields-btn i {
+    width: 1em;
+    text-align: center;
+  }
+
+  #uuid5-generator.is-locked input:not(#random-uuid-input) {
+    background: #d9d9d9;
+    color: #555555;
+    border-color: #a9a9a9;
+  }
+
+  #uuid5-generator.is-locked .uuid5-output {
+    opacity: 0.7;
+  }
+
+  #uuid5-generator button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  @keyframes uuid5FadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes uuid5FadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .uuid5-row.is-entering,
+    .uuid5-row.is-removing {
+      animation: none;
+    }
   }
 </style>
 
@@ -118,6 +204,10 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
   <p id="error-text" style="color: #b00020; margin-top: 10px; min-height: 1.2em;"></p>
 
   <div id="string-rows" style="margin-top: 10px;"></div>
+
+  <div class="uuid5-actions">
+    <button id="lock-fields-btn" type="button"><i class="fas fa-solid fa-lock" aria-hidden="true"></i><span>Lock</span></button>
+  </div>
 </div>
 
 <script src="uuid5-generator.js"></script>
