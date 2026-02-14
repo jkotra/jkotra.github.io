@@ -5,7 +5,6 @@
   const namespaceInput = document.getElementById("namespace-input");
   const addStringBtn = document.getElementById("add-string-btn");
   const lockFieldsBtn = document.getElementById("lock-fields-btn");
-  const generateBtn = document.getElementById("generate-btn");
   const rowsContainer = document.getElementById("string-rows");
   const errorText = document.getElementById("error-text");
   const generatorContainer = document.getElementById("uuid5-generator");
@@ -271,29 +270,6 @@
       errorText.textContent =
         "Could not copy automatically in this browser/context. UUID selected for manual copy.";
     }
-  });
-
-  generateBtn.addEventListener("click", async () => {
-    errorText.textContent = "";
-
-    const namespace = namespaceInput.value.trim();
-    if (!namespace) {
-      errorText.textContent = "Namespace UUID is required.";
-      return;
-    }
-
-    if (!uuidToBytes(namespace)) {
-      errorText.textContent = "Please enter a valid namespace UUID.";
-      return;
-    }
-
-    const rows = rowsContainer.querySelectorAll(".uuid5-row");
-    if (rows.length === 0) {
-      errorText.textContent = "Add at least one string value.";
-      return;
-    }
-
-    await recomputeAllRows();
   });
 
   setLocked(false);
