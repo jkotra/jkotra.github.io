@@ -11,8 +11,6 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
     --uuid5-bg: #ffffff;
     --uuid5-fg: #1b1b1f;
     --uuid5-border: #b8bcc5;
-    --uuid5-accent: #0f62fe;
-    --uuid5-accent-fg: #ffffff;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -20,8 +18,6 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
       --uuid5-bg: #1e1f24;
       --uuid5-fg: #f1f3f8;
       --uuid5-border: #505667;
-      --uuid5-accent: #7aa2ff;
-      --uuid5-accent-fg: #111319;
     }
   }
 
@@ -45,12 +41,6 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
     border-radius: 6px;
     padding: 10px 14px;
     cursor: pointer;
-  }
-
-  #uuid5-generator button.primary-btn {
-    background: var(--uuid5-accent);
-    border-color: var(--uuid5-accent);
-    color: var(--uuid5-accent-fg);
   }
 
   #random-uuid-input {
@@ -191,21 +181,17 @@ description: Generate UUIDv5 values from a namespace UUID and one or more string
 
   <hr />
 
-  Enter a namespace UUID, add one or more strings, and generate UUIDv5 values.
+  Enter a namespace UUID and add one or more strings. UUIDv5 values update automatically as you type.
 
   <label for="namespace-input"><strong>Namespace UUID</strong></label><br />
   <input id="namespace-input" type="text" placeholder="e.g. 6ba7b810-9dad-11d1-80b4-00c04fd430c8" />
-
-  <div class="uuid5-actions">
-    <button id="add-string-btn" type="button">Add String</button>
-    <button id="generate-btn" type="button" class="primary-btn">Generate UUIDv5</button>
-  </div>
 
   <p id="error-text" style="color: #b00020; margin-top: 10px; min-height: 1.2em;"></p>
 
   <div id="string-rows" style="margin-top: 10px;"></div>
 
   <div class="uuid5-actions">
+    <button id="add-string-btn" type="button">Add String</button>
     <button id="lock-fields-btn" type="button"><i class="fas fa-solid fa-lock" aria-hidden="true"></i><span>Lock</span></button>
   </div>
 </div>
