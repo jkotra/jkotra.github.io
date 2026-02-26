@@ -30,6 +30,9 @@ You can view my portfolio [here](/portfolio/), where my most recent works are co
 ---
 
 # Certificates
+
+* [Google Associate Cloud Engineer Certification](https://www.credly.com/badges/05094b2d-cc02-4894-9741-3132d8da9108/public_url)
+
 * [Machine Learning with Python](https://www.coursera.org/account/accomplishments/verify/QDPTGAQSXZNM)
 
 * [Mathematics for Machine Learning: Linear Algebra](https://www.coursera.org/account/accomplishments/certificate/E2FE7HNXWP8J)
