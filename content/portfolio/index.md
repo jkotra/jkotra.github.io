@@ -9,6 +9,15 @@ description: Compilation of my works.
 
 <!-- start from here -->
 
+## [ado-board-cli](https://github.com/jkotra/ado-board-cli)
+
+<img src="/images/ado-board-cli.png" width="400" alt="ado-board-cli" align="left" style="margin-right: 20px;">
+
+A blazingly fast, keyboard-first terminal UI and unified Model Context Protocol (MCP) copilot for Azure DevOps.
+
+<div style="clear: both;"></div>
+
+---
 
 ## [eOVPN](https://github.com/jkotra/eOVPN)
 
